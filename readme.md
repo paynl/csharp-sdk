@@ -1,3 +1,4 @@
+# Pay.nl C# SDK
 ---
 
 - [Quick start and examples](#usage)
@@ -8,26 +9,23 @@ This SDK is available as DotNet Assembly.
 
 With this SDK you will be able to start transactions and retrieve transactions with their status for the Pay.nl payment service provider.
 
-## Usage
+### Usage
 
 Setting the configuration:
-```
-#!c#
+```c#
 PAYNLSDK.API.RequestBase.ApiToken = "e41f83b246b706291ea9ad798ccfd9f0fee5e0ab";
 PAYNLSDK.API.RequestBase.ServiceId = "SL-3490-4320";
 ```
 
 Getting a list of available payment methods for your site:
-```
-#!c#
+```c#
 PAYNLSDK.API.RequestBase.ApiToken = "e41f83b246b706291ea9ad798ccfd9f0fee5e0ab";
 PAYNLSDK.API.RequestBase.ServiceId = "SL-3490-4320";
 PAYNLSDK.API.PaymentMethod.GetAll.Response response = PAYNLSDK.PaymentMethod.GetAll()
 ```
 
 Starting a transaction:
-```
-#!c#
+```c#
 PAYNLSDK.API.RequestBase.ApiToken = "e41f83b246b706291ea9ad798ccfd9f0fee5e0ab";
 PAYNLSDK.API.RequestBase.ServiceId = "SL-3490-4320";
 
@@ -103,8 +101,7 @@ PAYNLSDK.API.Transaction.Start.Response response = PAYNLSDK.Transaction.Start(re
 ```
 
 To determine if a transaction has been paid, you can use:
-```
-#!c#
+```c#
 PAYNLSDK.API.RequestBase.ApiToken = "e41f83b246b706291ea9ad798ccfd9f0fee5e0ab";
 PAYNLSDK.API.RequestBase.ServiceId = "SL-3490-4320";
 
@@ -125,8 +122,7 @@ else
 ```
 
 When implementing the exchange script (where you should process the order in your backend):
-```
-#!c#
+```c#
 PAYNLSDK.API.RequestBase.ApiToken = "e41f83b246b706291ea9ad798ccfd9f0fee5e0ab";
 PAYNLSDK.API.RequestBase.ServiceId = "SL-3490-4320";
 
@@ -148,10 +144,10 @@ response.Write("TRUE| ");
 response.Write("Paid");
 ```
 
-## Contributing
+### Contributing
 
 
 
-## License
+### License
 
 The Assembly is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
