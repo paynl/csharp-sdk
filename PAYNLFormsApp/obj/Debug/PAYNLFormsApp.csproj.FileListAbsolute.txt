@@ -1,1 +1,0 @@
-D:\ProjectWorkspaces\dotNET\PAY-CSHARP-SDK\PAYNLFormsApp\bin\Debug\PAYNLFormsApp.exe.config
