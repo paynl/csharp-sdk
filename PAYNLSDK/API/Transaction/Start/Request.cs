@@ -310,7 +310,7 @@ namespace PAYNLSDK.API.Transaction.Start
 
                         if (!ParameterValidator.IsNull(data.VatCode))
                         {
-                            nvc.Add(string.Format("saleData[orderData][{0}][vatCode]", i), data.VatCode);
+                            nvc.Add(string.Format("saleData[orderData][{0}][vatCode]", i), EnumUtil.ToEnumString<TaxClass>((TaxClass)data.VatCode));
                         }
                         i++;
                     }
