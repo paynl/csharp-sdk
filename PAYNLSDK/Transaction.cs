@@ -106,6 +106,7 @@ namespace PAYNLSDK
                 return ((request.Response.PaymentDetails.State == Enums.PaymentStatus.PENDING_1) ||
                     (request.Response.PaymentDetails.State == Enums.PaymentStatus.PENDING_2) ||
                     (request.Response.PaymentDetails.State == Enums.PaymentStatus.PENDING_3) ||
+                    (request.Response.PaymentDetails.State == Enums.PaymentStatus.VERIFY) ||
                     (request.Response.PaymentDetails.StateName == "PENDING"));
             }
             catch (ErrorException e)
@@ -115,17 +116,58 @@ namespace PAYNLSDK
         }
 
         /// <summary>
-        /// Checks whether a status is a CANCELLED status
+        /// Checks whether a status is a PENDING status
         /// </summary>
         /// <param name="status">Transaction status</param>
-        /// <returns>True if CANCELLED, false otherwise</returns>
+        /// <returns>True if PENDING, false otherwise</returns>
         static public bool IsPending(Enums.PaymentStatus status)
         {
             try
             {
                 return ((status == Enums.PaymentStatus.PENDING_1) ||
                     (status == Enums.PaymentStatus.PENDING_2) ||
-                    (status == Enums.PaymentStatus.PENDING_3));
+                    (status == Enums.PaymentStatus.PENDING_3) ||
+                    (status == Enums.PaymentStatus.VERIFY)
+                    );
+            }
+            catch (ErrorException e)
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Checks whether a transaction has a status of VERIFY
+        /// </summary>
+        /// <param name="transactionId">Transaction Id</param>
+        /// <returns>True if VERIFY, false otherwise</returns>
+        static public bool IsVerify(string transactionId)
+        {
+            try
+            {
+                TransactionInfo request = new TransactionInfo();
+                request.TransactionId = transactionId;
+                Client c = new Client();
+                c.PerformRequest(request);
+                return ((request.Response.PaymentDetails.State == Enums.PaymentStatus.VERIFY) ||
+                    (request.Response.PaymentDetails.StateName == "VERIFY"));
+            }
+            catch (ErrorException e)
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Checks whether a status is a VERIFY status
+        /// </summary>
+        /// <param name="status">Transaction status</param>
+        /// <returns>True if VERIFY, false otherwise</returns>
+        static public bool IsVerify(Enums.PaymentStatus status)
+        {
+            try
+            {
+                return ((status == Enums.PaymentStatus.VERIFY));
             }
             catch (ErrorException e)
             {
