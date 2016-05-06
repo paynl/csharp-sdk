@@ -135,7 +135,7 @@ if (PAYNLSDK.Transaction.IsPaid(result))
 }
 else 
 {
- if(PAYNLSDK.Transaction.IsCanceled(result)){
+ if(PAYNLSDK.Transaction.IsCancelled(result)){
     // payment canceled, restock items
  }
 }
