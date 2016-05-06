@@ -131,11 +131,11 @@ PAYNLSDK.Enums.PaymentStatus result = info.State;
 
 if (PAYNLSDK.Transaction.IsPaid(result) || PAYNLSDK.Transaction.IsPending(result))
 {
-    // redirect user to thank you page
+    // process the payment
 }
 else
 {
-    // it has not been paid yet, so redirect user back to checkout
+    // payment canceled, restock items
 }
 
 response.Write("TRUE| ");
