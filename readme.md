@@ -133,9 +133,11 @@ if (PAYNLSDK.Transaction.IsPaid(result))
 {
     // process the payment
 }
-else
+else 
 {
+ if(PAYNLSDK.Transaction.IsCanceled(result)){
     // payment canceled, restock items
+ }
 }
 
 response.Write("TRUE| ");
