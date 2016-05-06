@@ -129,7 +129,7 @@ PAYNLSDK.API.RequestBase.ServiceId = "SL-3490-4320";
 PAYNLSDK.API.Transaction.Info.Response info = PAYNLSDK.Transaction.Info(response.transactionId);
 PAYNLSDK.Enums.PaymentStatus result = info.State;
 
-if (PAYNLSDK.Transaction.IsPaid(result) || PAYNLSDK.Transaction.IsPending(result))
+if (PAYNLSDK.Transaction.IsPaid(result))
 {
     // process the payment
 }
