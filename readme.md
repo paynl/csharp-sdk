@@ -129,13 +129,15 @@ PAYNLSDK.API.RequestBase.ServiceId = "SL-3490-4320";
 PAYNLSDK.API.Transaction.Info.Response info = PAYNLSDK.Transaction.Info(response.transactionId);
 PAYNLSDK.Enums.PaymentStatus result = info.State;
 
-if (PAYNLSDK.Transaction.IsPaid(result) || PAYNLSDK.Transaction.IsPending(result))
+if (PAYNLSDK.Transaction.IsPaid(result))
 {
-    // redirect user to thank you page
+    // process the payment
 }
-else
+else 
 {
-    // it has not been paid yet, so redirect user back to checkout
+ if(PAYNLSDK.Transaction.IsCancelled(result)){
+    // payment canceled, restock items
+ }
 }
 
 response.Write("TRUE| ");
