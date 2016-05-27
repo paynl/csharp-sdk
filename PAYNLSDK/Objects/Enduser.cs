@@ -75,8 +75,8 @@ namespace PAYNLSDK.Objects
         [JsonProperty("bic")]
         public string BIC { get; set; }
 
-        //[JsonProperty("sendConfirmMail")]
-        //public bool? SendConfirmMail { get; set; }
+        [JsonProperty("sendConfirmMail")]
+        public bool? SendConfirmMail { get; set; }
 
         //[JsonProperty("confirmMailTemplate")]
         //public string ConfirmMailTemplate { get; set; }
