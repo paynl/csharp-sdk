@@ -33,6 +33,8 @@ namespace PAYNLSDK.API.Transaction.Start
         public int? PaymentOptionId { get; set; }
         public int? PaymentOptionSubId { get; set; }
         public bool? TestMode { get; set; }
+        public string TransferType { get; set; }
+        public string TransferValue { get; set; }
 
         public TransactionData Transaction { get; set; }
         public StatsDetails StatsData { get; set; }
@@ -81,6 +83,20 @@ namespace PAYNLSDK.API.Transaction.Start
             if (!ParameterValidator.IsNonEmptyInt(PaymentOptionSubId))
             {
                 nvc.Add("paymentOptionSubId", PaymentOptionSubId.ToString());
+            }
+
+            if (!ParameterValidator.IsEmpty(TransferValue))
+            {
+                
+                if (TransferType == "transaction" || TransferType == "merchant")
+                {
+                    nvc.Add("transferType", TransferType);
+                    nvc.Add("transferValue", TransferValue);
+                }
+                else
+                {
+                    throw new Exception("TransferValue cannot be set, without valid TransferType, please fix this.");
+                }
             }
 
             // Transaction
