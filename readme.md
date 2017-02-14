@@ -17,11 +17,19 @@ PAYNLSDK.API.RequestBase.ApiToken = "e41f83b246b706291ea9ad798ccfd9f0fee5e0ab";
 PAYNLSDK.API.RequestBase.ServiceId = "SL-3490-4320";
 ```
 
-Getting a list of available payment methods for your site:
+Getting a list of available payment methods, use the Getservice.
 ```c#
 PAYNLSDK.API.RequestBase.ApiToken = "e41f83b246b706291ea9ad798ccfd9f0fee5e0ab";
 PAYNLSDK.API.RequestBase.ServiceId = "SL-3490-4320";
-PAYNLSDK.API.PaymentMethod.GetAll.Response response = PAYNLSDK.PaymentMethod.GetAll()
+PAYNLSDK.API.Transaction.GetService.Response response = PAYNLSDK.Transaction.GetService(paymentMethodId);
+//paymentMethodId: is optional
+//The ID of the payment method. Only the payment options linked to the provided payment method ID will be returned if an ID is provided.
+//If omitted, all available payment options are returned. Use the following IDs to filter the options:
+//1. SMS.
+//2. Pay fixed price.
+//3. Pay per call.
+//4. Pay per transaction
+//5. Pay per minute.
 ```
 
 Starting a transaction:
