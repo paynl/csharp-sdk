@@ -269,6 +269,32 @@ namespace PAYNLSDK
             return Refund(transactionId, null, null, null);
         }
 
+
+        /// <summary>
+        /// Creates a transaction start request.
+        /// </summary>
+        /// <param name="ipAddress">The IP address of the customer</param>
+        /// <param name="returnUrl">The URL where the customer has to be send to after the payment.</param>
+        /// <param name="paymentOptionId">	The ID of the payment option (for iDEAL use 10).</param>
+        /// <param name="paymentSubOptionId">	In case of an iDEAL payment this is the ID of the bank (see the paymentOptionSubList in the getService function).</param>
+        /// <param name="testMode">	Whether or not we perform this call in test mode.</param>
+        /// <param name="transferType">TransferType for this transaction (merchant/transaction)</param>
+        /// <param name="transferValue">TransferValue eg MerchantId (M-xxxx-xxxx) or orderId</param>
+        /// <returns>Transaction Start Request</returns>
+        static public PAYNLSDK.API.Transaction.Start.Request CreateTransactionRequest(string ipAddress, string returnUrl, int? paymentOptionId, int? paymentSubOptionId, bool? testMode, string transferType, string transferValue)
+        {
+            API.Transaction.Start.Request request = new API.Transaction.Start.Request();
+            request.Amount = 0;
+            request.IPAddress = ipAddress;
+            request.ReturnUrl = returnUrl;
+            request.PaymentOptionId = paymentOptionId;
+            request.PaymentOptionSubId = paymentSubOptionId;
+            request.TestMode = testMode;
+            request.TransferType = transferType;
+            request.TransferValue = transferValue;
+            return request;
+        }
+
         /// <summary>
         /// Creates a transaction start request.
         /// </summary>
