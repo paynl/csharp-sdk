@@ -28,5 +28,12 @@ namespace PAYNLFormsApp
             PAYNLFormsApp.APISettings.ApiToken = tbApitoken.Text;
             PAYNLFormsApp.APISettings.ServiceID = tbServiceID.Text;
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+               
+            this.DialogResult = DialogResult.OK;
+        }
     }
-}
+    }
+

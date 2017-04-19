@@ -7,7 +7,7 @@ using System.Collections.Specialized;
 
 namespace PAYNLSDK.API.Transaction.Refund
 {
-    class Request : RequestBase
+    public class Request : RequestBase
     {
         [JsonProperty("transactionId")]
         public string TransactionId { get; set; }
@@ -23,7 +23,7 @@ namespace PAYNLSDK.API.Transaction.Refund
 
         public override int Version
         {
-            get { return 5; }
+            get { return 7; }
         }
 
         public override string Controller

@@ -37,13 +37,10 @@ namespace PAYNLFormsApp
 
         private void dumpPaymentmethodsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            APISettings.InitAPI();
-            ClearDebug();
-            PAYNLSDK.API.PaymentMethod.GetAll.Request request = new PAYNLSDK.API.PaymentMethod.GetAll.Request();
-            InitRequestDebug(request);
-            APISettings.Client.PerformRequest(request);
-            DebugRawResponse(request);
-            tbMain.Text = request.Response.ToString();
+            DebugForm form = new DebugForm();
+            form.dumpPaymentmethods();
+            form.ShowDialog();
+          
         }
 
         private void ClearDebug()
@@ -78,24 +75,19 @@ namespace PAYNLFormsApp
 
         private void dumpTransactionGetServiceToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            APISettings.InitAPI();
-            ClearDebug();
-            PAYNLSDK.API.Transaction.GetService.Request request = new PAYNLSDK.API.Transaction.GetService.Request();
-            InitRequestDebug(request);
-            APISettings.Client.PerformRequest(request);
-            DebugRawResponse(request);
-            tbMain.Text = request.Response.ToString();
+
+            DebugForm form = new DebugForm();
+            form.dumpTransactionGetService();
+            form.ShowDialog();
+
+            
         }
 
         private void dumpTransactionGetLastToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            APISettings.InitAPI();
-            ClearDebug();
-            PAYNLSDK.API.Transaction.GetLastTransactions.Request request = new PAYNLSDK.API.Transaction.GetLastTransactions.Request();
-            InitRequestDebug(request);
-            APISettings.Client.PerformRequest(request);
-            DebugRawResponse(request);
-            tbMain.Text = request.Response.ToString();
+            DebugForm form = new DebugForm();
+            form.dumpTransactionGetLast();
+            form.ShowDialog();    
         }
 
         private void txinfo(string id)
@@ -231,6 +223,8 @@ namespace PAYNLFormsApp
             frm.ShowDialog();
         }
 
+     
+
         private void frm_FormClosed(object sender, FormClosedEventArgs e)
         {
             try
@@ -314,6 +308,40 @@ namespace PAYNLFormsApp
                 AddDebug(ee.Message);
             }
         }
+
+        private void approveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+        
+            ApproveDecline form = new ApproveDecline();
+            form.ShowDialog();
+         
+        }
+
+        private void declineToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            ApproveDecline form = new ApproveDecline();
+            form.ShowDialog();
+
+    
+       }
+
+        private void refundAddToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            RefundAdd form = new RefundAdd();
+            form.ShowDialog();
+           
+        }
+
+        private void refundToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            TransactionRefund form = new TransactionRefund();
+            form.ShowDialog();
+
+        }
+
     }
     /*
     class X
