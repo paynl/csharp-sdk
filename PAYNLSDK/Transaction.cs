@@ -5,6 +5,8 @@ using System;
 using TransactionGetService = PAYNLSDK.API.Transaction.GetService.Request;
 using TransactionInfo = PAYNLSDK.API.Transaction.Info.Request;
 using TransactionRefund = PAYNLSDK.API.Transaction.Refund.Request;
+using TransactionApprove = PAYNLSDK.API.Transaction.Approve.Request;
+using TransactionDecline = PAYNLSDK.API.Transaction.Decline.Request;
 
 namespace PAYNLSDK
 {
@@ -267,6 +269,34 @@ namespace PAYNLSDK
         static public PAYNLSDK.API.Transaction.Refund.Response Refund(string transactionId)
         {
             return Refund(transactionId, null, null, null);
+        }
+
+        /// <summary>
+        /// function to approve a suspicious transaction
+        /// </summary>
+        /// <param name="transactionId">Transaction ID</param>
+        /// <returns>Full response including the message about the approvement
+        static public PAYNLSDK.API.Transaction.Approve.Response Approve(string transactionId)
+        {
+            TransactionApprove request = new TransactionApprove();
+            request.TransactionId = transactionId;
+            Client c = new Client();
+            c.PerformRequest(request);
+            return request.Response;
+        }
+
+        /// <summary>
+        /// function to decline a suspicious transaction
+        /// </summary>
+        /// <param name="transactionId">Transaction ID</param>
+        /// <returns>Full response including the message about the decline
+        static public PAYNLSDK.API.Transaction.Decline.Response Decline(string transactionId)
+        {
+            TransactionDecline request = new TransactionDecline();
+            request.TransactionId = transactionId;
+            Client c = new Client();
+            c.PerformRequest(request);
+            return request.Response;
         }
 
 

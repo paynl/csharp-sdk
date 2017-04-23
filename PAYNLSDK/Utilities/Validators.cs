@@ -12,7 +12,8 @@ namespace PAYNLSDK.Utilities
         {
             if (String.IsNullOrWhiteSpace(param))
             {
-                throw new ArgumentException(string.Format("Invalid parameter '{0}'. Cannot be null, empty or consist of whitespace only", paramName));
+                throw new ArgumentException(string.Format("Invalid parameter {0}. Cannot be null, empty or consist of whitespace only", paramName),"paramName");
+               
             }
         }
 

@@ -40,16 +40,21 @@
             this.fixturesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.transActionStartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.transactionStartproductsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.serviceCategoriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.payNLAPIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.transactionAPIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.startuseFixtureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.startuseFixtureEditableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.approveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.declineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.refundToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.changeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.refundAddToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tbMain = new System.Windows.Forms.TextBox();
             this.tbDebug = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.splitter1 = new System.Windows.Forms.Splitter();
-            this.serviceCategoriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -59,7 +64,8 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.viewToolStripMenuItem,
             this.settingsToolStripMenuItem,
-            this.transactionAPIToolStripMenuItem});
+            this.transactionAPIToolStripMenuItem,
+            this.changeToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(732, 24);
@@ -82,21 +88,21 @@
             // validationToolStripMenuItem
             // 
             this.validationToolStripMenuItem.Name = "validationToolStripMenuItem";
-            this.validationToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
+            this.validationToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
             this.validationToolStripMenuItem.Text = "Validation";
             this.validationToolStripMenuItem.Click += new System.EventHandler(this.validationToolStripMenuItem_Click);
             // 
             // dumpPaymentmethodsToolStripMenuItem
             // 
             this.dumpPaymentmethodsToolStripMenuItem.Name = "dumpPaymentmethodsToolStripMenuItem";
-            this.dumpPaymentmethodsToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
+            this.dumpPaymentmethodsToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
             this.dumpPaymentmethodsToolStripMenuItem.Text = "Dump Paymentmethods";
             this.dumpPaymentmethodsToolStripMenuItem.Click += new System.EventHandler(this.dumpPaymentmethodsToolStripMenuItem_Click);
             // 
             // dumpTransactionGetServiceToolStripMenuItem
             // 
             this.dumpTransactionGetServiceToolStripMenuItem.Name = "dumpTransactionGetServiceToolStripMenuItem";
-            this.dumpTransactionGetServiceToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
+            this.dumpTransactionGetServiceToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
             this.dumpTransactionGetServiceToolStripMenuItem.Text = "Dump Transaction::GetService";
             this.dumpTransactionGetServiceToolStripMenuItem.Click += new System.EventHandler(this.dumpTransactionGetServiceToolStripMenuItem_Click);
             // 
@@ -107,7 +113,7 @@
             this.xc5b75dPAIDToolStripMenuItem,
             this.xd83303CANCELToolStripMenuItem});
             this.txInfoFor619204633Xc4027eToolStripMenuItem.Name = "txInfoFor619204633Xc4027eToolStripMenuItem";
-            this.txInfoFor619204633Xc4027eToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
+            this.txInfoFor619204633Xc4027eToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
             this.txInfoFor619204633Xc4027eToolStripMenuItem.Text = "Dump Transaction Info";
             // 
             // xc4027ePAIDToolStripMenuItem
@@ -137,22 +143,29 @@
             this.transActionStartToolStripMenuItem,
             this.transactionStartproductsToolStripMenuItem});
             this.fixturesToolStripMenuItem.Name = "fixturesToolStripMenuItem";
-            this.fixturesToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
+            this.fixturesToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
             this.fixturesToolStripMenuItem.Text = "Fixtures";
             // 
             // transActionStartToolStripMenuItem
             // 
             this.transActionStartToolStripMenuItem.Name = "transActionStartToolStripMenuItem";
-            this.transActionStartToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
+            this.transActionStartToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.transActionStartToolStripMenuItem.Text = "TransAction.Start";
             this.transActionStartToolStripMenuItem.Click += new System.EventHandler(this.transActionStartToolStripMenuItem_Click);
             // 
             // transactionStartproductsToolStripMenuItem
             // 
             this.transactionStartproductsToolStripMenuItem.Name = "transactionStartproductsToolStripMenuItem";
-            this.transactionStartproductsToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
+            this.transactionStartproductsToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.transactionStartproductsToolStripMenuItem.Text = "Transaction.Start (-products)";
             this.transactionStartproductsToolStripMenuItem.Click += new System.EventHandler(this.transactionStartproductsToolStripMenuItem_Click);
+            // 
+            // serviceCategoriesToolStripMenuItem
+            // 
+            this.serviceCategoriesToolStripMenuItem.Name = "serviceCategoriesToolStripMenuItem";
+            this.serviceCategoriesToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
+            this.serviceCategoriesToolStripMenuItem.Text = "ServiceCategories";
+            this.serviceCategoriesToolStripMenuItem.Click += new System.EventHandler(this.serviceCategoriesToolStripMenuItem_Click);
             // 
             // settingsToolStripMenuItem
             // 
@@ -165,7 +178,7 @@
             // payNLAPIToolStripMenuItem
             // 
             this.payNLAPIToolStripMenuItem.Name = "payNLAPIToolStripMenuItem";
-            this.payNLAPIToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.payNLAPIToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.payNLAPIToolStripMenuItem.Text = "PayNL API";
             this.payNLAPIToolStripMenuItem.Click += new System.EventHandler(this.payNLAPIToolStripMenuItem_Click);
             // 
@@ -173,9 +186,12 @@
             // 
             this.transactionAPIToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.startuseFixtureToolStripMenuItem,
-            this.startuseFixtureEditableToolStripMenuItem});
+            this.startuseFixtureEditableToolStripMenuItem,
+            this.approveToolStripMenuItem,
+            this.declineToolStripMenuItem,
+            this.refundToolStripMenuItem});
             this.transactionAPIToolStripMenuItem.Name = "transactionAPIToolStripMenuItem";
-            this.transactionAPIToolStripMenuItem.Size = new System.Drawing.Size(102, 20);
+            this.transactionAPIToolStripMenuItem.Size = new System.Drawing.Size(101, 20);
             this.transactionAPIToolStripMenuItem.Text = "Transaction API";
             // 
             // startuseFixtureToolStripMenuItem
@@ -191,6 +207,42 @@
             this.startuseFixtureEditableToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
             this.startuseFixtureEditableToolStripMenuItem.Text = "Start (use fixture, editable)";
             this.startuseFixtureEditableToolStripMenuItem.Click += new System.EventHandler(this.startuseFixtureEditableToolStripMenuItem_Click);
+            // 
+            // approveToolStripMenuItem
+            // 
+            this.approveToolStripMenuItem.Name = "approveToolStripMenuItem";
+            this.approveToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
+            this.approveToolStripMenuItem.Text = "Approve";
+            this.approveToolStripMenuItem.Click += new System.EventHandler(this.approveToolStripMenuItem_Click);
+            // 
+            // declineToolStripMenuItem
+            // 
+            this.declineToolStripMenuItem.Name = "declineToolStripMenuItem";
+            this.declineToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
+            this.declineToolStripMenuItem.Text = "Decline";
+            this.declineToolStripMenuItem.Click += new System.EventHandler(this.declineToolStripMenuItem_Click);
+            // 
+            // refundToolStripMenuItem
+            // 
+            this.refundToolStripMenuItem.Name = "refundToolStripMenuItem";
+            this.refundToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
+            this.refundToolStripMenuItem.Text = "Refund";
+            this.refundToolStripMenuItem.Click += new System.EventHandler(this.refundToolStripMenuItem_Click);
+            // 
+            // changeToolStripMenuItem
+            // 
+            this.changeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.refundAddToolStripMenuItem});
+            this.changeToolStripMenuItem.Name = "changeToolStripMenuItem";
+            this.changeToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
+            this.changeToolStripMenuItem.Text = "Change";
+            // 
+            // refundAddToolStripMenuItem
+            // 
+            this.refundAddToolStripMenuItem.Name = "refundAddToolStripMenuItem";
+            this.refundAddToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.refundAddToolStripMenuItem.Text = "Refund-Add";
+            this.refundAddToolStripMenuItem.Click += new System.EventHandler(this.refundAddToolStripMenuItem_Click);
             // 
             // tbMain
             // 
@@ -231,13 +283,6 @@
             this.splitter1.Size = new System.Drawing.Size(3, 535);
             this.splitter1.TabIndex = 2;
             this.splitter1.TabStop = false;
-            // 
-            // serviceCategoriesToolStripMenuItem
-            // 
-            this.serviceCategoriesToolStripMenuItem.Name = "serviceCategoriesToolStripMenuItem";
-            this.serviceCategoriesToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
-            this.serviceCategoriesToolStripMenuItem.Text = "ServiceCategories";
-            this.serviceCategoriesToolStripMenuItem.Click += new System.EventHandler(this.serviceCategoriesToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -283,6 +328,11 @@
         private System.Windows.Forms.ToolStripMenuItem startuseFixtureToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem startuseFixtureEditableToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem serviceCategoriesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem approveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem declineToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem changeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem refundAddToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem refundToolStripMenuItem;
     }
 }
 
