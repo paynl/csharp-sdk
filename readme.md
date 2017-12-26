@@ -117,7 +117,7 @@ PAYNLSDK.API.Transaction.Start.Response response;
 // Perform transaction to get response object. Alternately, you could work with a stored ID.
 
 PAYNLSDK.API.Transaction.Info.Response info = PAYNLSDK.Transaction.Info(response.transactionId);
-PAYNLSDK.Enums.PaymentStatus result = info.State;
+PAYNLSDK.Enums.PaymentStatus result = info.PaymentDetails.State;
 
 if (PAYNLSDK.Transaction.IsPaid(result) || PAYNLSDK.Transaction.IsPending(result))
 {
