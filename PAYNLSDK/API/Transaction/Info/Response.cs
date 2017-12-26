@@ -15,9 +15,15 @@ namespace PAYNLSDK.API.Transaction.Info
         //[JsonProperty("saledata")]
         //public SalesData SalesData { get; protected set; }
 
+        /// <summary>
+        /// All details from the payment
+        /// </summary>
         [JsonProperty("paymentDetails")]
         public PaymentDetails PaymentDetails { get; protected set; }
 
+        /// <summary>
+        /// Details regarding the refund (if any)
+        /// </summary>
         [JsonProperty("stornoDetails")]
         public StornoDetails StornoDetails { get; protected set; }
 

@@ -73,7 +73,7 @@ namespace PAYNLSDK.API.Transaction.Start
         {
             get { return "start"; }
         }
-        
+
         public override NameValueCollection GetParameters()
         {
             NameValueCollection nvc = new NameValueCollection();
@@ -100,7 +100,7 @@ namespace PAYNLSDK.API.Transaction.Start
 
             if (!ParameterValidator.IsEmpty(TransferValue))
             {
-                
+
                 if (TransferType == "transaction" || TransferType == "merchant")
                 {
                     nvc.Add("transferType", TransferType);
@@ -115,7 +115,7 @@ namespace PAYNLSDK.API.Transaction.Start
             // Transaction
             if (TransactionData != null)
             {
-                if (!ParameterValidator.IsNull(TransactionData.Currency))
+                if (string.IsNullOrWhiteSpace(TransactionData.Currency) == false)
                 {
                     nvc.Add("transaction[currency]", TransactionData.Currency);
                 }
@@ -141,7 +141,7 @@ namespace PAYNLSDK.API.Transaction.Start
                 {
                     nvc.Add("transaction[enduserId]", TransactionData.EnduserId.ToString());
                 }
-                
+
                 if (!ParameterValidator.IsNull(TransactionData.ExpireDate))
                 {
                     nvc.Add("transaction[expireDate]", ((DateTime)TransactionData.ExpireDate).ToString("dd-MM-yyyy hh:mm:ss"));

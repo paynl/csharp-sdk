@@ -1,8 +1,7 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using PAYNLSDK.Exceptions;
 using PAYNLSDK.Utilities;
 using System.Collections.Specialized;
-using PAYNLSDK.Exceptions;
 
 namespace PAYNLSDK.API.PaymentMethod.GetAll
 {
@@ -13,29 +12,21 @@ namespace PAYNLSDK.API.PaymentMethod.GetAll
     public class Request : RequestBase
     {
         /// <inheritdoc />
-        public override int Version
-        {
-            get { return 1; }
-        }
+        public override int Version => 1;
 
         /// <inheritdoc />
-        public override string Controller
-        {
-            get { return "PaymentMethod"; }
-        }
+        public override string Controller => "PaymentMethod";
 
         /// <inheritdoc />
-        public override string Method
-        {
-            get { return "getAll"; }
-        }
+        public override string Method => "getAll";
 
+        /// <inheritdoc />
         public override NameValueCollection GetParameters()
         {
             return new NameValueCollection();
         }
 
-        public Response Response { get { return (Response)response; } }
+        public Response Response => (Response)response;
 
         /// <inheritdoc />
         protected override void PrepareAndSetResponse()

@@ -57,6 +57,9 @@ namespace PAYNLSDK.Objects
         /// </summary>
         [JsonProperty("transferData")]
         public string[] TransferData { get; set; }
+
+        [JsonProperty("object")]
+        public object Object { get; set; }
     }
 
 }

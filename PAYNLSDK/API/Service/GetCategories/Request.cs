@@ -1,32 +1,32 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using PAYNLSDK.Exceptions;
 using PAYNLSDK.Utilities;
 using System.Collections.Specialized;
-using PAYNLSDK.Converters;
-using PAYNLSDK.Exceptions;
 
 namespace PAYNLSDK.API.Service.GetCategories
 {
+    /// <summary>
+    /// Returns a list of available service categories. 
+    /// If a payment option is specified, only the categories linked to the payment option is returned 
+    /// </summary>
     public class Request : RequestBase
     {
+        /// <summary>
+        ///  	The optional ID of the payment profile
+        /// </summary>
         [JsonProperty("paymentOptionId")]
         public int? PaymentOptionId { get; set; }
 
-        public override int Version
-        {
-            get { return 3; }
-        }
+        /// <inheritdoc />
+        public override int Version => 3;
 
-        public override string Controller
-        {
-            get { return "Service"; }
-        }
+        /// <inheritdoc />
+        public override string Controller => "Service";
 
-        public override string Method
-        {
-            get { return "getCategories"; }
-        }
-        
+        /// <inheritdoc />
+        public override string Method => "getCategories";
+
+        /// <inheritdoc />
         public override NameValueCollection GetParameters()
         {
             NameValueCollection nvc = new NameValueCollection();
@@ -37,8 +37,9 @@ namespace PAYNLSDK.API.Service.GetCategories
             return nvc;
         }
 
-        public Response Response { get { return (Response)response; } }
+        public Response Response => (Response)response;
 
+        /// <inheritdoc />
         protected override void PrepareAndSetResponse()
         {
             if (ParameterValidator.IsEmpty(rawResponse))
@@ -46,8 +47,10 @@ namespace PAYNLSDK.API.Service.GetCategories
                 throw new ErrorException("rawResponse is empty!");
             }
             PAYNLSDK.Objects.ServiceCategory[] pm = JsonConvert.DeserializeObject<PAYNLSDK.Objects.ServiceCategory[]>(RawResponse);
-            Response r = new Response();
-            r.ServiceCategories = pm;
+            Response r = new Response
+            {
+                ServiceCategories = pm
+            };
             response = r;
         }
     }

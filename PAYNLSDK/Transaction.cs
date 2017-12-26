@@ -50,22 +50,6 @@ namespace PAYNLSDK
             }
         }
 
-        /// <summary>
-        /// Checks whether a status is a PAID status
-        /// </summary>
-        /// <param name="status">Transaction status</param>
-        /// <returns>True if PAID, false otherwise</returns>
-        public bool IsPaid(Enums.PaymentStatus status)
-        {
-            try
-            {
-                return (status == Enums.PaymentStatus.PAID);
-            }
-            catch (ErrorException e)
-            {
-                return false;
-            }
-        }
 
         /// <summary>
         /// Checks whether a transaction has a status of CANCELLED
@@ -87,22 +71,7 @@ namespace PAYNLSDK
             }
         }
 
-        /// <summary>
-        /// Checks whether a status is a CANCELLED status
-        /// </summary>
-        /// <param name="status">Transaction status</param>
-        /// <returns>True if CANCELLED, false otherwise</returns>
-        public bool IsCancelled(Enums.PaymentStatus status)
-        {
-            try
-            {
-                return (status == Enums.PaymentStatus.CANCEL);
-            }
-            catch (ErrorException e)
-            {
-                return false;
-            }
-        }
+
 
         /// <summary>
         /// Checks whether a transaction has a status of PENDING
@@ -115,7 +84,7 @@ namespace PAYNLSDK
             {
                 TransactionInfo request = new TransactionInfo();
                 request.TransactionId = transactionId;
-                
+
                 _webClient.PerformRequest(request);
                 return ((request.Response.PaymentDetails.State == Enums.PaymentStatus.PENDING_1) ||
                     (request.Response.PaymentDetails.State == Enums.PaymentStatus.PENDING_2) ||
@@ -129,26 +98,7 @@ namespace PAYNLSDK
             }
         }
 
-        /// <summary>
-        /// Checks whether a status is a PENDING status
-        /// </summary>
-        /// <param name="status">Transaction status</param>
-        /// <returns>True if PENDING, false otherwise</returns>
-        public bool IsPending(Enums.PaymentStatus status)
-        {
-            try
-            {
-                return ((status == Enums.PaymentStatus.PENDING_1) ||
-                    (status == Enums.PaymentStatus.PENDING_2) ||
-                    (status == Enums.PaymentStatus.PENDING_3) ||
-                    (status == Enums.PaymentStatus.VERIFY)
-                    );
-            }
-            catch (ErrorException e)
-            {
-                return false;
-            }
-        }
+
 
         /// <summary>
         /// Checks whether a transaction has a status of VERIFY
@@ -161,7 +111,7 @@ namespace PAYNLSDK
             {
                 TransactionInfo request = new TransactionInfo();
                 request.TransactionId = transactionId;
-                
+
                 _webClient.PerformRequest(request);
                 return ((request.Response.PaymentDetails.State == Enums.PaymentStatus.VERIFY) ||
                     (request.Response.PaymentDetails.StateName == "VERIFY"));
@@ -172,15 +122,7 @@ namespace PAYNLSDK
             }
         }
 
-        /// <summary>
-        /// Checks whether a status is a VERIFY status
-        /// </summary>
-        /// <param name="status">Transaction status</param>
-        /// <returns>True if VERIFY, false otherwise</returns>
-        public bool IsVerify(Enums.PaymentStatus status)
-        {
-            return status == Enums.PaymentStatus.VERIFY;
-        }
+        
 
         /// <summary>
         /// Query the service for all (current status) information on a transaction
@@ -315,7 +257,7 @@ namespace PAYNLSDK
         /// <param name="transferType">TransferType for this transaction (merchant/transaction)</param>
         /// <param name="transferValue">TransferValue eg MerchantId (M-xxxx-xxxx) or orderId</param>
         /// <returns>Transaction Start Request</returns>
-        public static PAYNLSDK.API.Transaction.Start.Request CreateTransactionRequest(string ipAddress, string returnUrl, int? paymentOptionId, int? paymentSubOptionId = null, bool testMode = false, string transferType = null, string transferValue = null)
+        public static PAYNLSDK.API.Transaction.Start.Request CreateTransactionRequest(string ipAddress, string returnUrl, int? paymentOptionId = null, int? paymentSubOptionId = null, bool testMode = false, string transferType = null, string transferValue = null)
         {
             var request = new API.Transaction.Start.Request
             {
@@ -323,7 +265,7 @@ namespace PAYNLSDK
                 IPAddress = ipAddress,
                 ReturnUrl = returnUrl,
                 PaymentOptionId = paymentOptionId,
-                
+
                 PaymentOptionSubId = paymentSubOptionId,
                 TestMode = testMode,
                 TransferType = transferType,

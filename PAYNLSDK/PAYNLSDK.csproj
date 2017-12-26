@@ -41,6 +41,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web" />
@@ -69,13 +70,14 @@
     <Compile Include="API\Transaction\Approve\Response.cs" />
     <Compile Include="API\Transaction\Decline\Request.cs" />
     <Compile Include="API\Transaction\Decline\Response.cs" />
+    <Compile Include="API\Transaction\Info\ResponseExtentions.cs" />
     <Compile Include="Banktransfer.cs" />
     <Compile Include="Converters\YMDConverter.cs" />
     <Compile Include="Exceptions\ErrorException.cs" />
     <Compile Include="Objects\Address.cs" />
     <Compile Include="Objects\Connection.cs" />
     <Compile Include="Objects\CountryOption.cs" />
-    <Compile Include="Objects\EndUser.cs" />
+    <Compile Include="API\Transaction\EndUser.cs" />
     <Compile Include="Objects\Error.cs" />
     <Compile Include="Objects\Merchant.cs" />
     <Compile Include="Objects\OrderData.cs" />
@@ -86,8 +88,8 @@
     <Compile Include="Objects\SalesData.cs" />
     <Compile Include="Objects\Service.cs" />
     <Compile Include="Objects\ServiceCategory.cs" />
-    <Compile Include="Objects\StatsDetails.cs" />
-    <Compile Include="Objects\StornoDetails.cs" />
+    <Compile Include="API\Transaction\StatsDetails.cs" />
+    <Compile Include="API\Transaction\Info\StornoDetails.cs" />
     <Compile Include="API\Transaction\Start\TransactionData.cs" />
     <Compile Include="Objects\TransactionStartInfo.cs" />
     <Compile Include="Objects\TransactionStats.cs" />

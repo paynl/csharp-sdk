@@ -13,15 +13,12 @@ With this SDK you will be able to start transactions and retrieve transactions w
 
 Setting the configuration:
 ```c#
-PAYNLSDK.API.RequestBase.ApiToken = "e41f83b246b706291ea9ad798ccfd9f0fee5e0ab";
-PAYNLSDK.API.RequestBase.ServiceId = "SL-3490-4320";
+var client = new Client("e41f83b246b706291ea9ad798ccfd9f0fee5e0ab", "SL-3490-4320")
 ```
 
 Getting a list of available payment methods, use the Getservice.
 ```c#
-PAYNLSDK.API.RequestBase.ApiToken = "e41f83b246b706291ea9ad798ccfd9f0fee5e0ab";
-PAYNLSDK.API.RequestBase.ServiceId = "SL-3490-4320";
-PAYNLSDK.API.Transaction.GetService.Response response = PAYNLSDK.Transaction.GetService(paymentMethodId);
+var response = PAYNLSDK.Transaction.GetService(paymentMethodId);
 //paymentMethodId: is optional
 //The ID of the payment method. Only the payment options linked to the provided payment method ID will be returned if an ID is provided.
 //If omitted, all available payment options are returned. Use the following IDs to filter the options:
@@ -105,21 +102,22 @@ request.Enduser.InvoiceAddress.ZipCode = "1234BC";
 request.Enduser.InvoiceAddress.City = "City";
 request.Enduser.InvoiceAddress.CountryCode = "NL";
 
-PAYNLSDK.API.Transaction.Start.Response response = PAYNLSDK.Transaction.Start(request);
+// Do the call
+var transaction = new PAYNLSDK.Transaction(client).Start(request);
+
+// do whatever you need to do
+var transactionId = transaction.Transaction.TransactionId;
+var redirectToUrl = transaction.Transaction.PaymentURL;
 ```
 
 To determine if a transaction has been paid, you can use:
 ```c#
-PAYNLSDK.API.RequestBase.ApiToken = "e41f83b246b706291ea9ad798ccfd9f0fee5e0ab";
-PAYNLSDK.API.RequestBase.ServiceId = "SL-3490-4320";
+var transactionInfo = new PAYNLSDK.Transaction(client).Info(transactionId);
+var paid = transactionInfo.PaymentDetails.State == PaymentStatus.PAID;
 
-PAYNLSDK.API.Transaction.Start.Response response;
-// Perform transaction to get response object. Alternately, you could work with a stored ID.
+// or use the extentionmethods by adding "using PAYNLSDK.API.Transaction.Info;" at the top of your file
 
-PAYNLSDK.API.Transaction.Info.Response info = PAYNLSDK.Transaction.Info(response.transactionId);
-PAYNLSDK.Enums.PaymentStatus result = info.State;
-
-if (PAYNLSDK.Transaction.IsPaid(result) || PAYNLSDK.Transaction.IsPending(result))
+if (transactionInfo.IsPaid() || transactionInfo.IsPending())
 {
     // redirect user to thank you page
 }
@@ -131,11 +129,8 @@ else
 
 When implementing the exchange script (where you should process the order in your backend):
 ```c#
-PAYNLSDK.API.RequestBase.ApiToken = "e41f83b246b706291ea9ad798ccfd9f0fee5e0ab";
-PAYNLSDK.API.RequestBase.ServiceId = "SL-3490-4320";
-
-PAYNLSDK.API.Transaction.Info.Response info = PAYNLSDK.Transaction.Info(response.transactionId);
-PAYNLSDK.Enums.PaymentStatus result = info.State;
+var info = PAYNLSDK.Transaction.Info(response.transactionId);
+PAYNLSDK.Enums.PaymentStatus result = info.PaymentDetails.State;
 
 if (PAYNLSDK.Transaction.IsPaid(result))
 {

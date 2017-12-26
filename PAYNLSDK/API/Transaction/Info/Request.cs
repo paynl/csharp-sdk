@@ -1,33 +1,33 @@
 ﻿using Newtonsoft.Json;
 using PAYNLSDK.Exceptions;
 using PAYNLSDK.Utilities;
-using System;
 using System.Collections.Specialized;
 
 namespace PAYNLSDK.API.Transaction.Info
 {
     public class Request : RequestBase
     {
-
+        /// <summary>
+        /// Mandatory transaction identifier
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.Required]
         public string TransactionId { get; set; }
 
+        /// <summary>
+        /// Unique code related to the order.
+        /// </summary>
         public string EntranceCode { get; set; }
 
-        public override int Version
-        {
-            get { return 5; }
-        }
+        /// <inheritdoc />
+        public override int Version => 5;
 
-        public override string Controller
-        {
-            get { return "Transaction"; }
-        }
+        /// <inheritdoc />
+        public override string Controller => "Transaction";
 
-        public override string Method
-        {
-            get { return "info"; }
-        }
-        
+        /// <inheritdoc />
+        public override string Method => "info";
+
+        /// <inheritdoc />
         public override NameValueCollection GetParameters()
         {
             NameValueCollection nvc = new NameValueCollection();
@@ -41,8 +41,9 @@ namespace PAYNLSDK.API.Transaction.Info
             }
             return nvc;
         }
-        public Response Response { get { return (Response)response; } }
+        public Response Response => (Response)response;
 
+        /// <inheritdoc />
         protected override void PrepareAndSetResponse()
         {
             if (ParameterValidator.IsEmpty(rawResponse))

@@ -3,7 +3,6 @@ using Newtonsoft.Json;
 using PAYNLSDK.Utilities;
 using System.Collections.Specialized;
 using PAYNLSDK.Exceptions;
-using PAYNLSDK.Objects;
 
 namespace PAYNLSDK.API.Banktransfer.Add
 {
