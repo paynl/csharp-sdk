@@ -22,7 +22,7 @@ namespace PAYNLSDK.Converters
             }
             catch (Exception e)
             {
-                throw new JsonSerializationException(String.Format("Unexpected conversion '{0}' when parsing errorId.", result));
+                throw new JsonSerializationException(String.Format("Unexpected conversion '{0}' when parsing errorId.", result), e);
             }
         }
 
