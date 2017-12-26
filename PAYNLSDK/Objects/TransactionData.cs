@@ -1,5 +1,6 @@
 ﻿using System;
 using Newtonsoft.Json;
+using PAYNLSDK.Converters;
 using PAYNLSDK.Enums;
 
 namespace PAYNLSDK.Objects
@@ -21,6 +22,10 @@ namespace PAYNLSDK.Objects
         [JsonProperty("costsVat")]
         public int? CostsVat { get; set; }
 
+        // No documentation is available to implement this
+        //[JsonProperty("excludeCosts")]
+        //public Array ExcludeCosts { get; set; }
+
         /// <summary>
         /// The URL of the exchange file that needs to be called
         /// </summary>
@@ -38,20 +43,31 @@ namespace PAYNLSDK.Objects
         /// </summary>
         [JsonProperty("expireDate")]
         public DateTime? ExpireDate { get; set; }
+        
+        /// <summary>
+        ///  	Unique id of the enduser
+        /// </summary>
+        [JsonProperty("enduserId")]
+        public int? EnduserId { get; set; }
 
-        // TODO: WHAT????
-        //[JsonProperty("excludeCosts")]
-        //public int? ExcludeCosts { get; set; }
+        /// <summary>
+        /// The number belonging to the order
+        /// </summary>
+        [JsonProperty("orderNumber")]
+        public string OrderNumber { get; set; }
 
-        // @DISABLED@
-        //[JsonProperty("enduserId")]
-        //public int? EnduserId { get; set; }
+        /// <summary>
+        /// Whether to sent a confimation email
+        /// </summary>
+        [JsonProperty("sendReminderEmail"), JsonConverter(typeof(BooleanConverter))]
+        public bool SendReminderEmail { get; set; }
 
-        //[JsonProperty("sendReminderEmail"),JsonConverter(typeof(BooleanConverter))]
-        //public bool SendReminderEmail { get; set; }
+        /// <summary>
+        /// The id of mailtemplate in case a confirmation mail needs to be sent
+        /// </summary>
+        [JsonProperty("reminderMailTemplateId")]
+        public int? ReminderMailTemplateId { get; set; }
 
-        //[JsonProperty("reminderMailTemplateId")]
-        //public int? ReminderMailTemplateId { get; set; }
 
     }
 }
