@@ -19,7 +19,7 @@ namespace PAYNLFormsApp
         public ValidationForm()
         {
             InitializeComponent();
-            validator = new Util(APISettings.Client);
+            validator = new Util(MyStaticPayNlClient.Client);
         }
 
         private void button1_Click(object sender, EventArgs e)

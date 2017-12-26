@@ -1,17 +1,10 @@
 ﻿using Newtonsoft.Json;
 using PAYNLFormsApp.Fixtures;
-using PAYNLSDK;
 using PAYNLSDK.API;
 using PAYNLSDK.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web;
 using System.Windows.Forms;
 
@@ -57,7 +50,6 @@ namespace PAYNLFormsApp
         }
         private void InitRequestDebug(RequestBase request)
         {
-            APISettings.InitAPI();
             AddDebug(string.Format("Calling API {0} / {1}", request.Controller, request.Method));
             AddDebug(string.Format("Requires TOKEN? {0}", request.RequiresApiToken));
             AddDebug(string.Format("Requires SERVICEID? {0}", request.RequiresServiceId));
@@ -75,30 +67,27 @@ namespace PAYNLFormsApp
 
         private void dumpTransactionGetServiceToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
             DebugForm form = new DebugForm();
             form.dumpTransactionGetService();
             form.ShowDialog();
-
-            
         }
 
         private void dumpTransactionGetLastToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DebugForm form = new DebugForm();
-            form.dumpTransactionGetLast();
+            form.DumpTransactionGetLast();
             form.ShowDialog();    
         }
 
         private void txinfo(string id)
         {
             //619204633Xc4027e
-            APISettings.InitAPI();
+            
             ClearDebug();
             PAYNLSDK.API.Transaction.Info.Request request = new PAYNLSDK.API.Transaction.Info.Request();
             request.TransactionId = id;
             InitRequestDebug(request);
-            APISettings.Client.PerformRequest(request);
+            MyStaticPayNlClient.Client.PerformRequest(request);
             DebugRawResponse(request);
             tbMain.Text = request.Response.ToString();
         }
@@ -120,7 +109,7 @@ namespace PAYNLFormsApp
 
         private void transActionStartToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            APISettings.InitAPI();
+            
             ClearDebug();
             PAYNLSDK.API.Transaction.Start.Request fixture = TransactionStart.GetFixture();
             AddDebug("Fixture loaded.");
@@ -134,7 +123,7 @@ namespace PAYNLFormsApp
 
         private void transactionStartproductsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            APISettings.InitAPI();
+            
             ClearDebug();
             PAYNLSDK.API.Transaction.Start.Request fixture = TransactionStart.GetFixtureNoProductLines();
             AddDebug("Fixture loaded.");
@@ -195,13 +184,13 @@ namespace PAYNLFormsApp
         {
             try
             {
-                APISettings.InitAPI();
+                
                 ClearDebug();
                 PAYNLSDK.API.Transaction.Start.Request fixture = TransactionStart.GetFixtureNoProductLines();
                 InitRequestDebug(fixture);
                 DumpNvc(fixture.GetParameters());
 
-                APISettings.Client.PerformRequest(fixture);
+                MyStaticPayNlClient.Client.PerformRequest(fixture);
                 DebugRawResponse(fixture);
                 tbMain.Text = fixture.Response.ToString();
 
@@ -235,13 +224,13 @@ namespace PAYNLFormsApp
                     AddDebug("CANCELLED!");
                     return;
                 }
-                APISettings.InitAPI();
+                
                 ClearDebug();
                 PAYNLSDK.API.Transaction.Start.Request fixture = LastRequests.LastTransactionStart;
                 InitRequestDebug(fixture);
                 DumpNvc(fixture.GetParameters());
 
-                APISettings.Client.PerformRequest(fixture);
+                MyStaticPayNlClient.Client.PerformRequest(fixture);
                 DebugRawResponse(fixture);
                 tbMain.Text = fixture.Response.ToString();
 
@@ -271,13 +260,13 @@ namespace PAYNLFormsApp
         {
             try
             {
-                APISettings.InitAPI();
+                
                 ClearDebug();
                 PAYNLSDK.API.PaymentProfile.GetAll.Request fixture = new PAYNLSDK.API.PaymentProfile.GetAll.Request();
                 InitRequestDebug(fixture);
                 DumpNvc(fixture.GetParameters());
 
-                APISettings.Client.PerformRequest(fixture);
+                MyStaticPayNlClient.Client.PerformRequest(fixture);
                 DebugRawResponse(fixture);
                 tbMain.Text = fixture.Response.ToString();
             }
@@ -292,13 +281,13 @@ namespace PAYNLFormsApp
         {
             try
             {
-                APISettings.InitAPI();
+                
                 ClearDebug();
                 PAYNLSDK.API.Service.GetCategories.Request fixture = new PAYNLSDK.API.Service.GetCategories.Request();
                 InitRequestDebug(fixture);
                 DumpNvc(fixture.GetParameters());
 
-                APISettings.Client.PerformRequest(fixture);
+                MyStaticPayNlClient.Client.PerformRequest(fixture);
                 DebugRawResponse(fixture);
                 tbMain.Text = fixture.Response.ToString();
             }

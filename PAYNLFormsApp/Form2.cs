@@ -19,14 +19,14 @@ namespace PAYNLFormsApp
 
         private void Form2_Load(object sender, EventArgs e)
         {
-            tbApitoken.Text = PAYNLFormsApp.APISettings.ApiToken;
-            tbServiceID.Text = PAYNLFormsApp.APISettings.ServiceID;
+            tbApitoken.Text = PAYNLFormsApp.MyStaticPayNlClient.ApiToken;
+            tbServiceID.Text = PAYNLFormsApp.MyStaticPayNlClient.ServiceId;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            PAYNLFormsApp.APISettings.ApiToken = tbApitoken.Text;
-            PAYNLFormsApp.APISettings.ServiceID = tbServiceID.Text;
+            PAYNLFormsApp.MyStaticPayNlClient.ApiToken = tbApitoken.Text;
+            PAYNLFormsApp.MyStaticPayNlClient.ServiceId = tbServiceID.Text;
         }
 
         private void button2_Click(object sender, EventArgs e)

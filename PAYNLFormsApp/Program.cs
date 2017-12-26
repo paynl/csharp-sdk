@@ -19,40 +19,22 @@ namespace PAYNLFormsApp
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             // Set test token/SL
-            APISettings.ApiToken = "e41f83b246b706291ea9ad798ccfd9f0fee5e0ab";
-            APISettings.ServiceID = "SL-3490-4320";
+            MyStaticPayNlClient.ApiToken = "88a97a72281e64491347f873041f33f7d3514a55";
+            MyStaticPayNlClient.ServiceId = "SL-5285-2850";
             Application.Run(new Form1());
         }
     }
 
-    class APISettings
+    class MyStaticPayNlClient
     {
         public static string ApiToken { get; set; }
-        public static string ServiceID { get; set; }
-
-        public static void InitAPI()
-        {
-            RequestBase.ApiToken = ApiToken;
-            RequestBase.ServiceId = ServiceID;
-        }
-
-        private static IClient client;
-        public static IClient Client
-        {
-            get
-            {
-                if (client == null)
-                {
-                    client = new Client();
-                }
-                InitAPI();
-                return client;
-            }
-        }
+        public static string ServiceId { get; set; }
+        
+        private static IClient _client;
+        public static IClient Client => _client ?? (_client = new Client(ApiToken, ServiceId));
     }
-
-
-    class LastRequests
+    
+    static class LastRequests
     {
         public static PAYNLSDK.API.Transaction.Start.Request LastTransactionStart { get; set; }
         public static RequestBase LastRequest { get; set; }

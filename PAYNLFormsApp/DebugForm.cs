@@ -31,34 +31,31 @@ namespace PAYNLFormsApp
 
         public void dumpPaymentmethods()
         {
-            APISettings.InitAPI();
             ClearDebug();
             PAYNLSDK.API.PaymentMethod.GetAll.Request request = new PAYNLSDK.API.PaymentMethod.GetAll.Request();
             InitRequestDebug(request);
-            APISettings.Client.PerformRequest(request);
+            MyStaticPayNlClient.Client.PerformRequest(request);
             DebugRawResponse(request);
             tbMain.Text = request.Response.ToString();
         }
 
         public void dumpTransactionGetService()
-        { 
-        APISettings.InitAPI();
-            ClearDebug();
-        PAYNLSDK.API.Transaction.GetService.Request request = new PAYNLSDK.API.Transaction.GetService.Request();
-            InitRequestDebug(request);
-        APISettings.Client.PerformRequest(request);
-            DebugRawResponse(request);
-        tbMain.Text = request.Response.ToString();
-
-         }
-
-        public void dumpTransactionGetLast()
         {
-            APISettings.InitAPI();
+            ClearDebug();
+            PAYNLSDK.API.Transaction.GetService.Request request = new PAYNLSDK.API.Transaction.GetService.Request();
+            InitRequestDebug(request);
+            MyStaticPayNlClient.Client.PerformRequest(request);
+            DebugRawResponse(request);
+            tbMain.Text = request.Response.ToString();
+
+        }
+
+        public void DumpTransactionGetLast()
+        {
             ClearDebug();
             PAYNLSDK.API.Transaction.GetLastTransactions.Request request = new PAYNLSDK.API.Transaction.GetLastTransactions.Request();
             InitRequestDebug(request);
-            APISettings.Client.PerformRequest(request);
+            MyStaticPayNlClient.Client.PerformRequest(request);
             DebugRawResponse(request);
             tbMain.Text = request.Response.ToString();
         }
@@ -66,11 +63,10 @@ namespace PAYNLFormsApp
 
         public void Approve(string transactionID)
         {
-
             try
             {
 
-                APISettings.InitAPI();
+
                 ClearDebug();
 
                 if (transactionID == "")
@@ -85,7 +81,7 @@ namespace PAYNLFormsApp
 
                     InitRequestDebug(request);
 
-                    APISettings.Client.PerformRequest(request);
+                    MyStaticPayNlClient.Client.PerformRequest(request);
                     DebugRawResponse(request);
                     tbMain.Text = request.Response.Message.ToString();
                 }
@@ -104,7 +100,7 @@ namespace PAYNLFormsApp
             try
             {
 
-                APISettings.InitAPI();
+
                 ClearDebug();
 
                 if (transactionID == "")
@@ -119,7 +115,7 @@ namespace PAYNLFormsApp
 
                     InitRequestDebug(request);
 
-                    APISettings.Client.PerformRequest(request);
+                    MyStaticPayNlClient.Client.PerformRequest(request);
                     DebugRawResponse(request);
 
 
@@ -141,7 +137,7 @@ namespace PAYNLFormsApp
             try
             {
 
-                APISettings.InitAPI();
+
                 ClearDebug();
 
                 int numValue;
@@ -170,12 +166,12 @@ namespace PAYNLFormsApp
 
                     InitRequestDebug(request);
 
-                    APISettings.Client.PerformRequest(request);
+                    MyStaticPayNlClient.Client.PerformRequest(request);
                     DebugRawResponse(request);
 
                     tbMain.Text = request.Response.RefundId;
                 }
-                
+
 
             }
             catch (ErrorException ee)
@@ -191,7 +187,7 @@ namespace PAYNLFormsApp
 
             try
             {
-                APISettings.InitAPI();
+
                 ClearDebug();
 
                 int numValue;
@@ -209,13 +205,13 @@ namespace PAYNLFormsApp
                     PAYNLSDK.API.Refund.Add.Request request = new PAYNLSDK.API.Refund.Add.Request(numValue, bankAccountName, bankAccountNumber, "");
                     InitRequestDebug(request);
 
-                    APISettings.Client.PerformRequest(request);
+                    MyStaticPayNlClient.Client.PerformRequest(request);
                     DebugRawResponse(request);
 
 
                     tbMain.Text = request.Response.RefundId;
                 }
-           
+
 
             }
             catch (ErrorException ee)
@@ -225,7 +221,7 @@ namespace PAYNLFormsApp
             }
         }
 
-// help function
+        // help function
         private void ClearDebug()
         {
             tbDebug.Text = "";
@@ -240,7 +236,7 @@ namespace PAYNLFormsApp
         }
         private void InitRequestDebug(RequestBase request)
         {
-            APISettings.InitAPI();
+
             AddDebug(string.Format("Calling API {0} / {1}", request.Controller, request.Method));
             AddDebug(string.Format("Requires TOKEN? {0}", request.RequiresApiToken));
             AddDebug(string.Format("Requires SERVICEID? {0}", request.RequiresServiceId));
