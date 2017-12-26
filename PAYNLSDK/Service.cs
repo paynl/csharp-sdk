@@ -11,28 +11,33 @@ namespace PAYNLSDK
     /// </summary>
     public class Service
     {
-        /// <summary>
-        /// Get Service Categories for a given payment option ID
-        /// </summary>
-        /// <param name="paymentOptionId">Payment Option ID</param>
-        /// <returns>Response object containing service categories</returns>
-        static public PAYNLSDK.API.Service.GetCategories.Response GetCategories(int? paymentOptionId)
+        private readonly IClient _webClient;
+
+        public Service()
         {
-            ServiceGetCategories request = new ServiceGetCategories();
-            request.PaymentOptionId = paymentOptionId;
-            Client c = new Client("", "");
-            c.PerformRequest(request);
-            return request.Response;
+            _webClient = new Client("", "");
+        }
+
+        public Service(IClient webClient)
+        {
+            _webClient = webClient;
         }
 
         /// <summary>
-        /// Get Service Categories
+        /// Get Service Categories for a given payment option ID
         /// </summary>
+        /// <param name="paymentOptionId">Payment Option ID, if null return all</param>
         /// <returns>Response object containing service categories</returns>
-        static public PAYNLSDK.API.Service.GetCategories.Response GetCategories()
+        public PAYNLSDK.API.Service.GetCategories.Response GetCategories(int? paymentOptionId = null)
         {
-            return GetCategories(null);
+            ServiceGetCategories request = new ServiceGetCategories();
+            request.PaymentOptionId = paymentOptionId;
+            
+            _webClient.PerformRequest(request);
+            return request.Response;
         }
+
+       
     }
 
 }

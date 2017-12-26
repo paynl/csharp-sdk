@@ -10,17 +10,37 @@ namespace PAYNLSDK
     /// </summary>
     public class PaymentMethod
     {
+        private readonly IClient _webClient;
+
+        /// <summary>
+        /// Create a new PaymentMethod object
+        /// </summary>
+        public PaymentMethod()
+        {
+            _webClient = new Client("", "");
+        }
+
+        /// <summary>
+        /// Create a new PaymentMethod object
+        /// </summary>
+        /// <param name="webClient"></param>
+        public PaymentMethod(IClient webClient)
+        {
+            _webClient = webClient;
+        }
+
         /// <summary>
         /// Get information for the requested payment method.
         /// </summary>
         /// <param name="paymentMethodId">Payment Method ID</param>
         /// <returns>Response containing the payment method data</returns>
-        static public PAYNLSDK.API.PaymentMethod.Get.Response Get(int paymentMethodId)
+        public PAYNLSDK.API.PaymentMethod.Get.Response Get(Enums.PaymentMethodId paymentMethodId)
         {
-            PaymentMethodGet request = new PaymentMethodGet();
-            request.PaymentMethodId = paymentMethodId;
-            Client c = new Client("", "");
-            c.PerformRequest(request);
+            var request = new PaymentMethodGet
+            {
+                PaymentMethodId = paymentMethodId
+            };
+            _webClient.PerformRequest(request);
             return request.Response;
         }
 
@@ -28,11 +48,10 @@ namespace PAYNLSDK
         /// Get information for all payment methods.
         /// </summary>
         /// <returns>Response containing a list of information for all payment methods</returns>
-        static public PAYNLSDK.API.PaymentMethod.GetAll.Response GetAll()
+        public PAYNLSDK.API.PaymentMethod.GetAll.Response GetAll()
         {
             PaymentMethodGetAll request = new PaymentMethodGetAll();
-            Client c = new Client("", "");
-            c.PerformRequest(request);
+            _webClient.PerformRequest(request);
             return request.Response;
         }
     }

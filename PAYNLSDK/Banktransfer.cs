@@ -9,18 +9,28 @@ namespace PAYNLSDK
 {
     public class Banktransfer
     {
-        static public API.Banktransfer.Add.Response Add(PAYNLSDK.API.Banktransfer.Add.Request request)
+        private readonly IClient _webClient;
+        
+        public Banktransfer()
         {
-            Client c = new Client("", "");
-            c.PerformRequest(request);
+            _webClient = new Client("", "");
+        }
+        
+        public Banktransfer(IClient webClient)
+        {
+            _webClient = webClient;
+        }
+
+        public API.Banktransfer.Add.Response Add(PAYNLSDK.API.Banktransfer.Add.Request request)
+        {
+            _webClient.PerformRequest(request);
             return request.Response;
         }
 
-        static public API.Banktransfer.Add.Response Add(int amount, string bankAccountHolder, string bankAccountNumber, string bankAccountBic)
+        public API.Banktransfer.Add.Response Add(int amount, string bankAccountHolder, string bankAccountNumber, string bankAccountBic)
         {
-            Client c = new Client("", "");
             var request = new API.Banktransfer.Add.Request(amount, bankAccountHolder, bankAccountNumber, bankAccountBic);
-            c.PerformRequest(request);
+            _webClient.PerformRequest(request);
             return request.Response;
         }
     }
