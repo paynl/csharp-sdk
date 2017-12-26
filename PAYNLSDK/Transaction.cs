@@ -41,8 +41,7 @@ namespace PAYNLSDK
             {
                 TransactionInfo request = new TransactionInfo();
                 request.TransactionId = transactionId;
-                Client c = new Client();
-                c.PerformRequest(request);
+                _webClient.PerformRequest(request);
                 return (request.Response.PaymentDetails.State == Enums.PaymentStatus.PAID);
             }
             catch (ErrorException e)
@@ -79,8 +78,7 @@ namespace PAYNLSDK
             {
                 TransactionInfo request = new TransactionInfo();
                 request.TransactionId = transactionId;
-                Client c = new Client();
-                c.PerformRequest(request);
+                _webClient.PerformRequest(request);
                 return (request.Response.PaymentDetails.State == Enums.PaymentStatus.CANCEL);
             }
             catch (ErrorException e)
@@ -117,8 +115,8 @@ namespace PAYNLSDK
             {
                 TransactionInfo request = new TransactionInfo();
                 request.TransactionId = transactionId;
-                Client c = new Client();
-                c.PerformRequest(request);
+                
+                _webClient.PerformRequest(request);
                 return ((request.Response.PaymentDetails.State == Enums.PaymentStatus.PENDING_1) ||
                     (request.Response.PaymentDetails.State == Enums.PaymentStatus.PENDING_2) ||
                     (request.Response.PaymentDetails.State == Enums.PaymentStatus.PENDING_3) ||
@@ -163,8 +161,8 @@ namespace PAYNLSDK
             {
                 TransactionInfo request = new TransactionInfo();
                 request.TransactionId = transactionId;
-                Client c = new Client();
-                c.PerformRequest(request);
+                
+                _webClient.PerformRequest(request);
                 return ((request.Response.PaymentDetails.State == Enums.PaymentStatus.VERIFY) ||
                     (request.Response.PaymentDetails.StateName == "VERIFY"));
             }

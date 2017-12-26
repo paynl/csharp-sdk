@@ -1,34 +1,12 @@
 ﻿using PAYNLSDK.API;
-using PAYNLSDK.Net.ProxyConfigurationInjector;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PAYNLSDK.Net
 {
+    /// <summary>
+    /// The wrapper for performing HTTP REST calls to the api
+    /// </summary>
     public interface IClient
     {
-        /// <summary>
-        /// PAYNL API TOKEN
-        /// </summary>
-        string ApiToken { get; }
-        /// <summary>
-        /// PAYNL SERVICE ID
-        /// </summary>
-        string ServiceID { get; }
-
-        /// <summary>
-        /// Proxy injector
-        /// </summary>
-        IProxyConfigurationInjector ProxyConfigurationInjector { get; }
-
-        /// <summary>
-        /// API VERSION
-        /// </summary>
-        string ApiVersion { get; }
-
         /// <summary>
         /// Client version
         /// </summary>

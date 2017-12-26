@@ -22,9 +22,10 @@ namespace PAYNLSDK.API
         public virtual bool RequiresServiceId { get { return false; } }
 
         /// <summary>
-        /// 
+        /// The configuration with the ServiceId & Token
         /// </summary>
-        public PayNlConfiguration Configuration { get; set; }
+        public IPayNlConfiguration Configuration { get; set; }
+
 
         /// <summary>
         /// Return as JSON

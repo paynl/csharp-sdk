@@ -53,6 +53,8 @@
   <ItemGroup>
     <Compile Include="API\Banktransfer\Add\Request.cs" />
     <Compile Include="API\Banktransfer\Add\Response.cs" />
+    <Compile Include="API\IPayNlConfiguration.cs" />
+    <Compile Include="API\PayNlConfiguration.cs" />
     <Compile Include="API\PaymentProfile\GetAll\Request.cs" />
     <Compile Include="API\PaymentProfile\GetAll\Response.cs" />
     <Compile Include="API\PaymentProfile\GetAvailable\Request.cs" />
@@ -132,7 +134,6 @@
     <Compile Include="API\Validate\Util.cs" />
     <Compile Include="API\Validate\VAT\Request.cs" />
     <Compile Include="API\Validate\VAT\Response.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="Converters\BooleanConverter.cs" />
     <Compile Include="Converters\CountryOptionConverter.cs" />
     <Compile Include="Converters\EnumConversionBase.cs" />

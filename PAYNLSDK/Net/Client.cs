@@ -10,100 +10,44 @@ using Newtonsoft.Json;
 
 namespace PAYNLSDK.Net
 {
+    /// <inheritdoc />
     public class Client : IClient
     {
+        private readonly IProxyConfigurationInjector _proxyConfigurationInjector;
+        private readonly IPayNlConfiguration _securityConfiguration;
+
+        /// <inheritdoc />
+        public Client(string apiToken, string serviceId, IProxyConfigurationInjector proxyConfigurationInjector = null)
+        {
+            _proxyConfigurationInjector = proxyConfigurationInjector;
+            _securityConfiguration = new PayNlConfiguration()
+            {
+                ApiToken = apiToken,
+                ServiceId = serviceId
+            };
+        }
+
+        /// <inheritdoc />
+        public Client(IPayNlConfiguration securityConfiguration, IProxyConfigurationInjector proxyConfigurationInjector = null)
+        {
+            _securityConfiguration = securityConfiguration;
+            _proxyConfigurationInjector = proxyConfigurationInjector;
+        }
+
         /// <summary>
         /// PAYNL Endpoint
         /// </summary>
-        public static readonly string Endpoint = "https://rest-api.pay.nl";
-
-        /// <summary>
-        /// PAYNL API TOKEN
-        /// </summary>
-        public string ApiToken
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// PAYNL SERVICE ID
-        /// </summary>
-        public string ServiceID
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// Proxy injector
-        /// </summary>
-        public IProxyConfigurationInjector ProxyConfigurationInjector { get; private set; }
-
-        /// <summary>
-        /// API VERSION
-        /// </summary>
-        public string ApiVersion
-        {
-            get;
-            private set;
-        }
-
+        private const string Endpoint = "https://rest-api.pay.nl";
+        
         /// <summary>
         /// Client version
         /// </summary>
-        public string ClientVersion
-        {
-            get { return "1.1.0.0"; }
-        }
+        public string ClientVersion => "1.1.0.0";
 
         /// <summary>
         /// User agent
         /// </summary>
-        public string UserAgent
-        {
-            get { return string.Format("PAYNL/SDK/{0} DotNet/{1}", ClientVersion, Environment.Version.Major); }
-        }
-
-        /// <summary>
-        /// Create a new Service client
-        /// </summary>
-        /// <param name="apiToken">PAYNL Api Token</param>
-        /// <param name="serviceID">PAYNL Service ID</param>
-        /// <param name="proxyConfigurationInjector">Proxy Injector</param>
-        public Client(string apiToken, string serviceID, IProxyConfigurationInjector proxyConfigurationInjector)
-        {
-            ApiToken = apiToken;
-            ServiceID = serviceID;
-            ProxyConfigurationInjector = proxyConfigurationInjector;
-        }
-
-        /// <summary>
-        /// Create a new Service client
-        /// </summary>
-        /// <param name="apiToken">PAYNL Api Token</param>
-        /// <param name="serviceID">PAYNL Service ID</param>
-        public Client(string apiToken, string serviceID)
-            : this(apiToken, serviceID, null)
-        {
-        }
-
-        /// <summary>
-        /// Create a new Service client
-        /// </summary>
-        /// <param name="apiToken">PAYNL Api Token</param>
-        public Client(string apiToken)
-            : this(apiToken, null, null)
-        {
-        }
-
-        /// <summary>
-        /// create new Client
-        /// </summary>
-        public Client()
-            : this(null, null, null)
-        {
-        }
+        public string UserAgent => $"PAYNL/SDK/{ClientVersion} DotNet/{Environment.Version.Major}";
 
         /// <summary>
         /// Performs an actual request
@@ -135,20 +79,20 @@ namespace PAYNLSDK.Net
         /// <returns></returns>
         private HttpWebRequest PrepareRequest(string requestUriString, string method)
         {
-            string uriString = String.Format("{0}/{1}", Endpoint, requestUriString);
+            var uriString = $"{Endpoint}/{requestUriString}";
             var uri = new Uri(uriString);
             var request = WebRequest.Create(uri) as HttpWebRequest;
             request.UserAgent = UserAgent;
-            const string ApplicationJsonContentType = "application/json"; // http://tools.ietf.org/html/rfc4627
-            const string WWWUrlContentType = "application/x-www-form-urlencoded"; // http://tools.ietf.org/html/rfc4627
-            request.Accept = ApplicationJsonContentType;
+            const string applicationJsonContentType = "application/json"; // http://tools.ietf.org/html/rfc4627
+            const string wwwUrlContentType = "application/x-www-form-urlencoded"; // http://tools.ietf.org/html/rfc4627
+            request.Accept = applicationJsonContentType;
             //request.ContentType = ApplicationJsonContentType;
-            request.ContentType = WWWUrlContentType;
+            request.ContentType = wwwUrlContentType;
             request.Method = method;
 
-            if (null != ProxyConfigurationInjector)
+            if (null != _proxyConfigurationInjector)
             {
-                request.Proxy = ProxyConfigurationInjector.InjectProxyConfiguration(request.Proxy, uri);
+                request.Proxy = _proxyConfigurationInjector.InjectProxyConfiguration(request.Proxy, uri);
             }
             return request;
         }
@@ -274,6 +218,6 @@ namespace PAYNLSDK.Net
                     return new ErrorException(String.Format("Unhandled status code {0}", statusCode), e);
             }
         }
-    
+
     }
 }
