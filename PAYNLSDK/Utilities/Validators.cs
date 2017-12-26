@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+// ReSharper disable ParameterOnlyUsedForPreconditionCheck.Global
 
 namespace PAYNLSDK.Utilities
 {
@@ -12,8 +10,7 @@ namespace PAYNLSDK.Utilities
         {
             if (String.IsNullOrWhiteSpace(param))
             {
-                throw new ArgumentException(string.Format("Invalid parameter {0}. Cannot be null, empty or consist of whitespace only", paramName),"paramName");
-               
+                throw new ArgumentException(string.Format("Invalid parameter {0}. Cannot be null, empty or consist of whitespace only", paramName), paramName);
             }
         }
 
@@ -21,7 +18,7 @@ namespace PAYNLSDK.Utilities
         {
             if (param == null)
             {
-                throw new ArgumentException(string.Format("Invalid parameter '{0}'. Cannot be null", paramName));
+                throw new ArgumentException(string.Format("Invalid parameter '{0}'. Cannot be null", paramName), paramName);
             }
         }
 
