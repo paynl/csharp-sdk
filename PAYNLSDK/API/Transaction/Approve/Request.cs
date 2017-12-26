@@ -80,7 +80,7 @@ namespace PAYNLSDK.API.Transaction.Approve
         /// <summary>
         /// 
         /// </summary>
-        public override void SetResponse()
+        protected override void PrepareAndSetResponse()
         {
             if (ParameterValidator.IsEmpty(rawResponse))
             {

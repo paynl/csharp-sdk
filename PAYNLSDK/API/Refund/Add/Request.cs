@@ -237,7 +237,7 @@ namespace PAYNLSDK.API.Refund.Add
         /// <summary>
         /// 
         /// </summary>
-        public override void SetResponse()
+        protected override void PrepareAndSetResponse()
         {
             if (ParameterValidator.IsEmpty(rawResponse))
             {

@@ -39,7 +39,7 @@ namespace PAYNLSDK.API.PaymentMethod.GetAll
         public Response Response { get { return (Response)response; } }
 
         /// <inheritdoc />
-        public override void SetResponse()
+        protected override void PrepareAndSetResponse()
         {
             if (ParameterValidator.IsEmpty(rawResponse))
             {

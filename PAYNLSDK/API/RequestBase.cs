@@ -22,14 +22,9 @@ namespace PAYNLSDK.API
         public virtual bool RequiresServiceId { get { return false; } }
 
         /// <summary>
-        /// PAYNL API TOKEN
+        /// 
         /// </summary>
-        public static string ApiToken { get; set; }
-
-        /// <summary>
-        /// PAYNL Service ID
-        /// </summary>
-        public static string ServiceId { get; set; }
+        public PayNlConfiguration Configuration { get; set; }
 
         /// <summary>
         /// Return as JSON
@@ -60,7 +55,7 @@ namespace PAYNLSDK.API
         public abstract string Controller { get; }
 
         /// <summary>
-        /// COntroller method for this request
+        /// Controller method for this request
         /// </summary>
         public abstract string Method { get; }
 
@@ -78,13 +73,13 @@ namespace PAYNLSDK.API
             NameValueCollection nvc = new NameValueCollection();
             if (RequiresApiToken)
             {
-                ParameterValidator.IsNotEmpty(ApiToken, "ApiToken");
-                nvc.Add("token", ApiToken);
+                ParameterValidator.IsNotEmpty(Configuration.ApiToken, nameof(Configuration.ApiToken));
+                nvc.Add("token", Configuration.ApiToken);
             }
             if (RequiresServiceId)
             {
-                ParameterValidator.IsNotEmpty(ServiceId, "ServiceId");
-                nvc.Add("serviceId", ServiceId);
+                ParameterValidator.IsNotEmpty(Configuration.ServiceId, nameof(Configuration.ServiceId));
+                nvc.Add("serviceId", Configuration.ServiceId);
             }
 
             return nvc;
@@ -139,21 +134,21 @@ namespace PAYNLSDK.API
         /// </summary>
         public string RawResponse
         {
-            get 
+            get
             {
-                return rawResponse; 
+                return rawResponse;
             }
             set
             {
                 rawResponse = value;
-                SetResponse();
+                PrepareAndSetResponse();
             }
         }
 
         /// <summary>
         /// Load the raw response and perform any actions along with it.
         /// </summary>
-        public abstract void SetResponse();
+        protected abstract void PrepareAndSetResponse();
     }
 
 }

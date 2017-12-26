@@ -191,7 +191,7 @@ namespace PAYNLSDK.API.Banktransfer.Add
             return nvc;
         }
 
-        public override void SetResponse()
+        protected override void PrepareAndSetResponse()
         {
             if (ParameterValidator.IsEmpty(rawResponse))
             {

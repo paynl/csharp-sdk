@@ -31,7 +31,7 @@ namespace PAYNLSDK.API.Validate.GetServerIps
 
         public Response Response { get { return (Response)response; } }
 
-        public override void SetResponse()
+        protected override void PrepareAndSetResponse()
         {
             if (ParameterValidator.IsEmpty(rawResponse))
             {

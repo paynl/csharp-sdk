@@ -84,7 +84,7 @@ namespace PAYNLSDK.API.Transaction.Decline
         /// <summary>
         /// 
         /// </summary>
-        public override void SetResponse()
+        protected override void PrepareAndSetResponse()
         {
             if (ParameterValidator.IsEmpty(rawResponse))
             {
