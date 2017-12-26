@@ -26,12 +26,7 @@ namespace PAYNLSDK.API.Service.GetCategories
         {
             get { return "getCategories"; }
         }
-
-        public override string Querystring
-        {
-            get { return ""; }
-        }
-
+        
         public override NameValueCollection GetParameters()
         {
             NameValueCollection nvc = new NameValueCollection();

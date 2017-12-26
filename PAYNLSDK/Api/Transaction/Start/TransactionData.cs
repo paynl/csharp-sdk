@@ -1,7 +1,6 @@
 ﻿using System;
 using Newtonsoft.Json;
 using PAYNLSDK.Converters;
-using PAYNLSDK.Enums;
 
 namespace PAYNLSDK.Objects
 {

@@ -39,12 +39,12 @@ namespace PAYNLFormsApp.Fixtures
             request.Amount = 6489;
 
             // transaction
-            request.Transaction = new PAYNLSDK.Objects.TransactionData();
-            request.Transaction.Currency = "EUR";
-            request.Transaction.CostsVat = null;
-            request.Transaction.OrderExchangeUrl = "https://pay.nl/exchange.php";
-            request.Transaction.Description = "TEST PAYMENT FIXTURE";
-            request.Transaction.ExpireDate = DateTime.Now.AddDays(14);
+            request.TransactionData = new PAYNLSDK.Objects.TransactionData();
+            request.TransactionData.Currency = "EUR";
+            request.TransactionData.CostsVat = null;
+            request.TransactionData.OrderExchangeUrl = "https://pay.nl/exchange.php";
+            request.TransactionData.Description = "TEST PAYMENT FIXTURE";
+            request.TransactionData.ExpireDate = DateTime.Now.AddDays(14);
             //request.Transaction.EnduserId = null;
             //request.Transaction.ExcludeCosts = null;
             //request.Transaction.SendReminderEmail = null;

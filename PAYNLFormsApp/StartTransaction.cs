@@ -29,9 +29,9 @@ namespace PAYNLFormsApp
             tbAmount.Text = LastRequests.LastTransactionStart.Amount.ToString();
             tbIP.Text = LastRequests.LastTransactionStart.IPAddress;
             tbReturn.Text = LastRequests.LastTransactionStart.ReturnUrl;
-            tbExchange.Text = LastRequests.LastTransactionStart.Transaction.OrderExchangeUrl;
+            tbExchange.Text = LastRequests.LastTransactionStart.TransactionData.OrderExchangeUrl;
             tbPaymentOption.Text = LastRequests.LastTransactionStart.PaymentOptionId.ToString();
-            tbDesc.Text = LastRequests.LastTransactionStart.Transaction.Description;
+            tbDesc.Text = LastRequests.LastTransactionStart.TransactionData.Description;
 
             tbUserlang.Text = LastRequests.LastTransactionStart.Enduser.Language;
             tbInitials.Text = LastRequests.LastTransactionStart.Enduser.Initials;
@@ -50,9 +50,9 @@ namespace PAYNLFormsApp
             LastRequests.LastTransactionStart.Amount = Int32.Parse(tbAmount.Text);
             LastRequests.LastTransactionStart.IPAddress = tbIP.Text;
             LastRequests.LastTransactionStart.ReturnUrl = tbReturn.Text;
-            LastRequests.LastTransactionStart.Transaction.OrderExchangeUrl = tbExchange.Text;
+            LastRequests.LastTransactionStart.TransactionData.OrderExchangeUrl = tbExchange.Text;
             LastRequests.LastTransactionStart.PaymentOptionId = Int32.Parse(tbPaymentOption.Text);
-            LastRequests.LastTransactionStart.Transaction.Description = tbDesc.Text;
+            LastRequests.LastTransactionStart.TransactionData.Description = tbDesc.Text;
 
             LastRequests.LastTransactionStart.Enduser.Language = tbUserlang.Text;
             LastRequests.LastTransactionStart.Enduser.Initials = tbInitials.Text;

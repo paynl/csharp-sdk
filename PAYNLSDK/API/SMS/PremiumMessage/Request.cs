@@ -36,12 +36,7 @@ namespace PAYNLSDK.API.SMS.PremiumMessage
         {
             get { return "sendPremiumMessage"; }
         }
-
-        public override string Querystring
-        {
-            get { return ""; }
-        }
-
+        
         public override NameValueCollection GetParameters()
         {
             NameValueCollection nvc = new NameValueCollection();

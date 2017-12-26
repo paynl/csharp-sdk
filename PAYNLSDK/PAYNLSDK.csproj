@@ -88,7 +88,7 @@
     <Compile Include="Objects\ServiceCategory.cs" />
     <Compile Include="Objects\StatsDetails.cs" />
     <Compile Include="Objects\StornoDetails.cs" />
-    <Compile Include="Objects\TransactionData.cs" />
+    <Compile Include="API\Transaction\Start\TransactionData.cs" />
     <Compile Include="Objects\TransactionStartInfo.cs" />
     <Compile Include="Objects\TransactionStats.cs" />
     <Compile Include="PaymentProfile.cs" />

@@ -23,12 +23,7 @@ namespace PAYNLSDK.API.Validate.GetServerIps
         {
             get { return "getPayServerIps"; }
         }
-
-        public override string Querystring
-        {
-            get { return ""; }
-        }
-
+        
         public override NameValueCollection GetParameters()
         {
             return new NameValueCollection();

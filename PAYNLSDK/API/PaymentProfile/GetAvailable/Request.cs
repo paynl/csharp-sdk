@@ -35,12 +35,7 @@ namespace PAYNLSDK.API.PaymentProfile.GetAvailable
         {
             get { return "getAvailable"; }
         }
-
-        public override string Querystring
-        {
-            get { return ""; }
-        }
-
+        
         public override NameValueCollection GetParameters()
         {
             NameValueCollection nvc = new NameValueCollection();

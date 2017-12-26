@@ -35,12 +35,7 @@ namespace PAYNLSDK.API.Transaction.Refund
         {
             get { return "refund"; }
         }
-
-        public override string Querystring
-        {
-            get { return ""; }
-        }
-
+        
         public override NameValueCollection GetParameters()
         {
             NameValueCollection nvc = new NameValueCollection();

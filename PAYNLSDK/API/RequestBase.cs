@@ -60,11 +60,6 @@ namespace PAYNLSDK.API
         public abstract string Method { get; }
 
         /// <summary>
-        /// Extra querystring parameters used for this request
-        /// </summary>
-        public abstract string Querystring { get; }
-
-        /// <summary>
         /// Get all properties as a nameValueCollection
         /// </summary>
         public abstract NameValueCollection GetParameters();

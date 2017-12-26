@@ -97,9 +97,6 @@ namespace PAYNLSDK.API.Banktransfer.Add
         public override string Method => "add";
 
         /// <inheritdoc />
-        public override string Querystring => "";
-
-        /// <inheritdoc />
         public override bool RequiresApiToken => true;
 
         /// <inheritdoc />

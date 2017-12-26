@@ -22,12 +22,7 @@ namespace PAYNLSDK.API.PaymentProfile.GetAll
         {
             get { return "getAll"; }
         }
-
-        public override string Querystring
-        {
-            get { return ""; }
-        }
-
+        
         public override NameValueCollection GetParameters()
         {
             return new NameValueCollection();

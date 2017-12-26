@@ -25,12 +25,7 @@ namespace PAYNLSDK.API.PaymentProfile.Get
         {
             get { return "get"; }
         }
-
-        public override string Querystring
-        {
-            get { return ""; }
-        }
-
+        
         public override System.Collections.Specialized.NameValueCollection GetParameters()
         {
             NameValueCollection nvc = new NameValueCollection();

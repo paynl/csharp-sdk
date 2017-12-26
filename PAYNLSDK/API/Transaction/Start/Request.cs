@@ -52,7 +52,7 @@ namespace PAYNLSDK.API.Transaction.Start
         /// <summary>
         /// Optional information about the transaction
         /// </summary>
-        public TransactionData Transaction { get; set; }
+        public TransactionData TransactionData { get; set; }
         public StatsDetails StatsData { get; set; }
         public EndUser Enduser { get; set; }
         public SalesData SalesData { get; set; }
@@ -73,12 +73,7 @@ namespace PAYNLSDK.API.Transaction.Start
         {
             get { return "start"; }
         }
-
-        public override string Querystring
-        {
-            get { return ""; }
-        }
-
+        
         public override NameValueCollection GetParameters()
         {
             NameValueCollection nvc = new NameValueCollection();
@@ -118,34 +113,38 @@ namespace PAYNLSDK.API.Transaction.Start
             }
 
             // Transaction
-            if (Transaction != null)
+            if (TransactionData != null)
             {
-                if (!ParameterValidator.IsNull(Transaction.Currency))
+                if (!ParameterValidator.IsNull(TransactionData.Currency))
                 {
-                    nvc.Add("transaction[currency]", Transaction.Currency);
+                    nvc.Add("transaction[currency]", TransactionData.Currency);
                 }
-                if (!ParameterValidator.IsNonEmptyInt(Transaction.CostsVat))
+                if (!ParameterValidator.IsNonEmptyInt(TransactionData.CostsVat))
                 {
-                    nvc.Add("transaction[costsVat]", Transaction.CostsVat.ToString());
+                    nvc.Add("transaction[costsVat]", TransactionData.CostsVat.ToString());
                 }
                 // TODO: exclude cost?
-                if (!ParameterValidator.IsEmpty(Transaction.OrderExchangeUrl))
+                if (!ParameterValidator.IsEmpty(TransactionData.OrderExchangeUrl))
                 {
-                    nvc.Add("transaction[orderExchangeUrl]", Transaction.OrderExchangeUrl);
+                    nvc.Add("transaction[orderExchangeUrl]", TransactionData.OrderExchangeUrl);
                 }
-                if (!ParameterValidator.IsEmpty(Transaction.Description))
+                if (!ParameterValidator.IsNull(TransactionData.OrderNumber))
                 {
-                    nvc.Add("transaction[description]", Transaction.Description);
+                    nvc.Add("transaction[orderNumber]", TransactionData.OrderNumber);
                 }
-                /*
-                if (!ParameterValidator.IsNonEmptyInt(Transaction.EnduserId))
+                if (!ParameterValidator.IsEmpty(TransactionData.Description))
                 {
-                    nvc.Add("transaction[enduserId]", Transaction.EnduserId.ToString());
+                    nvc.Add("transaction[description]", TransactionData.Description);
                 }
-                 * */
-                if (!ParameterValidator.IsNull(Transaction.ExpireDate))
+
+                if (!ParameterValidator.IsNonEmptyInt(TransactionData.EnduserId))
                 {
-                    nvc.Add("transaction[expireDate]", ((DateTime)Transaction.ExpireDate).ToString("dd-MM-yyyy hh:mm:ss"));
+                    nvc.Add("transaction[enduserId]", TransactionData.EnduserId.ToString());
+                }
+                
+                if (!ParameterValidator.IsNull(TransactionData.ExpireDate))
+                {
+                    nvc.Add("transaction[expireDate]", ((DateTime)TransactionData.ExpireDate).ToString("dd-MM-yyyy hh:mm:ss"));
                 }
                 // TODO: Are these right? Shouldn't this be BOOL / INT?
                 /*

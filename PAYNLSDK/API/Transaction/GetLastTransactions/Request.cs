@@ -39,12 +39,7 @@ namespace PAYNLSDK.API.Transaction.GetLastTransactions
         {
             get { return "getLastTransactions"; }
         }
-
-        public override string Querystring
-        {
-            get { return ""; }
-        }
-
+        
         public override NameValueCollection GetParameters()
         {
             NameValueCollection nvc = new NameValueCollection();

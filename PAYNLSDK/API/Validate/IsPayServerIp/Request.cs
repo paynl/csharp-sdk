@@ -34,12 +34,7 @@ namespace PAYNLSDK.API.Validate.IsPayServerIp
         {
             get { return "isPayServerIp"; }
         }
-
-        public override string Querystring
-        {
-            get { return ""; }
-        }
-
+        
         public override System.Collections.Specialized.NameValueCollection GetParameters()
         {
             NameValueCollection nvc = new NameValueCollection();

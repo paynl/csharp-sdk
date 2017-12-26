@@ -48,15 +48,7 @@ namespace PAYNLSDK.API.Transaction.Approve
         {
             get { return "approve"; }
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public override string Querystring
-        {
-            get { return ""; }
-        }
-
+        
         /// <summary>
         /// 
         /// </summary>

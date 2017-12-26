@@ -38,12 +38,7 @@ namespace PAYNLSDK.API.SMS.BulkMessage
         {
             get { return "sendBulkMessage"; }
         }
-
-        public override string Querystring
-        {
-            get { return ""; }
-        }
-
+        
         public override NameValueCollection GetParameters()
         {
             NameValueCollection nvc = new NameValueCollection();

@@ -27,12 +27,7 @@ namespace PAYNLSDK.API.Transaction.Info
         {
             get { return "info"; }
         }
-
-        public override string Querystring
-        {
-            get { return ""; }
-        }
-
+        
         public override NameValueCollection GetParameters()
         {
             NameValueCollection nvc = new NameValueCollection();

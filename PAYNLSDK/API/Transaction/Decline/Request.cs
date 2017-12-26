@@ -48,15 +48,7 @@ namespace PAYNLSDK.API.Transaction.Decline
         {
             get { return "decline"; }
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public override string Querystring
-        {
-            get { return ""; }
-        }
-
+        
         /// <summary>
         /// 
         /// </summary>

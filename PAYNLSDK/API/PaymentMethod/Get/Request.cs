@@ -33,13 +33,7 @@ namespace PAYNLSDK.API.PaymentMethod.Get
         {
             get { return "get"; }
         }
-
-        /// <inheritdoc />
-        public override string Querystring
-        {
-            get { return ""; }
-        }
-
+        
         public override System.Collections.Specialized.NameValueCollection GetParameters()
         {
             var allParameters = new NameValueCollection();

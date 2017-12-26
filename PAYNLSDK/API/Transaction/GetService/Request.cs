@@ -33,12 +33,7 @@ namespace PAYNLSDK.API.Transaction.GetService
         {
             get { return "getService"; }
         }
-
-        public override string Querystring
-        {
-            get { return ""; }
-        }
-
+        
         public override NameValueCollection GetParameters()
         {
             NameValueCollection nvc = new NameValueCollection();

@@ -126,15 +126,7 @@ namespace PAYNLSDK.API.Refund.Add
         {
             get { return "add"; }
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public override string Querystring
-        {
-            get { return ""; }
-        }
-
+        
         /// <summary>
         /// 
         /// </summary>
