@@ -10,42 +10,60 @@ namespace PAYNLSDK.API.Transaction.Start
 {
     public class Request : RequestBase
     {
-        public override bool RequiresApiToken
-        {
-            get
-            {
+        /// <inheritdoc />
+        public override bool RequiresApiToken => true;
 
+        /// <inheritdoc />
+        public override bool RequiresServiceId => true;
 
-                return true;
-            }
-        }
-        public override bool RequiresServiceId
-        {
-            get
-            {
-                return true;
-            }
-        }
-
+        /// <summary>
+        ///  	The amount to be paid should be given in cents. For example € 3.50 becomes 350.
+        /// </summary>
         public int Amount { get; set; }
+        /// <summary>
+        /// The IP address of the customer
+        /// </summary>
         public string IPAddress { get; set; }
+        /// <summary>
+        /// The URL where the customer has to be send to after the payment.
+        /// </summary>
         public string ReturnUrl { get; set; }
+        /// <summary>
+        /// The payment PROFILE to be used
+        /// </summary>
         public int? PaymentOptionId { get; set; }
+        /// <summary>
+        /// In case of an iDEAL payment this is the ID of the bank (see the paymentOptionSubList in the getService function).
+        /// </summary>
         public int? PaymentOptionSubId { get; set; }
-        public bool? TestMode { get; set; }
+        /// <summary>
+        ///  define if this is running in test or not 
+        /// </summary>
+        public bool TestMode { get; set; }
+        /// <summary>
+        /// Use transaction, merchant or alliance to change the benificiary owner of the transaction
+        /// </summary>
         public string TransferType { get; set; }
+        /// <summary>
+        ///  	MerchantId (M-xxxx-xxxx) or orderId
+        /// </summary>
         public string TransferValue { get; set; }
 
+        /// <summary>
+        /// Optional information about the transaction
+        /// </summary>
         public TransactionData Transaction { get; set; }
         public StatsDetails StatsData { get; set; }
         public EndUser Enduser { get; set; }
         public SalesData SalesData { get; set; }
 
+        /// <inheritdoc />
         public override int Version
         {
             get { return 5; }
         }
 
+        /// <inheritdoc />
         public override string Controller
         {
             get { return "Transaction"; }
@@ -129,7 +147,7 @@ namespace PAYNLSDK.API.Transaction.Start
                 {
                     nvc.Add("transaction[expireDate]", ((DateTime)Transaction.ExpireDate).ToString("dd-MM-yyyy hh:mm:ss"));
                 }
-                // TODO: Are these right? SHouldn't this be BOOL / INT?
+                // TODO: Are these right? Shouldn't this be BOOL / INT?
                 /*
                 if (!ParameterValidator.IsEmpty(Transaction.SendReminderEmail))
                 {
@@ -336,7 +354,7 @@ namespace PAYNLSDK.API.Transaction.Start
             // TestMode
             if (!ParameterValidator.IsNull(TestMode))
             {
-                nvc.Add("testMode", ((bool)TestMode) ? "1" : "0");
+                nvc.Add("testMode", (bool)TestMode ? "1" : "0");
             }
 
             return nvc;

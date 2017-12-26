@@ -6,6 +6,9 @@ using System.Text;
 
 namespace PAYNLSDK.API
 {
+    /// <summary>
+    /// The base class to perform a request to the Pay.NL api
+    /// </summary>
     public abstract class RequestBase
     {
         /// <summary>
