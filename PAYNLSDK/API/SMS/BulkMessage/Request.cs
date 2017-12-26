@@ -46,7 +46,7 @@ namespace PAYNLSDK.API.SMS.BulkMessage
 
         public override NameValueCollection GetParameters()
         {
-            NameValueCollection nvc = base.GetParameters();
+            NameValueCollection nvc = new NameValueCollection();
 
             ParameterValidator.IsNotEmpty(Sender, "Sender");
             nvc.Add("org", Sender);

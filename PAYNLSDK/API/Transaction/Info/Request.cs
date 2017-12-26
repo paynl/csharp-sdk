@@ -35,7 +35,7 @@ namespace PAYNLSDK.API.Transaction.Info
 
         public override NameValueCollection GetParameters()
         {
-            NameValueCollection nvc = base.GetParameters();
+            NameValueCollection nvc = new NameValueCollection();
             
             ParameterValidator.IsNotEmpty(TransactionId, "TransactionId");
             nvc.Add("transactionId", TransactionId);

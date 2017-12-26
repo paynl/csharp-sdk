@@ -87,46 +87,28 @@ namespace PAYNLSDK.API.Banktransfer.Add
         /// </summary>
         public DateTime? ProcessDate { get; set; }
 
-        public override int Version
-        {
-            get { return 1; }
-        }
+        /// <inheritdoc />
+        public override int Version => 1;
 
-        public override string Controller
-        {
-            get { return "Banktransfer"; }
-        }
+        /// <inheritdoc />
+        public override string Controller => "Banktransfer";
 
-        public override string Method
-        {
-            get { return "add"; }
-        }
+        /// <inheritdoc />
+        public override string Method => "add";
 
-        public override string Querystring
-        {
-            get { return ""; }
-        }
+        /// <inheritdoc />
+        public override string Querystring => "";
 
-        public override bool RequiresApiToken
-        {
-            get
-            {
+        /// <inheritdoc />
+        public override bool RequiresApiToken => true;
 
+        /// <inheritdoc />
+        public override bool RequiresServiceId => true;
 
-                return true;
-            }
-        }
-        public override bool RequiresServiceId
+        /// <inheritdoc />
+        public override NameValueCollection GetParameters()
         {
-            get
-            {
-                return true;
-            }
-        }
-
-        public override System.Collections.Specialized.NameValueCollection GetParameters()
-        {
-            NameValueCollection nvc = base.GetParameters();
+            NameValueCollection nvc = new NameValueCollection();
 
             ParameterValidator.IsNotNull(Amount, "Amount");
             nvc.Add("amount", Amount.ToString());

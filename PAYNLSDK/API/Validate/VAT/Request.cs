@@ -42,7 +42,7 @@ namespace PAYNLSDK.API.Validate.VAT
 
         public override System.Collections.Specialized.NameValueCollection GetParameters()
         {
-            NameValueCollection nvc = base.GetParameters();
+            NameValueCollection nvc = new NameValueCollection();
 
             ParameterValidator.IsNotEmpty(VAT, "vat");
             nvc.Add("vat", VAT);

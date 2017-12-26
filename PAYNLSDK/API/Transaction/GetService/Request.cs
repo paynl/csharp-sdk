@@ -41,7 +41,7 @@ namespace PAYNLSDK.API.Transaction.GetService
 
         public override NameValueCollection GetParameters()
         {
-            NameValueCollection nvc = base.GetParameters();
+            NameValueCollection nvc = new NameValueCollection();
             if (!ParameterValidator.IsNull(PaymentMethodId))
             {
                 nvc.Add("paymentMethodId", ((int)PaymentMethodId).ToString());

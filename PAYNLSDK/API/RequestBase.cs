@@ -25,8 +25,7 @@ namespace PAYNLSDK.API
         /// The configuration with the ServiceId & Token
         /// </summary>
         public IPayNlConfiguration Configuration { get; set; }
-
-
+        
         /// <summary>
         /// Return as JSON
         /// </summary>
@@ -66,59 +65,9 @@ namespace PAYNLSDK.API
         public abstract string Querystring { get; }
 
         /// <summary>
-        /// Returns a NameValueCollection of all paramaters used for this call.
+        /// Get all properties as a nameValueCollection
         /// </summary>
-        /// <returns>Name Value collection of parameters</returns>
-        public virtual NameValueCollection GetParameters()
-        {
-            NameValueCollection nvc = new NameValueCollection();
-            if (RequiresApiToken)
-            {
-                ParameterValidator.IsNotEmpty(Configuration.ApiToken, nameof(Configuration.ApiToken));
-                nvc.Add("token", Configuration.ApiToken);
-            }
-            if (RequiresServiceId)
-            {
-                ParameterValidator.IsNotEmpty(Configuration.ServiceId, nameof(Configuration.ServiceId));
-                nvc.Add("serviceId", Configuration.ServiceId);
-            }
-
-            return nvc;
-        }
-
-        /// <summary>
-        /// Transform NameValueCollection to a querystring
-        /// </summary>
-        /// <returns>appendable querystring</returns>
-        public string ToQueryString()
-        {
-            NameValueCollection nvc = GetParameters();
-            if (nvc.Count == 0)
-            {
-                return "";
-            }
-            StringBuilder sb = new StringBuilder();
-            // TODO: add "?" if GET?
-
-            bool first = true;
-
-            foreach (string key in nvc.AllKeys)
-            {
-                foreach (string value in nvc.GetValues(key))
-                {
-                    if (!first)
-                    {
-                        sb.Append("&");
-                    }
-
-                    sb.AppendFormat("{0}={1}", Uri.EscapeDataString(key), Uri.EscapeDataString(value));
-
-                    first = false;
-                }
-            }
-
-            return sb.ToString();
-        }
+        public abstract NameValueCollection GetParameters();
 
         /// <summary>
         /// Response belonging to this request

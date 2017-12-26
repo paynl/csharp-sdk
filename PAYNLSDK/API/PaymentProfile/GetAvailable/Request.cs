@@ -43,7 +43,7 @@ namespace PAYNLSDK.API.PaymentProfile.GetAvailable
 
         public override NameValueCollection GetParameters()
         {
-            NameValueCollection nvc = base.GetParameters();
+            NameValueCollection nvc = new NameValueCollection();
 
             ParameterValidator.IsNotNull(CategoryId, "CategoryId");
             nvc.Add("categoryId", CategoryId.ToString());

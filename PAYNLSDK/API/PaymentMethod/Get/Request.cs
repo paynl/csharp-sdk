@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Specialized;
+using Newtonsoft.Json;
 using PAYNLSDK.Utilities;
 using PAYNLSDK.Exceptions;
 
@@ -41,7 +42,7 @@ namespace PAYNLSDK.API.PaymentMethod.Get
 
         public override System.Collections.Specialized.NameValueCollection GetParameters()
         {
-            var allParameters = base.GetParameters();
+            var allParameters = new NameValueCollection();
 
             ParameterValidator.IsNotNull(PaymentMethodId, "PaymentMethodId");
             allParameters.Add("paymentMethodId", PaymentMethodId.ToString());

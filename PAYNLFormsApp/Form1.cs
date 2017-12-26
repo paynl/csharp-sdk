@@ -56,7 +56,7 @@ namespace PAYNLFormsApp
             AddDebug("-----");
             AddDebug("Initializing...");
             AddDebug(string.Format("URL    : {0}", request.Url));
-            AddDebug(string.Format("PARAMS : {0}", request.ToQueryString()));
+            //AddDebug(string.Format("PARAMS : {0}", request.ToQueryString()));
             AddDebug("-----");
         }
         private void DebugRawResponse(RequestBase request)
@@ -115,8 +115,8 @@ namespace PAYNLFormsApp
             AddDebug("Fixture loaded.");
             AddDebug("JSON:");
             AddDebug(fixture.ToString());
-            AddDebug("PARAMS:");
-            AddDebug(fixture.ToQueryString());
+            //AddDebug("PARAMS:");
+            //AddDebug(fixture.ToQueryString());
             AddDebug("-----");
             AddDebug("DONE");
         }
@@ -129,15 +129,13 @@ namespace PAYNLFormsApp
             AddDebug("Fixture loaded.");
             AddDebug("JSON:");
             AddDebug(fixture.ToString());
-            AddDebug("PARAMS:");
-            string qs = fixture.ToQueryString();
-            AddDebug(qs);
-            NameValueCollection nvc = HttpUtility.ParseQueryString(qs);
-            string json = JsonConvert.SerializeObject(NvcToDictionary(nvc, true));
+            //AddDebug("PARAMS:");
+            //string qs = fixture.ToQueryString();
+            //AddDebug(qs);
+            //NameValueCollection nvc = HttpUtility.ParseQueryString(qs);
+            //string json = JsonConvert.SerializeObject(NvcToDictionary(nvc, true));
             AddDebug("-----");
-            //AddDebug("PARAMS AS JSON");
-            //AddDebug(json);
-            DumpNvc(nvc);
+            //DumpNvc(nvc);
             AddDebug("-----");
             AddDebug("DONE");
         }

@@ -35,7 +35,12 @@ namespace PAYNLSDK.API.PaymentMethod.GetAll
         {
             get { return ""; }
         }
-        
+
+        public override NameValueCollection GetParameters()
+        {
+            return new NameValueCollection();
+        }
+
         public Response Response { get { return (Response)response; } }
 
         /// <inheritdoc />

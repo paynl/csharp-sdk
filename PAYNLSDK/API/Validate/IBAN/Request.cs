@@ -42,7 +42,7 @@ namespace PAYNLSDK.API.Validate.IBAN
 
         public override System.Collections.Specialized.NameValueCollection GetParameters()
         {
-            NameValueCollection nvc = base.GetParameters();
+            NameValueCollection nvc = new NameValueCollection();
 
             ParameterValidator.IsNotEmpty(IBAN, "iban");
             nvc.Add("iban", IBAN);

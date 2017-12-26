@@ -33,7 +33,7 @@ namespace PAYNLSDK.API.PaymentProfile.Get
 
         public override System.Collections.Specialized.NameValueCollection GetParameters()
         {
-            NameValueCollection nvc = base.GetParameters();
+            NameValueCollection nvc = new NameValueCollection();
 
             ParameterValidator.IsNotNull(PaymentProfileId, "PaymentProfileId");
             nvc.Add("paymentProfileId", PaymentProfileId.ToString());

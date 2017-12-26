@@ -34,7 +34,7 @@ namespace PAYNLSDK.API.Service.GetCategories
 
         public override NameValueCollection GetParameters()
         {
-            NameValueCollection nvc = base.GetParameters();
+            NameValueCollection nvc = new NameValueCollection();
             if (!ParameterValidator.IsNonEmptyInt(PaymentOptionId))
             {
                 nvc.Add("paymentOptionId", PaymentOptionId.ToString());

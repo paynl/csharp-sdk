@@ -243,7 +243,7 @@ namespace PAYNLFormsApp
             AddDebug("-----");
             AddDebug("Initializing...");
             AddDebug(string.Format("URL    : {0}", request.Url));
-            AddDebug(string.Format("PARAMS : {0}", request.ToQueryString()));
+            //AddDebug(string.Format("PARAMS : {0}", ToQueryString(request)));
             AddDebug("-----");
         }
         private void DebugRawResponse(RequestBase request)

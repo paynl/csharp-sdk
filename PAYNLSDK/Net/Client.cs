@@ -1,12 +1,14 @@
 ﻿using PAYNLSDK.Net.ProxyConfigurationInjector;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.IO;
 using System.Net;
 using System.Text;
 using PAYNLSDK.API;
 using PAYNLSDK.Exceptions;
 using Newtonsoft.Json;
+using PAYNLSDK.Utilities;
 
 namespace PAYNLSDK.Net
 {
@@ -38,7 +40,7 @@ namespace PAYNLSDK.Net
         /// PAYNL Endpoint
         /// </summary>
         private const string Endpoint = "https://rest-api.pay.nl";
-        
+
         /// <summary>
         /// Client version
         /// </summary>
@@ -62,13 +64,68 @@ namespace PAYNLSDK.Net
                 using (var requestWriter = new StreamWriter(httprequest.GetRequestStream()))
                 {
                     //string serializedResource = resource.Serialize();
-                    string serializedResource = request.ToQueryString();
+                    string serializedResource = ToQueryString(request);
                     requestWriter.Write(serializedResource);
                 }
             }
             );
             request.RawResponse = rawResponse;
             return rawResponse;
+        }
+
+        /// <summary>
+        /// Returns a NameValueCollection of all paramaters used for this call.
+        /// </summary>
+        /// <returns>Name Value collection of parameters</returns>
+        private NameValueCollection GetParameters(RequestBase request)
+        {
+            NameValueCollection nvc = request.GetParameters();
+            if (request.RequiresApiToken)
+            {
+                ParameterValidator.IsNotEmpty(_securityConfiguration.ApiToken, nameof(_securityConfiguration.ApiToken));
+                nvc.Add("token", _securityConfiguration.ApiToken);
+            }
+            if (request.RequiresServiceId)
+            {
+                ParameterValidator.IsNotEmpty(_securityConfiguration.ServiceId, nameof(_securityConfiguration.ServiceId));
+                nvc.Add("serviceId", _securityConfiguration.ServiceId);
+            }
+
+            return nvc;
+        }
+
+        /// <summary>
+        /// Transform NameValueCollection to a querystring
+        /// </summary>
+        /// <returns>appendable querystring</returns>
+        private string ToQueryString(RequestBase request)
+        {
+            NameValueCollection nvc = GetParameters(request);
+            if (nvc.Count == 0)
+            {
+                return "";
+            }
+            StringBuilder sb = new StringBuilder();
+            // TODO: add "?" if GET?
+
+            bool first = true;
+
+            foreach (string key in nvc.AllKeys)
+            {
+                foreach (string value in nvc.GetValues(key))
+                {
+                    if (!first)
+                    {
+                        sb.Append("&");
+                    }
+
+                    sb.AppendFormat("{0}={1}", Uri.EscapeDataString(key), Uri.EscapeDataString(value));
+
+                    first = false;
+                }
+            }
+
+            return sb.ToString();
         }
 
         /// <summary>

@@ -81,7 +81,7 @@ namespace PAYNLSDK.API.Transaction.Start
 
         public override NameValueCollection GetParameters()
         {
-            NameValueCollection nvc = base.GetParameters();
+            NameValueCollection nvc = new NameValueCollection();
 
             // Basic params
             ParameterValidator.IsNotNull(Amount, "Amount");

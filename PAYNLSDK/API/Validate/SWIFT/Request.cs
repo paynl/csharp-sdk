@@ -42,7 +42,7 @@ namespace PAYNLSDK.API.Validate.SWIFT
 
         public override System.Collections.Specialized.NameValueCollection GetParameters()
         {
-            NameValueCollection nvc = base.GetParameters();
+            NameValueCollection nvc = new NameValueCollection();
 
             ParameterValidator.IsNotEmpty(SWIFT, "swift");
             nvc.Add("swift", SWIFT);

@@ -42,7 +42,7 @@ namespace PAYNLSDK.API.Validate.BankAccountNumberInternational
 
         public override System.Collections.Specialized.NameValueCollection GetParameters()
         {
-            NameValueCollection nvc = base.GetParameters();
+            NameValueCollection nvc = new NameValueCollection();
 
             ParameterValidator.IsNotEmpty(BankAccountNumber, "bankAccountNumber");
             nvc.Add("bankAccountNumber", BankAccountNumber);

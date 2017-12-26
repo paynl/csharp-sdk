@@ -42,7 +42,7 @@ namespace PAYNLSDK.API.Validate.SOFI
 
         public override System.Collections.Specialized.NameValueCollection GetParameters()
         {
-            NameValueCollection nvc = base.GetParameters();
+            NameValueCollection nvc = new NameValueCollection();
 
             ParameterValidator.IsNotEmpty(SOFI, "sofi");
             nvc.Add("sofi", SOFI);

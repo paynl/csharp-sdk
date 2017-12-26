@@ -44,7 +44,7 @@ namespace PAYNLSDK.API.SMS.PremiumMessage
 
         public override NameValueCollection GetParameters()
         {
-            NameValueCollection nvc = base.GetParameters();
+            NameValueCollection nvc = new NameValueCollection();
 
             ParameterValidator.IsNotEmpty(SmsId, "SmsId");
             nvc.Add("sms_id", SmsId);

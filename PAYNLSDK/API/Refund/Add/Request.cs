@@ -164,7 +164,7 @@ namespace PAYNLSDK.API.Refund.Add
         /// <returns></returns>
         public override System.Collections.Specialized.NameValueCollection GetParameters()
         {
-            NameValueCollection nvc = base.GetParameters();
+            NameValueCollection nvc = new NameValueCollection();
 
             ParameterValidator.IsNotNull(Amount, "Amount");
             nvc.Add("amount", Amount.ToString());

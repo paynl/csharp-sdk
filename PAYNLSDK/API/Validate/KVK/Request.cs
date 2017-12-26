@@ -42,7 +42,7 @@ namespace PAYNLSDK.API.Validate.KVK
 
         public override System.Collections.Specialized.NameValueCollection GetParameters()
         {
-            NameValueCollection nvc = base.GetParameters();
+            NameValueCollection nvc = new NameValueCollection();
 
             ParameterValidator.IsNotEmpty(KVK, "kvk");
             nvc.Add("kvk", KVK);

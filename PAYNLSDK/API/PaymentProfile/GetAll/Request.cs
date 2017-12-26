@@ -28,6 +28,11 @@ namespace PAYNLSDK.API.PaymentProfile.GetAll
             get { return ""; }
         }
 
+        public override NameValueCollection GetParameters()
+        {
+            return new NameValueCollection();
+        }
+
         public Response Response { get { return (Response)response; } }
 
         protected override void PrepareAndSetResponse()

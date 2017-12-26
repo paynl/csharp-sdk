@@ -47,7 +47,7 @@ namespace PAYNLSDK.API.Transaction.GetLastTransactions
 
         public override NameValueCollection GetParameters()
         {
-            NameValueCollection nvc = base.GetParameters();
+            NameValueCollection nvc = new NameValueCollection();
             if (!ParameterValidator.IsNull(MerchantId))
             {
                 nvc.Add("merchantId", MerchantId);
