@@ -2,15 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 using PAYNLSDK.API;
 using PAYNLSDK.Exceptions;
-using PAYNLSDK.Objects;
 using Newtonsoft.Json;
-using System.Collections.Specialized;
 
 namespace PAYNLSDK.Net
 {
@@ -58,7 +54,7 @@ namespace PAYNLSDK.Net
         /// </summary>
         public string ClientVersion
         {
-            get { return "1.0.0.0"; }
+            get { return "1.1.0.0"; }
         }
 
         /// <summary>
@@ -66,7 +62,7 @@ namespace PAYNLSDK.Net
         /// </summary>
         public string UserAgent
         {
-            get { return string.Format("PAYNL/SDK/{0} DotNet/{1}", ClientVersion, ""); }
+            get { return string.Format("PAYNL/SDK/{0} DotNet/{1}", ClientVersion, Environment.Version.Major); }
         }
 
         /// <summary>
