@@ -20,11 +20,6 @@ namespace PAYNLSDK.API
         /// Indicator stating whether or not a Service ID is required for a specific request
         /// </summary>
         public virtual bool RequiresServiceId { get { return false; } }
-
-        /// <summary>
-        /// The configuration with the ServiceId & Token
-        /// </summary>
-        public IPayNlConfiguration Configuration { get; set; }
         
         /// <summary>
         /// Return as JSON
