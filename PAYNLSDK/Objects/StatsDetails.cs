@@ -52,16 +52,11 @@ namespace PAYNLSDK.Objects
         [JsonProperty("extra3")]
         public string Extra3 { get; set; }
 
-        // Array!
-        //[JsonProperty("transferData")]
-        //public string TransferData { get; set; }
-
         /// <summary>
-        /// Free value to e.g. identify an object type.
+        /// Option to send multiple values via an array which can be tracked in the stats
         /// </summary>
-        [JsonProperty("object")]
-        public string Object { get; set; }
-
+        [JsonProperty("transferData")]
+        public string[] TransferData { get; set; }
     }
 
 }
