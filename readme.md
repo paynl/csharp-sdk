@@ -9,7 +9,14 @@ This SDK is available as DotNet Assembly.
 
 With this SDK you will be able to start transactions and retrieve transactions with their status for the Pay.nl payment service provider.
 
-### Usage
+## Installation
+You can use this package as a nuget package: 
+
+```
+PM> Install-Package RoodFluweel.PAYNLSDK -Version 1.0.4 -Source https://www.myget.org/F/paynl/api/v3/index.json
+``` 
+
+## Usage
 
 Setting the configuration:
 ```c#
@@ -31,8 +38,6 @@ var response = PAYNLSDK.Transaction.GetService(paymentMethodId);
 
 Starting a transaction:
 ```c#
-PAYNLSDK.API.RequestBase.ApiToken = "e41f83b246b706291ea9ad798ccfd9f0fee5e0ab";
-PAYNLSDK.API.RequestBase.ServiceId = "SL-3490-4320";
 
 PAYNLSDK.API.Transaction.Start.Request request = PAYNLSDK.Transaction.CreateTransactionRequest("127.0.0.1", "http://example.org/visitor-return-after-payment");
 request.Amount = 621;
@@ -59,7 +64,6 @@ request.StatsData.Extra2 = "Y";
 request.StatsData.Extra3 = "Z";
 
 // Initialize Salesdata
-
 request.SalesData = new PAYNLSDK.Objects.SalesData();
 request.SalesData.InvoiceDate = DateTime.Now;
 request.SalesData.DeliveryDate = DateTime.Now;
@@ -151,8 +155,8 @@ response.Write("Paid");
 
 ### Contributing
 
-
+Feel free to do pull requests and create issues when you please. 
 
 ### License
 
-The Assembly is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
+This project is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
