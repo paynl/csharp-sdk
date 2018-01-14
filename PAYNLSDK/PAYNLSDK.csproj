@@ -73,7 +73,7 @@
     <Compile Include="API\Transaction\Info\ResponseExtentions.cs" />
     <Compile Include="Banktransfer.cs" />
     <Compile Include="Converters\YMDConverter.cs" />
-    <Compile Include="Exceptions\ErrorException.cs" />
+    <Compile Include="Exceptions\PayNlException.cs" />
     <Compile Include="Objects\Address.cs" />
     <Compile Include="Objects\Connection.cs" />
     <Compile Include="Objects\CountryOption.cs" />

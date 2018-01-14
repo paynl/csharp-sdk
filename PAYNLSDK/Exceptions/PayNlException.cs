@@ -4,66 +4,56 @@ using System;
 namespace PAYNLSDK.Exceptions
 {
     /// <summary>
-    /// ErrorException implementation
+    /// PayNlException implementation
     /// </summary>
-    public class ErrorException : Exception
+    public class PayNlException : Exception
     {
-        private Error error;
         /// <summary>
         /// Error, if any
         /// </summary>
-        public Error Error
-        {
-            get { return error; }
-        }
+        public Error Error { get; }
 
         /// <summary>
-        /// Retiurn whether or not there's an Error object associated with this Exception
+        /// Return whether or not there's an Error object associated with this Exception
         /// </summary>
-        public bool HasError
-        {
-            get
-            {
-                return (error != null);
-            }
-        }
+        public bool HasError => Error != null;
 
         /// <summary>
-        /// Create a new ErrorException with an Error attached
+        /// Create a new PayNlException with an Error attached
         /// </summary>
         /// <param name="error">Error object</param>
         /// <param name="innerException">Inner Exception</param>
-        public ErrorException(Error error, Exception innerException)
+        public PayNlException(Error error, Exception innerException)
             : base(error.Message, innerException)
         {
-            this.error = error;
+            this.Error = error;
         }
 
         /// <summary>
-        /// Create a new ErrorException with an Error attached
+        /// Create a new PayNlException with an Error attached
         /// </summary>
         /// <param name="error">Error object</param>
-        public ErrorException(Error error)
+        public PayNlException(Error error)
             : base(error.Message, null)
         {
-            this.error = error;
+            this.Error = error;
         }
 
         /// <summary>
-        /// Creates an ErrorException from a string
+        /// Creates an PayNlException from a string
         /// </summary>
         /// <param name="message">error message</param>
         /// <param name="innerException">inner Exception</param>
-        public ErrorException(string message, Exception innerException)
+        public PayNlException(string message, Exception innerException)
             : base(message, innerException)
         {
         }
 
         /// <summary>
-        /// Creates an ErrorException from a string
+        /// Creates an PayNlException from a string
         /// </summary>
         /// <param name="message">error message</param>
-        public ErrorException(string message)
+        public PayNlException(string message)
             : base(message)
         {
         }

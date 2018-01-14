@@ -35,7 +35,7 @@ namespace PAYNLSDK.API.Validate.GetServerIps
         {
             if (ParameterValidator.IsEmpty(rawResponse))
             {
-                throw new ErrorException("rawResponse is empty!");
+                throw new PayNlException("rawResponse is empty!");
             }
             string[] ips = JsonConvert.DeserializeObject<string[]>(RawResponse);
             Response r = new Response();

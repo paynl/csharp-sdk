@@ -66,7 +66,7 @@ namespace PAYNLSDK.API.Transaction.Refund
         {
             if (ParameterValidator.IsEmpty(rawResponse))
             {
-                throw new ErrorException("rawResponse is empty!");
+                throw new PayNlException("rawResponse is empty!");
             }
             response = JsonConvert.DeserializeObject<Response>(RawResponse);
         }

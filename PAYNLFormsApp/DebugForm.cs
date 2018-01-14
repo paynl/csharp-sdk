@@ -87,7 +87,7 @@ namespace PAYNLFormsApp
                 }
 
             }
-            catch (ErrorException ee)
+            catch (PayNlException ee)
             {
                 AddDebug("~~EXCEPTION~~");
                 AddDebug(ee.Message);
@@ -124,7 +124,7 @@ namespace PAYNLFormsApp
                 }
 
             }
-            catch (ErrorException ee)
+            catch (PayNlException ee)
             {
                 AddDebug("~~EXCEPTION~~");
                 AddDebug(ee.Message);
@@ -174,7 +174,7 @@ namespace PAYNLFormsApp
 
 
             }
-            catch (ErrorException ee)
+            catch (PayNlException ee)
             {
                 AddDebug("~~EXCEPTION~~");
                 AddDebug(ee.Message);
@@ -214,7 +214,7 @@ namespace PAYNLFormsApp
 
 
             }
-            catch (ErrorException ee)
+            catch (PayNlException ee)
             {
                 AddDebug("~~EXCEPTION~~");
                 AddDebug(ee.Message);

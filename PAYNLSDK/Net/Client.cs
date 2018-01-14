@@ -180,7 +180,7 @@ namespace PAYNLSDK.Net
                             return responseReader.ReadToEnd();
                         }
                     }
-                    throw new ErrorException(String.Format("Unexpected status code {0}", statusCode));
+                    throw new PayNlException(String.Format("Unexpected status code {0}", statusCode));
                 }
             }
             catch (WebException e)
@@ -189,7 +189,7 @@ namespace PAYNLSDK.Net
             }
             catch (Exception e)
             {
-                throw new ErrorException(String.Format("Unhandled exception {0}", e), e);
+                throw new PayNlException(String.Format("Unhandled exception {0}", e), e);
             }
         }
 
@@ -209,14 +209,14 @@ namespace PAYNLSDK.Net
         /// Build an error exception from a Web Exception
         /// </summary>
         /// <param name="e">web exception</param>
-        /// <returns>ErrorException</returns>
-        private ErrorException ErrorExceptionFromWebException(WebException e)
+        /// <returns>PayNlException</returns>
+        private PayNlException ErrorExceptionFromWebException(WebException e)
         {
             var httpWebResponse = e.Response as HttpWebResponse;
             if (null == httpWebResponse)
             {
                 // some kind of network error: didn't even make a connection
-                return new ErrorException(e.Message, e);
+                return new PayNlException(e.Message, e);
             }
 
             var statusCode = (HttpStatusCode)httpWebResponse.StatusCode;
@@ -244,17 +244,17 @@ namespace PAYNLSDK.Net
                                 errMessage = errors["message"];
                             }
 
-                            ErrorException errorException = new ErrorException(errMessage, e);
-                            if (errorException != null)
+                            PayNlException payNlException = new PayNlException(errMessage, e);
+                            if (payNlException != null)
                             {
-                                return errorException;
+                                return payNlException;
                             }
                         }
                         catch (Exception ex1)
                         {
-                            return new ErrorException(String.Format("Unknown error for {0}", statusCode), e);
+                            return new PayNlException(String.Format("Unknown error for {0}", statusCode), e);
                         }
-                        return new ErrorException(String.Format("Unknown error for {0}", statusCode), e);
+                        return new PayNlException(String.Format("Unknown error for {0}", statusCode), e);
                     }
                 case HttpStatusCode.InternalServerError:
                 case HttpStatusCode.NotImplemented:
@@ -270,9 +270,9 @@ namespace PAYNLSDK.Net
                 case HttpStatusCode.NetworkAuthenticationRequired:
                 case HttpStatusCode.NetworkReadTimeoutError:
                 case HttpStatusCode.NetworkConnectTimeoutError:
-                    return new ErrorException("Something went wrong on our end, please try again", e);
+                    return new PayNlException("Something went wrong on our end, please try again", e);
                 default:
-                    return new ErrorException(String.Format("Unhandled status code {0}", statusCode), e);
+                    return new PayNlException(String.Format("Unhandled status code {0}", statusCode), e);
             }
         }
 

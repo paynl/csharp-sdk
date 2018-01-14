@@ -44,7 +44,7 @@ namespace PAYNLSDK
                 _webClient.PerformRequest(request);
                 return (request.Response.PaymentDetails.State == Enums.PaymentStatus.PAID);
             }
-            catch (ErrorException e)
+            catch (PayNlException e)
             {
                 return false;
             }
@@ -65,7 +65,7 @@ namespace PAYNLSDK
                 _webClient.PerformRequest(request);
                 return (request.Response.PaymentDetails.State == Enums.PaymentStatus.CANCEL);
             }
-            catch (ErrorException e)
+            catch (PayNlException e)
             {
                 return false;
             }
@@ -92,7 +92,7 @@ namespace PAYNLSDK
                     (request.Response.PaymentDetails.State == Enums.PaymentStatus.VERIFY) ||
                     (request.Response.PaymentDetails.StateName == "PENDING"));
             }
-            catch (ErrorException e)
+            catch (PayNlException e)
             {
                 return false;
             }
@@ -116,7 +116,7 @@ namespace PAYNLSDK
                 return ((request.Response.PaymentDetails.State == Enums.PaymentStatus.VERIFY) ||
                     (request.Response.PaymentDetails.StateName == "VERIFY"));
             }
-            catch (ErrorException e)
+            catch (PayNlException e)
             {
                 return false;
             }

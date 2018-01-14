@@ -44,7 +44,7 @@ namespace PAYNLSDK.API.Service.GetCategories
         {
             if (ParameterValidator.IsEmpty(rawResponse))
             {
-                throw new ErrorException("rawResponse is empty!");
+                throw new PayNlException("rawResponse is empty!");
             }
             PAYNLSDK.Objects.ServiceCategory[] pm = JsonConvert.DeserializeObject<PAYNLSDK.Objects.ServiceCategory[]>(RawResponse);
             Response r = new Response

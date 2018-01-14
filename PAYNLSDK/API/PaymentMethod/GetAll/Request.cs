@@ -33,7 +33,7 @@ namespace PAYNLSDK.API.PaymentMethod.GetAll
         {
             if (ParameterValidator.IsEmpty(rawResponse))
             {
-                throw new ErrorException("rawResponse is empty!");
+                throw new PayNlException("rawResponse is empty!");
             }
             PAYNLSDK.Objects.PaymentMethod[] pm = JsonConvert.DeserializeObject<PAYNLSDK.Objects.PaymentMethod[]>(RawResponse);
             Response r = new Response

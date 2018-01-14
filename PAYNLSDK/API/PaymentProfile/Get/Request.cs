@@ -43,7 +43,7 @@ namespace PAYNLSDK.API.PaymentProfile.Get
         {
             if (ParameterValidator.IsEmpty(rawResponse))
             {
-                throw new ErrorException("rawResponse is empty!");
+                throw new PayNlException("rawResponse is empty!");
             }
             PAYNLSDK.Objects.PaymentProfile pm = JsonConvert.DeserializeObject<PAYNLSDK.Objects.PaymentProfile>(RawResponse);
             Response r = new Response();
