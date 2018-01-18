@@ -39,6 +39,12 @@ namespace PAYNLSDK.Objects
         [JsonProperty("expireDate")]
         public DateTime? ExpireDate { get; set; }
 
+        /// <summary>
+        /// The number belonging to the order
+        /// </summary>
+        [JsonProperty("orderNumber")]
+        public string OrderNumber { get; set; }
+
         // TODO: WHAT????
         //[JsonProperty("excludeCosts")]
         //public int? ExcludeCosts { get; set; }

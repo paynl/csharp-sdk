@@ -71,6 +71,7 @@
     <Compile Include="Converters\YMDConverter.cs" />
     <Compile Include="Exceptions\ErrorException.cs" />
     <Compile Include="Objects\Address.cs" />
+    <Compile Include="Objects\Company.cs" />
     <Compile Include="Objects\Connection.cs" />
     <Compile Include="Objects\CountryOption.cs" />
     <Compile Include="Objects\EndUser.cs" />

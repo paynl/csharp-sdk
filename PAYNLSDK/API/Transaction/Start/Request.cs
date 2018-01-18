@@ -140,6 +140,10 @@ namespace PAYNLSDK.API.Transaction.Start
                     nvc.Add("transaction[reminderMailTemplateId]", Transaction.ReminderMailTemplateId);
                 }
                 */
+                if (!ParameterValidator.IsNull(Transaction.OrderNumber))
+                {
+                    nvc.Add("transaction[orderNumber]", Transaction.OrderNumber);
+                }
             }
 
             // StatsData
@@ -230,6 +234,10 @@ namespace PAYNLSDK.API.Transaction.Start
                     nvc.Add("enduser[confirmMailTemplate]", Enduser.ConfirmMailTemplate);
                 }
                  * */
+                if (!ParameterValidator.IsEmpty(Enduser.CustomerReference))
+                {
+                    nvc.Add("enduser[customerReference]", Enduser.CustomerReference);
+                }
                 // Address
                 if (Enduser.Address != null)
                 {
@@ -292,6 +300,27 @@ namespace PAYNLSDK.API.Transaction.Start
                         nvc.Add("enduser[invoiceAddress][countryCode]", Enduser.InvoiceAddress.CountryCode);
                     }
                 }
+
+                //Company info
+                if (Enduser.Company != null)
+                {
+                    if (!ParameterValidator.IsEmpty(Enduser.Company.CocNumber))
+                    {
+                        nvc.Add("enduser[company][cocNumber]", Enduser.Company.CocNumber);
+                    }
+                    if (!ParameterValidator.IsEmpty(Enduser.Company.CountryCode))
+                    {
+                        nvc.Add("enduser[company][countryCode]", Enduser.Company.CountryCode);
+                    }
+                    if (!ParameterValidator.IsEmpty(Enduser.Company.Name))
+                    {
+                        nvc.Add("enduser[company][name]", Enduser.Company.Name);
+                    }
+                    if (!ParameterValidator.IsEmpty(Enduser.Company.VatNumber))
+                    {
+                        nvc.Add("enduser[company][vatNumber]", Enduser.Company.VatNumber);
+                    }
+                }
             }
 
             // SaleData
@@ -327,6 +356,10 @@ namespace PAYNLSDK.API.Transaction.Start
                         if (!ParameterValidator.IsNull(data.VatCode))
                         {
                             nvc.Add(string.Format("saleData[orderData][{0}][vatCode]", i), EnumUtil.ToEnumString<TaxClass>((TaxClass)data.VatCode));
+                        }
+                        if (!ParameterValidator.IsNull(data.ProductType))
+                        {
+                            nvc.Add(string.Format("saleData[orderData][{0}][productType]", i), EnumUtil.ToEnumString<ProductType>((ProductType)data.ProductType));
                         }
                         i++;
                     }
