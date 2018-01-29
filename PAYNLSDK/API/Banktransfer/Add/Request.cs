@@ -174,13 +174,13 @@ namespace PAYNLSDK.API.Banktransfer.Add
         {
             if (ParameterValidator.IsEmpty(rawResponse))
             {
-                throw new ErrorException("rawResponse is empty!");
+                throw new PayNlException("rawResponse is empty!");
             }
             response = JsonConvert.DeserializeObject<Response>(RawResponse);
             if (!Response.Request.Result)
             {
                 // toss
-                throw new ErrorException(Response.Request.Message);
+                throw new PayNlException(Response.Request.Message);
             }
         }
 
