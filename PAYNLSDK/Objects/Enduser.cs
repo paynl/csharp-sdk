@@ -15,6 +15,12 @@ namespace PAYNLSDK.Objects
         //public string AccessCode { get; set; }
 
         /// <summary>
+        /// Unique reference of customer
+        /// </summary>
+        [JsonProperty("customerReference")]
+        public string CustomerReference { get; set; }
+
+        /// <summary>
         /// End User's Language
         /// </summary>
         [JsonProperty("language")]
@@ -113,6 +119,12 @@ namespace PAYNLSDK.Objects
         /// </summary>
         [JsonProperty("statsDetails")]
         public StatsDetails StatsDetails { get; set; }
+
+        /// <summary>
+        /// Company information of the EndUser
+        /// </summary>
+        [JsonProperty("company")]
+        public Company Company { get; set; }
     }
 
 }

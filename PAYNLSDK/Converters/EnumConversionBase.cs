@@ -46,5 +46,17 @@ namespace PAYNLSDK.Converters
         }
     }
 
+    public class ProductTypeConverter : EnumConversionBase
+    {
+        public override Type EnumType
+        {
+            get { return typeof(Enums.ProductType); }
+        }
+
+        public override bool CanConvert(Type objectType)
+        {
+            throw new NotImplementedException();
+        }
+    }
 
 }

@@ -181,6 +181,8 @@ namespace PAYNLSDK.Enums
     {
         [EnumMember(Value = "-90")]
         CANCEL = -90,
+        [EnumMember(Value = "-60")]
+        CANCEL_2 = -60,
         [EnumMember(Value = "-82")]
         PARTIAL_REFUND = -82,
         [EnumMember(Value = "-81")]
@@ -201,6 +203,8 @@ namespace PAYNLSDK.Enums
         PENDING_2 = 25,
         [EnumMember(Value = "50")]
         PENDING_3 = 50,
+        [EnumMember(Value = "90")]
+        PENDING_4 = 90,
         [EnumMember(Value = "60")]
         OPEN = 60,
         [EnumMember(Value = "75")]
@@ -212,7 +216,25 @@ namespace PAYNLSDK.Enums
         [EnumMember(Value = "85")]
         VERIFY = 85,
         [EnumMember(Value = "100")]
-        PAID = 100
+        PAID = 100,
+        [EnumMember(Value = "95")]
+        AUTHORIZE = 95,
+        [EnumMember(Value = "-63")]
+        DENIED = -63,
     }
 
+    /// <summary>
+    /// Type of the order line. Possible values: ARTICLE, SHIPPING, HANDLING, DISCOUNT
+    /// </summary>
+    public enum ProductType
+    {
+        [EnumMember(Value = "ARTICLE")]
+        ARTICLE,
+        [EnumMember(Value = "SHIPPING")]
+        SHIPPING,
+        [EnumMember(Value = "HANDLING")]
+        HANDLING,
+        [EnumMember(Value = "DISCOUNT")]
+        DISCOUNT,
+    }
 }

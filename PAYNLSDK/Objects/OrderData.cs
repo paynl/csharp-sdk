@@ -41,6 +41,12 @@ namespace PAYNLSDK.Objects
         public TaxClass VatCode { get; set; }
 
         /// <summary>
+        /// Type of the order line. Possible values: ARTICLE, SHIPPING, HANDLING, DISCOUNT
+        /// </summary>
+        [JsonProperty("productType"), JsonConverter(typeof(ProductTypeConverter))]
+        public ProductType ProductType { get; set; }
+
+        /// <summary>
         /// Create a new OrderData specification
         /// </summary>
         /// <param name="productId">Your systems product ID</param>
