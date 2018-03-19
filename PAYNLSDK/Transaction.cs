@@ -275,7 +275,7 @@ namespace PAYNLSDK
         /// function to approve a suspicious transaction
         /// </summary>
         /// <param name="transactionId">Transaction ID</param>
-        /// <returns>Full response including the message about the approvement
+        /// <returns>Full response including the message about the approvement</returns>
         static public PAYNLSDK.API.Transaction.Approve.Response Approve(string transactionId)
         {
             TransactionApprove request = new TransactionApprove();
@@ -289,7 +289,7 @@ namespace PAYNLSDK
         /// function to decline a suspicious transaction
         /// </summary>
         /// <param name="transactionId">Transaction ID</param>
-        /// <returns>Full response including the message about the decline
+        /// <returns>Full response including the message about the decline</returns>
         static public PAYNLSDK.API.Transaction.Decline.Response Decline(string transactionId)
         {
             TransactionDecline request = new TransactionDecline();
