@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
+using PAYNLSDK.Exceptions;
+using PAYNLSDK.Utilities;
 
 namespace PAYNLSDK.API.Merchant.Add
 {
@@ -66,6 +65,8 @@ namespace PAYNLSDK.API.Merchant.Add
          *  )
          */
 
+        [JsonRequired]
+        [Required]
         public string CompanyName { get; set; }
         public string CocNumber { get; set; }
         public string Street { get; set; }
@@ -119,7 +120,7 @@ namespace PAYNLSDK.API.Merchant.Add
         [JsonProperty("payoutInterval")]
         public string PayoutInterval { get; set; }
 
-        internal class Account
+        public class Account
         {
             [JsonProperty("primary")]
             public bool Primary { get; set; }
@@ -155,18 +156,40 @@ namespace PAYNLSDK.API.Merchant.Add
         public override int Version { get; }
         public override string Controller => "Merchant";
         public override string Method => "Add";
-        
 
+        /// <inheritdoc />
         public override NameValueCollection GetParameters()
         {
-            // TODO
-            throw new NotImplementedException();
-        }
+            NameValueCollection nvc = new NameValueCollection();
 
+            ParameterValidator.IsNotNull(CompanyName, "CompanyName");
+            nvc.Add("amount", CompanyName);
+            
+            if(string.IsNullOrWhiteSpace(CocNumber) == false) { nvc.Add("cocNumber", CocNumber); }
+            if (string.IsNullOrWhiteSpace(Street) == false) { nvc.Add("street", Street); }
+            if (string.IsNullOrWhiteSpace(HouseNumber) == false) { nvc.Add("housenumber", HouseNumber); }
+            if (string.IsNullOrWhiteSpace(PostalCode) == false) { nvc.Add("postalCode", PostalCode); }
+            if (string.IsNullOrWhiteSpace(City) == false) { nvc.Add("city", City); }
+            // if (Accounts == null) { nvc.Add("city", Accounts); }
+
+            // TODO ADD MORE!!!
+
+            return nvc;
+        }
+        
+        /// <inheritdoc />
         protected override void PrepareAndSetResponse()
         {
-            // TODO
-            throw new NotImplementedException();
+            if (ParameterValidator.IsEmpty(rawResponse))
+            {
+                throw new PayNlException("rawResponse is empty!");
+            }
+            response = JsonConvert.DeserializeObject<API.Merchant.Add.Response>(RawResponse);
+            if (!response.Request.Result)
+            {
+                // toss
+                throw new PayNlException(response.Request.Message);
+            }
         }
     }
 }

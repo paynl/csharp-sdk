@@ -26,7 +26,13 @@ namespace PAYNLSDK.API.Merchant.Add
         [JsonProperty("packageName")] public string PackageName { get; set; }
         [JsonProperty("invoiceAllowed")] public bool GetInvoiceAllowed { get; set; }
         [JsonProperty("payoutInterval")] public string PayoutInterval { get; set; }
-        [JsonProperty("createdDate")] public string CreateDate { get; set; }
+        /// <summary>
+        /// The date the contract has been created.  
+        /// </summary>
+        [JsonProperty("createdDate")] public string CreatedDate { get; set; }
+        /// <summary>
+        /// The date when you can start using the services from PAY
+        /// </summary>
         [JsonProperty("acceptedDate")] public string AcceptedDate { get; set; }
         [JsonProperty("deletedDate")] public string DeletedDate { get; set; }
         [JsonProperty("services")] public string Services { get; set; }
