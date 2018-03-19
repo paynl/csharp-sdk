@@ -52,6 +52,7 @@ namespace PAYNLSDK.API.Refund.Add
         /// </summary>
         public string Description { get; set; }
 
+        /// <summary>
         /// The id of a promotor / affiliate.
         /// In general, you won't use this unless you know the ID's of your affiliate's
         /// </summary>
