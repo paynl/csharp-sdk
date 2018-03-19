@@ -8,7 +8,7 @@ namespace PAYNLSDK.API.Transaction.GetService
     public class Response : ResponseBase
     {
         [JsonProperty("merchant")]
-        public Merchant Merchant { get; set; }
+        public Objects.Merchant Merchant { get; set; }
 
         [JsonProperty("service")]
         public PAYNLSDK.Objects.Service Service { get; set; }
