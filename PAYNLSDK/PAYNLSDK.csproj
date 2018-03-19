@@ -57,6 +57,8 @@
     <Compile Include="API\IPayNlConfiguration.cs" />
     <Compile Include="API\Merchant\Add\Request.cs" />
     <Compile Include="API\Merchant\Add\Response.cs" />
+    <Compile Include="API\Merchant\Get\Request.cs" />
+    <Compile Include="API\Merchant\Get\Response.cs" />
     <Compile Include="API\PayNlConfiguration.cs" />
     <Compile Include="API\PaymentProfile\GetAll\Request.cs" />
     <Compile Include="API\PaymentProfile\GetAll\Response.cs" />

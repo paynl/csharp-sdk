@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using PAYNLSDK.API.Merchant.Add;
 
 namespace PAYNLSDK
 {
@@ -29,7 +28,7 @@ namespace PAYNLSDK
         
         /// <summary>Create a new merchant</summary>
         /// <remarks></remarks>
-        /// <returns>A new <see cref="Response"/> object</returns>
+        /// <returns>A new <see cref="API.Merchant.Add.Response"/> object</returns>
         public API.Merchant.Add.Response Create(API.Merchant.Add.Request request)
         {
             // api = new Api\AddMerchant();
@@ -142,68 +141,7 @@ namespace PAYNLSDK
             return new object();
         }
 
-        /**
-         * @param array  options
-         */
-        private object _getMerchant( /*options*/)
-        {
-            var merchant = new Array[0];
-
-         //   if (!!String.IsNullOrEmpty( options['companyName']))
-         //   {
-         //       throw new Required('companyName');
-         //   }
-         //merchant['name'] =  options['companyName'];
-
-         //   if (!!String.IsNullOrEmpty( options['cocNumber']))
-         //   {
-         //       throw new Required('cocNumber');
-         //   }
-         //merchant['coc'] =  options['cocNumber'];
-
-         //   if (!!String.IsNullOrEmpty( options['street']))
-         //   {
-         //       throw new Required('street');
-         //   }
-         //merchant['street'] =  options['street'];
-
-         //   if (!!String.IsNullOrEmpty( options['houseNumber']))
-         //   {
-         //       throw new Required('houseNumber');
-         //   }
-         //merchant['houseNumber'] =  options['houseNumber'];
-
-         //   if (!!String.IsNullOrEmpty( options['postalCode']))
-         //   {
-         //       throw new Required('postalCode');
-         //   }
-         //merchant['postalCode'] =  options['postalCode'];
-
-         //   if (!!String.IsNullOrEmpty( options['city']))
-         //   {
-         //       throw new Required('city');
-         //   }
-         //merchant['city'] =  options['city'];
-
-         //   if (!!String.IsNullOrEmpty( options['countryCode']))
-         //   {
-         //       throw new Required('countryCode');
-         //   }
-         //merchant['countryCode'] =  options['countryCode'];
-
-         //   /**
-         //    * Optional
-         //    */
-         //   if (!String.IsNullOrEmpty( options['vatNumber']))
-         //   {
-         //    merchant['vat'] =  options['vatNumber'];
-         //   }
-         //   if (!String.IsNullOrEmpty( options['houseNumberAddition']))
-         //   {
-         //    merchant['houseNumberAddition'] =  options['houseNumberAddition'];
-         //   }
-            return  merchant;
-        }
+       
 
         private object _getBankAccount( /*options*/)
         {
@@ -259,7 +197,7 @@ namespace PAYNLSDK
          * @param  options
          * @return Result\Merchant\Get
          */
-        public object get( /*options*/)
+        public API.Merchant.Get.Response Get( string merchantId)
         {
          //api = new Api\GetMerchant();
          //   if (!String.IsNullOrEmpty( options['merchantId']))
@@ -268,8 +206,12 @@ namespace PAYNLSDK
          //   }
 
          //result =  api->doRequest();
+         
+            var request = new API.Merchant.Get.Request();
+            request.MerchantId = merchantId;
 
-            return new object(); // Result\Merchant\Get( result);
+            var response = _webClient.PerformRequest(request);
+            return API.Merchant.Get.Response.FromRawResponse(response);
         }
 
         public object getList( /*options = array()*/)
