@@ -18,13 +18,13 @@ namespace PAYNLSDK.API.Refund.Add
         /// <param name="amount"></param>
         /// <param name="bankAccountHolder"></param>
         /// <param name="bankAccountNumber"></param>
-        public Request(int amount, string bankAccountHolder, string bankAccountNumber, string BankAccountBic)
+        /// <param name="bankAccountBic"></param>
+        public Request(int amount, string bankAccountHolder, string bankAccountNumber, string bankAccountBic)
         {
             this.Amount = amount;
             this.BankAccountHolder = bankAccountHolder;
             this.BankAccountNumber = bankAccountNumber;
-            this.BankAccountBic = BankAccountBic;
-
+            this.BankAccountBic = bankAccountBic;
         }
               
         /// <summary>
@@ -52,6 +52,7 @@ namespace PAYNLSDK.API.Refund.Add
         /// </summary>
         public string Description { get; set; }
 
+        /// <summary>
         /// The id of a promotor / affiliate.
         /// In general, you won't use this unless you know the ID's of your affiliate's
         /// </summary>
