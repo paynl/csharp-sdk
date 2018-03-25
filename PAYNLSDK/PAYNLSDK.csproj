@@ -80,6 +80,7 @@
     <Compile Include="Exceptions\PayNlException.cs" />
     <Compile Include="Merchant.cs" />
     <Compile Include="Objects\Address.cs" />
+    <Compile Include="Objects\Company.cs" />
     <Compile Include="Objects\Connection.cs" />
     <Compile Include="Objects\CountryOption.cs" />
     <Compile Include="API\Transaction\EndUser.cs" />

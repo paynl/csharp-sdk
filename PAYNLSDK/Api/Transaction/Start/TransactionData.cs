@@ -42,12 +42,6 @@ namespace PAYNLSDK.Objects
         /// </summary>
         [JsonProperty("expireDate")]
         public DateTime? ExpireDate { get; set; }
-        
-        /// <summary>
-        ///  	Unique id of the enduser
-        /// </summary>
-        [JsonProperty("enduserId")]
-        public int? EnduserId { get; set; }
 
         /// <summary>
         /// The number belonging to the order
@@ -55,6 +49,12 @@ namespace PAYNLSDK.Objects
         [JsonProperty("orderNumber")]
         public string OrderNumber { get; set; }
 
+        /// <summary>
+        ///  	Unique id of the enduser
+        /// </summary>
+        [JsonProperty("enduserId")]
+        public int? EnduserId { get; set; }
+        
         /// <summary>
         /// Whether to sent a confimation email
         /// </summary>
