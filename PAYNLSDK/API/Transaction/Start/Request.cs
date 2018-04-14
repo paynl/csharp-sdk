@@ -10,6 +10,13 @@ namespace PAYNLSDK.API.Transaction.Start
 {
     public class Request : RequestBase
     {
+        public Request()
+        {
+            TransactionData = new TransactionData();
+            Enduser = new EndUser();
+            SalesData = new SalesData();
+            StatsData = new StatsDetails();
+        }
         /// <inheritdoc />
         public override bool RequiresApiToken => true;
 
