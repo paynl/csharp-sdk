@@ -6,11 +6,24 @@ namespace PAYNLSDK.API.Transaction.Start
 {
     public class Response : ResponseBase
     {
-        [JsonProperty("enduser")]
-        public TransactionStartEnduser Enduser { get; set; }
-
+        [JsonProperty("endUser")]
+        public Enduser endUser { get; set; }
         [JsonProperty("transaction")]
-        public TransactionStartInfo Transaction { get; set; }
+        public Transaction transaction { get; set; }
+
+        public class Enduser
+        {
+            public string blacklist { get; set; }
+        }
+
+        public class Transaction
+        {
+            public string transactionId { get; set; }
+            public string paymentURL { get; set; }
+            public string popupAllowed { get; set; }
+            public string paymentReference { get; set; }
+        }
 
     }
 }
+
