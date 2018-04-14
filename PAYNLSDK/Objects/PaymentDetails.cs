@@ -55,8 +55,8 @@ namespace PAYNLSDK.Objects
         /// <summary>
         /// Currency of the payment 
         /// </summary>
-        [JsonProperty("paidCurreny")]
-        public string PaidCurreny { get; protected set; }
+        [JsonProperty("PaidCurreny")]
+        public string PaidCurrency { get; protected set; }
 
         /// <summary>
         /// Number of payment attempts 
@@ -209,5 +209,25 @@ namespace PAYNLSDK.Objects
         [JsonProperty("paymentProfileName")]
         public string PaymentProfileName { get; protected set; }
 
+        /// <summary>
+        /// Gets or sets the Order number of the transaction .
+        /// </summary>
+        /// <value>The order number.</value>
+        [JsonProperty("orderNumber")] public string OrderNumber { get; set; }
+
+        /// <summary>
+        /// Name of the creditcard supplier 
+        /// </summary>
+        [JsonProperty("cardBrand")] public string CardBrand { get; set; }
+
+        /// <summary>
+        /// Debit or credit 
+        /// </summary>
+        [JsonProperty("cardType")] public string CardType { get; set; }
+
+        /// <summary>
+        /// Countrycode of the creditcards origin 
+        /// </summary>
+        [JsonProperty("cardCountryCode")] public string CardCountryCode { get; set; }
     }
 }
