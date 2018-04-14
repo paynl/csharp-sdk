@@ -57,8 +57,8 @@
     <Compile Include="API\IPayNlConfiguration.cs" />
     <Compile Include="API\Merchant\Add\Request.cs" />
     <Compile Include="API\Merchant\Add\Response.cs" />
-    <Compile Include="API\Merchant\Get\Request.cs" />
-    <Compile Include="API\Merchant\Get\Response.cs" />
+    <Compile Include="API\Merchant\Info\Request.cs" />
+    <Compile Include="API\Merchant\Info\Response.cs" />
     <Compile Include="API\PayNlConfiguration.cs" />
     <Compile Include="API\PaymentProfile\GetAll\Request.cs" />
     <Compile Include="API\PaymentProfile\GetAll\Response.cs" />
@@ -78,6 +78,8 @@
     <Compile Include="Banktransfer.cs" />
     <Compile Include="Converters\YMDConverter.cs" />
     <Compile Include="Exceptions\PayNlException.cs" />
+    <Compile Include="IMerchant.cs" />
+    <Compile Include="IService.cs" />
     <Compile Include="Merchant.cs" />
     <Compile Include="Objects\Address.cs" />
     <Compile Include="Objects\Company.cs" />

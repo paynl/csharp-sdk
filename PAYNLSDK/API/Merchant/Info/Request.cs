@@ -17,7 +17,7 @@ namespace PAYNLSDK.API.Merchant.Get
 
         public override int Version { get; }
         public override string Controller => "Merchant";
-        public override string Method => "Get";
+        public override string Method => "info";
 
         public override NameValueCollection GetParameters()
         {
