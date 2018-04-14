@@ -122,7 +122,7 @@ namespace PAYNLSDK
             }
         }
 
-        
+
 
         /// <summary>
         /// Query the service for all (current status) information on a transaction
@@ -249,6 +249,7 @@ namespace PAYNLSDK
         /// <summary>
         /// Creates a transaction start request model
         /// </summary>
+        /// <param name="amount">The amount.  Will be rounded at 2 digits after comma.</param>
         /// <param name="ipAddress">The IP address of the customer</param>
         /// <param name="returnUrl">The URL where the customer has to be send to after the payment.</param>
         /// <param name="paymentOptionId">	The ID of the payment option (for iDEAL use 10).</param>
@@ -257,15 +258,14 @@ namespace PAYNLSDK
         /// <param name="transferType">TransferType for this transaction (merchant/transaction)</param>
         /// <param name="transferValue">TransferValue eg MerchantId (M-xxxx-xxxx) or orderId</param>
         /// <returns>Transaction Start Request</returns>
-        public static PAYNLSDK.API.Transaction.Start.Request CreateTransactionRequest(string ipAddress, string returnUrl, int? paymentOptionId = null, int? paymentSubOptionId = null, bool testMode = false, string transferType = null, string transferValue = null)
+        public static PAYNLSDK.API.Transaction.Start.Request CreateTransactionRequest(decimal amount, string ipAddress, string returnUrl, int? paymentOptionId = null, int? paymentSubOptionId = null, bool testMode = false, string transferType = null, string transferValue = null)
         {
             var request = new API.Transaction.Start.Request
             {
-                Amount = 0,
+                Amount = (int)Math.Round(amount * 100),
                 IPAddress = ipAddress,
                 ReturnUrl = returnUrl,
                 PaymentOptionId = paymentOptionId,
-
                 PaymentOptionSubId = paymentSubOptionId,
                 TestMode = testMode,
                 TransferType = transferType,
