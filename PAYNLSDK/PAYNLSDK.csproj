@@ -80,6 +80,7 @@
     <Compile Include="Exceptions\PayNlException.cs" />
     <Compile Include="IMerchant.cs" />
     <Compile Include="IService.cs" />
+    <Compile Include="ITransaction.cs" />
     <Compile Include="Merchant.cs" />
     <Compile Include="Objects\Address.cs" />
     <Compile Include="Objects\Company.cs" />

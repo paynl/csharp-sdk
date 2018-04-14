@@ -35,9 +35,8 @@ namespace PAYNLFormsApp.Fixtures
 
         static public Request GetFixtureNoProductLines()
         {
-            Request request = Transaction.CreateTransactionRequest("37.143.38.31", "https://pay.nl/return.php", 10, 0, true);
-            request.Amount = 6489;
-
+            Request request = Transaction.CreateTransactionRequest(64.89m, "37.143.38.31", "https://pay.nl/return.php", 10, 0, true);
+            
             // transaction
             request.TransactionData = new PAYNLSDK.Objects.TransactionData();
             request.TransactionData.Currency = "EUR";

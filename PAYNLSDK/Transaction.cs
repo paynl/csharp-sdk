@@ -14,7 +14,7 @@ namespace PAYNLSDK
     /// Generic Transaction service helper class.
     /// Makes calling PAYNL Services easier and illiminates the need to fully initiate all Request objects.
     /// </summary>
-    public class Transaction
+    public class Transaction : ITransaction
     {
 
         private readonly IClient _webClient;
