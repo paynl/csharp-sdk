@@ -192,7 +192,7 @@ namespace PAYNLFormsApp
                 DebugRawResponse(fixture);
                 tbMain.Text = fixture.Response.ToString();
 
-                string url = fixture.Response.Transaction.PaymentURL;
+                string url = fixture.Response.Transaction.PaymentUrl;
                 System.Diagnostics.Process.Start(url);
             }
             catch (PayNlException ee)
@@ -232,7 +232,7 @@ namespace PAYNLFormsApp
                 DebugRawResponse(fixture);
                 tbMain.Text = fixture.Response.ToString();
 
-                string url = fixture.Response.Transaction.PaymentURL;
+                string url = fixture.Response.Transaction.PaymentUrl;
                 System.Diagnostics.Process.Start(url);
             }
             catch (PayNlException ee)
