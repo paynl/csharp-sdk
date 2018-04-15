@@ -60,16 +60,32 @@ namespace PAYNLSDK.Net
         {
             HttpWebRequest httprequest = PrepareRequest(request.Url, "POST");
             string rawResponse = PerformRoundTrip2(httprequest, HttpStatusCode.OK, () =>
-            {
-                using (var requestWriter = new StreamWriter(httprequest.GetRequestStream()))
                 {
-                    //string serializedResource = resource.Serialize();
-                    string serializedResource = ToQueryString(request);
-                    requestWriter.Write(serializedResource);
+                    using (var requestWriter = new StreamWriter(httprequest.GetRequestStream()))
+                    {
+                        //string serializedResource = resource.Serialize();
+                        string serializedResource = ToQueryString(request);
+                        requestWriter.Write(serializedResource);
+                    }
                 }
-            }
             );
             request.RawResponse = rawResponse;
+            return rawResponse;
+
+
+            //var webClient = new WebClient();
+            //// we are not using the client.Credentials for the reason stated here: https://stackoverflow.com/a/26016919/97615
+            ////string credentials = Convert.ToBase64String(
+            ////    Encoding.ASCII.GetBytes("token:" + _securityConfiguration.ApiToken));
+            ////webClient.Headers[HttpRequestHeader.Authorization] = $"Basic {credentials}";
+            //webClient.Credentials = new NetworkCredential("token", _securityConfiguration.ApiToken);
+            //webClient.Headers[HttpRequestHeader.UserAgent] = this.UserAgent;
+            //webClient.QueryString = GetParameters(request);
+            //webClient.BaseAddress = Endpoint;
+
+            //// download data
+            //var rawResponse = webClient.DownloadString(request.Url);
+
             return rawResponse;
         }
 
