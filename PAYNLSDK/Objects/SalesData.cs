@@ -15,13 +15,13 @@ namespace PAYNLSDK.Objects
         /// Invoice date
         /// </summary>
         [JsonProperty("invoiceDate"), JsonConverter(typeof(DMYConverter))]
-        public DateTime InvoiceDate { get; set; }
+        public DateTime? InvoiceDate { get; set; }
 
         /// <summary>
         /// Delivery date
         /// </summary>
         [JsonProperty("deliveryDate"), JsonConverter(typeof(DMYConverter))]
-        public DateTime DeliveryDate { get; set; }
+        public DateTime? DeliveryDate { get; set; }
 
         /// <summary>
         /// Ordered products specification

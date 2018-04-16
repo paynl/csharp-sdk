@@ -354,11 +354,11 @@ namespace PAYNLSDK.API.Transaction.Start
             {
                 if (!ParameterValidator.IsNull(SalesData.DeliveryDate))
                 {
-                    nvc.Add("saleData[deliveryDate]", SalesData.DeliveryDate.ToString("dd-MM-yyyy"));
+                    nvc.Add("saleData[deliveryDate]", SalesData.DeliveryDate?.ToString("dd-MM-yyyy"));
                 }
                 if (!ParameterValidator.IsNull(SalesData.InvoiceDate))
                 {
-                    nvc.Add("saleData[invoiceDate]", SalesData.InvoiceDate.ToString("dd-MM-yyyy"));
+                    nvc.Add("saleData[invoiceDate]", SalesData.InvoiceDate?.ToString("dd-MM-yyyy"));
                 }
                 if (!ParameterValidator.IsNull(SalesData.OrderData))
                 {
@@ -414,7 +414,7 @@ namespace PAYNLSDK.API.Transaction.Start
             if (!Response.Request.Result)
             {
                 // toss
-                throw new PayNlException(Response.Request.Message);
+                throw new PayNlException(Response.Request.Code + " " + Response.Request.Message);
             }
         }
     }
