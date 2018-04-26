@@ -52,11 +52,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="API\Alliance\GetMerchantResult.cs" />
-    <Compile Include="API\Alliance\GetMerchant\RequestBase.cs" />
+    <Compile Include="API\Language\GetAllRequest.cs" />
+    <Compile Include="Language.cs" />
+    <Compile Include="API\Alliance\GetMerchant\GetMerchantResult.cs" />
+    <Compile Include="API\Alliance\GetMerchant\Request.cs" />
     <Compile Include="API\Banktransfer\Add\Request.cs" />
     <Compile Include="API\Banktransfer\Add\Response.cs" />
     <Compile Include="API\IPayNlConfiguration.cs" />
+    <Compile Include="API\Language\GetAllResult.cs" />
     <Compile Include="API\Merchant\Add\Request.cs" />
     <Compile Include="API\Merchant\Add\Response.cs" />
     <Compile Include="API\Merchant\Info\Request.cs" />

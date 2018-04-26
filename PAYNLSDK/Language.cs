@@ -7,32 +7,33 @@ using System.Threading.Tasks;
 using System.Web.UI.WebControls;
 using PAYNLSDK.API.Alliance;
 using PAYNLSDK.API.Alliance.GetMerchant;
+using PAYNLSDK.API.Language;
 
 namespace PAYNLSDK
 {
     /// <summary>
     /// This is a part of the alliance SDK
     /// </summary>
-    public class Alliance : IAlliance
+    public class Language : ILanguage
     {
         private readonly IClient _webClient;
 
         /// <inheritdoc />
-        public Alliance()
+        public Language()
         {
             _webClient = new Client("", "");
         }
 
         /// <inheritdoc />
-        public Alliance(IClient webClient)
+        public Language(IClient webClient)
         {
             _webClient = webClient;
         }
 
         /// <inheritdoc />
-        public GetMerchantResult GetMerchant(API.Alliance.GetMerchant.Request request)
+        public GetMerchantResult GetAll()
         {
-            var response = _webClient.PerformRequest(request);
+            var response = _webClient.PerformRequest(new GetAllRequest());
             return Newtonsoft.Json.JsonConvert.DeserializeObject<GetMerchantResult>(response);
         }
     }
@@ -40,13 +41,8 @@ namespace PAYNLSDK
     /// <summary>
     /// 
     /// </summary>
-    public interface IAlliance
+    public interface ILanguage
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
-        GetMerchantResult GetMerchant(API.Alliance.GetMerchant.Request request);
+        GetMerchantResult GetAll();
     }
 }
