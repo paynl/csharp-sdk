@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.UI.WebControls;
 using PAYNLSDK.API.Alliance;
+using PAYNLSDK.API.Alliance.AddMerchant;
 using PAYNLSDK.API.Alliance.GetMerchant;
 
 namespace PAYNLSDK
@@ -34,6 +35,13 @@ namespace PAYNLSDK
         {
             var response = _webClient.PerformRequest(request);
             return Newtonsoft.Json.JsonConvert.DeserializeObject<GetMerchantResult>(response);
+        }
+
+        /// <inheritdoc />
+        public AddMerchantResult AddMerchant(API.Alliance.AddMerchant.Request request)
+        {
+            var response = _webClient.PerformRequest(request);
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<AddMerchantResult>(response);
         }
     }
 
