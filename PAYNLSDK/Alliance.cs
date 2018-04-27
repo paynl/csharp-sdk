@@ -1,13 +1,7 @@
 ﻿using PAYNLSDK.Net;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.UI.WebControls;
-using PAYNLSDK.API.Alliance;
 using PAYNLSDK.API.Alliance.AddMerchant;
 using PAYNLSDK.API.Alliance.GetMerchant;
+
 
 namespace PAYNLSDK
 {
@@ -46,7 +40,7 @@ namespace PAYNLSDK
     }
 
     /// <summary>
-    /// 
+    /// Alliance methods
     /// </summary>
     public interface IAlliance
     {
@@ -56,5 +50,12 @@ namespace PAYNLSDK
         /// <param name="request"></param>
         /// <returns></returns>
         GetMerchantResult GetMerchant(API.Alliance.GetMerchant.Request request);
+
+        /// <summary>
+        /// Adds the merchant.
+        /// </summary>
+        /// <param name="request">The request.</param>
+        /// <returns>AddMerchantResult.</returns>
+        AddMerchantResult AddMerchant(API.Alliance.AddMerchant.Request request);
     }
 }
