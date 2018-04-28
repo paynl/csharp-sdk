@@ -55,6 +55,8 @@
   <ItemGroup>
     <Compile Include="API\Alliance\AddMerchant\AddMerchantResult.cs" />
     <Compile Include="API\Alliance\AddMerchant\Request.cs" />
+    <Compile Include="API\Alliance\AddService\AddServiceResult.cs" />
+    <Compile Include="API\Alliance\AddService\Request.cs" />
     <Compile Include="API\Language\GetAllRequest.cs" />
     <Compile Include="Language.cs" />
     <Compile Include="API\Alliance\GetMerchant\GetMerchantResult.cs" />

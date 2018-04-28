@@ -1,5 +1,6 @@
 ﻿using PAYNLSDK.Net;
 using PAYNLSDK.API.Alliance.AddMerchant;
+using PAYNLSDK.API.Alliance.AddService;
 using PAYNLSDK.API.Alliance.GetMerchant;
 
 
@@ -37,6 +38,13 @@ namespace PAYNLSDK
             var response = _webClient.PerformRequest(request);
             return Newtonsoft.Json.JsonConvert.DeserializeObject<AddMerchantResult>(response);
         }
+
+        /// <inheritdoc />
+        public AddServiceResult AddService(API.Alliance.AddService.Request request)
+        {
+            var response = _webClient.PerformRequest(request);
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<AddServiceResult>(response);
+        }
     }
 
     /// <summary>
@@ -57,5 +65,12 @@ namespace PAYNLSDK
         /// <param name="request">The request.</param>
         /// <returns>AddMerchantResult.</returns>
         AddMerchantResult AddMerchant(API.Alliance.AddMerchant.Request request);
+
+        /// <summary>
+        /// Adds a service for a merchant
+        /// </summary>
+        /// <param name="request">The request.</param>
+        /// <returns>AddServiceResult.</returns>
+        AddServiceResult AddService(API.Alliance.AddService.Request request);
     }
 }
