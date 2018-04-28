@@ -8,8 +8,15 @@ using PAYNLSDK.Exceptions;
 
 namespace PAYNLSDK.API.Transaction.Start
 {
+    /// <summary>
+    /// The HTTP request to request the start of a new transaction
+    /// </summary>
+    /// <seealso cref="T:PAYNLSDK.API.RequestBase" />
     public class Request : RequestBase
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Request"/> class.
+        /// </summary>
         public Request()
         {
             TransactionData = new TransactionData();
@@ -17,6 +24,7 @@ namespace PAYNLSDK.API.Transaction.Start
             SalesData = new SalesData();
             StatsData = new StatsDetails();
         }
+
         /// <inheritdoc />
         public override bool RequiresApiToken => true;
 

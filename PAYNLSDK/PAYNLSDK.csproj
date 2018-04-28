@@ -53,9 +53,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\Alliance\AddMerchant\AddMerchantResult.cs" />
+    <Compile Include="API\Alliance\AddMerchant\Request.cs" />
+    <Compile Include="API\Language\GetAllRequest.cs" />
+    <Compile Include="Language.cs" />
+    <Compile Include="API\Alliance\GetMerchant\GetMerchantResult.cs" />
+    <Compile Include="API\Alliance\GetMerchant\Request.cs" />
     <Compile Include="API\Banktransfer\Add\Request.cs" />
     <Compile Include="API\Banktransfer\Add\Response.cs" />
     <Compile Include="API\IPayNlConfiguration.cs" />
+    <Compile Include="API\Language\GetAllResult.cs" />
     <Compile Include="API\Merchant\Add\Request.cs" />
     <Compile Include="API\Merchant\Add\Response.cs" />
     <Compile Include="API\Merchant\Info\Request.cs" />
@@ -82,6 +89,7 @@
     <Compile Include="IMerchant.cs" />
     <Compile Include="IService.cs" />
     <Compile Include="ITransaction.cs" />
+    <Compile Include="Alliance.cs" />
     <Compile Include="Merchant.cs" />
     <Compile Include="Objects\Address.cs" />
     <Compile Include="Objects\Company.cs" />
