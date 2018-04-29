@@ -94,13 +94,20 @@ namespace PAYNLSDK.API.Alliance.AddMerchant
             /// 0 not authorised, 1 authorised independently, 2  shared authorized to sign
             /// </summary>
             [JsonProperty("authorisedToSign")]
-            public int AuthorizedToSign { get; set; }
+            public AuthorisedToSignEnum AuthorizedToSign { get; set; }
 
             /// <summary>
             /// Ultimate beneficial owner (25% of more shares)
             /// </summary>
             [JsonProperty("ubo")]
             public bool UltimateBeneficialOwner { get; set; }
+
+            public enum AuthorisedToSignEnum
+            {
+                NotAuthorised = 0,
+                AuthorisedIndependently = 1,
+                SharedAuthorizedToSign = 2
+            }
         }
 
         protected override void PrepareAndSetResponse()
