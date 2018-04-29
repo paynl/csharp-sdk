@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace PAYNLSDK.API.Alliance.AddMerchant
 {
@@ -88,6 +89,7 @@ namespace PAYNLSDK.API.Alliance.AddMerchant
             /// "male" or "female"
             /// </summary>
             [JsonProperty("gender")]
+            [JsonConverter(typeof(StringEnumConverter))]
             public string Gender { get; set; }
 
             /// <summary>
@@ -101,6 +103,12 @@ namespace PAYNLSDK.API.Alliance.AddMerchant
             /// </summary>
             [JsonProperty("ubo")]
             public bool UltimateBeneficialOwner { get; set; }
+
+            public enum GenderEnum
+            {
+                M,
+                F
+            }
 
             public enum AuthorisedToSignEnum
             {
