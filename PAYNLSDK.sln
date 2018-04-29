@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2043
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PAYNLSDK", "PAYNLSDK\PAYNLSDK.csproj", "{AE95E452-C622-44A3-81F3-BEEDBAA18CE3}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PAYNLFormsApp", "PAYNLFormsApp\PAYNLFormsApp.csproj", "{6D6D7430-DF23-4A29-9C64-2EF056D99A4A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayNLSdk", "PAYNLSDK\PayNLSdk.csproj", "{C8AB15F6-3F29-490B-8424-F3A337177543}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,16 +13,19 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{AE95E452-C622-44A3-81F3-BEEDBAA18CE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AE95E452-C622-44A3-81F3-BEEDBAA18CE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AE95E452-C622-44A3-81F3-BEEDBAA18CE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AE95E452-C622-44A3-81F3-BEEDBAA18CE3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6D6D7430-DF23-4A29-9C64-2EF056D99A4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6D6D7430-DF23-4A29-9C64-2EF056D99A4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D6D7430-DF23-4A29-9C64-2EF056D99A4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D6D7430-DF23-4A29-9C64-2EF056D99A4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8AB15F6-3F29-490B-8424-F3A337177543}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8AB15F6-3F29-490B-8424-F3A337177543}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8AB15F6-3F29-490B-8424-F3A337177543}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8AB15F6-3F29-490B-8424-F3A337177543}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {821BC9F0-00C1-4514-843D-619B98B6A1D0}
 	EndGlobalSection
 EndGlobal
