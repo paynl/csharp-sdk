@@ -10,6 +10,10 @@ namespace PAYNLSDK.API.Alliance.AddMerchant
 {
     public class Request : RequestBase
     {
+        public Request()
+        {
+            Accounts = new List<Account>();
+        }
         public override int Version => 4;
         public override string Controller => "Alliance";
         public override string Method => "addMerchant";
