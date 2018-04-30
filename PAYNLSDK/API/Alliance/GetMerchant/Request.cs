@@ -15,7 +15,7 @@ namespace PAYNLSDK.API.Alliance.GetMerchant
     {
         public override int Version => 4;
         public override string Controller => "Alliance";
-        public override string Method => "GetMerchant";
+        public override string Method => "getMerchant";
 
         /// <summary>
         /// the merchant Id to request
