@@ -128,7 +128,14 @@ namespace PAYNLSDK.Net
 
             foreach (string key in nvc.AllKeys)
             {
-                foreach (string value in nvc.GetValues(key))
+                var values = nvc.GetValues(key);
+                if (values == null)
+                {
+                    // don't add empty parameters
+                    continue;
+                }
+
+                foreach (string value in values)
                 {
                     if (!first)
                     {
