@@ -22,16 +22,16 @@ namespace PAYNLSDK.API.Alliance.AddMerchant
         {
             var retval = new NameValueCollection { };
 
-            retval.Add("name", FullName);
-            retval.Add("coc", Coc);
+            retval.Add("merchant[name]", FullName);
+            retval.Add("merchant[coc]", Coc);
 
-            retval.Add("vat", Vat);
-            retval.Add("street", Street);
-            retval.Add("houseNumber", HouseNumber);
-            retval.Add("houseNumberAddition", HouseNumberAddition);
-            retval.Add("postalCode", PostalCode);
-            retval.Add("city", City);
-            retval.Add("countryCode", Country);
+            retval.Add("merchant[vat]", Vat);
+            retval.Add("merchant[street]", Street);
+            retval.Add("merchant[houseNumber]", HouseNumber);
+            retval.Add("merchant[houseNumberAddition]", HouseNumberAddition);
+            retval.Add("merchant[postalCode]", PostalCode);
+            retval.Add("merchant[city]", City);
+            retval.Add("merchant[countryCode]", Country);
 
             for (var i = 0; i < Accounts.Count; i++)
             {
