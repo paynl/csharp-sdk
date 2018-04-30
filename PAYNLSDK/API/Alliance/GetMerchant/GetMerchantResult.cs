@@ -1,27 +1,30 @@
-﻿namespace PAYNLSDK.API.Alliance.GetMerchant
+﻿using System;
+using Newtonsoft.Json;
+
+namespace PAYNLSDK.API.Alliance.GetMerchant
 {
     /// <summary>
     /// The result of the Alliance/GetMerchant call
     /// </summary>
     public class GetMerchantResult
     {
-        public GetMerchantResult.Request request { get; set; }
-        public string merchantId { get; set; }
-        public string merchantName { get; set; }
-        public Service[] services { get; set; }
-        public string balance { get; set; }
-        public Document[] documents { get; set; }
-        public Account[] accounts { get; set; }
-        public string bankaccounts { get; set; }
-        public Public_Info public_info { get; set; }
-        public Contract contract { get; set; }
-
+        [JsonProperty("request")] public GetMerchantResult.Request request { get; set; }
+        [JsonProperty("merchantId")] public string merchantId { get; set; }
+        [JsonProperty("merchantName")] public string merchantName { get; set; }
+        [JsonProperty("services")] public Service[] services { get; set; }
+        [JsonProperty("balance")] public int BalanceInCents { get; set; }
+        [JsonIgnore] public decimal Balance => Math.Round(BalanceInCents / 100m);
+        [JsonProperty("documents")] public Document[] documents { get; set; }
+        [JsonProperty("accounts")] public Account[] accounts { get; set; }
+        [JsonProperty("bankaccounts")] public string bankaccounts { get; set; }
+        [JsonProperty("public_info")] public Public_Info public_info { get; set; }
+        [JsonProperty("contract")] public Contract contract { get; set; }
 
         public class Request
         {
-            public string result { get; set; }
-            public string errorId { get; set; }
-            public string errorMessage { get; set; }
+            [JsonProperty("result")] public string result { get; set; }
+            [JsonProperty("errorId")] public string errorId { get; set; }
+            [JsonProperty("errorMessage")] public string errorMessage { get; set; }
         }
 
         public class Public_Info
@@ -83,19 +86,7 @@
             public string ubo { get; set; }
             public string authorised_to_sign { get; set; }
             public string signature_label { get; set; }
-            public Document1[] documents { get; set; }
+            public Document[] documents { get; set; }
         }
-
-        public class Document1
-        {
-            public string id { get; set; }
-            public string type_id { get; set; }
-            public string type_name { get; set; }
-            public string status_id { get; set; }
-            public string status_name { get; set; }
-            public string expires { get; set; }
-        }
-
-
     }
 }
