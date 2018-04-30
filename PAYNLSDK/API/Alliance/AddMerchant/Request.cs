@@ -36,16 +36,16 @@ namespace PAYNLSDK.API.Alliance.AddMerchant
             for (var i = 0; i < Accounts.Count; i++)
             {
                 var account = Accounts[i];
-                retval.Add($"accounts[{i}]['email']", account.Email);
-                retval.Add($"accounts[{i}]['firstname']", account.FirstName);
-                retval.Add($"accounts[{i}]['lastname']", account.LastName);
-                retval.Add($"accounts[{i}]['gender']", account.Gender);
-                retval.Add($"accounts[{i}]['authorizedToSign']", account.AuthorizedToSign.ToString());
-                retval.Add($"accounts[{i}]['ubo']", account.UltimateBeneficialOwner ? "1" : "0");
-                retval.Add($"accounts[{i}]['uboPercentage']", 0.ToString());
-                retval.Add($"accounts[{i}]['useCompanyAuth']", "1");
-                retval.Add($"accounts[{i}]['hasAccess']", "1");
-                retval.Add($"accounts[{i}]['language']", "1");
+                retval.Add($"accounts[{i}][email]", account.Email);
+                retval.Add($"accounts[{i}][firstname]", account.FirstName);
+                retval.Add($"accounts[{i}][lastname]", account.LastName);
+                retval.Add($"accounts[{i}][gender]", account.Gender);
+                retval.Add($"accounts[{i}][authorizedToSign]", account.AuthorizedToSign.ToString());
+                retval.Add($"accounts[{i}][ubo]", account.UltimateBeneficialOwner ? "1" : "0");
+                retval.Add($"accounts[{i}][uboPercentage]", 0.ToString());
+                retval.Add($"accounts[{i}][useCompanyAuth]", "1");
+                retval.Add($"accounts[{i}][hasAccess]", "1");
+                retval.Add($"accounts[{i}][language]", "1");
             }
 
             return retval;
