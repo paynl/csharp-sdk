@@ -17,7 +17,7 @@ namespace PAYNLSDK.API.Alliance.GetMerchant
         [JsonProperty("documents")] public Document[] documents { get; set; }
         [JsonProperty("accounts")] public Account[] accounts { get; set; }
         [JsonProperty("bankaccounts")] public string bankaccounts { get; set; }
-        [JsonProperty("public_info")] public Public_Info public_info { get; set; }
+        [JsonProperty("public_info")] public PublicInfo public_info { get; set; }
         [JsonProperty("contract")] public Contract contract { get; set; }
 
         public class Request
@@ -27,20 +27,20 @@ namespace PAYNLSDK.API.Alliance.GetMerchant
             [JsonProperty("errorMessage")] public string errorMessage { get; set; }
         }
 
-        public class Public_Info
+        public class PublicInfo
         {
             public string merchantId { get; set; }
             public string name { get; set; }
             public string type { get; set; }
             public string typeName { get; set; }
-            public Postaladdress postalAddress { get; set; }
+            public PostalAddress postalAddress { get; set; }
             public string cocNumber { get; set; }
             public string vatNumber { get; set; }
             public string image { get; set; }
             public string contactData { get; set; }
         }
 
-        public class Postaladdress
+        public class PostalAddress
         {
             public string street { get; set; }
             public string houseNumber { get; set; }
