@@ -1,14 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks Condition="'$(LibraryFrameworks)'==''">net46;net47;netstandard2.0;netcoreapp2.0</TargetFrameworks>
+    <TargetFrameworks Condition="'$(LibraryFrameworks)'==''">net46;net462;net47;net471;netstandard2.0;netcoreapp2.0</TargetFrameworks>
     <TargetFrameworks Condition="'$(LibraryFrameworks)'!=''">$(LibraryFrameworks)</TargetFrameworks>
     <LangVersion>latest</LangVersion>
 
     <!--<TargetFramework>netstandard2.0</TargetFramework>-->
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>RoodFluweel.PAYNLSDK</PackageId>
-    <Version>1.0.29</Version>
+    <Version>1.1.0</Version>
     <Authors>paynl, dampee, Sebsoft</Authors>
     <Company>dampee, paynl</Company>
     <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
