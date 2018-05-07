@@ -8,6 +8,15 @@ namespace PAYNLSDK.API
 {
     public class PayNlConfiguration : IPayNlConfiguration
     {
+        public PayNlConfiguration()
+        {
+        }
+        public PayNlConfiguration(string serviceId, string apiToken)
+        {
+            ServiceId = serviceId;
+            ApiToken = apiToken;
+        }
+
         /// <summary>
         /// PAYNL Service ID
         /// </summary>

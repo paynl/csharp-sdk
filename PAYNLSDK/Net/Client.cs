@@ -13,27 +13,19 @@ using PAYNLSDK.Utilities;
 namespace PAYNLSDK.Net
 {
     /// <inheritdoc />
+    ///<summary>
+    /// This is the default client to be used by the PayNl function calls
+    /// </summary>
     public class Client : IClient
     {
-        private readonly IProxyConfigurationInjector _proxyConfigurationInjector;
-        private readonly IPayNlConfiguration _securityConfiguration;
-
-        /// <inheritdoc />
-        public Client(string apiToken, string serviceId, IProxyConfigurationInjector proxyConfigurationInjector = null)
-        {
-            _proxyConfigurationInjector = proxyConfigurationInjector;
-            _securityConfiguration = new PayNlConfiguration()
-            {
-                ApiToken = apiToken,
-                ServiceId = serviceId
-            };
-        }
+        protected readonly IProxyConfigurationInjector ProxyConfigurationInjector;
+        protected readonly IPayNlConfiguration SecurityConfiguration;
 
         /// <inheritdoc />
         public Client(IPayNlConfiguration securityConfiguration, IProxyConfigurationInjector proxyConfigurationInjector = null)
         {
-            _securityConfiguration = securityConfiguration;
-            _proxyConfigurationInjector = proxyConfigurationInjector;
+            SecurityConfiguration = securityConfiguration;
+            ProxyConfigurationInjector = proxyConfigurationInjector;
         }
 
         /// <summary>
@@ -98,13 +90,13 @@ namespace PAYNLSDK.Net
             NameValueCollection nvc = request.GetParameters();
             if (request.RequiresApiToken)
             {
-                ParameterValidator.IsNotEmpty(_securityConfiguration.ApiToken, nameof(_securityConfiguration.ApiToken));
-                nvc.Add("token", _securityConfiguration.ApiToken);
+                ParameterValidator.IsNotEmpty(SecurityConfiguration.ApiToken, nameof(SecurityConfiguration.ApiToken));
+                nvc.Add("token", SecurityConfiguration.ApiToken);
             }
             if (request.RequiresServiceId)
             {
-                ParameterValidator.IsNotEmpty(_securityConfiguration.ServiceId, nameof(_securityConfiguration.ServiceId));
-                nvc.Add("serviceId", _securityConfiguration.ServiceId);
+                ParameterValidator.IsNotEmpty(SecurityConfiguration.ServiceId, nameof(SecurityConfiguration.ServiceId));
+                nvc.Add("serviceId", SecurityConfiguration.ServiceId);
             }
 
             return nvc;
@@ -170,9 +162,9 @@ namespace PAYNLSDK.Net
             request.ContentType = wwwUrlContentType;
             request.Method = method;
 
-            if (null != _proxyConfigurationInjector)
+            if (null != ProxyConfigurationInjector)
             {
-                request.Proxy = _proxyConfigurationInjector.InjectProxyConfiguration(request.Proxy, uri);
+                request.Proxy = ProxyConfigurationInjector.InjectProxyConfiguration(request.Proxy, uri);
             }
             return request;
         }
