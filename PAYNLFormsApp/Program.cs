@@ -31,7 +31,7 @@ namespace PAYNLFormsApp
         public static string ServiceId { get; set; }
         
         private static IClient _client;
-        public static IClient Client => _client ?? (_client = new Client(ApiToken, ServiceId));
+        public static IClient Client => _client ?? (_client = new ApiTokenClient(ApiToken, ServiceId));
     }
     
     static class LastRequests

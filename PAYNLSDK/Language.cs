@@ -18,12 +18,6 @@ namespace PAYNLSDK
         private readonly IClient _webClient;
 
         /// <inheritdoc />
-        public Language()
-        {
-            _webClient = new Client("", "");
-        }
-
-        /// <inheritdoc />
         public Language(IClient webClient)
         {
             _webClient = webClient;

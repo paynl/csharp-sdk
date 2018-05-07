@@ -12,11 +12,6 @@ namespace PAYNLSDK
     {
         private readonly IClient _webClient;
 
-        public PaymentProfile()
-        {
-            _webClient = new Client("", "");
-        }
-
         public PaymentProfile(IClient webClient)
         {
             _webClient = webClient;

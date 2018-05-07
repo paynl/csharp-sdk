@@ -10,12 +10,7 @@ namespace PAYNLSDK
     public class Banktransfer
     {
         private readonly IClient _webClient;
-        
-        public Banktransfer()
-        {
-            _webClient = new Client("", "");
-        }
-        
+     
         public Banktransfer(IClient webClient)
         {
             _webClient = webClient;

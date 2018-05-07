@@ -19,11 +19,6 @@ namespace PAYNLSDK
 
         private readonly IClient _webClient;
 
-        public Transaction()
-        {
-            _webClient = new Client("", "");
-        }
-
         public Transaction(IClient webClient)
         {
             _webClient = webClient;

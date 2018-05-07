@@ -14,12 +14,6 @@ namespace PAYNLSDK
         private readonly IClient _webClient;
 
         /// <inheritdoc />
-        public Alliance()
-        {
-            _webClient = new Client("", "");
-        }
-
-        /// <inheritdoc />
         public Alliance(IClient webClient)
         {
             _webClient = webClient;

@@ -12,15 +12,7 @@ namespace PAYNLSDK
     {
         private readonly IClient _webClient;
 
-        /// <summary>
-        /// Create a new PaymentMethod object
-        /// </summary>
-        public PaymentMethod()
-        {
-            _webClient = new Client("", "");
-        }
-
-        /// <summary>
+       /// <summary>
         /// Create a new PaymentMethod object
         /// </summary>
         /// <param name="webClient"></param>

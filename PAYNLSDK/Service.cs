@@ -13,11 +13,6 @@ namespace PAYNLSDK
     {
         private readonly IClient _webClient;
 
-        public Service()
-        {
-            _webClient = new Client("", "");
-        }
-
         public Service(IClient webClient)
         {
             _webClient = webClient;

@@ -15,12 +15,6 @@ namespace PAYNLSDK
         private readonly IClient _webClient;
 
         /// <inheritdoc />
-        public Merchant()
-        {
-            _webClient = new Client("", "");
-        }
-
-        /// <inheritdoc />
         public Merchant(IClient webClient)
         {
             _webClient = webClient;
