@@ -12,6 +12,12 @@ With this SDK you will be able to start transactions and retrieve transactions w
 ## Installation
 You can use this package as a nuget package: 
 
+From nuget:
+```
+Install-Package RoodFluweel.PAYNLSDK
+```
+
+Or if you want bleeding edge:
 ```
 PM> Install-Package RoodFluweel.PAYNLSDK -Source https://www.myget.org/F/paynl/api/v3/index.json
 ``` 
