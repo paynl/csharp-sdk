@@ -4,7 +4,7 @@ using PAYNLSDK.Utilities;
 
 namespace PAYNLSDK.Converters
 {
-    class DMYConverter : JsonConverter
+    public class DMYConverter : JsonConverter
     {
         private const string Format = "dd-MM-yyyy";
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
@@ -44,11 +44,22 @@ namespace PAYNLSDK.Converters
 
             if (reader.TokenType == JsonToken.String)
             {
+                DateTime dateTime;
+                string[] formats = { "d/M/yyyy", "dd/MM/yyyy", "d-M-yyyy", "dd-MM-yyyy" };
                 string timeString = (string)reader.Value;
                 if (!ParameterValidator.IsEmpty(timeString))
                 {
-                    var dateTime = DateTime.Parse(timeString);
-                    return dateTime;
+                    if (DateTime.TryParseExact(timeString, formats, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out dateTime))
+                    {
+                        // Gelukt we kunnen doorgaan
+                        return dateTime;
+                    }
+                    else
+                    {
+                        // De opgegeven timeString is niet juist.
+                        return null;
+                    }
+
                 }
                 return null;
             }

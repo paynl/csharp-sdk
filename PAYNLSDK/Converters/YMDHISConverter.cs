@@ -4,7 +4,7 @@ using PAYNLSDK.Utilities;
 
 namespace PAYNLSDK.Converters
 {
-    class YMDHISConverter : JsonConverter
+    public class YMDHISConverter : JsonConverter
     {
         private const string Format = "yyyy-MM-dd HH:ii:ss";
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
@@ -44,11 +44,35 @@ namespace PAYNLSDK.Converters
 
             if (reader.TokenType == JsonToken.String)
             {
+                DateTime dateTime;
+                string[] formats = {
+                                       // - argument.
+                                       "yyyy-M-d h:mm:ss tt", "yyyy-M-d h:mm tt", 
+                                       "yyyy-MM-dd hh:mm:ss", "yyyy-M-d h:mm:ss", 
+                                       "yyyy-M-d hh:mm tt", "yyyy-M-d hh tt", 
+                                       "yyyy-M-d h:mm", "yyyy-M-d h:mm", 
+                                       "yyyy-MM-dd hh:mm", "yyyy-M-dd hh:mm",
+                                       // Slash argument.
+                                       "yyyy/M/d h:mm:ss tt", "yyyy/M/d h:mm tt", 
+                                       "yyyy/MM/dd hh:mm:ss", "yyyy/M/d h:mm:ss", 
+                                       "yyyy/M/d hh:mm tt", "yyyy/M/d hh tt", 
+                                       "yyyy/M/d h:mm", "yyyy/M/d h:mm", 
+                                       "yyyy/MM/dd hh:mm", "yyyy/M/dd hh:mm"
+                                   };
                 string timeString = (string)reader.Value;
                 if (!ParameterValidator.IsEmpty(timeString))
                 {
-                    var dateTime = DateTime.Parse(timeString);
-                    return dateTime;
+                    if (DateTime.TryParseExact(timeString, formats, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out dateTime))
+                    {
+                        // Gelukt we kunnen doorgaan
+                        return dateTime;
+                    }
+                    else
+                    {
+                        // De opgegeven timeString is niet juist.
+                        return null;
+                    }
+
                 }
                 return null;
             }
