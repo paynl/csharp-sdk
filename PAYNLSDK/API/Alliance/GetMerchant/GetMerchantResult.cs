@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using Newtonsoft.Json;
 
 namespace PAYNLSDK.API.Alliance.GetMerchant
@@ -6,6 +7,7 @@ namespace PAYNLSDK.API.Alliance.GetMerchant
     /// <summary>
     /// The result of the Alliance/GetMerchant call
     /// </summary>
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public class GetMerchantResult
     {
         [JsonProperty("request")] public GetMerchantResult.Request request { get; set; }
@@ -16,7 +18,7 @@ namespace PAYNLSDK.API.Alliance.GetMerchant
         [JsonIgnore] public decimal Balance => Math.Round(BalanceInCents / 100m);
         [JsonProperty("documents")] public Document[] documents { get; set; }
         [JsonProperty("accounts")] public Account[] accounts { get; set; }
-        [JsonProperty("bankaccounts")] public string bankaccounts { get; set; }
+        [JsonProperty("bankaccounts")] public Bankaccount[] bankaccounts { get; set; }
         [JsonProperty("public_info")] public PublicInfo public_info { get; set; }
         [JsonProperty("contract")] public Contract contract { get; set; }
 
@@ -88,5 +90,21 @@ namespace PAYNLSDK.API.Alliance.GetMerchant
             public string signature_label { get; set; }
             public Document[] documents { get; set; }
         }
+
+        public class Bankaccount
+        {
+            [JsonProperty("id")]
+            public string id { get; set; }
+            [JsonProperty("bankaccountHolder")]
+            public string bankaccountHolder { get; set; }
+            [JsonProperty("bankaccountNumber")]
+            public string bankaccountNumber { get; set; }
+            [JsonProperty("bic")]
+            public string bic { get; set; }
+            [JsonProperty("countryCode")]
+            public string countryCode { get; set; }
+        }
+
     }
 }
+
