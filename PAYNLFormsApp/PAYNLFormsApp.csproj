@@ -77,6 +77,7 @@
     <Compile Include="DebugForm.Designer.cs">
       <DependentUpon>DebugForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Fixtures\RefundTransaction.cs" />
     <Compile Include="Fixtures\TransactionStart.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

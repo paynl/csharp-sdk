@@ -61,6 +61,8 @@
     <Compile Include="API\PaymentProfile\Get\Response.cs" />
     <Compile Include="API\Refund\Add\Request.cs" />
     <Compile Include="API\Refund\Add\Response.cs" />
+    <Compile Include="API\Refund\Transaction\Request.cs" />
+    <Compile Include="API\Refund\Transaction\Response.cs" />
     <Compile Include="API\Service\GetCategories\Request.cs" />
     <Compile Include="API\Service\GetCategories\Response.cs" />
     <Compile Include="API\Transaction\Approve\Request.cs" />
