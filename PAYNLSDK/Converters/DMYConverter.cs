@@ -7,6 +7,12 @@ namespace PAYNLSDK.Converters
     public class DMYConverter : JsonConverter
     {
         private const string Format = "dd-MM-yyyy";
+        private static string[] ParseFormats = {
+                                       // - argument.
+                                       "d-M-yyyy", "dd-MM-yyyy",
+                                       // Slash argument.
+                                       "d/M/yyyy", "dd/MM/yyyy"
+                                   };
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
             if (value is DateTime)
@@ -45,11 +51,11 @@ namespace PAYNLSDK.Converters
             if (reader.TokenType == JsonToken.String)
             {
                 DateTime dateTime;
-                string[] formats = { "d/M/yyyy", "dd/MM/yyyy", "d-M-yyyy", "dd-MM-yyyy" };
+                /*string[] formats = { "d/M/yyyy", "dd/MM/yyyy", "d-M-yyyy", "dd-MM-yyyy" };*/
                 string timeString = (string)reader.Value;
                 if (!ParameterValidator.IsEmpty(timeString))
                 {
-                    if (DateTime.TryParseExact(timeString, formats, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out dateTime))
+                    if (DateTime.TryParseExact(timeString, ParseFormats, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out dateTime))
                     {
                         // Gelukt we kunnen doorgaan
                         return dateTime;

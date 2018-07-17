@@ -33,7 +33,7 @@ namespace PAYNLFormsApp
             DebugForm form = new DebugForm();
             form.dumpPaymentmethods();
             form.ShowDialog();
-          
+
         }
 
         private void ClearDebug()
@@ -76,7 +76,7 @@ namespace PAYNLFormsApp
         {
             DebugForm form = new DebugForm();
             form.DumpTransactionGetLast();
-            form.ShowDialog();    
+            form.ShowDialog();
         }
 
         private void txinfo(string id)
@@ -210,7 +210,7 @@ namespace PAYNLFormsApp
             frm.ShowDialog();
         }
 
-     
+
 
         private void frm_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -298,10 +298,10 @@ namespace PAYNLFormsApp
 
         private void approveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-        
+
             ApproveDecline form = new ApproveDecline();
             form.ShowDialog();
-         
+
         }
 
         private void declineToolStripMenuItem_Click(object sender, EventArgs e)
@@ -310,15 +310,15 @@ namespace PAYNLFormsApp
             ApproveDecline form = new ApproveDecline();
             form.ShowDialog();
 
-    
-       }
+
+        }
 
         private void refundAddToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
             RefundAdd form = new RefundAdd();
             form.ShowDialog();
-           
+
         }
 
         private void refundToolStripMenuItem_Click(object sender, EventArgs e)
@@ -329,13 +329,169 @@ namespace PAYNLFormsApp
 
         }
 
+        private void testDateTimeConversionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string[] ymdtests = {
+                                 // YMD
+                                 @"{dt: '2018-1-1'}",
+                                 @"{dt: '2018-5-10'}",
+                                 @"{dt: '2018-12-11'}",
+                                 @"{dt: '2018-12-1'}",
+                                 @"{dt: '2018/1/1'}",
+                                 @"{dt: '2018/5/10'}",
+                                 @"{dt: '2018/12/11'}",
+                                 @"{dt: '2018/12/1'}"
+                                };
+            string[] dmytests = {
+                                 // DMY
+                                 @"{dt: '1-1-2-2018'}",
+                                 @"{dt: '10-5-2018'}",
+                                 @"{dt: '11-23-2018'}",
+                                 @"{dt: '1-12-2018'}",
+                                 @"{dt: '1/1/2/2018'}",
+                                 @"{dt: '10/5/2018'}",
+                                 @"{dt: '11/23/2018'}",
+                                 @"{dt: '1/12/2018'}"
+                                };
+            string[] ymdhistests = {
+                                 // YMDHIS
+                                 @"{dt: '2018-1-1 12:11'}",
+                                 @"{dt: '2018-1-1 9:11'}",
+                                 @"{dt: '2018-1-1 11:9'}",
+                                 @"{dt: '2018-5-10 12:11:01'}",
+                                 @"{dt: '2018-12-11 9:9:1'}",
+                                 @"{dt: '2018-12-1 9:9:10'}",
+                                 @"{dt: '2018-12-1 09:9:10'}",
+                                 @"{dt: '2018-12-1 9:09:10'}",
+                                 @"{dt: '2018/1/1 12:11'}",
+                                 @"{dt: '2018/1/1 9:11'}",
+                                 @"{dt: '2018/1/1 11:9'}",
+                                 @"{dt: '2018/5/10 12:11:01'}",
+                                 @"{dt: '2018/12/11 9:9:1'}",
+                                 @"{dt: '2018/12/1 9:9:10'}",
+                                 @"{dt: '2018/12/1 09:9:10'}",
+                                 @"{dt: '2018/12/1 9:09:10'}"
+                            };
+
+
+            foreach (string dateString in ymdtests)
+            {
+                try
+                {
+                    TestYMD testObj = JsonConvert.DeserializeObject<TestYMD>(dateString);
+                    AddDebug(String.Format("Converted '{0}' to {1}.", dateString, testObj.DT.ToString()));
+                }
+                catch (Exception e0)
+                {
+                    AddDebug(String.Format("Error converting '{0}' using YMD.", dateString));
+                    AddDebug(e0.Message);
+                }
+            }
+            foreach (string dateString in dmytests)
+            {
+                try
+                {
+                    TestDMY testObj = JsonConvert.DeserializeObject<TestDMY>(dateString);
+                    AddDebug(String.Format("Converted '{0}' to {1}.", dateString, testObj.DT.ToString()));
+                }
+                catch (Exception e1)
+                {
+                    AddDebug(String.Format("Error converting '{0}' using YMD.", dateString));
+                    AddDebug(e1.Message);
+                }
+            }
+            foreach (string dateString in ymdhistests)
+            {
+                try
+                {
+                    TestYMDHIS testObj = JsonConvert.DeserializeObject<TestYMDHIS>(dateString);
+                    AddDebug(String.Format("Converted '{0}' to {1}.", dateString, testObj.DT.ToString()));
+                }
+                catch (Exception e2)
+                {
+                    AddDebug(String.Format("Error converting '{0}' using YMD.", dateString));
+                    AddDebug(e2.Message);
+                }
+            }
+
+        }
+
+        private void refundtransactionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            APISettings.InitAPI();
+            ClearDebug();
+            PAYNLSDK.API.Refund.Transaction.Request fixture = RefundTransaction.GetFixtureNoProductLines();
+            AddDebug("Fixture loaded.");
+            AddDebug("JSON:");
+            AddDebug(fixture.ToString());
+            AddDebug("PARAMS:");
+            string qs = fixture.ToQueryString();
+            AddDebug(qs);
+            NameValueCollection nvc = HttpUtility.ParseQueryString(qs);
+            string json = JsonConvert.SerializeObject(NvcToDictionary(nvc, true));
+            AddDebug("-----");
+            //AddDebug("PARAMS AS JSON");
+            //AddDebug(json);
+            DumpNvc(nvc);
+            AddDebug("-----");
+            AddDebug("DONE");
+        }
+
+        private void refundTrasactionProductsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            APISettings.InitAPI();
+            ClearDebug();
+            PAYNLSDK.API.Refund.Transaction.Request fixture = RefundTransaction.GetFixture();
+            AddDebug("Fixture loaded.");
+            AddDebug("JSON:");
+            AddDebug(fixture.ToString());
+            AddDebug("PARAMS:");
+            string qs = fixture.ToQueryString();
+            AddDebug(qs);
+            NameValueCollection nvc = HttpUtility.ParseQueryString(qs);
+            string json = JsonConvert.SerializeObject(NvcToDictionary(nvc, true));
+            AddDebug("-----");
+            //AddDebug("PARAMS AS JSON");
+            //AddDebug(json);
+            DumpNvc(nvc);
+            AddDebug("-----");
+            AddDebug("DONE");
+        }
+        /*
+        class X
+        {
+            [JsonProperty("gender"), JsonConverter(typeof(PAYNLSDK.Converters.GenderConverter))]
+            public PAYNLSDK.Enums.Gender Gender { get; set; }
+
+        }
+         */
     }
-    /*
-    class X
+
+    public class TestYMD
     {
-        [JsonProperty("gender"), JsonConverter(typeof(PAYNLSDK.Converters.GenderConverter))]
-        public PAYNLSDK.Enums.Gender Gender { get; set; }
+        /// <summary>
+        /// Merchant ID
+        /// </summary>
+        [JsonProperty("dt"), JsonConverter(typeof(PAYNLSDK.Converters.YMDConverter))]
+        public DateTime? DT { get; set; }
 
     }
-     */
+    public class TestDMY
+    {
+        /// <summary>
+        /// Merchant ID
+        /// </summary>
+        [JsonProperty("dt"), JsonConverter(typeof(PAYNLSDK.Converters.DMYConverter))]
+        public DateTime? DT { get; set; }
+
+    }
+    public class TestYMDHIS
+    {
+        /// <summary>
+        /// Merchant ID
+        /// </summary>
+        [JsonProperty("dt"), JsonConverter(typeof(PAYNLSDK.Converters.YMDHISConverter))]
+        public DateTime? DT { get; set; }
+
+    }
 }
