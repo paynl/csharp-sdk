@@ -418,42 +418,42 @@ namespace PAYNLFormsApp
 
         private void refundtransactionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            APISettings.InitAPI();
+            //APISettings.InitAPI();
             ClearDebug();
             PAYNLSDK.API.Refund.Transaction.Request fixture = RefundTransaction.GetFixtureNoProductLines();
             AddDebug("Fixture loaded.");
             AddDebug("JSON:");
             AddDebug(fixture.ToString());
             AddDebug("PARAMS:");
-            string qs = fixture.ToQueryString();
-            AddDebug(qs);
-            NameValueCollection nvc = HttpUtility.ParseQueryString(qs);
-            string json = JsonConvert.SerializeObject(NvcToDictionary(nvc, true));
+            //string qs = fixture.ToQueryString();
+            //AddDebug(qs);
+            //NameValueCollection nvc = HttpUtility.ParseQueryString(qs);
+            //string json = JsonConvert.SerializeObject(NvcToDictionary(nvc, true));
             AddDebug("-----");
             //AddDebug("PARAMS AS JSON");
             //AddDebug(json);
-            DumpNvc(nvc);
+            //DumpNvc(nvc);
             AddDebug("-----");
             AddDebug("DONE");
         }
 
         private void refundTrasactionProductsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            APISettings.InitAPI();
+            //APISettings.InitAPI();
             ClearDebug();
             PAYNLSDK.API.Refund.Transaction.Request fixture = RefundTransaction.GetFixture();
             AddDebug("Fixture loaded.");
             AddDebug("JSON:");
             AddDebug(fixture.ToString());
             AddDebug("PARAMS:");
-            string qs = fixture.ToQueryString();
-            AddDebug(qs);
-            NameValueCollection nvc = HttpUtility.ParseQueryString(qs);
-            string json = JsonConvert.SerializeObject(NvcToDictionary(nvc, true));
-            AddDebug("-----");
-            //AddDebug("PARAMS AS JSON");
-            //AddDebug(json);
-            DumpNvc(nvc);
+            //string qs = fixture.ToQueryString();
+            //AddDebug(qs);
+            //NameValueCollection nvc = HttpUtility.ParseQueryString(qs);
+            //string json = JsonConvert.SerializeObject(NvcToDictionary(nvc, true));
+            //AddDebug("-----");
+            ////AddDebug("PARAMS AS JSON");
+            ////AddDebug(json);
+            //DumpNvc(nvc);
             AddDebug("-----");
             AddDebug("DONE");
         }

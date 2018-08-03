@@ -101,14 +101,11 @@ namespace PAYNLSDK.API.Refund.Transaction
         {
             get { return "transaction"; }
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public override string Querystring
-        {
-            get { return ""; }
-        }
+        
+        //public override string Querystring
+        //{
+        //    get { return ""; }
+        //}
 
         /// <summary>
         /// 
@@ -131,13 +128,10 @@ namespace PAYNLSDK.API.Refund.Transaction
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
+        /// <inheritdoc />
         public override System.Collections.Specialized.NameValueCollection GetParameters()
         {
-            NameValueCollection nvc = base.GetParameters();
+            NameValueCollection nvc = new NameValueCollection();
 
             ParameterValidator.IsNotNull(TransactionId, "TransactionId");
             nvc.Add("transactionId", TransactionId.ToString());
@@ -170,20 +164,17 @@ namespace PAYNLSDK.API.Refund.Transaction
             return nvc;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public override void SetResponse()
+        protected override void PrepareAndSetResponse()
         {
             if (ParameterValidator.IsEmpty(rawResponse))
             {
-                throw new ErrorException("rawResponse is empty!");
+                throw new PayNlException("rawResponse is empty!");
             }
             response = JsonConvert.DeserializeObject<Response>(RawResponse);
             if (!Response.Request.Result)
             {
                 // toss
-                throw new ErrorException(Response.Request.Message);
+                throw new PayNlException(Response.Request.Message);
             }
         }
 
