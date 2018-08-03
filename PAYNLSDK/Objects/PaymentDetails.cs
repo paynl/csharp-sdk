@@ -6,7 +6,7 @@ using PAYNLSDK.Converters;
 namespace PAYNLSDK.Objects
 {
     /// <summary>
-    /// Generl dtails regarding the payment
+    /// General details regarding the payment
     /// </summary>
     public class PaymentDetails
     {
