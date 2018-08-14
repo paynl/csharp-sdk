@@ -70,24 +70,39 @@ namespace PAYNLSDK.API.Alliance.GetMerchant
 
         public class Document
         {
+            [JsonProperty("id")]
             public string id { get; set; }
+            [JsonProperty("type_id")]
             public string type_id { get; set; }
+            [JsonProperty("type_name")]
             public string type_name { get; set; }
+            [JsonProperty("status_id")]
             public string status_id { get; set; }
+            [JsonProperty("status_name")]
             public string status_name { get; set; }
+            [JsonProperty("expires")]
             public string expires { get; set; }
         }
 
         public class Account
         {
+            [JsonProperty("id")]
             public string id { get; set; }
+            [JsonProperty("account_id")]
             public string account_id { get; set; }
+            [JsonProperty("name")]
             public string name { get; set; }
+            [JsonProperty("accepted")]
             public string accepted { get; set; }
+            [JsonProperty("access")]
             public string access { get; set; }
+            [JsonProperty("ubo")]
             public string ubo { get; set; }
+            [JsonProperty("authorised_to_sign")]
             public string authorised_to_sign { get; set; }
+            [JsonProperty("signature_label")]
             public string signature_label { get; set; }
+            [JsonProperty("documents")]
             public Document[] documents { get; set; }
         }
 
