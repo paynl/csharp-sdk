@@ -470,6 +470,26 @@ namespace PAYNLFormsApp
             AddDebug("-----");
             AddDebug("DONE");
         }
+
+        private void transactionRefundInofromJsonFixtureToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ClearDebug();
+            String json = TransactionRefundInfo.GetJsonFixture();
+            PAYNLSDK.Objects.RefundInfo fixture = TransactionRefundInfo.GetRefundInfoFixture();
+            AddDebug("Fixture loaded.");
+            AddDebug("JSON:");
+            AddDebug(json);
+            AddDebug("-----");
+            AddDebug(fixture.ToString());
+            AddDebug("-----");
+            AddDebug("DONE");
+        }
+
+        private void refundInfoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RefundInfo form = new RefundInfo();
+            form.ShowDialog();
+        }
         /*
         class X
         {

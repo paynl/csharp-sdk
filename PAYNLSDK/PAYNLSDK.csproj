@@ -61,6 +61,8 @@
     <Compile Include="API\PaymentProfile\Get\Response.cs" />
     <Compile Include="API\Refund\Add\Request.cs" />
     <Compile Include="API\Refund\Add\Response.cs" />
+    <Compile Include="API\Refund\Info\Request.cs" />
+    <Compile Include="API\Refund\Info\Response.cs" />
     <Compile Include="API\Refund\Transaction\Request.cs" />
     <Compile Include="API\Refund\Transaction\Response.cs" />
     <Compile Include="API\Service\GetCategories\Request.cs" />
@@ -84,6 +86,7 @@
     <Compile Include="Objects\PaymentMethod.cs" />
     <Compile Include="Objects\PaymentOption.cs" />
     <Compile Include="Objects\PaymentProfile.cs" />
+    <Compile Include="Objects\RefundInfo.cs" />
     <Compile Include="Objects\SalesData.cs" />
     <Compile Include="Objects\Service.cs" />
     <Compile Include="Objects\ServiceCategory.cs" />

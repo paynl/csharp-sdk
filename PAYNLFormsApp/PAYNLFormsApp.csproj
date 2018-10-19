@@ -78,6 +78,7 @@
       <DependentUpon>DebugForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Fixtures\RefundTransaction.cs" />
+    <Compile Include="Fixtures\RefundInfo.cs" />
     <Compile Include="Fixtures\TransactionStart.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -98,6 +99,12 @@
     </Compile>
     <Compile Include="RefundAdd.Designer.cs">
       <DependentUpon>RefundAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RefundInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RefundInfo.Designer.cs">
+      <DependentUpon>RefundInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="StartTransaction.cs">
       <SubType>Form</SubType>
@@ -140,6 +147,9 @@
     </Compile>
     <EmbeddedResource Include="RefundAdd.resx">
       <DependentUpon>RefundAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RefundInfo.resx">
+      <DependentUpon>RefundInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="StartTransaction.resx">
       <DependentUpon>StartTransaction.cs</DependentUpon>
