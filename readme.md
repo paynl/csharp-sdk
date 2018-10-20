@@ -1,3 +1,6 @@
+[![paynl MyGet Build Status](https://www.myget.org/BuildSource/Badge/paynl?identifier=5abead8d-3d3f-417b-9a84-1e8af5953014)](https://www.myget.org/)
+[![NuGet release](https://img.shields.io/nuget/v/RoodFluweel.PAYNLSDK.svg)](https://www.nuget.org/packages/RoodFluweel.PAYNLSDK/)
+
 # Pay.nl C# SDK
 ---
 
