@@ -221,6 +221,32 @@ namespace PAYNLFormsApp
             }
         }
 
+        public void TransactionRefundInfo(string refundID)
+        {
+
+            try
+            {
+                // APISettings.InitAPI();
+                ClearDebug();
+
+                PAYNLSDK.API.Refund.Info.Request request = new PAYNLSDK.API.Refund.Info.Request(refundID);
+                InitRequestDebug(request);
+
+                APISettings.Client.PerformRequest(request);
+                DebugRawResponse(request);
+
+
+                tbMain.Text = request.Response.ToString();
+
+
+            }
+            catch (ErrorException ee)
+            {
+                AddDebug("~~EXCEPTION~~");
+                AddDebug(ee.Message);
+            }
+        }
+
         // help function
         private void ClearDebug()
         {

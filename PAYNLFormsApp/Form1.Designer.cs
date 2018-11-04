@@ -41,6 +41,8 @@
             this.transActionStartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.transactionStartproductsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.refundtransactionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.refundTrasactionProductsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.transactionRefundInofromJsonFixtureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.serviceCategoriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.testDateTimeConversionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -57,7 +59,8 @@
             this.tbDebug = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.splitter1 = new System.Windows.Forms.Splitter();
-            this.refundTrasactionProductsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.refundAPIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.refundInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -68,7 +71,8 @@
             this.viewToolStripMenuItem,
             this.settingsToolStripMenuItem,
             this.transactionAPIToolStripMenuItem,
-            this.changeToolStripMenuItem});
+            this.changeToolStripMenuItem,
+            this.refundAPIToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(732, 24);
@@ -147,7 +151,8 @@
             this.transActionStartToolStripMenuItem,
             this.transactionStartproductsToolStripMenuItem,
             this.refundtransactionToolStripMenuItem,
-            this.refundTrasactionProductsToolStripMenuItem});
+            this.refundTrasactionProductsToolStripMenuItem,
+            this.transactionRefundInofromJsonFixtureToolStripMenuItem});
             this.fixturesToolStripMenuItem.Name = "fixturesToolStripMenuItem";
             this.fixturesToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
             this.fixturesToolStripMenuItem.Text = "Fixtures";
@@ -155,23 +160,37 @@
             // transActionStartToolStripMenuItem
             // 
             this.transActionStartToolStripMenuItem.Name = "transActionStartToolStripMenuItem";
-            this.transActionStartToolStripMenuItem.Size = new System.Drawing.Size(235, 22);
+            this.transActionStartToolStripMenuItem.Size = new System.Drawing.Size(291, 22);
             this.transActionStartToolStripMenuItem.Text = "TransAction.Start";
             this.transActionStartToolStripMenuItem.Click += new System.EventHandler(this.transActionStartToolStripMenuItem_Click);
             // 
             // transactionStartproductsToolStripMenuItem
             // 
             this.transactionStartproductsToolStripMenuItem.Name = "transactionStartproductsToolStripMenuItem";
-            this.transactionStartproductsToolStripMenuItem.Size = new System.Drawing.Size(235, 22);
+            this.transactionStartproductsToolStripMenuItem.Size = new System.Drawing.Size(291, 22);
             this.transactionStartproductsToolStripMenuItem.Text = "Transaction.Start (-products)";
             this.transactionStartproductsToolStripMenuItem.Click += new System.EventHandler(this.transactionStartproductsToolStripMenuItem_Click);
             // 
             // refundtransactionToolStripMenuItem
             // 
             this.refundtransactionToolStripMenuItem.Name = "refundtransactionToolStripMenuItem";
-            this.refundtransactionToolStripMenuItem.Size = new System.Drawing.Size(235, 22);
+            this.refundtransactionToolStripMenuItem.Size = new System.Drawing.Size(291, 22);
             this.refundtransactionToolStripMenuItem.Text = "Refund.Transaction";
             this.refundtransactionToolStripMenuItem.Click += new System.EventHandler(this.refundtransactionToolStripMenuItem_Click);
+            // 
+            // refundTrasactionProductsToolStripMenuItem
+            // 
+            this.refundTrasactionProductsToolStripMenuItem.Name = "refundTrasactionProductsToolStripMenuItem";
+            this.refundTrasactionProductsToolStripMenuItem.Size = new System.Drawing.Size(291, 22);
+            this.refundTrasactionProductsToolStripMenuItem.Text = "Refund.Trasaction (- products)";
+            this.refundTrasactionProductsToolStripMenuItem.Click += new System.EventHandler(this.refundTrasactionProductsToolStripMenuItem_Click);
+            // 
+            // transactionRefundInofromJsonFixtureToolStripMenuItem
+            // 
+            this.transactionRefundInofromJsonFixtureToolStripMenuItem.Name = "transactionRefundInofromJsonFixtureToolStripMenuItem";
+            this.transactionRefundInofromJsonFixtureToolStripMenuItem.Size = new System.Drawing.Size(291, 22);
+            this.transactionRefundInofromJsonFixtureToolStripMenuItem.Text = "Transaction.RefundIno (from json fixture)";
+            this.transactionRefundInofromJsonFixtureToolStripMenuItem.Click += new System.EventHandler(this.transactionRefundInofromJsonFixtureToolStripMenuItem_Click);
             // 
             // serviceCategoriesToolStripMenuItem
             // 
@@ -304,12 +323,20 @@
             this.splitter1.TabIndex = 2;
             this.splitter1.TabStop = false;
             // 
-            // refundTrasactionProductsToolStripMenuItem
+            // refundAPIToolStripMenuItem
             // 
-            this.refundTrasactionProductsToolStripMenuItem.Name = "refundTrasactionProductsToolStripMenuItem";
-            this.refundTrasactionProductsToolStripMenuItem.Size = new System.Drawing.Size(235, 22);
-            this.refundTrasactionProductsToolStripMenuItem.Text = "Refund.Trasaction (- products)";
-            this.refundTrasactionProductsToolStripMenuItem.Click += new System.EventHandler(this.refundTrasactionProductsToolStripMenuItem_Click);
+            this.refundAPIToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.refundInfoToolStripMenuItem});
+            this.refundAPIToolStripMenuItem.Name = "refundAPIToolStripMenuItem";
+            this.refundAPIToolStripMenuItem.Size = new System.Drawing.Size(78, 20);
+            this.refundAPIToolStripMenuItem.Text = "Refund API";
+            // 
+            // refundInfoToolStripMenuItem
+            // 
+            this.refundInfoToolStripMenuItem.Name = "refundInfoToolStripMenuItem";
+            this.refundInfoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.refundInfoToolStripMenuItem.Text = "Refund.Info";
+            this.refundInfoToolStripMenuItem.Click += new System.EventHandler(this.refundInfoToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -363,6 +390,9 @@
         private System.Windows.Forms.ToolStripMenuItem testDateTimeConversionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem refundtransactionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem refundTrasactionProductsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem transactionRefundInofromJsonFixtureToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem refundAPIToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem refundInfoToolStripMenuItem;
     }
 }
 
