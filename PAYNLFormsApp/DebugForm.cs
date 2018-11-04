@@ -14,6 +14,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Windows.Forms;
+using PayNlException = PAYNLSDK.Exceptions.PayNlException;
 
 namespace PAYNLFormsApp
 {
@@ -232,7 +233,7 @@ namespace PAYNLFormsApp
                 PAYNLSDK.API.Refund.Info.Request request = new PAYNLSDK.API.Refund.Info.Request(refundID);
                 InitRequestDebug(request);
 
-                APISettings.Client.PerformRequest(request);
+                MyStaticPayNlClient.Client.PerformRequest(request);
                 DebugRawResponse(request);
 
 
@@ -240,7 +241,7 @@ namespace PAYNLFormsApp
 
 
             }
-            catch (ErrorException ee)
+            catch (PayNlException ee)
             {
                 AddDebug("~~EXCEPTION~~");
                 AddDebug(ee.Message);
@@ -260,6 +261,7 @@ namespace PAYNLFormsApp
             else
                 tbDebug.AppendText(System.Environment.NewLine + value);
         }
+
         private void InitRequestDebug(RequestBase request)
         {
 
