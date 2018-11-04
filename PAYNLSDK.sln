@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PAYNLFormsApp", "PAYNLForms
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayNLSdk", "PAYNLSDK\PayNLSdk.csproj", "{C8AB15F6-3F29-490B-8424-F3A337177543}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayNLSdk.Tests", "PayNLSdk.Tests\PayNLSdk.Tests.csproj", "{4C691697-D689-4A00-9E3B-45C05D9F7817}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{C8AB15F6-3F29-490B-8424-F3A337177543}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8AB15F6-3F29-490B-8424-F3A337177543}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C8AB15F6-3F29-490B-8424-F3A337177543}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C691697-D689-4A00-9E3B-45C05D9F7817}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C691697-D689-4A00-9E3B-45C05D9F7817}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C691697-D689-4A00-9E3B-45C05D9F7817}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C691697-D689-4A00-9E3B-45C05D9F7817}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
