@@ -10,7 +10,7 @@ before_build:
   - nuget restore
 
 artifacts:
-  - path: '**\*.nupkg' # find all NuGet packages recursively
+  - path: '**\RoodFluweel.PAYNLSDK.*.nupkg' # find all NuGet packages recursively
     name: MyApp
 
 deploy:
