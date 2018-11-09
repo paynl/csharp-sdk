@@ -25,7 +25,7 @@ deploy:
 
 dotnet_csproj:
   patch: true
-  file: '*.csproj'
+  file: '**\*.csproj'
   version: '{version}'
   package_version: '{version}'
   
