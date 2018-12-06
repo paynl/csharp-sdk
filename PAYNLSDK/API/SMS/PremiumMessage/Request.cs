@@ -1,12 +1,7 @@
 ﻿using Newtonsoft.Json;
 using PAYNLSDK.Exceptions;
 using PAYNLSDK.Utilities;
-using System;
-using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PAYNLSDK.API.SMS.PremiumMessage
 {
@@ -22,21 +17,15 @@ namespace PAYNLSDK.API.SMS.PremiumMessage
         [JsonProperty("message")]
         public string Message { get; set; }
 
-        public override int Version
-        {
-            get { return 1; }
-        }
+        /// <inheritdoc />
+        protected override int Version => 1;
 
-        public override string Controller
-        {
-            get { return "SMS"; }
-        }
+        /// <inheritdoc />
+        protected override string Controller => "SMS";
 
-        public override string Method
-        {
-            get { return "sendPremiumMessage"; }
-        }
-        
+        /// <inheritdoc />
+        protected override string Method => "sendPremiumMessage";
+
         public override NameValueCollection GetParameters()
         {
             NameValueCollection nvc = new NameValueCollection();
@@ -52,7 +41,7 @@ namespace PAYNLSDK.API.SMS.PremiumMessage
 
             return nvc;
         }
-        public Response Response { get { return (Response)response; } }
+        public Response Response => (Response)response;
 
         protected override void PrepareAndSetResponse()
         {

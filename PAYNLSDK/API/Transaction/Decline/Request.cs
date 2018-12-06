@@ -1,8 +1,6 @@
 ﻿using Newtonsoft.Json;
-using PAYNLSDK.Converters;
 using PAYNLSDK.Exceptions;
 using PAYNLSDK.Utilities;
-using System;
 using System.Collections.Specialized;
 
 namespace PAYNLSDK.API.Transaction.Decline
@@ -25,30 +23,15 @@ namespace PAYNLSDK.API.Transaction.Decline
         //   public string EntranceCode { get; set; }
 
         /* overrides */
-        /// <summary>
-        /// 
-        /// </summary>
-        public override int Version
-        {
-            get { return 7; }
-        }
+        /// <inheritdoc />
+        protected override int Version => 7;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public override string Controller
-        {
-            get { return "Transaction"; }
-        }
+        /// <inheritdoc />
+        protected override string Controller => "Transaction";
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public override string Method
-        {
-            get { return "decline"; }
-        }
-        
+        /// <inheritdoc />
+        protected override string Method => "decline";
+
         /// <summary>
         /// 
         /// </summary>
@@ -71,7 +54,7 @@ namespace PAYNLSDK.API.Transaction.Decline
         /// <summary>
         /// 
         /// </summary>
-        public Response Response { get { return (Response)response; } }
+        public Response Response => (Response)response;
 
         /// <summary>
         /// 

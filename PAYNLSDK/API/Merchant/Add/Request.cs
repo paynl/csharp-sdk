@@ -153,9 +153,12 @@ namespace PAYNLSDK.API.Merchant.Add
             public bool UltimateBeneficialOwner { get; set; }
         }
 
-        public override int Version { get; }
-        public override string Controller => "Merchant";
-        public override string Method => "Add";
+        /// <inheritdoc />
+        protected override int Version { get; }
+        /// <inheritdoc />
+        protected override string Controller => "Merchant";
+        /// <inheritdoc />
+        protected override string Method => "Add";
 
         /// <inheritdoc />
         public override NameValueCollection GetParameters()

@@ -1,7 +1,7 @@
-﻿using System.Collections.Specialized;
-using Newtonsoft.Json;
-using PAYNLSDK.Utilities;
+﻿using Newtonsoft.Json;
 using PAYNLSDK.Exceptions;
+using PAYNLSDK.Utilities;
+using System.Collections.Specialized;
 
 namespace PAYNLSDK.API.PaymentMethod.Get
 {
@@ -17,23 +17,15 @@ namespace PAYNLSDK.API.PaymentMethod.Get
         public Enums.PaymentMethodId PaymentMethodId { get; set; }
 
         /// <inheritdoc />
-        public override int Version
-        {
-            get { return 1; }
-        }
+        protected override int Version => 1;
 
         /// <inheritdoc />
-        public override string Controller
-        {
-            get { return "PaymentMethod"; }
-        }
+        protected override string Controller => "PaymentMethod";
 
         /// <inheritdoc />
-        public override string Method
-        {
-            get { return "get"; }
-        }
-        
+        protected override string Method => "get";
+
+        /// <inheritdoc />
         public override System.Collections.Specialized.NameValueCollection GetParameters()
         {
             var allParameters = new NameValueCollection();
@@ -44,9 +36,8 @@ namespace PAYNLSDK.API.PaymentMethod.Get
             return allParameters;
         }
 
-        public Response Response { get { return (Response)response; } }
-
-
+        public Response Response => (Response)response;
+        
         protected override void PrepareAndSetResponse()
         {
             if (ParameterValidator.IsEmpty(rawResponse))
@@ -54,8 +45,10 @@ namespace PAYNLSDK.API.PaymentMethod.Get
                 throw new PayNlException("rawResponse is empty!");
             }
             PAYNLSDK.Objects.PaymentMethod pm = JsonConvert.DeserializeObject<PAYNLSDK.Objects.PaymentMethod>(RawResponse);
-            Response r = new Response();
-            r.PaymentMethod = pm;
+            Response r = new Response
+            {
+                PaymentMethod = pm
+            };
             response = r;
         }
     }

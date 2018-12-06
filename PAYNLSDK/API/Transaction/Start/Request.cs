@@ -73,18 +73,18 @@ namespace PAYNLSDK.API.Transaction.Start
         public SalesData SalesData { get; set; }
 
         /// <inheritdoc />
-        public override int Version
+        protected override int Version
         {
             get { return 5; }
         }
 
         /// <inheritdoc />
-        public override string Controller
+        protected override string Controller
         {
             get { return "Transaction"; }
         }
 
-        public override string Method
+        protected override string Method
         {
             get { return "start"; }
         }

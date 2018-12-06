@@ -12,13 +12,13 @@ namespace PAYNLSDK.API.PaymentMethod.GetAll
     public class Request : RequestBase
     {
         /// <inheritdoc />
-        public override int Version => 1;
+        protected override int Version => 1;
 
         /// <inheritdoc />
-        public override string Controller => "PaymentMethod";
+        protected override string Controller => "PaymentMethod";
 
         /// <inheritdoc />
-        public override string Method => "getAll";
+        protected override string Method => "getAll";
 
         /// <inheritdoc />
         public override NameValueCollection GetParameters()

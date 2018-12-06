@@ -21,17 +21,17 @@ namespace PAYNLSDK.API.Transaction.Refund
         [JsonProperty("processDate"),JsonConverter(typeof(DMYConverter))]
         public DateTime? ProcessDate { get; set; }
 
-        public override int Version
+        protected override int Version
         {
             get { return 7; }
         }
 
-        public override string Controller
+        protected override string Controller
         {
             get { return "Transaction"; }
         }
 
-        public override string Method
+        protected override string Method
         {
             get { return "refund"; }
         }

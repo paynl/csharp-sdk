@@ -34,11 +34,14 @@ namespace PAYNLSDK.API.PaymentProfile.GetAvailable
         [JsonProperty("showNotAllowedOnRegistration"), JsonConverter(typeof(BooleanConverter))]
         public bool? ShowNotAllowedOnRegistration { get; set; }
 
-        public override int Version => 1;
+        /// <inheritdoc />
+        protected override int Version => 1;
 
-        public override string Controller => "PaymentProfile";
+        /// <inheritdoc />
+        protected override string Controller => "PaymentProfile";
 
-        public override string Method => "getAvailable";
+        /// <inheritdoc />
+        protected override string Method => "getAvailable";
 
         /// <inheritdoc />
         public override NameValueCollection GetParameters()
@@ -68,6 +71,7 @@ namespace PAYNLSDK.API.PaymentProfile.GetAvailable
 
         public Response Response { get { return (Response)response; } }
 
+        /// <inheritdoc />
         protected override void PrepareAndSetResponse()
         {
             if (ParameterValidator.IsEmpty(rawResponse))

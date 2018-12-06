@@ -18,13 +18,13 @@ namespace PAYNLSDK.API.Service.GetCategories
         public int? PaymentOptionId { get; set; }
 
         /// <inheritdoc />
-        public override int Version => 3;
+        protected override int Version => 3;
 
         /// <inheritdoc />
-        public override string Controller => "Service";
+        protected override string Controller => "Service";
 
         /// <inheritdoc />
-        public override string Method => "getCategories";
+        protected override string Method => "getCategories";
 
         /// <inheritdoc />
         public override NameValueCollection GetParameters()

@@ -1,31 +1,26 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using PAYNLSDK.Exceptions;
 using PAYNLSDK.Utilities;
 using System.Collections.Specialized;
-using PAYNLSDK.Exceptions;
 
 namespace PAYNLSDK.API.PaymentProfile.Get
 {
     public class Request : RequestBase
     {
+        
         [JsonProperty("paymentProfileId")]
         public int PaymentProfileId { get; set; }
 
-        public override int Version
-        {
-            get { return 1; }
-        }
+        /// <inheritdoc />
+        protected override int Version => 1;
 
-        public override string Controller
-        {
-            get { return "PaymentProfile"; }
-        }
+        /// <inheritdoc />
+        protected override string Controller => "PaymentProfile";
 
-        public override string Method
-        {
-            get { return "get"; }
-        }
-        
+        /// <inheritdoc />
+        protected override string Method => "get";
+
+        /// <inheritdoc />
         public override System.Collections.Specialized.NameValueCollection GetParameters()
         {
             NameValueCollection nvc = new NameValueCollection();
@@ -36,7 +31,7 @@ namespace PAYNLSDK.API.PaymentProfile.Get
             return nvc;
         }
 
-        public Response Response { get { return (Response)response; } }
+        public Response Response => (Response)response;
 
 
         protected override void PrepareAndSetResponse()
@@ -46,8 +41,10 @@ namespace PAYNLSDK.API.PaymentProfile.Get
                 throw new PayNlException("rawResponse is empty!");
             }
             PAYNLSDK.Objects.PaymentProfile pm = JsonConvert.DeserializeObject<PAYNLSDK.Objects.PaymentProfile>(RawResponse);
-            Response r = new Response();
-            r.PaymentProfile = pm;
+            Response r = new Response
+            {
+                PaymentProfile = pm
+            };
             response = r;
         }
     }

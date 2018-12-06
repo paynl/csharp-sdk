@@ -13,9 +13,12 @@ namespace PAYNLSDK.API.Alliance.GetMerchant
 {
     public class Request : RequestBase
     {
-        public override int Version => 4;
-        public override string Controller => "Alliance";
-        public override string Method => "getMerchant";
+        /// <inheritdoc />
+        protected override int Version => 4;
+        /// <inheritdoc />
+        protected override string Controller => "Alliance";
+        /// <inheritdoc />
+        protected override string Method => "getMerchant";
 
         /// <summary>
         /// the merchant Id to request
@@ -28,6 +31,7 @@ namespace PAYNLSDK.API.Alliance.GetMerchant
             return retval;
         }
 
+        /// <inheritdoc />
         protected override void PrepareAndSetResponse()
         {
             if (ParameterValidator.IsEmpty(rawResponse))

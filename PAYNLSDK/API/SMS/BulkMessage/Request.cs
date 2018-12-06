@@ -1,12 +1,7 @@
 ﻿using Newtonsoft.Json;
 using PAYNLSDK.Exceptions;
 using PAYNLSDK.Utilities;
-using System;
-using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PAYNLSDK.API.SMS.BulkMessage
 {
@@ -24,21 +19,16 @@ namespace PAYNLSDK.API.SMS.BulkMessage
         //[JsonProperty("starttime")]
         //public int SendTime { get; set; }
 
-        public override int Version
-        {
-            get { return 1; }
-        }
+        /// <inheritdoc />
+        protected override int Version => 1;
 
-        public override string Controller
-        {
-            get { return "SMS"; }
-        }
+        /// <inheritdoc />
+        protected override string Controller => "SMS";
 
-        public override string Method
-        {
-            get { return "sendBulkMessage"; }
-        }
-        
+        /// <inheritdoc />
+        protected override string Method => "sendBulkMessage";
+
+        /// <inheritdoc />
         public override NameValueCollection GetParameters()
         {
             NameValueCollection nvc = new NameValueCollection();
@@ -54,8 +44,9 @@ namespace PAYNLSDK.API.SMS.BulkMessage
 
             return nvc;
         }
-        public Response Response { get { return (Response)response; } }
+        public Response Response => (Response)response;
 
+        /// <inheritdoc />
         protected override void PrepareAndSetResponse()
         {
             if (ParameterValidator.IsEmpty(rawResponse))

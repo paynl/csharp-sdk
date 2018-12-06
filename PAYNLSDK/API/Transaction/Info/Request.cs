@@ -19,13 +19,13 @@ namespace PAYNLSDK.API.Transaction.Info
         public string EntranceCode { get; set; }
 
         /// <inheritdoc />
-        public override int Version => 5;
+        protected override int Version => 5;
 
         /// <inheritdoc />
-        public override string Controller => "Transaction";
+        protected override string Controller => "Transaction";
 
         /// <inheritdoc />
-        public override string Method => "info";
+        protected override string Method => "info";
 
         /// <inheritdoc />
         public override NameValueCollection GetParameters()

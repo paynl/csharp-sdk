@@ -1,11 +1,10 @@
-﻿using System;
-using Newtonsoft.Json;
-using PAYNLSDK.Utilities;
-using System.Collections.Specialized;
-using PAYNLSDK.Exceptions;
-using PAYNLSDK.Objects;
+﻿using Newtonsoft.Json;
 using PAYNLSDK.Converters;
+using PAYNLSDK.Exceptions;
+using PAYNLSDK.Utilities;
+using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 
 namespace PAYNLSDK.API.Refund.Transaction
 {
@@ -20,8 +19,8 @@ namespace PAYNLSDK.API.Refund.Transaction
         /// <param name="transactionId">The order ID or EX code of the transaction</param>
         public Request(string transactionId)
         {
-            this.TransactionId = transactionId;
-            this.Products = new Dictionary<string, int>();
+            TransactionId = transactionId;
+            Products = new Dictionary<string, int>();
         }
 
         /// <summary>
@@ -77,56 +76,26 @@ namespace PAYNLSDK.API.Refund.Transaction
             }
         }
 
-        /* overrides */
-        /// <summary>
-        /// 
-        /// </summary>
-        public override int Version
-        {
-            get { return 2; }
-        }
+        /// <inheritdoc />
+        protected override int Version => 2;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public override string Controller
-        {
-            get { return "Refund"; }
-        }
+        /// <inheritdoc />
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public override string Method
-        {
-            get { return "transaction"; }
-        }
-        
+        protected override string Controller => "Refund";
+
+        /// <inheritdoc />
+        protected override string Method => "transaction";
+
         //public override string Querystring
         //{
         //    get { return ""; }
         //}
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public override bool RequiresApiToken
-        {
-            get
-            {
-                return true;
-            }
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        public override bool RequiresServiceId
-        {
-            get
-            {
-                return true;
-            }
-        }
+        /// <inheritdoc />
+        public override bool RequiresApiToken => true;
+
+        /// <inheritdoc />
+        public override bool RequiresServiceId => true;
 
         /// <inheritdoc />
         public override System.Collections.Specialized.NameValueCollection GetParameters()
@@ -146,9 +115,9 @@ namespace PAYNLSDK.API.Refund.Transaction
                 nvc.Add("description", Description);
             }
 
-            if (this.ProcessDate.HasValue)
+            if (ProcessDate.HasValue)
             {
-                nvc.Add("processDate", this.ProcessDate.Value.ToString("yyyy-MM-dd"));
+                nvc.Add("processDate", ProcessDate.Value.ToString("yyyy-MM-dd"));
             }
 
             if (Products.Count > 0)
@@ -181,7 +150,7 @@ namespace PAYNLSDK.API.Refund.Transaction
         /// <summary>
         /// 
         /// </summary>
-        public Response Response { get { return (Response)response; } }
+        public Response Response => (Response)response;
 
         private static Dictionary<string, object> NvcToDictionary(NameValueCollection nvc, bool handleMultipleValuesPerKey)
         {

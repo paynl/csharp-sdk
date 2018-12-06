@@ -20,17 +20,17 @@ namespace PAYNLSDK.API.Validate.IBAN
             }
         }
 
-        public override int Version
+        protected override int Version
         {
             get { return 1; }
         }
 
-        public override string Controller
+        protected override string Controller
         {
             get { return "Validate"; }
         }
 
-        public override string Method
+        protected override string Method
         {
             get { return "IBAN"; }
         }

@@ -1,8 +1,8 @@
-﻿using System;
-using Newtonsoft.Json;
-using PAYNLSDK.Utilities;
-using System.Collections.Specialized;
+﻿using Newtonsoft.Json;
 using PAYNLSDK.Exceptions;
+using PAYNLSDK.Utilities;
+using System;
+using System.Collections.Specialized;
 
 namespace PAYNLSDK.API.Banktransfer.Add
 {
@@ -10,10 +10,10 @@ namespace PAYNLSDK.API.Banktransfer.Add
     {
         public Request(int amount, string bankAccountHolder, string bankAccountNumber, string bankAccountBic)
         {
-            this.Amount = amount;
-            this.BankAccountHolder = bankAccountHolder;
-            this.BankAccountNumber = bankAccountNumber;
-            this.BankAccountBic = bankAccountBic;
+            Amount = amount;
+            BankAccountHolder = bankAccountHolder;
+            BankAccountNumber = bankAccountNumber;
+            BankAccountBic = bankAccountBic;
         }
 
         /// <summary>
@@ -88,13 +88,13 @@ namespace PAYNLSDK.API.Banktransfer.Add
         public DateTime? ProcessDate { get; set; }
 
         /// <inheritdoc />
-        public override int Version => 1;
+        protected override int Version => 1;
 
         /// <inheritdoc />
-        public override string Controller => "Banktransfer";
+        protected override string Controller => "Banktransfer";
 
         /// <inheritdoc />
-        public override string Method => "add";
+        protected override string Method => "add";
 
         /// <inheritdoc />
         public override bool RequiresApiToken => true;
@@ -162,9 +162,9 @@ namespace PAYNLSDK.API.Banktransfer.Add
                 nvc.Add("currency", Currency);
             }
 
-            if (this.ProcessDate.HasValue)
+            if (ProcessDate.HasValue)
             {
-                nvc.Add("processDate", this.ProcessDate.Value.ToString("yyyy-MM-dd"));
+                nvc.Add("processDate", ProcessDate.Value.ToString("yyyy-MM-dd"));
             }
 
             return nvc;
@@ -184,6 +184,6 @@ namespace PAYNLSDK.API.Banktransfer.Add
             }
         }
 
-        public Response Response { get { return (Response)response; } }
+        public Response Response => (Response)response;
     }
 }

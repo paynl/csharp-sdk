@@ -1,9 +1,8 @@
-﻿using System;
-using Newtonsoft.Json;
-using PAYNLSDK.Utilities;
-using System.Collections.Specialized;
+﻿using Newtonsoft.Json;
 using PAYNLSDK.Exceptions;
-using PAYNLSDK.Objects;
+using PAYNLSDK.Utilities;
+using System;
+using System.Collections.Specialized;
 
 namespace PAYNLSDK.API.Refund.Add
 {
@@ -12,21 +11,14 @@ namespace PAYNLSDK.API.Refund.Add
     /// </summary>
     public class Request : RequestBase
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="amount"></param>
-        /// <param name="bankAccountHolder"></param>
-        /// <param name="bankAccountNumber"></param>
-        public Request(int amount, string bankAccountHolder, string bankAccountNumber, string BankAccountBic)
+        public Request(int amount, string bankAccountHolder, string bankAccountNumber, string bankAccountBic)
         {
-            this.Amount = amount;
-            this.BankAccountHolder = bankAccountHolder;
-            this.BankAccountNumber = bankAccountNumber;
-            this.BankAccountBic = BankAccountBic;
-
+            Amount = amount;
+            BankAccountHolder = bankAccountHolder;
+            BankAccountNumber = bankAccountNumber;
+            BankAccountBic = bankAccountBic;
         }
-              
+
         /// <summary>
         /// The amount to be paid should be given in cents. For example € 3.50 becomes 350.
         /// </summary>
@@ -103,58 +95,25 @@ namespace PAYNLSDK.API.Refund.Add
         /// </summary>
         public DateTime? ProcessDate { get; set; }
 
-/* overrides */
-        /// <summary>
-        /// 
-        /// </summary>
-        public override int Version
-        {
-            get { return 7; }
-        }
+        /// <inheritdoc />
+        protected override int Version => 7;
+
+        /// <inheritdoc />
+        protected override string Controller => "Refund";
+
+        /// <inheritdoc />
+        protected override string Method => "add";
 
         /// <summary>
         /// 
         /// </summary>
-        public override string Controller
-        {
-            get { return "Refund"; }
-        }
-
+        public override bool RequiresApiToken => true;
         /// <summary>
         /// 
         /// </summary>
-        public override string Method
-        {
-            get { return "add"; }
-        }
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        public override bool RequiresApiToken
-        {
-            get
-            {
+        public override bool RequiresServiceId => true;
 
-
-                return true;
-            }
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        public override bool RequiresServiceId
-        {
-            get
-            {
-                return true;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
+        /// <inheritdoc />
         public override System.Collections.Specialized.NameValueCollection GetParameters()
         {
             NameValueCollection nvc = new NameValueCollection();
@@ -219,17 +178,15 @@ namespace PAYNLSDK.API.Refund.Add
                 nvc.Add("orderId", OrderId);
             }
 
-            if (this.ProcessDate.HasValue)
+            if (ProcessDate.HasValue)
             {
-                nvc.Add("processDate", this.ProcessDate.Value.ToString("yyyy-MM-dd"));
+                nvc.Add("processDate", ProcessDate.Value.ToString("yyyy-MM-dd"));
             }
 
             return nvc;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc />
         protected override void PrepareAndSetResponse()
         {
             if (ParameterValidator.IsEmpty(rawResponse))
@@ -247,6 +204,6 @@ namespace PAYNLSDK.API.Refund.Add
         /// <summary>
         /// 
         /// </summary>
-        public Response Response { get { return (Response)response; } }
+        public Response Response => (Response)response;
     }
 }

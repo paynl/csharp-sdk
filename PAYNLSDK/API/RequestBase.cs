@@ -42,17 +42,17 @@ namespace PAYNLSDK.API
         /// <summary>
         /// Api Version for this request
         /// </summary>
-        public abstract int Version { get; }
+        protected abstract int Version { get; }
 
         /// <summary>
         /// Controller used for this request
         /// </summary>
-        public abstract string Controller { get; }
+        protected abstract string Controller { get; }
 
         /// <summary>
         /// Controller method for this request
         /// </summary>
-        public abstract string Method { get; }
+        protected abstract string Method { get; }
 
         ///// <summary>
         ///// Extra querystring parameters used for this request

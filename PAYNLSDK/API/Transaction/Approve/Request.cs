@@ -21,30 +21,23 @@ namespace PAYNLSDK.API.Transaction.Approve
         /// <summary>
         /// not implemented
         /// </summary>
-      //  [JsonProperty("entranceCode")]
-     //   public string EntranceCode { get; set; }
+        //  [JsonProperty("entranceCode")]
+        //   public string EntranceCode { get; set; }
 
-        /* overrides */
-        /// <summary>
-        /// 
-        /// </summary>
-        public override int Version
+        /// <inheritdoc />
+        protected override int Version
         {
             get { return 7; }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public override string Controller
+        /// <inheritdoc />
+        protected override string Controller
         {
             get { return "Transaction"; }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public override string Method
+        /// <inheritdoc />
+        protected override string Method
         {
             get { return "approve"; }
         }

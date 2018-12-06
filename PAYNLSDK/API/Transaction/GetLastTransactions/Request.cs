@@ -24,18 +24,20 @@ namespace PAYNLSDK.API.Transaction.GetLastTransactions
                 return true;
             }
         }
-
-        public override int Version
+        /// <inheritdoc />
+        protected override int Version
         {
             get { return 5; }
         }
 
-        public override string Controller
+        /// <inheritdoc />
+        protected override string Controller
         {
             get { return "Transaction"; }
         }
 
-        public override string Method
+        /// <inheritdoc />
+        protected override string Method
         {
             get { return "getLastTransactions"; }
         }

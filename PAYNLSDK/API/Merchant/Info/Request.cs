@@ -15,10 +15,14 @@ namespace PAYNLSDK.API.Merchant.Get
         [JsonProperty("merchantId")]
         public string MerchantId { get; set; }
 
-        public override int Version { get; }
-        public override string Controller => "Merchant";
-        public override string Method => "info";
+        /// <inheritdoc />
+        protected override int Version { get; }
+        /// <inheritdoc />
+        protected override string Controller => "Merchant";
+        /// <inheritdoc />
+        protected override string Method => "info";
 
+        /// <inheritdoc />
         public override NameValueCollection GetParameters()
         {
             var nvc = new NameValueCollection();
@@ -27,6 +31,7 @@ namespace PAYNLSDK.API.Merchant.Get
             return nvc;
         }
 
+        /// <inheritdoc />
         protected override void PrepareAndSetResponse()
         {
             if (ParameterValidator.IsEmpty(rawResponse))

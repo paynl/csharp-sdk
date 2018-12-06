@@ -8,12 +8,16 @@ namespace PAYNLSDK.API.Alliance.AddService
     /// <seealso cref="PAYNLSDK.API.RequestBase" />
     public class Request : RequestBase
     {
-        public override int Version => 4;
-        public override string Controller => "Alliance";
-        public override string Method => "addService";
+        /// <inheritdoc />
+        protected override int Version => 4;
+        /// <inheritdoc />
+        protected override string Controller => "Alliance";
+        /// <inheritdoc />
+        protected override string Method => "addService";
+        /// <inheritdoc />
         public override NameValueCollection GetParameters()
         {
-            var retval = new NameValueCollection { };
+            var retval = new NameValueCollection();
             retval.Add("merchantId", MerchantId);
             retval.Add("name", Name);
             retval.Add("description", Description);

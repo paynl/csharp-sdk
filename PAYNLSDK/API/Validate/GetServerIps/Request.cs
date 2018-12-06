@@ -1,36 +1,30 @@
 ﻿using Newtonsoft.Json;
-using PAYNLSDK.Converters;
 using PAYNLSDK.Exceptions;
 using PAYNLSDK.Utilities;
-using System;
 using System.Collections.Specialized;
 
 namespace PAYNLSDK.API.Validate.GetServerIps
 {
     public class Request : RequestBase
     {
-        public override int Version
-        {
-            get { return 1; }
-        }
+        /// <inheritdoc />
+        protected override int Version => 1;
 
-        public override string Controller
-        {
-            get { return "Validate"; }
-        }
+        /// <inheritdoc />
+        protected override string Controller => "Validate";
 
-        public override string Method
-        {
-            get { return "getPayServerIps"; }
-        }
-        
+        /// <inheritdoc />
+        protected override string Method => "getPayServerIps";
+
+        /// <inheritdoc />
         public override NameValueCollection GetParameters()
         {
             return new NameValueCollection();
         }
 
-        public Response Response { get { return (Response)response; } }
+        public Response Response => (Response)response;
 
+        /// <inheritdoc />
         protected override void PrepareAndSetResponse()
         {
             if (ParameterValidator.IsEmpty(rawResponse))
@@ -38,8 +32,10 @@ namespace PAYNLSDK.API.Validate.GetServerIps
                 throw new PayNlException("rawResponse is empty!");
             }
             string[] ips = JsonConvert.DeserializeObject<string[]>(RawResponse);
-            Response r = new Response();
-            r.IPAddresses = ips;
+            Response r = new Response
+            {
+                IPAddresses = ips
+            };
             response = r;
         }
     }

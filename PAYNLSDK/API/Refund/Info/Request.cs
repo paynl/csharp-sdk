@@ -1,9 +1,7 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using PAYNLSDK.Exceptions;
 using PAYNLSDK.Utilities;
 using System.Collections.Specialized;
-using PAYNLSDK.Exceptions;
-using PAYNLSDK.Objects;
 
 namespace PAYNLSDK.API.Refund.Info
 {
@@ -18,7 +16,7 @@ namespace PAYNLSDK.API.Refund.Info
         /// <param name="refundId">Refund ID</param>
         public Request(string refundId)
         {
-            this.RefundId = refundId;
+            RefundId = refundId;
         }
 
         /// <summary>
@@ -26,35 +24,17 @@ namespace PAYNLSDK.API.Refund.Info
         /// </summary>
         public string RefundId { get; set; }
 
-        /* overrides */
-        /// <summary>
-        /// 
-        /// </summary>
-        public override int Version
-        {
-            get { return 3; }
-        }
+        /// <inheritdoc />
+        protected override int Version => 3;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public override string Controller
-        {
-            get { return "Refund"; }
-        }
+        /// <inheritdoc />
+        protected override string Controller => "Refund";
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public override string Method
-        {
-            get { return "info"; }
-        }
+        /// <inheritdoc />
+        protected override string Method => "info";
 
-      
-        /// <summary>
-        /// 
-        /// </summary>
+
+        /// <inheritdoc />
         public override bool RequiresApiToken => true;
 
         /// <summary>
@@ -62,10 +42,7 @@ namespace PAYNLSDK.API.Refund.Info
         /// </summary>
         public override bool RequiresServiceId => true;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
+        /// <inheritdoc />
         public override System.Collections.Specialized.NameValueCollection GetParameters()
         {
             NameValueCollection nvc = new NameValueCollection();
@@ -76,9 +53,7 @@ namespace PAYNLSDK.API.Refund.Info
             return nvc;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc />
         protected override void PrepareAndSetResponse()
         {
             if (ParameterValidator.IsEmpty(rawResponse))

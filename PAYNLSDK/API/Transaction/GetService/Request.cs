@@ -1,39 +1,27 @@
 ﻿using Newtonsoft.Json;
 using PAYNLSDK.Exceptions;
 using PAYNLSDK.Utilities;
-using System;
 using System.Collections.Specialized;
 
 namespace PAYNLSDK.API.Transaction.GetService
 {
     public class Request : RequestBase
     {
-        public override bool RequiresServiceId
-        {
-            get
-            {
-                return true;
-            }
-        }
+        public override bool RequiresServiceId => true;
 
         [JsonProperty("paymentMethodId")]
         public PAYNLSDK.Enums.PaymentMethodId? PaymentMethodId { get; set; }
 
-        public override int Version
-        {
-            get { return 5; }
-        }
+        /// <inheritdoc />
+        protected override int Version => 5;
 
-        public override string Controller
-        {
-            get { return "Transaction"; }
-        }
+        /// <inheritdoc />
+        protected override string Controller => "Transaction";
 
-        public override string Method
-        {
-            get { return "getService"; }
-        }
-        
+        /// <inheritdoc />
+        protected override string Method => "getService";
+
+        /// <inheritdoc />
         public override NameValueCollection GetParameters()
         {
             NameValueCollection nvc = new NameValueCollection();
@@ -43,8 +31,10 @@ namespace PAYNLSDK.API.Transaction.GetService
             }
             return nvc;
         }
-        public Response Response { get { return (Response)response; } }
 
+        public Response Response => (Response)response;
+
+        /// <inheritdoc />
         protected override void PrepareAndSetResponse()
         {
             if (ParameterValidator.IsEmpty(rawResponse))

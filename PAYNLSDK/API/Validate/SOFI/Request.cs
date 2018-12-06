@@ -20,21 +20,16 @@ namespace PAYNLSDK.API.Validate.SOFI
             }
         }
 
-        public override int Version
-        {
-            get { return 1; }
-        }
+        /// <inheritdoc />
+        protected override int Version => 1;
 
-        public override string Controller
-        {
-            get { return "Validate"; }
-        }
+        /// <inheritdoc />
+        protected override string Controller => "Validate";
 
-        public override string Method
-        {
-            get { return "SOFI"; }
-        }
-        
+        /// <inheritdoc />
+        protected override string Method => "SOFI";
+
+        /// <inheritdoc />
         public override System.Collections.Specialized.NameValueCollection GetParameters()
         {
             NameValueCollection nvc = new NameValueCollection();
@@ -47,6 +42,7 @@ namespace PAYNLSDK.API.Validate.SOFI
 
         public Response Response { get { return (Response)response; } }
 
+        /// <inheritdoc />
         protected override void PrepareAndSetResponse()
         {
             if (ParameterValidator.IsEmpty(rawResponse))

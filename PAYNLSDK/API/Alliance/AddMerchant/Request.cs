@@ -15,9 +15,14 @@ namespace PAYNLSDK.API.Alliance.AddMerchant
         {
             Accounts = new List<Account>();
         }
-        public override int Version => 4;
-        public override string Controller => "Alliance";
-        public override string Method => "addMerchant";
+
+        /// <inheritdoc />
+        protected override int Version => 4;
+        /// <inheritdoc />
+        protected override string Controller => "Alliance";
+        /// <inheritdoc />
+        protected override string Method => "addMerchant";
+        /// <inheritdoc />
         public override NameValueCollection GetParameters()
         {
             var retval = new NameValueCollection { };
@@ -118,6 +123,7 @@ namespace PAYNLSDK.API.Alliance.AddMerchant
             }
         }
 
+        /// <inheritdoc />
         protected override void PrepareAndSetResponse()
         {
             // do nothing   

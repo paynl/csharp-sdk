@@ -1,8 +1,6 @@
 ﻿using Newtonsoft.Json;
-using PAYNLSDK.Converters;
 using PAYNLSDK.Exceptions;
 using PAYNLSDK.Utilities;
-using System;
 using System.Collections.Specialized;
 
 namespace PAYNLSDK.API.Validate.BankAccountNumberInternational
@@ -12,29 +10,18 @@ namespace PAYNLSDK.API.Validate.BankAccountNumberInternational
         [JsonProperty("bankAccountNumber")]
         public string BankAccountNumber { get; set; }
 
-        public override bool RequiresApiToken
-        {
-            get
-            {
-                return false;// base.RequiresApiToken;
-            }
-        }
+        public override bool RequiresApiToken => false;// base.RequiresApiToken;
 
-        public override int Version
-        {
-            get { return 1; }
-        }
+        /// <inheritdoc />
+        protected override int Version => 1;
 
-        public override string Controller
-        {
-            get { return "Validate"; }
-        }
+        /// <inheritdoc />
+        protected override string Controller => "Validate";
 
-        public override string Method
-        {
-            get { return "BankAccountNumberInternational"; }
-        }
-        
+        /// <inheritdoc />
+        protected override string Method => "BankAccountNumberInternational";
+
+        /// <inheritdoc />
         public override System.Collections.Specialized.NameValueCollection GetParameters()
         {
             NameValueCollection nvc = new NameValueCollection();
@@ -45,8 +32,9 @@ namespace PAYNLSDK.API.Validate.BankAccountNumberInternational
             return nvc;
         }
 
-        public Response Response { get { return (Response)response; } }
+        public Response Response => (Response)response;
 
+        /// <inheritdoc />
         protected override void PrepareAndSetResponse()
         {
             if (ParameterValidator.IsEmpty(rawResponse))
