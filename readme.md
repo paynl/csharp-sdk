@@ -30,7 +30,8 @@ PM> Install-Package RoodFluweel.PAYNLSDK -Source https://www.myget.org/F/paynl/a
 
 Setting the configuration:
 ```c#
-var client = new Client("e41f83b246b706291ea9ad798ccfd9f0fee5e0ab", "SL-3490-4320")
+var config = new PayNlConfiguration("e4test6b70code9adreplacef0fee5e0ab", "SL-1234-1234");
+var client = new Client(payNlConfig);
 ```
 
 Getting a list of available payment methods, use the Getservice.
