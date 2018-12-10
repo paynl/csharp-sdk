@@ -12,6 +12,8 @@ namespace PayNLSdk.API.Statistics.GetManagement
         public Request()
         {
             ExcludeSandbox = true;
+            Filters = new List<FilterItem>();
+            SortByFieldNames = new List<string>();
         }
 
         /// <inheritdocs />
@@ -29,15 +31,19 @@ namespace PayNLSdk.API.Statistics.GetManagement
         /// The last date to be included in the Report
         /// </summary>
         public DateTime EndDate { get; set; }
+
         public bool Staffels { get; set; }
         public int? CurrencyId { get; set; }
 
+        /// <summary>
+        /// This property can be used to filter events
+        /// </summary>
         public List<FilterItem> Filters { get; set; }
-
-        //public Array FilterType { get; set; }
-        //public Array filterValue { get; set; }
-        //public string GroupBy { get; set; }
-
+        /// <summary>
+        /// Use this field to sort the results
+        /// </summary>
+        public List<string> SortByFieldNames { get; set; }
+        
         /// <summary>
         /// Exclude calls from the sandbox.  Default = true
         /// </summary>
@@ -50,16 +56,27 @@ namespace PayNLSdk.API.Statistics.GetManagement
             {
                 { "startDate", StartDate.ToString("yyyy-MM-dd")},
                 { "endDate", EndDate.ToString("yyyy-MM-dd")},
-                //{ "FilterType", FilterType},
-                //{ "filterValue", filterValue},
-                //{ "GroupBy", GroupBy},
                 { "staffels", Staffels.ToString()},
                 { "CurrencyId", CurrencyId?.ToString()},
             };
 
             retval.Add(GenerateFiltersNameValueCollection());
-
+            retval.Add(GenerateGroupByClause());
             return retval;
+        }
+
+        private NameValueCollection GenerateGroupByClause()
+        {
+            var groupByNvc = new NameValueCollection();
+
+            var i = 0;
+            foreach (var sortByFieldName in this.SortByFieldNames)
+            {
+                groupByNvc.Add($"groupBy[{i}]", sortByFieldName);
+                i++;
+            }
+
+            return groupByNvc;
         }
 
         private NameValueCollection GenerateFiltersNameValueCollection()
