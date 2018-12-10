@@ -9,17 +9,25 @@ namespace PayNLSdk.API.Statistics.GetManagement
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     public class GetStatsResult
     {
-        public string login { get; set; }
-        public Arrstatsdata[] arrStatsData { get; set; }
-        public Arrlabellist arrLabelList { get; set; }
-        public Totals totals { get; set; }
-        public string totalRows { get; set; }
-        public string page { get; set; }
-        public Pagedata pageData { get; set; }
-        public string currency_symbol { get; set; }
+        [JsonProperty("login")]
+        public string Login { get; set; }
+        [JsonProperty("arrStatsData")]
+        public StatsData[] ArrStatsData { get; set; }
+        [JsonProperty("arrLabelList")]
+        public LabelList ArrLabelList { get; set; }
+        [JsonProperty("totals")]
+        public Totals Total { get; set; }
+        [JsonProperty("totalRows")]
+        public int TotalRows { get; set; }
+        [JsonProperty("page")]
+        public int Page { get; set; }
+        [JsonProperty("pageData")]
+        public Pagedata PageData { get; set; }
+        [JsonProperty("currency_symbol")]
+        public string Currency_symbol { get; set; }
 
 
-        public class Arrlabellist
+        public class LabelList
         {
             [JsonProperty("4")]
             public _4 _4 { get; set; }
@@ -94,12 +102,11 @@ namespace PayNLSdk.API.Statistics.GetManagement
             public string COLOR_36 { get; set; }
         }
 
-        public class Arrstatsdata
+        public class StatsData
         {
             public string Id { get; set; }
             [JsonProperty("Label")]
-
-            public string Datum { get; set; }
+            public string GroupedBy { get; set; }
             public StatsLine[] Data { get; set; }
         }
 

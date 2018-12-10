@@ -16,7 +16,11 @@ namespace PAYNLSDK
             _webClient = webClient;
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Get management statistics from the RestApi
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         public GetStatsResult GetStats(Request request)
         {
             var response = _webClient.PerformRequest(request);
