@@ -50,7 +50,7 @@ namespace PAYNLFormsApp
         }
         private void InitRequestDebug(RequestBase request)
         {
-            AddDebug(string.Format("Calling API {0} / {1}", request.Controller, request.Method));
+            //AddDebug(string.Format("Calling API {0} / {1}", request.Controller, request.Method));
             AddDebug(string.Format("Requires TOKEN? {0}", request.RequiresApiToken));
             AddDebug(string.Format("Requires SERVICEID? {0}", request.RequiresServiceId));
             AddDebug("-----");
