@@ -42,15 +42,15 @@ namespace PayNLSdk.Tests.Api.Statistics
             // Act
 
             // Assert
-            Assert.IsNotNull(_sut.SortByFieldNames);
-            Assert.AreEqual(0, _sut.SortByFieldNames.Count);
+            Assert.IsNotNull(_sut.GroupByFieldNames);
+            Assert.AreEqual(0, _sut.GroupByFieldNames.Count);
         }
 
         [TestMethod]
         public void GetParameters_ContainsGroupBy_IfSortByFieldNamesPropertyIsUsed()
         {
             // Arrange
-            _sut.SortByFieldNames.Add("ABC");
+            _sut.GroupByFieldNames.Add("ABC");
 
             // Act
             var result = _sut.GetParameters();

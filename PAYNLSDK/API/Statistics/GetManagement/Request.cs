@@ -13,7 +13,7 @@ namespace PayNLSdk.API.Statistics.GetManagement
         {
             ExcludeSandbox = true;
             Filters = new List<FilterItem>();
-            SortByFieldNames = new List<string>();
+            GroupByFieldNames = new HashSet<string>();
         }
 
         /// <inheritdocs />
@@ -39,10 +39,11 @@ namespace PayNLSdk.API.Statistics.GetManagement
         /// This property can be used to filter events
         /// </summary>
         public List<FilterItem> Filters { get; set; }
+
         /// <summary>
         /// Use this field to sort the results
         /// </summary>
-        public List<string> SortByFieldNames { get; set; }
+        internal HashSet<string> GroupByFieldNames { get; set; }
         
         /// <summary>
         /// Exclude calls from the sandbox.  Default = true
@@ -70,7 +71,7 @@ namespace PayNLSdk.API.Statistics.GetManagement
             var groupByNvc = new NameValueCollection();
 
             var i = 0;
-            foreach (var sortByFieldName in this.SortByFieldNames)
+            foreach (var sortByFieldName in this.GroupByFieldNames)
             {
                 groupByNvc.Add($"groupBy[{i}]", sortByFieldName);
                 i++;
