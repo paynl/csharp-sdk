@@ -6,11 +6,15 @@ using System.Threading.Tasks;
 
 namespace PAYNLSDK.API
 {
+    /// <inheritdoc />
     public class PayNlConfiguration : IPayNlConfiguration
     {
+        /// <inheritdoc />
         public PayNlConfiguration()
         {
         }
+
+        /// <inheritdoc />
         public PayNlConfiguration(string serviceId, string apiToken)
         {
             ServiceId = serviceId;
@@ -23,7 +27,7 @@ namespace PAYNLSDK.API
         public string ServiceId { get; set; }
 
         /// <summary>
-        /// PAYNL API TOKEN
+        /// PAYNL API Token
         /// </summary>
         public string ApiToken { get; set; }
     }

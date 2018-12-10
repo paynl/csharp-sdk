@@ -34,10 +34,7 @@ namespace PAYNLSDK.API
         /// <summary>
         /// URL used to perform this specific request
         /// </summary>
-        public string Url
-        {
-            get { return string.Format("v{0}/{1}/{2}/json", Version, Controller, Method); }
-        }
+        public string Url => $"v{Version}/{Controller}/{Method}/json";
 
         /// <summary>
         /// Api Version for this request
