@@ -5,11 +5,19 @@ using System.Collections.Specialized;
 
 namespace PAYNLSDK.API.Validate.BankAccountNumberInternational
 {
+    /// <inheritdoc />
+    /// <summary>
+    /// Validation request class for an international bank account number
+    /// </summary>
     public class Request : RequestBase
     {
+        /// <summary>
+        /// Bank account number
+        /// </summary>
         [JsonProperty("bankAccountNumber")]
         public string BankAccountNumber { get; set; }
 
+        /// <inheritdoc />
         public override bool RequiresApiToken => false;// base.RequiresApiToken;
 
         /// <inheritdoc />
@@ -22,9 +30,9 @@ namespace PAYNLSDK.API.Validate.BankAccountNumberInternational
         protected override string Method => "BankAccountNumberInternational";
 
         /// <inheritdoc />
-        public override System.Collections.Specialized.NameValueCollection GetParameters()
+        public override NameValueCollection GetParameters()
         {
-            NameValueCollection nvc = new NameValueCollection();
+            var nvc = new NameValueCollection();
 
             ParameterValidator.IsNotEmpty(BankAccountNumber, "bankAccountNumber");
             nvc.Add("bankAccountNumber", BankAccountNumber);
@@ -32,6 +40,8 @@ namespace PAYNLSDK.API.Validate.BankAccountNumberInternational
             return nvc;
         }
 
+        /// <summary>  Gets the response.</summary>
+        /// <value>The response.</value>
         public Response Response => (Response)response;
 
         /// <inheritdoc />

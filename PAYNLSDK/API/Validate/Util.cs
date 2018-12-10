@@ -51,7 +51,7 @@ namespace PAYNLSDK.API.Validate
                 BankAccountNumberInternational.Request request = new BankAccountNumberInternational.Request();
                 request.BankAccountNumber = bankAccountNumber;
                 Client.PerformRequest(request);
-                return request.Response.result;
+                return request.Response.Result;
             }
             else
             {

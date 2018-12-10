@@ -5,6 +5,12 @@ using System.Collections.Specialized;
 
 namespace PAYNLSDK.API.Validate.GetServerIps
 {
+    /// <inheritdoc />
+    /// <summary>
+    /// Request class for the SERVER IPs request.
+    /// Implements the <see cref="T:PAYNLSDK.API.RequestBase" />
+    /// </summary>
+    /// <seealso cref="T:PAYNLSDK.API.RequestBase" />
     public class Request : RequestBase
     {
         /// <inheritdoc />
@@ -22,6 +28,10 @@ namespace PAYNLSDK.API.Validate.GetServerIps
             return new NameValueCollection();
         }
 
+        /// <summary>
+        /// Gets the response.
+        /// </summary>
+        /// <value>The response.</value>
         public Response Response => (Response)response;
 
         /// <inheritdoc />

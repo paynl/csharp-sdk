@@ -1,25 +1,29 @@
 ﻿using Newtonsoft.Json;
-using PAYNLSDK.Converters;
 using PAYNLSDK.Exceptions;
 using PAYNLSDK.Utilities;
-using System;
 using System.Collections.Specialized;
+using System.Diagnostics.CodeAnalysis;
 
 namespace PAYNLSDK.API.Validate.KVK
 {
+    /// <summary>
+    /// Request to validate the KVK number
+    /// Implements the <see cref="PAYNLSDK.API.RequestBase" />
+    /// </summary>
+    /// <inheritdoc />
+    /// <seealso cref="PAYNLSDK.API.RequestBase" />
     public class Request : RequestBase
     {
+        /// <summary>
+        /// Gets or sets the "kamer van koophandel" number.
+        /// </summary>
+        /// <value>The KVK.</value>
         [JsonProperty("kvk")]
+        [SuppressMessage("ReSharper", "InconsistentNaming")]
         public string KVK { get; set; }
 
         /// <inheritdoc />
-        public override bool RequiresApiToken
-        {
-            get
-            {
-                return false;// base.RequiresApiToken;
-            }
-        }
+        public override bool RequiresApiToken => false;// base.RequiresApiToken;
 
         /// <inheritdoc />
         protected override int Version => 1;
@@ -31,9 +35,9 @@ namespace PAYNLSDK.API.Validate.KVK
         protected override string Method => "KVK";
 
         /// <inheritdoc />
-        public override System.Collections.Specialized.NameValueCollection GetParameters()
+        public override NameValueCollection GetParameters()
         {
-            NameValueCollection nvc = new NameValueCollection();
+            var nvc = new NameValueCollection();
 
             ParameterValidator.IsNotEmpty(KVK, "kvk");
             nvc.Add("kvk", KVK);
@@ -41,7 +45,11 @@ namespace PAYNLSDK.API.Validate.KVK
             return nvc;
         }
 
-        public Response Response { get { return (Response)response; } }
+        /// <summary>
+        /// Gets the response.
+        /// </summary>
+        /// <value>The response.</value>
+        public Response Response => (Response)response;
 
         /// <inheritdoc />
         protected override void PrepareAndSetResponse()

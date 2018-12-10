@@ -5,11 +5,18 @@ using System.Collections.Specialized;
 
 namespace PAYNLSDK.API.Validate.BankAccountNumber
 {
+    /// <summary>
+    /// The request object to validate a bank account number
+    /// </summary>
     public class Request : RequestBase
     {
+        /// <summary>
+        /// The bank account number
+        /// </summary>
         [JsonProperty("bankAccountNumber")]
         public string BankAccountNumber { get; set; }
 
+        /// <inheritdoc />
         public override bool RequiresApiToken => false;
 
         /// <inheritdoc />
@@ -32,8 +39,12 @@ namespace PAYNLSDK.API.Validate.BankAccountNumber
             return nvc;
         }
 
+        /// <summary>
+        /// the response from the request
+        /// </summary>
         public Response Response => (Response)response;
 
+        /// <inheritdoc />
         protected override void PrepareAndSetResponse()
         {
             if (ParameterValidator.IsEmpty(rawResponse))
