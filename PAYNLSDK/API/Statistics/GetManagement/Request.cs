@@ -1,4 +1,5 @@
-﻿using PAYNLSDK.API;
+﻿using PayNLSdk.ExtentionMethods;
+using PAYNLSDK.API;
 using PAYNLSDK.Exceptions;
 using PAYNLSDK.Utilities;
 using System;
@@ -7,8 +8,71 @@ using System.Collections.Specialized;
 
 namespace PayNLSdk.API.Statistics.GetManagement
 {
+    /// <summary>
+    /// The parameters to be requested when requesting the management statistics
+    /// </summary>
     public class Request : RequestBase
     {
+        /// <summary>
+        /// A predefined period to request statistics
+        /// </summary>
+        public enum StatsPeriod
+        {
+            /// <summary>
+            /// Last week
+            /// </summary>
+            LastWeek,
+            /// <summary>
+            /// Current week
+            /// </summary>
+            ThisWeek,
+            /// <summary>
+            /// Last month
+            /// </summary>
+            LastMonth,
+            /// <summary>
+            /// Current month
+            /// </summary>
+            ThisMonth
+        }
+
+        /// <summary>
+        /// Creates a new instance of a stats request
+        /// </summary>
+        /// <param name="dateTime">a current time implementation</param>
+        /// <param name="period">The period for the request</param>
+        public static Request Create(IDateTime dateTime, StatsPeriod period) 
+        {
+            var retval = new Request();
+
+            switch (period)
+            {
+                case StatsPeriod.LastWeek:
+                    retval.StartDate = dateTime.Now.LastWeek(DayOfWeek.Monday);
+                    retval.EndDate = retval.StartDate.AddDays(6);
+                    break;
+                case StatsPeriod.ThisWeek:
+                    retval.StartDate = dateTime.Now.ThisWeek(DayOfWeek.Monday);
+                    retval.EndDate = retval.StartDate.AddDays(6);
+                    break;
+                case StatsPeriod.LastMonth:
+                    retval.StartDate = dateTime.Now.LastMonthFirstDay();
+                    retval.EndDate = dateTime.Now.LastMonthLastDay();
+                    break;
+                case StatsPeriod.ThisMonth:
+                    retval.StartDate = new DateTime(dateTime.Now.Year, dateTime.Now.Month, 1);
+                    retval.EndDate = dateTime.Now;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(period), period, null);
+            }
+
+            return retval;
+        }
+
+        /// <summary>
+        /// Creates a new instance of a stats request
+        /// </summary>
         public Request()
         {
             ExcludeSandbox = true;
@@ -44,7 +108,7 @@ namespace PayNLSdk.API.Statistics.GetManagement
         /// Use this field to sort the results
         /// </summary>
         internal HashSet<string> GroupByFieldNames { get; set; }
-        
+
         /// <summary>
         /// Exclude calls from the sandbox.  Default = true
         /// </summary>
@@ -71,7 +135,7 @@ namespace PayNLSdk.API.Statistics.GetManagement
             var groupByNvc = new NameValueCollection();
 
             var i = 0;
-            foreach (var sortByFieldName in this.GroupByFieldNames)
+            foreach (var sortByFieldName in GroupByFieldNames)
             {
                 groupByNvc.Add($"groupBy[{i}]", sortByFieldName);
                 i++;
@@ -94,7 +158,7 @@ namespace PayNLSdk.API.Statistics.GetManagement
 
                 filterNvc.Add($"filterType[{i}]", "payment_profile_id");
                 filterNvc.Add($"filterOperator[{i}]", "neq");
-                filterNvc.Add($"filterValue[{i}]", 613.ToString());                
+                filterNvc.Add($"filterValue[{i}]", 613.ToString());
                 i++;
             }
 
@@ -140,5 +204,6 @@ namespace PayNLSdk.API.Statistics.GetManagement
             lt,
             like
         }
+
     }
 }

@@ -2,10 +2,14 @@
 
 namespace PayNLSdk.API.Statistics.GetManagement
 {
+    /// <summary>
+    /// If 2 groupBy parameters are added to the request,
+    /// we have a Top-level and a sublevel of data
+    /// </summary>
     public class GetStatsMultiLevel : GetStatsResultBase
     {
         [JsonProperty("arrStatsData")]
-        public TopLevelStatsData[] ToplevelGroup { get; set; }
+        public TopLevelStatsData[] TopLevelGroup { get; set; }
     }
 
     public class TopLevelStatsData

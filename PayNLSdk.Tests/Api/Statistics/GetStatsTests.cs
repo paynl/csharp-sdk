@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using PayNLSdk.API.Statistics.GetManagement;
 using PAYNLSDK.Net;
@@ -75,6 +76,66 @@ namespace PayNLSdk.Tests.Api.Statistics
             Assert.IsTrue(GetWithPartialKey(result, "filterType[").Contains("KEY2"));
             Assert.IsTrue(GetWithPartialKey(result, "filterValue[").Contains("VAL1"));
             Assert.IsTrue(GetWithPartialKey(result, "filterValue[").Contains("VAL2"));
+        }
+
+        [TestMethod]
+        public void Create_CorrectStartEndDate_LastWeek()
+        {
+            // Arrange
+            var dateTime = new Mock<IDateTime>();
+            dateTime.SetupGet(p => p.Now).Returns(new DateTime(2018, 12, 11));
+
+            // Act
+            var result = Request.Create(dateTime.Object, Request.StatsPeriod.LastWeek);
+
+            // Assert
+            Assert.AreEqual(new DateTime(2018,12,3), result.StartDate);
+            Assert.AreEqual(new DateTime(2018,12,9), result.EndDate);
+        }
+
+        [TestMethod]
+        public void Create_CorrectStartEndDate_LastMonth()
+        {
+            // Arrange
+            var dateTime = new Mock<IDateTime>();
+            dateTime.SetupGet(p => p.Now).Returns(new DateTime(2018, 12, 11));
+
+            // Act
+            var result = Request.Create(dateTime.Object, Request.StatsPeriod.LastMonth);
+
+            // Assert
+            Assert.AreEqual(new DateTime(2018, 11, 1), result.StartDate);
+            Assert.AreEqual(new DateTime(2018, 11, 30), result.EndDate);
+        }
+
+        [TestMethod]
+        public void Create_CorrectStartEndDate_Thisweek()
+        {
+            // Arrange
+            var dateTime = new Mock<IDateTime>();
+            dateTime.SetupGet(p => p.Now).Returns(new DateTime(2018, 12, 11));
+
+            // Act
+            var result = Request.Create(dateTime.Object, Request.StatsPeriod.ThisWeek);
+
+            // Assert
+            Assert.AreEqual(new DateTime(2018, 12, 10), result.StartDate);
+            Assert.AreEqual(new DateTime(2018, 12, 16), result.EndDate);
+        }
+
+        [TestMethod]
+        public void Create_CorrectStartEndDate_ThisMonth()
+        {
+            // Arrange
+            var dateTime = new Mock<IDateTime>();
+            dateTime.SetupGet(p => p.Now).Returns(new DateTime(2018, 12, 11));
+
+            // Act
+            var result = Request.Create(dateTime.Object, Request.StatsPeriod.ThisMonth);
+
+            // Assert
+            Assert.AreEqual(new DateTime(2018, 12, 1), result.StartDate);
+            Assert.AreEqual(new DateTime(2018, 12, 11), result.EndDate);
         }
 
         /// <summary>

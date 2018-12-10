@@ -1,5 +1,4 @@
-﻿using System.Collections.Specialized;
-using PayNLSdk.API.Statistics.GetManagement;
+﻿using PayNLSdk.API.Statistics.GetManagement;
 using PAYNLSDK.Net;
 
 namespace PAYNLSDK
@@ -23,7 +22,7 @@ namespace PAYNLSDK
         /// <param name="request"></param>
         /// <param name="groupByFieldName">The fieldname on which the grouping has to take place</param>
         /// <returns></returns>
-        public GetStatsResult GetStats( Request request, string groupByFieldName = "")
+        public GetStatsResult GetStats(Request request, string groupByFieldName = "")
         {
             if (string.IsNullOrWhiteSpace(groupByFieldName)) { groupByFieldName = "company_id"; }
             request.GroupByFieldNames.Clear();
