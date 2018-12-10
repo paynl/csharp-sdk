@@ -18,7 +18,8 @@ dotnet_csproj:
   version: '{version}'
   package_version: '{version}'
   
--  # configuration for MASTER branch
+# configuration for different branches
+-  
   branches:
     only:
       - master
@@ -36,5 +37,5 @@ dotnet_csproj:
     skip_symbols: false
     artifact: MyApp
 
--  # configuration for other branches
+-
   configuration: Debug
