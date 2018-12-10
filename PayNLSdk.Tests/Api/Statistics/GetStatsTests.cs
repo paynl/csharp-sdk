@@ -133,7 +133,7 @@ namespace PayNLSdk.Tests.Api.Statistics
             // Act
             var result = Request.Create(dateTime.Object, Request.StatsPeriod.ThisMonth);
 
-            // Assert
+            // Assert 
             Assert.AreEqual(new DateTime(2018, 12, 1), result.StartDate);
             Assert.AreEqual(new DateTime(2018, 12, 11), result.EndDate);
         }
