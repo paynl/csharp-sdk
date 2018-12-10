@@ -13,11 +13,13 @@
         <Company>dampee, paynl</Company>
         <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
         <PackageProjectUrl>https://github.com/roodfluweel/csharp-sdk</PackageProjectUrl>
-        <PackageReleaseNotes />
+        <PackageReleaseNotes>
+            Latest addition is the addition of the Statistics/Management api
+        </PackageReleaseNotes>
         <Description>
             Connector for Pay.NL, forked from the original
-            and improved to support multiple tenants and the Alliance SDK supporting
-            netstandard2, netcoreapp20, net46 and net47
+            and improved to support multiple tenants and the Alliance SDK. 
+            Targeting netstandard2, netcoreapp20, net46 and net47.
         </Description>
         <PackageTags>paynl payment gateway</PackageTags>
         <Copyright>Copyright ©2017</Copyright>
