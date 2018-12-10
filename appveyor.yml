@@ -12,22 +12,29 @@ build:
 before_build:
   - nuget restore
 
-artifacts:
-  - path: '**\RoodFluweel.PAYNLSDK.*.nupkg' # find all NuGet packages recursively
-    name: MyApp
-
-deploy:
-  provider: NuGet
-  api_key:
-    secure: pd9kF0t0Bt6BExgB0t6xEQT9pAlFrRhFZDl6LDGTZjtgaI4nd4ilIongUFWZKLOO
-  skip_symbols: false
-  artifact: MyApp
-
 dotnet_csproj:
   patch: true
   file: '**\*.csproj'
   version: '{version}'
   package_version: '{version}'
   
-configuration:
-  - Release
+-  # configuration for MASTER branch
+  branches:
+    only:
+      - master
+
+  configuration: Release
+  
+  artifacts:
+    - path: '**\RoodFluweel.PAYNLSDK.*.nupkg' # find all NuGet packages recursively
+      name: MyApp
+  
+  deploy:
+    provider: NuGet
+    api_key:
+      secure: pd9kF0t0Bt6BExgB0t6xEQT9pAlFrRhFZDl6LDGTZjtgaI4nd4ilIongUFWZKLOO
+    skip_symbols: false
+    artifact: MyApp
+
+-  # configuration for other branches
+  configuration: Debug
