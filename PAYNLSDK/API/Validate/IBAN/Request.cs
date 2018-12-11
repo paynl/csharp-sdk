@@ -1,43 +1,43 @@
 ﻿using Newtonsoft.Json;
-using PAYNLSDK.Converters;
 using PAYNLSDK.Exceptions;
 using PAYNLSDK.Utilities;
-using System;
 using System.Collections.Specialized;
+using System.Diagnostics.CodeAnalysis;
 
 namespace PAYNLSDK.API.Validate.IBAN
 {
+    /// <inheritdoc />
+    /// <summary>
+    /// Validate Iban Request
+    /// Implements the <see cref="T:PAYNLSDK.API.RequestBase" />
+    /// </summary>
+    /// <seealso cref="T:PAYNLSDK.API.RequestBase" />
     public class Request : RequestBase
     {
+        /// <summary>
+        /// Gets or sets the iban.
+        /// </summary>
+        /// <value>The iban.</value>
         [JsonProperty("iban")]
+        [SuppressMessage("ReSharper", "InconsistentNaming")]
         public string IBAN { get; set; }
 
-        public override bool RequiresApiToken
-        {
-            get
-            {
-                return false;// base.RequiresApiToken;
-            }
-        }
+        /// <inheritdoc />
+        public override bool RequiresApiToken => false;// base.RequiresApiToken;
 
-        protected override int Version
-        {
-            get { return 1; }
-        }
+        /// <inheritdoc />
+        protected override int Version => 1;
 
-        protected override string Controller
-        {
-            get { return "Validate"; }
-        }
+        /// <inheritdoc />
+        protected override string Controller => "Validate";
 
-        protected override string Method
-        {
-            get { return "IBAN"; }
-        }
-        
+        /// <inheritdoc />
+        protected override string Method => "IBAN";
+
+        /// <inheritdoc />
         public override System.Collections.Specialized.NameValueCollection GetParameters()
         {
-            NameValueCollection nvc = new NameValueCollection();
+            var nvc = new NameValueCollection();
 
             ParameterValidator.IsNotEmpty(IBAN, "iban");
             nvc.Add("iban", IBAN);
@@ -45,8 +45,13 @@ namespace PAYNLSDK.API.Validate.IBAN
             return nvc;
         }
 
-        public Response Response { get { return (Response)response; } }
+        /// <summary>
+        /// Gets the response.
+        /// </summary>
+        /// <value>The response.</value>
+        public Response Response => (Response)response;
 
+        /// <inheritdoc />
         protected override void PrepareAndSetResponse()
         {
             if (ParameterValidator.IsEmpty(rawResponse))

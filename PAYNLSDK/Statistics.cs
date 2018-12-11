@@ -6,7 +6,8 @@ namespace PAYNLSDK
     /// <summary>
     /// This is a part of the alliance SDK
     /// </summary>
-    public class Statistics
+    /// <inheritdoc />
+    public class Statistics : IStatistics
     {
         private readonly IClient _webClient;
 
@@ -54,10 +55,25 @@ namespace PAYNLSDK
     }
 
     /// <summary>
-    /// Alliance methods
+    /// Get alliance statistics
     /// </summary>
     public interface IStatistics
     {
-        GetStatsResult GetStats(Request request);
+        /// <summary>
+        /// Get management statistics from the RestApi
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="groupByFieldName">The fieldname on which the grouping has to take place</param>
+        /// <returns></returns>
+        GetStatsResult GetStats(Request request, string groupByFieldName = "");
+
+        /// <summary>
+        /// Get management statistics from the Api using two group by fields
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="groupByFieldName"></param>
+        /// <param name="groupByFieldName2"></param>
+        /// <returns></returns>
+        GetStatsMultiLevel GetMultiLevelStats(Request request, string groupByFieldName, string groupByFieldName2 = "day");
     }
 }

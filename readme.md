@@ -3,7 +3,6 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/tf7nerddjixwumn1?svg=true)](https://ci.appveyor.com/project/dampee/csharp-sdk)
 
 # Pay.nl C# SDK
-
 ---
 
 - [Quick start and examples](#usage)
@@ -15,27 +14,28 @@ This SDK is available as DotNet Assembly.
 With this SDK you will be able to start transactions and retrieve transactions with their status for the Pay.nl payment service provider.
 
 ## Installation
+You can use this package as a nuget package: 
 
-You can use this package as a nuget package:
-
-From NuGet:
-
-```shell
+From nuget:
+```
 Install-Package RoodFluweel.PAYNLSDK
 ```
+
+Or if you want bleeding edge:
+```
+PM> Install-Package RoodFluweel.PAYNLSDK -Source https://www.myget.org/F/paynl/api/v3/index.json
+``` 
 
 ## Usage
 
 Setting the configuration:
-
-```csharp
+```c#
 var config = new PayNlConfiguration("e4test6b70code9adreplacef0fee5e0ab", "SL-1234-1234");
 var client = new Client(payNlConfig);
 ```
 
 Getting a list of available payment methods, use the Getservice.
-
-```csharp
+```c#
 var response = PAYNLSDK.Transaction.GetService(paymentMethodId);
 //paymentMethodId: is optional
 //The ID of the payment method. Only the payment options linked to the provided payment method ID will be returned if an ID is provided.
@@ -48,8 +48,8 @@ var response = PAYNLSDK.Transaction.GetService(paymentMethodId);
 ```
 
 Starting a transaction:
+```c#
 
-```csharp
 PAYNLSDK.API.Transaction.Start.Request request = PAYNLSDK.Transaction.CreateTransactionRequest("127.0.0.1", "http://example.org/visitor-return-after-payment");
 request.Amount = 621;
 
@@ -126,12 +126,11 @@ var redirectToUrl = transaction.Transaction.PaymentURL;
 ```
 
 To determine if a transaction has been paid, you can use:
-
 ```c#
 var transactionInfo = new PAYNLSDK.Transaction(client).Info(transactionId);
 var paid = transactionInfo.PaymentDetails.State == PaymentStatus.PAID;
 
-// or use the extension methods by adding "using PAYNLSDK.API.Transaction.Info;" at the top of your file
+// or use the extentionmethods by adding "using PAYNLSDK.API.Transaction.Info;" at the top of your file
 
 if (transactionInfo.IsPaid() || transactionInfo.IsPending())
 {
@@ -143,9 +142,8 @@ else
 }
 ```
 
-When implementing the exchange script (where you should process the order in your back-end):
-
-```csharp
+When implementing the exchange script (where you should process the order in your backend):
+```c#
 var info = PAYNLSDK.Transaction.Info(response.transactionId);
 PAYNLSDK.Enums.PaymentStatus result = info.PaymentDetails.State;
 
@@ -153,7 +151,7 @@ if (PAYNLSDK.Transaction.IsPaid(result))
 {
     // process the payment
 }
-else
+else 
 {
  if(PAYNLSDK.Transaction.IsCancelled(result)){
     // payment canceled, restock items
@@ -164,59 +162,6 @@ response.Write("TRUE| ");
 // Optionally you can send a message after TRUE|, you can view these messages in the logs.
 // https://admin.pay.nl/logs/payment_state
 response.Write("Paid");
-```
-
-## Alliance
-
-Inject the `IAlliance` component in your logic, if you use e.g. `autofac`
-
-```csharp
-builder.RegisterType<PAYNLSDK.Alliance>().As<PAYNLSDK.IAlliance>();
-```
-
-### Lookup a merchant
-
-```csharp
-public MyPayNlHelper(PAYNLSDK.IAlliance allianceService) {
-  _allianceService = allianceService;
-}
-
-var request = new PAYNLSDK.API.Alliance.GetMerchant.Request 
-{
-     MerchantId = merchantId 
-};
-var merchant = _allianceService.GetMerchant(request);
-```
-
-### Create a new merchant
-
-```csharp
-var request = new PAYNLSDK.API.Alliance.AddMerchant.Request
-{
-    FullName = model.FullName,
-    ...
-};
-
-var merchant = _allianceService.AddMerchant(request);
-if (merchant.Success == false)
-{
-    ...
-    var service = _allianceService.AddService(serviceRequest);
-    ...
-}
-```
-
-### Statistics
-
-To call the management report from the statistics module, first instantiate the client, then create a request.
-
-Finally, call the `GetStats` or the `GetMultiLevelStats`.  Where the second one accepts 2 fields for grouping your data.
-
-```csharp
-var client = new Client(new PayNlConfiguration("AT-0000-0000", "000xxxxxxxxxxxxxxxxxxxx0000xxxxxx"));
-var statistics = new PAYNLSDK.Statistics(client);
-var request = Request.Create(new LocalDateTime(), Request.StatsPeriod.LastWeek);
-var result = statistics.GetMultiLevelStats(request, "company_id", "day");
 ```
 
 ### Contributing
