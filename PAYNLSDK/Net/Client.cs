@@ -1,14 +1,15 @@
-﻿using PAYNLSDK.Net.ProxyConfigurationInjector;
+﻿using Newtonsoft.Json;
+using PAYNLSDK.API;
+using PAYNLSDK.Exceptions;
+using PAYNLSDK.Net.ProxyConfigurationInjector;
+using PAYNLSDK.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Net;
 using System.Text;
-using PAYNLSDK.API;
-using PAYNLSDK.Exceptions;
-using Newtonsoft.Json;
-using PAYNLSDK.Utilities;
 
 namespace PAYNLSDK.Net
 {
@@ -16,31 +17,32 @@ namespace PAYNLSDK.Net
     ///<summary>
     /// This is the default client to be used by the PayNl function calls
     /// </summary>
+    [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
     public class Client : IClient
     {
+        /// <summary>
+        /// If the client needs to work with a proxy, inject it here
+        /// </summary>
         protected readonly IProxyConfigurationInjector ProxyConfigurationInjector;
+        /// <summary>
+        /// The PayNL configuration
+        /// </summary>
         protected readonly IPayNlConfiguration SecurityConfiguration;
 
         /// <inheritdoc />
+        [SuppressMessage("ReSharper", "MemberCanBeProtected.Global")]
         public Client(IPayNlConfiguration securityConfiguration, IProxyConfigurationInjector proxyConfigurationInjector = null)
         {
             SecurityConfiguration = securityConfiguration;
             ProxyConfigurationInjector = proxyConfigurationInjector;
         }
 
-        /// <summary>
-        /// PAYNL Endpoint
-        /// </summary>
         private const string Endpoint = "https://rest-api.pay.nl";
 
-        /// <summary>
-        /// Client version
-        /// </summary>
+        /// <inheritdoc />
         public string ClientVersion => "1.1.0.0";
 
-        /// <summary>
-        /// User agent
-        /// </summary>
+        /// <inheritdoc />
         public string UserAgent => $"PAYNL/SDK/{ClientVersion} DotNet/{Environment.Version.Major}";
 
         /// <summary>
@@ -50,10 +52,10 @@ namespace PAYNLSDK.Net
         /// <returns>raw response string</returns>
         public string PerformRequest(RequestBase request)
         {
-            HttpWebRequest httprequest = PrepareRequest(request.Url, "POST");
-            string rawResponse = PerformRoundTrip2(httprequest, HttpStatusCode.OK, () =>
+            var webRequest = PrepareRequest(request.Url, "POST");
+            var rawResponse = PerformRoundTrip2(webRequest, HttpStatusCode.OK, () =>
                 {
-                    using (var requestWriter = new StreamWriter(httprequest.GetRequestStream()))
+                    using (var requestWriter = new StreamWriter(webRequest.GetRequestStream()))
                     {
                         //string serializedResource = resource.Serialize();
                         string serializedResource = ToQueryString(request);
@@ -82,12 +84,12 @@ namespace PAYNLSDK.Net
         }
 
         /// <summary>
-        /// Returns a NameValueCollection of all paramaters used for this call.
+        /// Returns a NameValueCollection of all parameters used for this call.
         /// </summary>
         /// <returns>Name Value collection of parameters</returns>
         private NameValueCollection GetParameters(RequestBase request)
         {
-            NameValueCollection nvc = request.GetParameters();
+            var nvc = request.GetParameters();
             if (request.RequiresApiToken)
             {
                 ParameterValidator.IsNotEmpty(SecurityConfiguration.ApiToken, nameof(SecurityConfiguration.ApiToken));
@@ -105,20 +107,21 @@ namespace PAYNLSDK.Net
         /// <summary>
         /// Transform NameValueCollection to a querystring
         /// </summary>
-        /// <returns>appendable querystring</returns>
+        /// <returns>querystring ready to be appended to the url</returns>
         private string ToQueryString(RequestBase request)
         {
-            NameValueCollection nvc = GetParameters(request);
+            var nvc = GetParameters(request);
             if (nvc.Count == 0)
             {
                 return "";
             }
-            StringBuilder sb = new StringBuilder();
+
+            var sb = new StringBuilder();
             // TODO: add "?" if GET?
 
-            bool first = true;
+            var first = true;
 
-            foreach (string key in nvc.AllKeys)
+            foreach (var key in nvc.AllKeys)
             {
                 var values = nvc.GetValues(key);
                 if (values == null)
@@ -127,7 +130,7 @@ namespace PAYNLSDK.Net
                     continue;
                 }
 
-                foreach (string value in values)
+                foreach (var value in values)
                 {
                     if (!first)
                     {
@@ -148,7 +151,7 @@ namespace PAYNLSDK.Net
         /// </summary>
         /// <param name="requestUriString">URL to call</param>
         /// <param name="method">Request Method (get, post, delete, put)</param>
-        /// <returns></returns>
+        /// <returns>A new WebRequest</returns>
         private HttpWebRequest PrepareRequest(string requestUriString, string method)
         {
             var uriString = $"{Endpoint}/{requestUriString}";
@@ -185,17 +188,18 @@ namespace PAYNLSDK.Net
                 using (var response = request.GetResponse() as HttpWebResponse)
                 {
                     var statusCode = (HttpStatusCode)response.StatusCode;
-                    if (statusCode == expectedHttpStatusCode)
+                    if (statusCode != expectedHttpStatusCode)
                     {
-                        Stream responseStream = response.GetResponseStream();
-                        Encoding encoding = GetEncoding(response);
-
-                        using (var responseReader = new StreamReader(responseStream, encoding))
-                        {
-                            return responseReader.ReadToEnd();
-                        }
+                        throw new PayNlException(string.Format("Unexpected status code {0}", statusCode));
                     }
-                    throw new PayNlException(String.Format("Unexpected status code {0}", statusCode));
+
+                    Stream responseStream = response.GetResponseStream();
+                    Encoding encoding = GetEncoding(response);
+
+                    using (var responseReader = new StreamReader(responseStream, encoding))
+                    {
+                        return responseReader.ReadToEnd();
+                    }
                 }
             }
             catch (WebException e)
@@ -204,7 +208,7 @@ namespace PAYNLSDK.Net
             }
             catch (Exception e)
             {
-                throw new PayNlException(String.Format("Unhandled exception {0}", e), e);
+                throw new PayNlException($"Unhandled exception {e.Message}", e);
             }
         }
 
@@ -259,17 +263,12 @@ namespace PAYNLSDK.Net
                                 errMessage = errors["message"];
                             }
 
-                            PayNlException payNlException = new PayNlException(errMessage, e);
-                            if (payNlException != null)
-                            {
-                                return payNlException;
-                            }
+                            return new PayNlException(errMessage, e);
                         }
                         catch (Exception ex1)
                         {
-                            return new PayNlException(String.Format("Unknown error for {0}", statusCode), e);
+                            return new PayNlException(string.Format("Unknown error for {0}", statusCode), ex1);
                         }
-                        return new PayNlException(String.Format("Unknown error for {0}", statusCode), e);
                     }
                 case HttpStatusCode.InternalServerError:
                 case HttpStatusCode.NotImplemented:
@@ -287,7 +286,7 @@ namespace PAYNLSDK.Net
                 case HttpStatusCode.NetworkConnectTimeoutError:
                     return new PayNlException("Something went wrong on our end, please try again", e);
                 default:
-                    return new PayNlException(String.Format("Unhandled status code {0}", statusCode), e);
+                    return new PayNlException(string.Format("Unhandled status code {0}", statusCode), e);
             }
         }
 
