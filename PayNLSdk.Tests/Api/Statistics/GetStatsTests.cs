@@ -2,14 +2,15 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using PayNLSdk.API.Statistics.GetManagement;
-using PAYNLSDK.Net;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace PayNLSdk.Tests.Api.Statistics
 {
     [TestClass]
+    [SuppressMessage("ReSharper", "RedundantNameQualifier", Justification = "We need to be sure the correct object is called in the tests")]
     public class GetStatsRequestTests
     {
         private PayNLSdk.API.Statistics.GetManagement.Request _sut;
@@ -17,7 +18,6 @@ namespace PayNLSdk.Tests.Api.Statistics
         [TestInitialize]
         public void TestInitialize()
         {
-            var clientMock = new Mock<IClient>();
             _sut = new PayNLSdk.API.Statistics.GetManagement.Request();
         }
 
@@ -109,7 +109,7 @@ namespace PayNLSdk.Tests.Api.Statistics
         }
 
         [TestMethod]
-        public void Create_CorrectStartEndDate_Thisweek()
+        public void Create_CorrectStartEndDate_ThisWeek()
         {
             // Arrange
             var dateTime = new Mock<IDateTime>();
