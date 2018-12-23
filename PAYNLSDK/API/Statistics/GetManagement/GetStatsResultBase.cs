@@ -1,7 +1,7 @@
-﻿using System;
-using System.Globalization;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System;
+using System.Globalization;
 
 namespace PayNLSdk.API.Statistics.GetManagement
 {
@@ -89,13 +89,13 @@ namespace PayNLSdk.API.Statistics.GetManagement
             /// </summary>
             /// <value>The cols.</value>
             [JsonProperty("cols")]
-            public Cols cols { get; set; }
+            public ColumnLabels ColumnLabels { get; set; }
         }
 
         /// <summary>
         /// Class Cols.
         /// </summary>
-        public class Cols
+        public class ColumnLabels
         {
             /// <summary>
             /// Gets or sets the number.
@@ -109,7 +109,7 @@ namespace PayNLSdk.API.Statistics.GetManagement
             /// </summary>
             /// <value>The average pay.</value>
             [JsonProperty("avg_pay")]
-            public decimal avg_pay { get; set; }
+            public string avg_pay { get; set; }
 
             /// <summary>
             /// Gets or sets the org.
@@ -144,7 +144,69 @@ namespace PayNLSdk.API.Statistics.GetManagement
             /// </summary>
             /// <value>The CST.</value>
             [JsonProperty("cst")]
-            public decimal cst { get; set; }
+            public string cst { get; set; }
+
+            /// <summary>
+            /// Gets or sets the pay.
+            /// </summary>
+            /// <value>The pay.</value>
+            [JsonProperty("pay")]
+            public string pay { get; set; }
+        }
+
+        /// <summary>
+        /// Class ColumnValues.
+        /// </summary>
+        public class ColumnValues
+        {
+            /// <summary>
+            /// Gets or sets the number.
+            /// </summary>
+            /// <value>The number.</value>
+            [JsonProperty("num")]
+            public string num { get; set; }
+
+            /// <summary>
+            /// Gets or sets the average pay.
+            /// </summary>
+            /// <value>The average pay.</value>
+            [JsonProperty("avg_pay")]
+            public string avg_pay { get; set; }
+
+            /// <summary>
+            /// Gets or sets the org.
+            /// </summary>
+            /// <value>The org.</value>
+            [JsonProperty("org")]
+            public string org { get; set; }
+
+            /// <summary>
+            /// Gets or sets the org vat.
+            /// </summary>
+            /// <value>The org vat.</value>
+            [JsonProperty("org_vat")]
+            public string org_vat { get; set; }
+
+            /// <summary>
+            /// Gets or sets the org ext.
+            /// </summary>
+            /// <value>The org ext.</value>
+            [JsonProperty("org_ext")]
+            public string org_ext { get; set; }
+
+            /// <summary>
+            /// Gets or sets the org tot.
+            /// </summary>
+            /// <value>The org tot.</value>
+            [JsonProperty("org_tot")]
+            public string org_tot { get; set; }
+
+            /// <summary>
+            /// Gets or sets the CST.
+            /// </summary>
+            /// <value>The CST.</value>
+            [JsonProperty("cst")]
+            public string cst { get; set; }
 
             /// <summary>
             /// Gets or sets the pay.
@@ -419,45 +481,45 @@ namespace PayNLSdk.API.Statistics.GetManagement
             /// </summary>
             /// <value>The sum.</value>
             [JsonProperty("sum")]
-            public string sum { get; set; }
+            public decimal sum { get; set; }
 
             /// <summary>
-            /// Gets or sets the CST.
+            /// Gets or sets the costs
             /// </summary>
             /// <value>The CST.</value>
             [JsonProperty("cst")]
-            public string cst { get; set; }
+            public decimal cst { get; set; }
 
             /// <summary>
-            /// Gets or sets the number.
+            /// Gets or sets the number of transactions
             /// </summary>
             /// <value>The number.</value>
             [JsonProperty("num")]
-            public string num { get; set; }
+            public decimal num { get; set; }
 
             /// <summary>
-            /// Gets or sets the average dur.
+            /// Gets or sets the average duration.  Probably the average duration of seconds in a transaction.
             /// </summary>
             /// <value>The average dur.</value>
             [JsonProperty("avg_dur")]
-            public string avg_dur { get; set; }
+            public decimal avg_dur { get; set; }
 
             /// <summary>
-            /// Gets or sets the average pay.
+            /// Gets or sets the average payout amount
             /// </summary>
             /// <value>The average pay.</value>
             [JsonProperty("avg_pay")]
-            public string avg_pay { get; set; }
+            public decimal avg_pay { get; set; }
 
             /// <summary>
-            /// Gets or sets the pay.
+            /// Gets or sets the paid costs. <seealso cref="cst"/>
             /// </summary>
             /// <value>The pay.</value>
             [JsonProperty("pay")]
-            public string pay { get; set; }
+            public decimal pay { get; set; }
 
             /// <summary>
-            /// Gets or sets the org.
+            /// Gets or sets the organization total.  Same as org_tot
             /// </summary>
             /// <value>The org.</value>
             [JsonProperty("org")]
@@ -520,8 +582,11 @@ namespace PayNLSdk.API.Statistics.GetManagement
                 case JTokenType.Float:
                 case JTokenType.Integer:
                     return token.ToObject<decimal>();
-                case JTokenType.String when decimal.TryParse(token.ToString(), NumberStyles.AllowParentheses,
-                    CultureInfo.CurrentCulture, out var d):
+                case JTokenType.String when decimal.TryParse(
+                    token.ToString(),
+                    NumberStyles.Any,
+                    CultureInfo.InvariantCulture,
+                    out var d):
                     return d;
                 case JTokenType.String:
                 case JTokenType.Null when objectType == typeof(decimal?):
@@ -539,14 +604,14 @@ namespace PayNLSdk.API.Statistics.GetManagement
         /// <param name="serializer">The calling serializer.</param>
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            var d = default;
+            var d = default(decimal?);
             if (value != null)
             {
                 d = value as decimal?;
                 if (d.HasValue) // If value was a decimal?, then this is possible
                 {
                     d = new decimal(
-                        decimal.ToDouble(d.Value)); // The ToDouble-conversion removes all unnessecary precision
+                        decimal.ToDouble(d.Value)); // The ToDouble-conversion removes all unnecessary precision
                 }
             }
 
