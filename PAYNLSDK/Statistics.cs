@@ -1,5 +1,7 @@
-﻿using PayNLSdk.API.Statistics.GetManagement;
+﻿using Newtonsoft.Json;
+using PayNLSdk.API.Statistics.GetManagement;
 using PAYNLSDK.Net;
+using System.Collections.Generic;
 
 namespace PAYNLSDK
 {
@@ -30,7 +32,8 @@ namespace PAYNLSDK
             request.GroupByFieldNames.Add(groupByFieldName);
 
             var response = _webClient.PerformRequest(request);
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<GetStatsResult>(response);
+            var settings = new List<JsonConverter> { new DecimalConverter() };
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<GetStatsResult>(response, settings.ToArray());
         }
 
         /// <summary>

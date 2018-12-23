@@ -1,4 +1,6 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 
 namespace PayNLSdk.API.Statistics.GetManagement
 {
@@ -40,12 +42,13 @@ namespace PayNLSdk.API.Statistics.GetManagement
         public class Cols
         {
             public string num { get; set; }
-            public string avg_pay { get; set; }
+
+            public decimal avg_pay { get; set; }
             public string org { get; set; }
             public string org_vat { get; set; }
             public string org_ext { get; set; }
             public string org_tot { get; set; }
-            public string cst { get; set; }
+            public decimal cst { get; set; }
             public string pay { get; set; }
         }
 
@@ -138,6 +141,51 @@ namespace PayNLSdk.API.Statistics.GetManagement
             public string org_ext { get; set; }
             [JsonProperty("org_tot")]
             public decimal org_tot { get; set; }
+        }
+    }
+
+    /// <summary>
+    /// Class DecimalConverter.
+    /// </summary>
+    /// <remarks>https://stackoverflow.com/q/24051206/97615</remarks>
+    /// <seealso cref="Newtonsoft.Json.JsonConverter" />
+    internal class DecimalConverter : JsonConverter
+    {
+        public override bool CanConvert(Type objectType)
+        {
+            return (objectType == typeof(decimal) || objectType == typeof(decimal?));
+        }
+
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        {
+            var token = JToken.Load(reader);
+            switch (token.Type)
+            {
+                case JTokenType.Float:
+                case JTokenType.Integer:
+                    return token.ToObject<decimal>();
+                case JTokenType.String when decimal.TryParse(token.ToString(), System.Globalization.NumberStyles.AllowParentheses, System.Globalization.CultureInfo.CurrentCulture, out decimal d):
+                    return d;
+                case JTokenType.String:
+                case JTokenType.Null when objectType == typeof(decimal?):
+                    return null;
+                default:
+                    throw new JsonSerializationException($"Unexpected token type: {token.Type}");
+            }
+        }
+
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            decimal? d = default(decimal?);
+            if (value != null)
+            {
+                d = value as decimal?;
+                if (d.HasValue) // If value was a decimal?, then this is possible
+                {
+                    d = new decimal?(new decimal(decimal.ToDouble(d.Value))); // The ToDouble-conversion removes all unnessecary precision
+                }
+            }
+            JToken.FromObject(d).WriteTo(writer);
         }
     }
 }
