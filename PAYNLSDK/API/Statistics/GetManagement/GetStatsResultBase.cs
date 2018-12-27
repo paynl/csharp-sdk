@@ -221,6 +221,10 @@ namespace PayNLSdk.API.Statistics.GetManagement
         /// </summary>
         public class Totals
         {
+            /// <summary>
+            /// Gets or sets the sub data - which is oddly called "4"
+            /// </summary>
+            /// <value>The 4.</value>
             [JsonProperty("4")] public Data _4 { get; set; }
         }
 
@@ -229,6 +233,10 @@ namespace PayNLSdk.API.Statistics.GetManagement
         /// </summary>
         public class Pagedata
         {
+            /// <summary>
+            /// Gets or sets the colors.
+            /// </summary>
+            /// <value>The colors.</value>
             [JsonProperty("pay")] public Colors colors { get; set; }
         }
 
