@@ -31,6 +31,9 @@ Targeting netstandard2, netcoreapp20, net46 and net47.
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="GitVersionTask" Version="4.0.0-beta*">
+            <PrivateAssets>All</PrivateAssets>
+        </PackageReference>
         <PackageReference Include="Newtonsoft.Json" Version="8.0.3" />
         <PackageReference Include="System.ComponentModel.Annotations" Version="4.4.1" />
     </ItemGroup>
