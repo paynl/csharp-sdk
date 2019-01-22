@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayNLSdk", "PAYNLSDK\PayNLS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayNLSdk.Tests", "PayNLSdk.Tests\PayNLSdk.Tests.csproj", "{4C691697-D689-4A00-9E3B-45C05D9F7817}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{FFB98419-2D3E-49CF-978F-F76FBA99429F}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Files", "Solution Files", "{B16C3601-D4E5-4C36-B88E-AC26A4368490}"
 	ProjectSection(SolutionItems) = preProject
 		appveyor.yml = appveyor.yml
@@ -35,10 +33,6 @@ Global
 		{4C691697-D689-4A00-9E3B-45C05D9F7817}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C691697-D689-4A00-9E3B-45C05D9F7817}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C691697-D689-4A00-9E3B-45C05D9F7817}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FFB98419-2D3E-49CF-978F-F76FBA99429F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FFB98419-2D3E-49CF-978F-F76FBA99429F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FFB98419-2D3E-49CF-978F-F76FBA99429F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FFB98419-2D3E-49CF-978F-F76FBA99429F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
