@@ -4,14 +4,14 @@ using PAYNLSDK.Converters;
 namespace PAYNLSDK.API.Alliance.AddMerchant
 {
     /// <summary>
-    ///     Class AddMerchantResult.
+    /// The result of the Alliance/AddMerchant call
     /// </summary>
     public class AddMerchantResult
     {
         /// <summary>
         ///     Gets or sets if it was success.
         /// </summary>
-        /// <value>whether we had a succesfull call or not.</value>
+        /// <value>whether we had a successful call or not.</value>
         [JsonProperty("success")]
         [JsonConverter(typeof(BooleanConverter))]
         public bool Success { get; set; }

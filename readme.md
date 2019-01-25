@@ -3,21 +3,16 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/tf7nerddjixwumn1?svg=true)](https://ci.appveyor.com/project/dampee/csharp-sdk)
 
 # Pay.nl C# SDK
----
 
-- [Quick start and examples](#usage)
-
----
-
-This SDK is available as DotNet Assembly. 
-
-With this SDK you will be able to start transactions and retrieve transactions with their status for the Pay.nl payment service provider.
+With this SDK you will be able to start transactions and retrieve transactions with
+their status for the Pay.nl payment service provider.
 
 ## Installation
+
 You can use this package as a nuget package: 
 
 From nuget:
-```
+```shell
 Install-Package RoodFluweel.PAYNLSDK
 ```
 
@@ -26,13 +21,15 @@ Or if you want bleeding edge:
 PM> Install-Package RoodFluweel.PAYNLSDK -Source https://www.myget.org/F/paynl/api/v3/index.json
 ``` 
 
-## Usage
+## Configuration
 
 Setting the configuration:
 ```c#
 var config = new PayNlConfiguration("e4test6b70code9adreplacef0fee5e0ab", "SL-1234-1234");
 var client = new Client(payNlConfig);
 ```
+
+## Usage of the GetService
 
 Getting a list of available payment methods, use the Getservice.
 ```c#
@@ -47,7 +44,8 @@ var response = PAYNLSDK.Transaction.GetService(paymentMethodId);
 //5. Pay per minute.
 ```
 
-Starting a transaction:
+## Starting a transaction
+
 ```c#
 
 PAYNLSDK.API.Transaction.Start.Request request = PAYNLSDK.Transaction.CreateTransactionRequest("127.0.0.1", "http://example.org/visitor-return-after-payment");
@@ -142,6 +140,8 @@ else
 }
 ```
 
+### Exchange scripts
+
 When implementing the exchange script (where you should process the order in your backend):
 ```c#
 var info = PAYNLSDK.Transaction.Info(response.transactionId);
@@ -164,10 +164,24 @@ response.Write("TRUE| ");
 response.Write("Paid");
 ```
 
-### Contributing
+## Alliance
+
+The following Alliance methods are available:
+
+- getMerchant
+- addMerchant
+- addInvoice
+
+## Statistics
+
+The following statistics methods are available:
+
+- statistics/GetManagement
+
+## Contributing
 
 Feel free to do pull requests and create issues when you please. 
 
-### License
+## License
 
 This project is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
