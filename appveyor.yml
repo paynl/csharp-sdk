@@ -17,34 +17,24 @@
     - choco install gitversion.portable -pre -y
   assembly_info:
     patch: false
-#  after_build:
-#    - cmd: ECHO nuget pack <Project>\<NuSpec>.nuspec -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%"
-#    - cmd: nuget pack <Project>\<NuSpec>.nuspec -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%"
-#    - cmd: appveyor PushArtifact "<NuSpec>.%GitVersion_NuGetVersion%.nupkg"    
-  cache:
-    - src\packages -> **\packages.config  # preserve "packages" directory in the root of build folder but will reset it if packages.config is modified
   build:
     project: PAYNLSDK\PayNLSdk.csproj
   before_build:
-    - nuget restore
-    - ps: gitversion /l console /output buildserver /updateAssemblyInfo
+    - dotnet restore
+    - ps: .\build.ps1
   dotnet_csproj:
     patch: true
-    file: '**\*.csproj'
-    version: '{version}'
+    file: 'PAYNLSDK\PayNLSdk.csproj'    
     package_version: '{version}'
 -
   configuration: Debug
-  os: Visual Studio 2017
-  version: 1.2.{build}
-  cache:
-    - src\packages -> **\packages.config  # preserve "packages" directory in the root of build folder but will reset it if packages.config is modified
+  os: Visual Studio 2017  
   build:
     project: PAYNLSDK\PayNLSdk.csproj
   before_build:
-    - nuget restore
+    - dotnet restore
+    - ps: .\build.ps1
   dotnet_csproj:
     patch: true
-    file: '**\*.csproj'
-    version: '{version}'
+    file: 'PAYNLSDK\PayNLSdk.csproj'    
     package_version: '{version}'
