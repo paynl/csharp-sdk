@@ -1,11 +1,14 @@
-﻿using PAYNLSDK.API;
-using PAYNLSDK.Exceptions;
+﻿using PAYNLSDK.Exceptions;
 using PAYNLSDK.Utilities;
 using System.Collections.Specialized;
+using System.Diagnostics.CodeAnalysis;
 
-namespace PayNLSdk.API.Alliance.AddInvoice
+namespace PAYNLSDK.API.Alliance.AddInvoice
 {
     /// <inheritdoc />
+    [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
+    [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
+    [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public class Request : RequestBase
     {
         /// <inheritdoc />
@@ -18,20 +21,42 @@ namespace PayNLSdk.API.Alliance.AddInvoice
         /// <inheritdoc />
         public override NameValueCollection GetParameters()
         {
-            var retval = new NameValueCollection { };
+            var retval = new NameValueCollection
+            {
 
-            // mandatory fields
-            retval.Add("serviceId", ServiceId);
-            retval.Add("merchantId", MerchantId);
-            retval.Add("invoiceId", InvoiceId);
-            retval.Add("amount", AmountInCents.ToString());
-            retval.Add("description", Description);
+                // mandatory fields
+                { "serviceId", ServiceId },
+                { "merchantId", MerchantId },
+                { "invoiceId", InvoiceId },
+                { "amount", AmountInCents.ToString() },
+                { "description", Description }
+            };
 
-            retval.Add("invoiceUrl", InvoiceUrl);
-            retval.Add("makeYesterday", MakeYesterday.ToString().ToLower());
-            retval.Add("extra1", Extra1);
-            retval.Add("extra2", Extra2);
-            retval.Add("extra2", Extra3);
+            // Optional fields
+            if (string.IsNullOrWhiteSpace(InvoiceUrl) == false)
+            {
+                retval.Add("invoiceUrl", InvoiceUrl);
+            }
+
+            if (MakeYesterday.HasValue)
+            {
+                retval.Add("makeYesterday", MakeYesterday.ToString().ToLower());
+            }
+
+            if (string.IsNullOrWhiteSpace(Extra1) == false)
+            {
+                retval.Add("extra1", Extra1);
+            }
+
+            if (string.IsNullOrWhiteSpace(Extra2) == false)
+            {
+                retval.Add("extra2", Extra2);
+            }
+
+            if (string.IsNullOrWhiteSpace(Extra3) == false)
+            {
+                retval.Add("extra2", Extra3);
+            }
 
             return retval;
         }
@@ -63,8 +88,8 @@ namespace PayNLSdk.API.Alliance.AddInvoice
         /// <summary>
         /// Gets or sets whether the transaction should be backdated to yesterday 23:59:59
         /// </summary>
-        /// <value><c>true</c> if [make yester day]; otherwise, <c>false</c>.</value>
-        public bool MakeYesterday { get; set; }
+        /// <value><c>true</c> transactions should be booked yesterday; otherwise, <c>false</c>.</value>
+        public bool? MakeYesterday { get; set; }
 
         /// <summary>
         /// Gets or sets the URL pointing to the location of the invoice.
@@ -96,6 +121,8 @@ namespace PayNLSdk.API.Alliance.AddInvoice
         /// <value>The service identifier.</value>
         public string ServiceId { get; set; }
 
+        /// <inheritdoc />
+        /// <exception cref="T:PAYNLSDK.Exceptions.PayNlException">rawResponse is empty!</exception>
         protected override void PrepareAndSetResponse()
         {
             if (ParameterValidator.IsEmpty(rawResponse))

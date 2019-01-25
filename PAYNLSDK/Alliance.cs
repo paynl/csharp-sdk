@@ -1,14 +1,12 @@
-﻿using PAYNLSDK.Net;
-using PAYNLSDK.API.Alliance.AddMerchant;
-using PAYNLSDK.API.Alliance.AddService;
-using PAYNLSDK.API.Alliance.GetMerchant;
-
+﻿using System.Diagnostics.CodeAnalysis;
+using PAYNLSDK.Net;
 
 namespace PAYNLSDK
 {
     /// <summary>
     /// This is a part of the alliance SDK
     /// </summary>
+    [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public class Alliance : IAlliance
     {
         private readonly IClient _webClient;
@@ -20,51 +18,31 @@ namespace PAYNLSDK
         }
 
         /// <inheritdoc />
-        public GetMerchantResult GetMerchant(API.Alliance.GetMerchant.Request request)
+        public PAYNLSDK.API.Alliance.GetMerchant.GetMerchantResult GetMerchant(API.Alliance.GetMerchant.Request request)
         {
             var response = _webClient.PerformRequest(request);
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<GetMerchantResult>(response);
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<PAYNLSDK.API.Alliance.GetMerchant.GetMerchantResult>(response);
         }
 
         /// <inheritdoc />
-        public AddMerchantResult AddMerchant(API.Alliance.AddMerchant.Request request)
+        public API.Alliance.AddMerchant.AddMerchantResult AddMerchant(API.Alliance.AddMerchant.Request request)
         {
             var response = _webClient.PerformRequest(request);
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<AddMerchantResult>(response);
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<API.Alliance.AddMerchant.AddMerchantResult>(response);
         }
 
         /// <inheritdoc />
-        public AddServiceResult AddService(API.Alliance.AddService.Request request)
+        public API.Alliance.AddService.AddServiceResult AddService(API.Alliance.AddService.Request request)
         {
             var response = _webClient.PerformRequest(request);
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<AddServiceResult>(response);
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<API.Alliance.AddService.AddServiceResult>(response);
         }
-    }
 
-    /// <summary>
-    /// Alliance methods
-    /// </summary>
-    public interface IAlliance
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
-        GetMerchantResult GetMerchant(API.Alliance.GetMerchant.Request request);
-
-        /// <summary>
-        /// Adds the merchant.
-        /// </summary>
-        /// <param name="request">The request.</param>
-        /// <returns>AddMerchantResult.</returns>
-        AddMerchantResult AddMerchant(API.Alliance.AddMerchant.Request request);
-
-        /// <summary>
-        /// Adds a service for a merchant
-        /// </summary>
-        /// <param name="request">The request.</param>
-        /// <returns>AddServiceResult.</returns>
-        AddServiceResult AddService(API.Alliance.AddService.Request request);
+        /// <inheritdoc />
+        public API.Alliance.AddInvoice.AddInvoiceResult AddInvoice(API.Alliance.AddInvoice.Request request)
+        {
+            var response = _webClient.PerformRequest(request);
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<API.Alliance.AddInvoice.AddInvoiceResult>(response);
+        }
     }
 }
