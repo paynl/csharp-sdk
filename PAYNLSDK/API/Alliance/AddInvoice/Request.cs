@@ -11,6 +11,23 @@ namespace PAYNLSDK.API.Alliance.AddInvoice
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public class Request : RequestBase
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Request"/> class.
+        /// </summary>
+        /// <param name="merchantId">The merchant identifier.</param>
+        /// <param name="serviceId">The service identifier.</param>
+        /// <param name="invoiceId">The invoice identifier.</param>
+        /// <param name="description">The description.</param>
+        /// <param name="amountInCents">The amount in cents.</param>
+        public Request(string merchantId, string serviceId, string invoiceId, string description, long amountInCents)
+        {
+            ServiceId = serviceId;
+            MerchantId = merchantId;
+            InvoiceId = invoiceId;
+            Description = description;
+            AmountInCents = amountInCents;
+        }
+
         /// <inheritdoc />
         protected override int Version => 5;
         /// <inheritdoc />

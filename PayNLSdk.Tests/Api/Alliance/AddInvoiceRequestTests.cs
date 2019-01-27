@@ -68,12 +68,13 @@ namespace PayNLSdk.Tests.Api.Alliance
         public void InvoiceUrl_internalPropertySet_True()
         {
             // Arrange
+            var httpUrlToInvoice = "http://url.to/invoice";
 
             // Act
-            _sut.InvoiceUrl = "http://url.to/invoice";
+            _sut.InvoiceUrl = httpUrlToInvoice;
 
             // Assert
-            Assert.AreEqual("true", _sut.GetParameters()["invoiceUrl"]);
+            Assert.AreEqual(httpUrlToInvoice, _sut.GetParameters()["invoiceUrl"]);
         }
 
         [TestMethod]

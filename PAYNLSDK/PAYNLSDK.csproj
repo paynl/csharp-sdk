@@ -8,22 +8,26 @@
         <!--<TargetFramework>netstandard2.0</TargetFramework>-->
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageId>RoodFluweel.PAYNLSDK</PackageId>
-        <Version>1.2.0</Version>
+        <Version>1.0.0</Version>
         <Authors>paynl, dampee, Sebsoft</Authors>
         <Company>dampee, paynl</Company>
         <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
         <PackageProjectUrl>https://github.com/roodfluweel/csharp-sdk</PackageProjectUrl>
-        <PackageReleaseNotes>Breaking change: the constructor parameters of ApiTokenClient have changed places!</PackageReleaseNotes>
-        <Description>Connector for Pay.NL, forked from the original
-and improved to support multiple tenants and the Alliance SDK. 
-Targeting netstandard2, netcoreapp20, net46 and net47.
-</Description>
+        <PackageReleaseNotes>
+            Latest addition is the addition of the Statistics/Management api
+        </PackageReleaseNotes>
+        <Description>
+            Connector for Pay.NL, forked from the original
+            and improved to support multiple tenants and the Alliance SDK. 
+            Targeting netstandard2, netcoreapp20, net46 and net47.
+        </Description>
         <PackageTags>paynl payment gateway</PackageTags>
         <Copyright>Copyright ©2017</Copyright>
         <RepositoryUrl>https://github.com/roodfluweel/csharp-sdk</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <AssemblyName>PayNLSdk</AssemblyName>
         <RootNamespace>PayNLSdk</RootNamespace>
+        <Configurations>Debug;Release;AppVeyor</Configurations>
     </PropertyGroup>
 
     <PropertyGroup>
@@ -31,9 +35,6 @@ Targeting netstandard2, netcoreapp20, net46 and net47.
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="GitVersionTask" Version="4.0.0-beta*">
-            <PrivateAssets>All</PrivateAssets>
-        </PackageReference>
         <PackageReference Include="Newtonsoft.Json" Version="8.0.3" />
         <PackageReference Include="System.ComponentModel.Annotations" Version="4.4.1" />
     </ItemGroup>
