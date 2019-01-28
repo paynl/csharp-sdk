@@ -10,7 +10,7 @@ namespace PAYNLSDK.Enums
     /// <summary>
     /// Utility to convert Enum Values to EnumMember Values and vice versa.
     /// </summary>
-    public class EnumUtil
+    public static class EnumUtil
     {
         /// <summary>
         /// Return the value of an EnumMember
@@ -79,8 +79,14 @@ namespace PAYNLSDK.Enums
     /// </summary>
     public enum Gender
     {
+        /// <summary>
+        /// A male gender
+        /// </summary>
         [EnumMember(Value="m")]
         Male,
+        /// <summary>
+        /// A female gender
+        /// </summary>
         [EnumMember(Value = "f")]
         Female
     }
@@ -90,10 +96,21 @@ namespace PAYNLSDK.Enums
     /// </summary>
     public enum TaxClass
     {
+        /// <summary>
+        /// No tax
+        /// </summary>
         [EnumMember(Value = "N")]
         None = 0,
+
+        /// <summary>
+        /// A low tax class
+        /// </summary>
         [EnumMember(Value = "L")]
         Low = 6,
+
+        /// <summary>
+        /// High tax class
+        /// </summary>
         [EnumMember(Value = "H")]
         High = 21
     }
@@ -135,10 +152,21 @@ namespace PAYNLSDK.Enums
     /// </summary>
     public enum ExchangeState
     {
+        /// <summary>
+        /// The exchange state failed
+        /// </summary>
         [EnumMember(Value = "-1")]
         Failed = -1,
+
+        /// <summary>
+        /// The exchange was not called
+        /// </summary>
         [EnumMember(Value = "0")]
         NotCalled = 0,
+
+        /// <summary>
+        /// The exchange call was successful
+        /// </summary>
         [EnumMember(Value = "1")]
         Success = 1
     }
@@ -148,8 +176,15 @@ namespace PAYNLSDK.Enums
     /// </summary>
     public enum ActiveState
     {
+        /// <summary>
+        /// Is inactive
+        /// </summary>
         [EnumMember(Value = "0")]
         Inactive = 0,
+
+        /// <summary>
+        /// Is active
+        /// </summary>
         [EnumMember(Value = "1")]
         Active = 1
     }
@@ -159,8 +194,15 @@ namespace PAYNLSDK.Enums
     /// </summary>
     public enum Secure
     {
+        /// <summary>
+        /// No additional security was used
+        /// </summary>
         [EnumMember(Value = "0")]
         NotSecure = 0,
+
+        /// <summary>
+        /// Security uses Secure3D
+        /// </summary>
         [EnumMember(Value = "1")]
         Secure3D = 1
     }
@@ -170,8 +212,15 @@ namespace PAYNLSDK.Enums
     /// </summary>
     public enum Availability
     {
+        /// <summary>
+        /// Is not unavailable
+        /// </summary>
         [EnumMember(Value = "0")]
         Unavailable = 0,
+
+        /// <summary>
+        /// Is available
+        /// </summary>
         [EnumMember(Value = "1")]
         Available = 1
     }
@@ -181,16 +230,27 @@ namespace PAYNLSDK.Enums
     /// </summary>
     public enum Blacklist
     {
+        /// <summary>
+        /// not blacklisted
+        /// </summary>
         [EnumMember(Value = "0")]
         NotBlacklisted = 0,
+
+        /// <summary>
+        /// blacklisted
+        /// </summary>
         [EnumMember(Value = "1")]
         Blacklisted = 1,
+
+        /// <summary>
+        /// blacklisted by others
+        /// </summary>
         [EnumMember(Value = "2")]
         BlacklistedByOthers = 2
     }
 
     /// <summary>
-    /// Paymentstatus enumeration representing PAYNL Payment statusses
+    /// Payment status enumeration representing PAYNL Payment statuses
     /// </summary>
     public enum PaymentStatus
     {

@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using Newtonsoft.Json;
 
 namespace PAYNLSDK.API.Alliance.GetMerchant
 {
@@ -39,7 +40,7 @@ namespace PAYNLSDK.API.Alliance.GetMerchant
             public string cocNumber { get; set; }
             public string vatNumber { get; set; }
             public string image { get; set; }
-            public string contactData { get; set; }
+            public List<ContactData> contactData { get; set; }
         }
 
         public class PostalAddress
@@ -118,6 +119,16 @@ namespace PAYNLSDK.API.Alliance.GetMerchant
             public string bic { get; set; }
             [JsonProperty("countryCode")]
             public string countryCode { get; set; }
+        }
+
+        public class ContactData
+        {
+            [JsonProperty("type")]
+            public string Type { get; set; }
+            [JsonProperty("value")]
+            public string Value { get; set; }
+            [JsonProperty("description")]
+            public string Description { get; set; }
         }
 
     }
