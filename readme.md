@@ -16,22 +16,19 @@ From nuget:
 Install-Package RoodFluweel.PAYNLSDK
 ```
 
-Or if you want bleeding edge:
-```
-PM> Install-Package RoodFluweel.PAYNLSDK -Source https://www.myget.org/F/paynl/api/v3/index.json
-``` 
-
 ## Configuration
 
 Setting the configuration:
+
 ```c#
-var config = new PayNlConfiguration("e4test6b70code9adreplacef0fee5e0ab", "SL-1234-1234");
-var client = new Client(payNlConfig);
+var payNlConfig = new PAYNLSDK.API.PayNlConfiguration("SL-1234-1234", "e4test6b70code9adreplacef0fee5e0ab");
+var client = new PAYNLSDK.Net.Client(payNlConfig);
 ```
 
 ## Usage of the GetService
 
 Getting a list of available payment methods, use the Getservice.
+
 ```c#
 var response = PAYNLSDK.Transaction.GetService(paymentMethodId);
 //paymentMethodId: is optional
