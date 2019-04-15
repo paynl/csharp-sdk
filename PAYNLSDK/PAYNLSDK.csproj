@@ -28,6 +28,8 @@
         <AssemblyName>PayNLSdk</AssemblyName>
         <RootNamespace>PayNLSdk</RootNamespace>
         <Configurations>Debug;Release;AppVeyor</Configurations>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     </PropertyGroup>
 
     <PropertyGroup>

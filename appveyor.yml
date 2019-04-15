@@ -6,12 +6,19 @@
   artifacts:
     - path: '**\RoodFluweel.PAYNLSDK.*.nupkg' # find all NuGet packages recursively
       name: MyApp
+    - path: '**\RoodFluweel.PAYNLSDK.*.snupkg' # find all NuGet PDB packages recursively
+      name: MyPdb
   deploy:
-    provider: NuGet
-    api_key:
-      secure: pd9kF0t0Bt6BExgB0t6xEQT9pAlFrRhFZDl6LDGTZjtgaI4nd4ilIongUFWZKLOO
-    skip_symbols: false
-    artifact: MyApp
+    - provider: NuGet
+      api_key:
+        secure: pd9kF0t0Bt6BExgB0t6xEQT9pAlFrRhFZDl6LDGTZjtgaI4nd4ilIongUFWZKLOO
+      skip_symbols: false
+      artifact: MyApp
+    - provider: NuGet
+      api_key:
+        secure: pd9kF0t0Bt6BExgB0t6xEQT9pAlFrRhFZDl6LDGTZjtgaI4nd4ilIongUFWZKLOO
+      skip_symbols: false
+      artifact: MyPdb
   os: Visual Studio 2017
   install:
     - choco install gitversion.portable -pre -y
