@@ -37,7 +37,7 @@ namespace PAYNLSDK.Utilities
 
         public static bool IsNonEmptyInt(int? param)
         {
-            return (param == null);
+            return (param != null);
         }
 
     }
