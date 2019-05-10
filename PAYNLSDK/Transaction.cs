@@ -7,6 +7,7 @@ using TransactionInfo = PAYNLSDK.API.Transaction.Info.Request;
 using TransactionRefund = PAYNLSDK.API.Transaction.Refund.Request;
 using TransactionApprove = PAYNLSDK.API.Transaction.Approve.Request;
 using TransactionDecline = PAYNLSDK.API.Transaction.Decline.Request;
+using Newtonsoft.Json;
 
 namespace PAYNLSDK
 {
@@ -269,6 +270,33 @@ namespace PAYNLSDK
         static public PAYNLSDK.API.Transaction.Refund.Response Refund(string transactionId)
         {
             return Refund(transactionId, null, null, null);
+        }
+
+        /// <summary>
+        /// Performs a (partial) refund call on an existing transaction
+        /// </summary>
+        /// <param name="transactionId">Transaction ID</param>
+        /// <param name="description">Reason for the refund. May be null.</param>
+        /// <param name="amount">Amount of the refund. If null is given, it will be the full amount of the transaction.</param>
+        /// <param name="processDate">Date to process the refund. May be null.</param>
+        /// <param name="exchangeUrl">The url to send notifications to on changes in this refund.</param>
+        /// <returns>Full response including the Refund ID</returns>
+        static public PAYNLSDK.API.Transaction.Refund.Response Refund(string transactionId, string description, int? amount, DateTime? processDate, string exchangeUrl)
+        {
+            // Unable to reuse existing method for refunding,  since this specific case needs to be done with different Request 
+            // API.Transaction.Refund.Request vs. API.Refund.Transaction.Request (already existing in code, we simply use this here)
+
+            var request = new API.Refund.Transaction.Request(transactionId);
+            request.TransactionId = transactionId;
+            request.Description = description;
+            request.Amount = amount;
+            request.ProcessDate = processDate;
+            request.ExchangeUrl = exchangeUrl;
+            Client c = new Client();
+            c.PerformRequest(request);
+            // We will convert the response to a PAYNLSDK.API.Transaction.Refund.Response so we stay in the same, original, namespace.
+            // We manage to get away with this because the API responses have the same definition.
+            return JsonConvert.DeserializeObject<PAYNLSDK.API.Transaction.Refund.Response>(request.RawResponse);
         }
 
         /// <summary>
