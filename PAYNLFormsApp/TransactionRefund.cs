@@ -21,7 +21,7 @@ namespace PAYNLFormsApp
         {
             
             DebugForm form = new DebugForm();
-            form.TransactionRefund(tbTransactionID.Text, tbAmount.Text);
+            form.TransactionRefund(tbTransactionID.Text, tbAmount.Text, tbExchangeUrl.Text);
             form.ShowDialog();
 
       

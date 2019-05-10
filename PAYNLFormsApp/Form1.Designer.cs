@@ -55,12 +55,12 @@
             this.refundToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.refundAddToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.refundAPIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.refundInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tbMain = new System.Windows.Forms.TextBox();
             this.tbDebug = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.splitter1 = new System.Windows.Forms.Splitter();
-            this.refundAPIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.refundInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -217,7 +217,7 @@
             // payNLAPIToolStripMenuItem
             // 
             this.payNLAPIToolStripMenuItem.Name = "payNLAPIToolStripMenuItem";
-            this.payNLAPIToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.payNLAPIToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.payNLAPIToolStripMenuItem.Text = "PayNL API";
             this.payNLAPIToolStripMenuItem.Click += new System.EventHandler(this.payNLAPIToolStripMenuItem_Click);
             // 
@@ -279,9 +279,24 @@
             // refundAddToolStripMenuItem
             // 
             this.refundAddToolStripMenuItem.Name = "refundAddToolStripMenuItem";
-            this.refundAddToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.refundAddToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.refundAddToolStripMenuItem.Text = "Refund-Add";
             this.refundAddToolStripMenuItem.Click += new System.EventHandler(this.refundAddToolStripMenuItem_Click);
+            // 
+            // refundAPIToolStripMenuItem
+            // 
+            this.refundAPIToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.refundInfoToolStripMenuItem});
+            this.refundAPIToolStripMenuItem.Name = "refundAPIToolStripMenuItem";
+            this.refundAPIToolStripMenuItem.Size = new System.Drawing.Size(78, 20);
+            this.refundAPIToolStripMenuItem.Text = "Refund API";
+            // 
+            // refundInfoToolStripMenuItem
+            // 
+            this.refundInfoToolStripMenuItem.Name = "refundInfoToolStripMenuItem";
+            this.refundInfoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.refundInfoToolStripMenuItem.Text = "Refund.Info";
+            this.refundInfoToolStripMenuItem.Click += new System.EventHandler(this.refundInfoToolStripMenuItem_Click);
             // 
             // tbMain
             // 
@@ -322,21 +337,6 @@
             this.splitter1.Size = new System.Drawing.Size(3, 535);
             this.splitter1.TabIndex = 2;
             this.splitter1.TabStop = false;
-            // 
-            // refundAPIToolStripMenuItem
-            // 
-            this.refundAPIToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.refundInfoToolStripMenuItem});
-            this.refundAPIToolStripMenuItem.Name = "refundAPIToolStripMenuItem";
-            this.refundAPIToolStripMenuItem.Size = new System.Drawing.Size(78, 20);
-            this.refundAPIToolStripMenuItem.Text = "Refund API";
-            // 
-            // refundInfoToolStripMenuItem
-            // 
-            this.refundInfoToolStripMenuItem.Name = "refundInfoToolStripMenuItem";
-            this.refundInfoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.refundInfoToolStripMenuItem.Text = "Refund.Info";
-            this.refundInfoToolStripMenuItem.Click += new System.EventHandler(this.refundInfoToolStripMenuItem_Click);
             // 
             // Form1
             // 

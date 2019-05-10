@@ -136,7 +136,7 @@ namespace PAYNLFormsApp
 
         }
 
-        public void TransactionRefund(string transactionID, string amount)
+        public void TransactionRefund(string transactionID, string amount, string exchangeUrl)
         {
             try
             {
@@ -159,6 +159,17 @@ namespace PAYNLFormsApp
                     AddDebug("foutieve invoer");
                     AddDebug("transactionID mag niet leeg zijn");
 
+                }
+
+                else if (exchangeUrl != "")
+                {
+                    APISettings.InitAPI();
+                    AddDebug("-----");
+                    AddDebug("Working with modified version of call");
+
+                    PAYNLSDK.API.Transaction.Refund.Response response = Transaction.Refund(transactionID, null, numValue, null, exchangeUrl);
+
+                    tbMain.Text = response.RefundId;
                 }
 
                 else

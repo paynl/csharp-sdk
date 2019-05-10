@@ -34,6 +34,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tbTransactionID = new System.Windows.Forms.TextBox();
             this.tbAmount = new System.Windows.Forms.TextBox();
+            this.tbExchangeUrl = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btOK
@@ -78,21 +80,39 @@
             // 
             this.tbTransactionID.Location = new System.Drawing.Point(206, 26);
             this.tbTransactionID.Name = "tbTransactionID";
-            this.tbTransactionID.Size = new System.Drawing.Size(100, 20);
+            this.tbTransactionID.Size = new System.Drawing.Size(214, 20);
             this.tbTransactionID.TabIndex = 4;
             // 
             // tbAmount
             // 
             this.tbAmount.Location = new System.Drawing.Point(206, 77);
             this.tbAmount.Name = "tbAmount";
-            this.tbAmount.Size = new System.Drawing.Size(100, 20);
+            this.tbAmount.Size = new System.Drawing.Size(214, 20);
             this.tbAmount.TabIndex = 5;
+            // 
+            // tbExchangeUrl
+            // 
+            this.tbExchangeUrl.Location = new System.Drawing.Point(206, 120);
+            this.tbExchangeUrl.Name = "tbExchangeUrl";
+            this.tbExchangeUrl.Size = new System.Drawing.Size(214, 20);
+            this.tbExchangeUrl.TabIndex = 7;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(117, 128);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(80, 13);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "Exchange URL";
             // 
             // TransactionRefund
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(701, 256);
+            this.Controls.Add(this.tbExchangeUrl);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.tbAmount);
             this.Controls.Add(this.tbTransactionID);
             this.Controls.Add(this.label2);
@@ -114,5 +134,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox tbTransactionID;
         private System.Windows.Forms.TextBox tbAmount;
+        private System.Windows.Forms.TextBox tbExchangeUrl;
+        private System.Windows.Forms.Label label3;
     }
 }
