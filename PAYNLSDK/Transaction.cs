@@ -179,6 +179,40 @@ namespace PAYNLSDK
         }
 
         /// <summary>
+        /// Checks whether a status is a REFUND or REFUNDING status
+        /// </summary>
+        /// <param name="status">Transaction status</param>
+        /// <returns>True if REFUND or REFUNDING, false otherwise</returns>
+        static public bool IsRefund(Enums.PaymentStatus status)
+        {
+            try
+            {
+                return ((status == Enums.PaymentStatus.REFUND) || (status == Enums.PaymentStatus.REFUNDING));
+            }
+            catch (ErrorException e)
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Checks whether a status is a REFUNDING status, meaning a refund is currently being processed.
+        /// </summary>
+        /// <param name="status">Transaction status</param>
+        /// <returns>True if REFUNDING, false otherwise</returns>
+        static public bool IsRefunding(Enums.PaymentStatus status)
+        {
+            try
+            {
+                return ((status == Enums.PaymentStatus.REFUNDING));
+            }
+            catch (ErrorException e)
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
         /// Query the service for all (current status) information on a transaction
         /// </summary>
         /// <param name="transactionId">Transaction ID</param>
