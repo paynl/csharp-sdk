@@ -17,11 +17,11 @@ namespace PAYNLFormsApp
             InitializeComponent();
         }
 
-        private void btOK_Click(object sender, EventArgs e)
+        private async void btOK_Click(object sender, EventArgs e)
         {
             
             DebugForm form = new DebugForm();
-            form.TransactionRefund(tbTransactionID.Text, tbAmount.Text, tbExchangeUrl.Text);
+            await form.TransactionRefundAsync(tbTransactionID.Text, tbAmount.Text, tbExchangeUrl.Text);
             form.ShowDialog();
 
       

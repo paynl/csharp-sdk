@@ -1,4 +1,5 @@
-﻿using PAYNLSDK.Net;
+﻿using System.Threading.Tasks;
+using PAYNLSDK.Net;
 using PaymentMethodGet = PAYNLSDK.API.PaymentMethod.Get.Request;
 using PaymentMethodGetAll = PAYNLSDK.API.PaymentMethod.GetAll.Request;
 
@@ -8,19 +9,26 @@ namespace PAYNLSDK
     /// Generic Payment Method service helper class.
     /// Makes calling PAYNL Services easier and illiminates the need to fully initiate all Request objects.
     /// </summary>
-    public class PaymentMethod
+    public class PaymentMethod : Client
     {
+        public PaymentMethod(string apiToken, string serviceID)
+            : base(apiToken, serviceID)
+        {
+        }
+
         /// <summary>
         /// Get information for the requested payment method.
         /// </summary>
         /// <param name="paymentMethodId">Payment Method ID</param>
         /// <returns>Response containing the payment method data</returns>
-        static public PAYNLSDK.API.PaymentMethod.Get.Response Get(int paymentMethodId)
+        public async Task<API.PaymentMethod.Get.Response> GetAsync(int paymentMethodId)
         {
-            PaymentMethodGet request = new PaymentMethodGet();
-            request.PaymentMethodId = paymentMethodId;
-            Client c = new Client("", "");
-            c.PerformRequest(request);
+            var request = new PaymentMethodGet
+            {
+                PaymentMethodId = paymentMethodId
+            };
+
+            await PerformRequestAsync(request);
             return request.Response;
         }
 
@@ -28,11 +36,10 @@ namespace PAYNLSDK
         /// Get information for all payment methods.
         /// </summary>
         /// <returns>Response containing a list of information for all payment methods</returns>
-        static public PAYNLSDK.API.PaymentMethod.GetAll.Response GetAll()
+        public async Task<API.PaymentMethod.GetAll.Response> GetAllAsync()
         {
-            PaymentMethodGetAll request = new PaymentMethodGetAll();
-            Client c = new Client("", "");
-            c.PerformRequest(request);
+            var request = new PaymentMethodGetAll();
+            await PerformRequestAsync(request);
             return request.Response;
         }
     }

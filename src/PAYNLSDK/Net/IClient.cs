@@ -1,8 +1,8 @@
 ﻿using PAYNLSDK.API;
-using PAYNLSDK.Net.ProxyConfigurationInjector;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -22,7 +22,7 @@ namespace PAYNLSDK.Net
         /// <summary>
         /// Proxy injector
         /// </summary>
-        IProxyConfigurationInjector ProxyConfigurationInjector { get; }
+        IWebProxy ProxyConfiguration { get; }
 
         /// <summary>
         /// API VERSION
@@ -44,6 +44,6 @@ namespace PAYNLSDK.Net
         /// </summary>
         /// <param name="request">Specific request implementation to perform</param>
         /// <returns>raw response string</returns>
-        string PerformRequest(RequestBase request);
+        Task<string> PerformRequestAsync(RequestBase request);
     }
 }

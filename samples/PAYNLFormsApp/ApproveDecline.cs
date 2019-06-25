@@ -17,19 +17,19 @@ namespace PAYNLFormsApp
             InitializeComponent();
         }
 
-        private void btApprove_Click(object sender, EventArgs e)
+        private async void btApprove_Click(object sender, EventArgs e)
         {
 
             DebugForm form = new DebugForm();
-            form.Approve(tbTransactionID.Text);
+            await form.ApproveAsync(tbTransactionID.Text);
             form.ShowDialog();
 
         }
 
-        private void btDecline_Click(object sender, EventArgs e)
+        private async void btDecline_Click(object sender, EventArgs e)
         {
             DebugForm form = new DebugForm();
-            form.Decline(tbTransactionID.Text);
+            await form.DeclineAsync(tbTransactionID.Text);
             form.ShowDialog();
         }
 

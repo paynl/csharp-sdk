@@ -1,4 +1,5 @@
 ﻿using PAYNLSDK.Enums;
+using PAYNLSDK.Utilities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,7 +24,7 @@ namespace PAYNLFormsApp
 
         private void StartTransaction_Load(object sender, EventArgs e)
         {
-            LastRequests.LastTransactionStart = Fixtures.TransactionStart.GetFixtureNoProductLines();
+            LastRequests.LastTransactionStart = new Fixtures.TransactionStart().GetFixtureNoProductLines();
 
             // load
             tbAmount.Text = LastRequests.LastTransactionStart.Amount.ToString();

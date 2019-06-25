@@ -29,42 +29,42 @@ namespace PAYNLFormsApp
 
         }
 
-        public void dumpPaymentmethods()
+        public async Task dumpPaymentmethodsAsync()
         {
             APISettings.InitAPI();
             ClearDebug();
             PAYNLSDK.API.PaymentMethod.GetAll.Request request = new PAYNLSDK.API.PaymentMethod.GetAll.Request();
             InitRequestDebug(request);
-            APISettings.Client.PerformRequest(request);
+            await APISettings.Client.PerformRequestAsync(request);
             DebugRawResponse(request);
             tbMain.Text = request.Response.ToString();
         }
 
-        public void dumpTransactionGetService()
+        public async Task dumpTransactionGetServiceAsync()
         { 
         APISettings.InitAPI();
             ClearDebug();
         PAYNLSDK.API.Transaction.GetService.Request request = new PAYNLSDK.API.Transaction.GetService.Request();
             InitRequestDebug(request);
-        APISettings.Client.PerformRequest(request);
+        await APISettings.Client.PerformRequestAsync(request);
             DebugRawResponse(request);
         tbMain.Text = request.Response.ToString();
 
          }
 
-        public void dumpTransactionGetLast()
+        public async Task dumpTransactionGetLastAsync()
         {
             APISettings.InitAPI();
             ClearDebug();
             PAYNLSDK.API.Transaction.GetLastTransactions.Request request = new PAYNLSDK.API.Transaction.GetLastTransactions.Request();
             InitRequestDebug(request);
-            APISettings.Client.PerformRequest(request);
+            await APISettings.Client.PerformRequestAsync(request);
             DebugRawResponse(request);
             tbMain.Text = request.Response.ToString();
         }
 
 
-        public void Approve(string transactionID)
+        public async Task ApproveAsync(string transactionID)
         {
 
             try
@@ -85,7 +85,7 @@ namespace PAYNLFormsApp
 
                     InitRequestDebug(request);
 
-                    APISettings.Client.PerformRequest(request);
+                    await APISettings.Client.PerformRequestAsync(request);
                     DebugRawResponse(request);
                     tbMain.Text = request.Response.Message.ToString();
                 }
@@ -99,7 +99,7 @@ namespace PAYNLFormsApp
 
         }
 
-        public void Decline(string transactionID)
+        public async Task DeclineAsync(string transactionID)
         {
             try
             {
@@ -119,7 +119,7 @@ namespace PAYNLFormsApp
 
                     InitRequestDebug(request);
 
-                    APISettings.Client.PerformRequest(request);
+                    await APISettings.Client.PerformRequestAsync(request);
                     DebugRawResponse(request);
 
 
@@ -136,7 +136,7 @@ namespace PAYNLFormsApp
 
         }
 
-        public void TransactionRefund(string transactionID, string amount, string exchangeUrl)
+        public async Task TransactionRefundAsync(string transactionID, string amount, string exchangeUrl)
         {
             try
             {
@@ -167,7 +167,7 @@ namespace PAYNLFormsApp
                     AddDebug("-----");
                     AddDebug("Working with modified version of call");
 
-                    PAYNLSDK.API.Transaction.Refund.Response response = Transaction.Refund(transactionID, null, numValue, null, exchangeUrl);
+                    PAYNLSDK.API.Transaction.Refund.Response response = await new Transaction().RefundAsync(transactionID, null, numValue, null, exchangeUrl);
 
                     tbMain.Text = response.RefundId;
                 }
@@ -181,7 +181,7 @@ namespace PAYNLFormsApp
 
                     InitRequestDebug(request);
 
-                    APISettings.Client.PerformRequest(request);
+                    await APISettings.Client.PerformRequestAsync(request);
                     DebugRawResponse(request);
 
                     tbMain.Text = request.Response.RefundId;
@@ -197,7 +197,7 @@ namespace PAYNLFormsApp
 
         }
 
-        public void RefundAdd(string bankAccountName, string bankAccountNumber, string amount)
+        public async Task RefundAddAsync(string bankAccountName, string bankAccountNumber, string amount)
         {
 
             try
@@ -220,7 +220,7 @@ namespace PAYNLFormsApp
                     PAYNLSDK.API.Refund.Add.Request request = new PAYNLSDK.API.Refund.Add.Request(numValue, bankAccountName, bankAccountNumber, "");
                     InitRequestDebug(request);
 
-                    APISettings.Client.PerformRequest(request);
+                    await APISettings.Client.PerformRequestAsync(request);
                     DebugRawResponse(request);
 
 
@@ -236,7 +236,7 @@ namespace PAYNLFormsApp
             }
         }
 
-        public void TransactionRefundInfo(string refundID)
+        public async Task TransactionRefundInfoAsync(string refundID)
         {
 
             try
@@ -247,7 +247,7 @@ namespace PAYNLFormsApp
                 PAYNLSDK.API.Refund.Info.Request request = new PAYNLSDK.API.Refund.Info.Request(refundID);
                 InitRequestDebug(request);
 
-                APISettings.Client.PerformRequest(request);
+                await APISettings.Client.PerformRequestAsync(request);
                 DebugRawResponse(request);
 
 

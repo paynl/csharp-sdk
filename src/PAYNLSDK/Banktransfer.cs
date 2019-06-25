@@ -7,20 +7,23 @@ using System.Threading.Tasks;
 
 namespace PAYNLSDK
 {
-    public class Banktransfer
+    public class Banktransfer : Client
     {
-        static public API.Banktransfer.Add.Response Add(PAYNLSDK.API.Banktransfer.Add.Request request)
+        public Banktransfer(string apiToken, string serviceID)
+            : base(apiToken, serviceID)
         {
-            Client c = new Client("", "");
-            c.PerformRequest(request);
+        }
+
+        public async Task<API.Banktransfer.Add.Response> AddAsync(API.Banktransfer.Add.Request request)
+        {
+            await PerformRequestAsync(request);
             return request.Response;
         }
 
-        static public API.Banktransfer.Add.Response Add(int amount, string bankAccountHolder, string bankAccountNumber, string bankAccountBic)
+        public async Task<API.Banktransfer.Add.Response> AddAsync(int amount, string bankAccountHolder, string bankAccountNumber, string bankAccountBic)
         {
-            Client c = new Client("", "");
             var request = new API.Banktransfer.Add.Request(amount, bankAccountHolder, bankAccountNumber, bankAccountBic);
-            c.PerformRequest(request);
+            await PerformRequestAsync(request);
             return request.Response;
         }
     }

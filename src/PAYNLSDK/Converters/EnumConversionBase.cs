@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using PAYNLSDK.Utilities;
 using System;
 
 namespace PAYNLSDK.Converters
@@ -9,12 +10,12 @@ namespace PAYNLSDK.Converters
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            return Enums.EnumUtil.ToEnum(serializer.Deserialize<string>(reader), EnumType);
+            return EnumUtil.ToEnum(serializer.Deserialize<string>(reader), EnumType);
         }
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            string result = Enums.EnumUtil.ToEnumString(value, EnumType);
+            string result = EnumUtil.ToEnumString(value, EnumType);
             writer.WriteValue(result);
             return;
         }

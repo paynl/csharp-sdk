@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using PAYNLSDK.Net;
 using System;
+using System.Threading.Tasks;
 
 namespace PAYNLSDK.API.Validate
 {
@@ -36,69 +37,69 @@ namespace PAYNLSDK.API.Validate
             SerializerSettings = serializerSettings;
         }
 
-        public bool ValidatePayIP(string ipAddress)
+        public async Task<bool> ValidatePayIPAsync(string ipAddress)
         {
             IsPayServerIp.Request request = new IsPayServerIp.Request();
             request.IpAddress = ipAddress;
-            Client.PerformRequest(request);
+            await Client.PerformRequestAsync(request);
             return request.Response.result;
         }
 
-        public bool ValidateBankAccountNumber(string bankAccountNumber, bool international)
+        public async Task<bool> ValidateBankAccountNumberAsync(string bankAccountNumber, bool international)
         {
             if (international)
             {
                 BankAccountNumberInternational.Request request = new BankAccountNumberInternational.Request();
                 request.BankAccountNumber = bankAccountNumber;
-                Client.PerformRequest(request);
+                await Client.PerformRequestAsync(request);
                 return request.Response.result;
             }
             else
             {
                 BankAccountNumber.Request request = new BankAccountNumber.Request();
                 request.BankAccountNumber = bankAccountNumber;
-                Client.PerformRequest(request);
+                await Client.PerformRequestAsync(request);
                 return request.Response.result;
             }
         }
 
-        public bool ValidateIBAN(string iban)
+        public async Task<bool> ValidateIBANAsync(string iban)
         {
             IBAN.Request request = new IBAN.Request();
             request.IBAN = iban;
-            Client.PerformRequest(request);
+            await Client.PerformRequestAsync(request);
             return request.Response.result;
         }
 
-        public bool ValidateSWIFT(string swift)
+        public async Task<bool> ValidateSWIFTAsync(string swift)
         {
             SWIFT.Request request = new SWIFT.Request();
             request.SWIFT = swift;
-            Client.PerformRequest(request);
+            await Client.PerformRequestAsync(request);
             return request.Response.result;
         }
 
-        public bool ValidateKVK(string kvk)
+        public async Task<bool> ValidateKVKAsync(string kvk)
         {
             KVK.Request request = new KVK.Request();
             request.KVK = kvk;
-            Client.PerformRequest(request);
+            await Client.PerformRequestAsync(request);
             return request.Response.result;
         }
 
-        public bool ValidateVAT(string vat)
+        public async Task<bool> ValidateVATAsync(string vat)
         {
             VAT.Request request = new VAT.Request();
             request.VAT = vat;
-            Client.PerformRequest(request);
+            await Client.PerformRequestAsync(request);
             return request.Response.result;
         }
 
-        public bool ValidateSOFI(string sofi)
+        public async Task<bool> ValidateSOFIAsync(string sofi)
         {
             SOFI.Request request = new SOFI.Request();
             request.SOFI = sofi;
-            Client.PerformRequest(request);
+            await Client.PerformRequestAsync(request);
             return request.Response.result;
         }
 

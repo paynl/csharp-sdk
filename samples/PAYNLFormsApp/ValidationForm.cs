@@ -22,7 +22,7 @@ namespace PAYNLFormsApp
             validator = new Util(APISettings.Client);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private async void button1_Click(object sender, EventArgs e)
         {
             try
             {
@@ -31,7 +31,7 @@ namespace PAYNLFormsApp
                 bool i = checkBox1.Checked;
                 AddLine(string.Format("Validating bankaccount number {0} ({1})", v, i ? "INTERNATIONAL" : "NATIONAL"));
                 AddLine("");
-                bool rs = validator.ValidateBankAccountNumber(v, i);
+                bool rs = await validator.ValidateBankAccountNumberAsync(v, i);
                 AddLine(string.Format("RESULT = {0}", rs));
             }
             catch (Exception ex)
@@ -50,7 +50,7 @@ namespace PAYNLFormsApp
                 tbOut.AppendText(System.Environment.NewLine + value);
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private async void button2_Click(object sender, EventArgs e)
         {
             try
             {
@@ -59,7 +59,7 @@ namespace PAYNLFormsApp
                 bool i = checkBox1.Checked;
                 AddLine(string.Format("Validating IBAN {0}", v));
                 AddLine("");
-                bool rs = validator.ValidateIBAN(v);
+                bool rs = await validator.ValidateIBANAsync(v);
                 AddLine(string.Format("RESULT = {0}", rs));
             }
             catch (Exception ex)
@@ -69,7 +69,7 @@ namespace PAYNLFormsApp
             }
         }
 
-        private void textBox3_TextChanged(object sender, EventArgs e)
+        private async void textBox3_TextChanged(object sender, EventArgs e)
         {
             try
             {
@@ -78,7 +78,7 @@ namespace PAYNLFormsApp
                 bool i = checkBox1.Checked;
                 AddLine(string.Format("Validating SWIFT {0}", v));
                 AddLine("");
-                bool rs = validator.ValidateSWIFT(v);
+                bool rs = await validator.ValidateSWIFTAsync(v);
                 AddLine(string.Format("RESULT = {0}", rs));
             }
             catch (Exception ex)
@@ -88,7 +88,7 @@ namespace PAYNLFormsApp
             }
         }
 
-        private void textBox4_TextChanged(object sender, EventArgs e)
+        private async void textBox4_TextChanged(object sender, EventArgs e)
         {
             try
             {
@@ -97,7 +97,7 @@ namespace PAYNLFormsApp
                 bool i = checkBox1.Checked;
                 AddLine(string.Format("Validating KVK {0}", v));
                 AddLine("");
-                bool rs = validator.ValidateKVK(v);
+                bool rs = await validator.ValidateKVKAsync(v);
                 AddLine(string.Format("RESULT = {0}", rs));
             }
             catch (Exception ex)
@@ -107,7 +107,7 @@ namespace PAYNLFormsApp
             }
         }
 
-        private void textBox5_TextChanged(object sender, EventArgs e)
+        private async void textBox5_TextChanged(object sender, EventArgs e)
         {
             try
             {
@@ -116,7 +116,7 @@ namespace PAYNLFormsApp
                 bool i = checkBox1.Checked;
                 AddLine(string.Format("Validating SOFI {0}", v));
                 AddLine("");
-                bool rs = validator.ValidateSOFI(v);
+                bool rs = await validator.ValidateSOFIAsync(v);
                 AddLine(string.Format("RESULT = {0}", rs));
             }
             catch (Exception ex)
@@ -126,7 +126,7 @@ namespace PAYNLFormsApp
             }
         }
 
-        private void textBox6_TextChanged(object sender, EventArgs e)
+        private async void textBox6_TextChanged(object sender, EventArgs e)
         {
             try
             {
@@ -135,7 +135,7 @@ namespace PAYNLFormsApp
                 bool i = checkBox1.Checked;
                 AddLine(string.Format("Validating VAT {0}", v));
                 AddLine("");
-                bool rs = validator.ValidateVAT(v);
+                bool rs = await validator.ValidateVATAsync(v);
                 AddLine(string.Format("RESULT = {0}", rs));
             }
             catch (Exception ex)
@@ -145,7 +145,7 @@ namespace PAYNLFormsApp
             }
         }
 
-        private void textBox7_TextChanged(object sender, EventArgs e)
+        private async void textBox7_TextChanged(object sender, EventArgs e)
         {
             try
             {
@@ -154,7 +154,7 @@ namespace PAYNLFormsApp
                 bool i = checkBox1.Checked;
                 AddLine(string.Format("Validating IP {0}", v));
                 AddLine("");
-                bool rs = validator.ValidatePayIP(v);
+                bool rs = await validator.ValidatePayIPAsync(v);
                 AddLine(string.Format("RESULT = {0}", rs));
             }
             catch (Exception ex)
