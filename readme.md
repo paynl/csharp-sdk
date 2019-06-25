@@ -13,15 +13,15 @@ With this SDK you will be able to start transactions and retrieve transactions w
 
 Setting the configuration:
 ```c#
-PAYNLSDK.API.RequestBase.ApiToken = "e41f83b246b706291ea9ad798ccfd9f0fee5e0ab";
-PAYNLSDK.API.RequestBase.ServiceId = "SL-3490-4320";
+SimpleIoc.Default.Register(() => new LoggerFactory().CreateLogger(nameof(Quicktstart)));
+SimpleIoc.Default.Register<ISettingsService>(() => new SettingsService("e41f83b246b706291ea9ad798ccfd9f0fee5e0ab", "SL-3490-4320"));
+SimpleIoc.Default.Register<IWebProxy>(() => null);
+SimpleIoc.Default.Register<IClientService, ClientService>();
+SimpleIoc.Default.Register<IUtilityService, UtilityService>();
 ```
 
 Getting a list of available payment methods, use the Getservice.
 ```c#
-PAYNLSDK.API.RequestBase.ApiToken = "e41f83b246b706291ea9ad798ccfd9f0fee5e0ab";
-PAYNLSDK.API.RequestBase.ServiceId = "SL-3490-4320";
-PAYNLSDK.API.Transaction.GetService.Response response = PAYNLSDK.Transaction.GetService(paymentMethodId);
 //paymentMethodId: is optional
 //The ID of the payment method. Only the payment options linked to the provided payment method ID will be returned if an ID is provided.
 //If omitted, all available payment options are returned. Use the following IDs to filter the options:
@@ -30,96 +30,110 @@ PAYNLSDK.API.Transaction.GetService.Response response = PAYNLSDK.Transaction.Get
 //3. Pay per call.
 //4. Pay per transaction
 //5. Pay per minute.
+PaymentMethodId? paymentMethodId = null;
+var transaction = new PAYNLSDK.Transaction(SimpleIoc.Default.GetInstance<IClientService>());
+return transaction.GetServiceAsync(paymentMethodId);
 ```
 
 Starting a transaction:
 ```c#
-PAYNLSDK.API.RequestBase.ApiToken = "e41f83b246b706291ea9ad798ccfd9f0fee5e0ab";
-PAYNLSDK.API.RequestBase.ServiceId = "SL-3490-4320";
+var transaction = new PAYNLSDK.Transaction(SimpleIoc.Default.GetInstance<IClientService>());
+var request = transaction.CreateTransactionRequest("127.0.0.1", "http://example.org/visitor-return-after-payment");
 
-PAYNLSDK.API.Transaction.Start.Request request = PAYNLSDK.Transaction.CreateTransactionRequest("127.0.0.1", "http://example.org/visitor-return-after-payment");
 request.Amount = 621;
 
 // Optional values
-options.store("paymentMethod", 10;
-options.store("description", "demo payment";
-options.store("language","EN";
+// Uncommented because not available in sdk!
+//options.store("paymentMethod", 10);
+//options.store("description", "demo payment");
+//options.store("language", "EN");
 
 // Transaction data
-request.Transaction = new PAYNLSDK.Objects.TransactionData();
-request.Transaction.Currency = "EUR";
-request.Transaction.CostsVat = null;
-request.Transaction.OrderExchangeUrl = "https://example.org/exchange.php";
-request.Transaction.Description = "TEST PAYMENT";
-request.Transaction.ExpireDate = DateTime.Now.AddDays(14);
+request.Transaction = new PAYNLSDK.Objects.TransactionData
+{
+    Currency = "EUR",
+    CostsVat = null,
+    OrderExchangeUrl = "https://example.org/exchange.php",
+    Description = "TEST PAYMENT",
+    ExpireDate = DateTime.Now.AddDays(14)
+};
 
 // Optional Stats data
-request.StatsData = new PAYNLSDK.Objects.StatsDetails();
-request.StatsData.Info = "your information";
-request.StatsData.Tool = "C#.NET";
-request.StatsData.Extra1 = "X";
-request.StatsData.Extra2 = "Y";
-request.StatsData.Extra3 = "Z";
+request.StatsData = new PAYNLSDK.Objects.StatsDetails
+{
+    Info = "your information",
+    Tool = "C#.NET",
+    Extra1 = "X",
+    Extra2 = "Y",
+    Extra3 = "Z"
+};
 
 // Initialize Salesdata
-
-request.SalesData = new PAYNLSDK.Objects.SalesData();
-request.SalesData.InvoiceDate = DateTime.Now;
-request.SalesData.DeliveryDate = DateTime.Now;
-request.SalesData.OrderData = new System.Collections.Generic.List<PAYNLSDK.Objects.OrderData>();
-
-// Add products
-request.SalesData.OrderData.Add(new PAYNLSDK.Objects.OrderData("SKU-8489", "Testproduct 1", 2995, "H", 1));
-request.SalesData.OrderData.Add(new PAYNLSDK.Objects.OrderData("SKU-8421", "Testproduct 2", 995, "H", 1));
-request.SalesData.OrderData.Add(new PAYNLSDK.Objects.OrderData("SKU-2359", "Testproduct 3", 2499, "H", 1));
+request.SalesData = new PAYNLSDK.Objects.SalesData
+{
+    InvoiceDate = DateTime.Now,
+    DeliveryDate = DateTime.Now,
+    OrderData = new List<PAYNLSDK.Objects.OrderData>()
+    {
+        // Add products
+        new PAYNLSDK.Objects.OrderData("SKU-8489", "Testproduct 1", 2995, "H", 1),
+        new PAYNLSDK.Objects.OrderData("SKU-8421", "Testproduct 2", 995, "H", 1),
+        new PAYNLSDK.Objects.OrderData("SKU-2359", "Testproduct 3", 2499, "H", 1)
+    }
+};
 
 // enduser
-request.Enduser = new PAYNLSDK.Objects.EndUser();
-request.Enduser.Language = "NL";
-request.Enduser.Initials = "J.";
-request.Enduser.Lastname = "Buyer";
-request.Enduser.Gender = PAYNLSDK.Enums.Gender.Male;
-request.Enduser.BirthDate = new DateTime(1991, 1, 23, 0, 0, 0, DateTimeKind.Local);
-request.Enduser.PhoneNumber = "0612345678";
-request.Enduser.EmailAddress = "email@domain.com";
-request.Enduser.BankAccount = "";
-request.Enduser.IBAN = "NL08INGB0000000555";
-request.Enduser.BIC = "";
+request.Enduser = new PAYNLSDK.Objects.EndUser
+{
+    Language = "NL",
+    Initials = "J.",
+    Lastname = "Buyer",
+    Gender = Gender.Male,
+    BirthDate = new DateTime(1991, 1, 23, 0, 0, 0, DateTimeKind.Local),
+    PhoneNumber = "0612345678",
+    EmailAddress = "email@domain.com",
+    BankAccount = "",
+    IBAN = "NL08INGB0000000555",
+    BIC = "",
 
-// enduser address
-request.Enduser.Address = new PAYNLSDK.Objects.Address();
-request.Enduser.Address.StreetName = "Streetname";
-request.Enduser.Address.StreetNumber = "8";
-request.Enduser.Address.ZipCode = "1234AB";
-request.Enduser.Address.City = "City";
-request.Enduser.Address.CountryCode = "NL";
+    // enduser address
+    Address = new PAYNLSDK.Objects.Address
+    {
+        StreetName = "Streetname",
+        StreetNumber = "8",
+        ZipCode = "1234AB",
+        City = "City",
+        CountryCode = "NL"
+    },
 
-// invoice address
-request.Enduser.InvoiceAddress = new PAYNLSDK.Objects.Address();
-request.Enduser.InvoiceAddress.Initials = "J.";
-request.Enduser.InvoiceAddress.LastName = "Jansen";
-request.Enduser.InvoiceAddress.Gender = PAYLSDK.Enums.Gender.Male;
-request.Enduser.InvoiceAddress.StreetName = "InvoiceStreetname";
-request.Enduser.InvoiceAddress.StreetNumber = "10";
-request.Enduser.InvoiceAddress.ZipCode = "1234BC";
-request.Enduser.InvoiceAddress.City = "City";
-request.Enduser.InvoiceAddress.CountryCode = "NL";
+    // invoice address
+    InvoiceAddress = new PAYNLSDK.Objects.Address
+    {
+        Initials = "J.",
+        LastName = "Jansen",
+        Gender = Gender.Male,
+        StreetName = "InvoiceStreetname",
+        StreetNumber = "10",
+        ZipCode = "1234BC",
+        City = "City",
+        CountryCode = "NL"
+    }
+};
 
-PAYNLSDK.API.Transaction.Start.Response response = PAYNLSDK.Transaction.Start(request);
+return transaction.StartAsync(request);
 ```
 
 To determine if a transaction has been paid, you can use:
 ```c#
-PAYNLSDK.API.RequestBase.ApiToken = "e41f83b246b706291ea9ad798ccfd9f0fee5e0ab";
-PAYNLSDK.API.RequestBase.ServiceId = "SL-3490-4320";
+var transaction = new PAYNLSDK.Transaction(SimpleIoc.Default.GetInstance<IClientService>());
 
-PAYNLSDK.API.Transaction.Start.Response response;
-// Perform transaction to get response object. Alternately, you could work with a stored ID.
+// Perform transaction to get response object. Alternately, you could work with a stored ID....
+var response = new PAYNLSDK.API.Transaction.Start.Response();
 
-PAYNLSDK.API.Transaction.Info.Response info = PAYNLSDK.Transaction.Info(response.transactionId);
-PAYNLSDK.Enums.PaymentStatus result = info.PaymentDetails.State;
+var info = await transaction.InfoAsync(response.Transaction.TransactionId);
+var result = info.PaymentDetails.State;
 
-if (PAYNLSDK.Transaction.IsPaid(result) || PAYNLSDK.Transaction.IsPending(result))
+if (transaction.IsPaid(result) || transaction.IsPending(result))
 {
     // redirect user to thank you page
 }
@@ -131,21 +145,24 @@ else
 
 When implementing the exchange script (where you should process the order in your backend):
 ```c#
-PAYNLSDK.API.RequestBase.ApiToken = "e41f83b246b706291ea9ad798ccfd9f0fee5e0ab";
-PAYNLSDK.API.RequestBase.ServiceId = "SL-3490-4320";
+var transaction = new PAYNLSDK.Transaction(SimpleIoc.Default.GetInstance<IClientService>());
 
-PAYNLSDK.API.Transaction.Info.Response info = PAYNLSDK.Transaction.Info(response.transactionId);
-PAYNLSDK.Enums.PaymentStatus result = info.State;
+// Perform transaction to get response object. Alternately, you could work with a stored ID....
+var response = new PAYNLSDK.API.Transaction.Start.Response();
 
-if (PAYNLSDK.Transaction.IsPaid(result))
+var info = await transaction.InfoAsync(response.Transaction.TransactionId);
+var result = info.PaymentDetails.State;
+
+if (transaction.IsPaid(result))
 {
     // process the payment
 }
-else 
+else
 {
- if(PAYNLSDK.Transaction.IsCancelled(result)){
-    // payment canceled, restock items
- }
+    if (transaction.IsCancelled(result))
+    {
+        // payment canceled, restock items
+    }
 }
 
 response.Write("TRUE| ");

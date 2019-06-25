@@ -96,6 +96,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Quicktstart.cs" />
     <Compile Include="RefundAdd.cs">
       <SubType>Form</SubType>
     </Compile>
