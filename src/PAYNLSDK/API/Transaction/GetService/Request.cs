@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using PAYNLSDK.Exceptions;
 using PAYNLSDK.Utilities;
-using System;
 using System.Collections.Specialized;
 
 namespace PAYNLSDK.API.Transaction.GetService
@@ -17,7 +16,7 @@ namespace PAYNLSDK.API.Transaction.GetService
         }
 
         [JsonProperty("paymentMethodId")]
-        public PAYNLSDK.Enums.PaymentMethodId? PaymentMethodId { get; set; }
+        public Enums.PaymentMethodId? PaymentMethodId { get; set; }
 
         public override int Version
         {
@@ -41,7 +40,7 @@ namespace PAYNLSDK.API.Transaction.GetService
 
         public override NameValueCollection GetParameters()
         {
-            NameValueCollection nvc = base.GetParameters();
+            var nvc = base.GetParameters();
             if (!ParameterValidator.IsNull(PaymentMethodId))
             {
                 nvc.Add("paymentMethodId", ((int)PaymentMethodId).ToString());

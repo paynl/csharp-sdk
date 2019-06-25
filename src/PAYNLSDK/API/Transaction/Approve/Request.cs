@@ -1,8 +1,6 @@
 ﻿using Newtonsoft.Json;
-using PAYNLSDK.Converters;
 using PAYNLSDK.Exceptions;
 using PAYNLSDK.Utilities;
-using System;
 using System.Collections.Specialized;
 
 namespace PAYNLSDK.API.Transaction.Approve
@@ -63,13 +61,12 @@ namespace PAYNLSDK.API.Transaction.Approve
         /// <returns></returns>
         public override NameValueCollection GetParameters()
         {
-            NameValueCollection nvc = base.GetParameters();
+            var nvc = base.GetParameters();
 
                 ParameterValidator.IsNotEmpty(TransactionId, "TransactionId");
                 nvc.Add("orderId", TransactionId);
 
                 return nvc;
-       
         }
 
         /// <summary>

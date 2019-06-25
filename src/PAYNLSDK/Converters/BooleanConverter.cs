@@ -1,9 +1,5 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PAYNLSDK.Converters
 {
@@ -14,24 +10,24 @@ namespace PAYNLSDK.Converters
             try
             {
                 var result = serializer.Deserialize<int>(reader);
-                return (result == 1);
+                return result == 1;
             }
             catch (Exception)
             {
-                return Boolean.Parse(serializer.Deserialize<string>(reader));
+                return bool.Parse(serializer.Deserialize<string>(reader));
             }
         }
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            bool result = Convert.ToBoolean(value);
+            var result = Convert.ToBoolean(value);
             writer.WriteValue(result);
             return;
         }
 
         public override bool CanConvert(Type objectType)
         {
-            return typeof(Boolean).IsAssignableFrom(objectType);
+            return typeof(bool).IsAssignableFrom(objectType);
         }
     }
 }

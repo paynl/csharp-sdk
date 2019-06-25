@@ -1,5 +1,4 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using PAYNLSDK.Utilities;
 using System.Collections.Specialized;
 using PAYNLSDK.Exceptions;
@@ -47,7 +46,7 @@ namespace PAYNLSDK.API.Transaction.GetLastTransactions
 
         public override NameValueCollection GetParameters()
         {
-            NameValueCollection nvc = base.GetParameters();
+            var nvc = base.GetParameters();
             if (!ParameterValidator.IsNull(MerchantId))
             {
                 nvc.Add("merchantId", MerchantId);
@@ -62,7 +61,7 @@ namespace PAYNLSDK.API.Transaction.GetLastTransactions
             }
             return nvc;
         }
-        
+
         public Response Response { get { return (Response)response; } }
 
         public override void SetResponse()

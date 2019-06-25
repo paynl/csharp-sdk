@@ -1,5 +1,4 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using PAYNLSDK.Objects;
 
 namespace PAYNLSDK.API.Transaction.Start
@@ -11,6 +10,5 @@ namespace PAYNLSDK.API.Transaction.Start
 
         [JsonProperty("transaction")]
         public TransactionStartInfo Transaction { get; set; }
-
     }
 }

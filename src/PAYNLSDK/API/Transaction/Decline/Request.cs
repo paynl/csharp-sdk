@@ -1,8 +1,6 @@
 ﻿using Newtonsoft.Json;
-using PAYNLSDK.Converters;
 using PAYNLSDK.Exceptions;
 using PAYNLSDK.Utilities;
-using System;
 using System.Collections.Specialized;
 
 namespace PAYNLSDK.API.Transaction.Decline
@@ -63,7 +61,7 @@ namespace PAYNLSDK.API.Transaction.Decline
         /// <returns></returns>
         public override NameValueCollection GetParameters()
         {
-            NameValueCollection nvc = base.GetParameters();
+            var nvc = base.GetParameters();
 
             ParameterValidator.IsNotEmpty(TransactionId, "TransactionId");
             nvc.Add("orderId", TransactionId);

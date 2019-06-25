@@ -8,14 +8,10 @@ namespace PAYNLSDK.Exceptions
     /// </summary>
     public class ErrorException : Exception
     {
-        private Error error;
         /// <summary>
         /// Error, if any
         /// </summary>
-        public Error Error
-        {
-            get { return error; }
-        }
+        public Error Error { get; }
 
         /// <summary>
         /// Retiurn whether or not there's an Error object associated with this Exception
@@ -24,7 +20,7 @@ namespace PAYNLSDK.Exceptions
         {
             get
             {
-                return (error != null);
+                return Error != null;
             }
         }
 
@@ -36,7 +32,7 @@ namespace PAYNLSDK.Exceptions
         public ErrorException(Error error, Exception innerException)
             : base(error.Message, innerException)
         {
-            this.error = error;
+            this.Error = error;
         }
 
         /// <summary>
@@ -46,7 +42,7 @@ namespace PAYNLSDK.Exceptions
         public ErrorException(Error error)
             : base(error.Message, null)
         {
-            this.error = error;
+            this.Error = error;
         }
 
         /// <summary>
@@ -67,6 +63,5 @@ namespace PAYNLSDK.Exceptions
             : base(message)
         {
         }
-
     }
 }

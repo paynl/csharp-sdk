@@ -52,7 +52,7 @@
             this.btApprove.TabIndex = 1;
             this.btApprove.Text = "Approve";
             this.btApprove.UseVisualStyleBackColor = true;
-            this.btApprove.Click += new System.EventHandler(this.btApprove_Click);
+            this.btApprove.Click += new System.EventHandler(this.BtApprove_Click);
             // 
             // button2
             // 
@@ -62,7 +62,7 @@
             this.button2.TabIndex = 2;
             this.button2.Text = "Cancel";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
             // tbTransactionID
             // 
@@ -79,7 +79,7 @@
             this.btDecline.TabIndex = 4;
             this.btDecline.Text = "Decline";
             this.btDecline.UseVisualStyleBackColor = true;
-            this.btDecline.Click += new System.EventHandler(this.btDecline_Click);
+            this.btDecline.Click += new System.EventHandler(this.BtDecline_Click);
             // 
             // ApproveDecline
             // 

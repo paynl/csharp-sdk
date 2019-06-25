@@ -61,6 +61,5 @@ namespace PAYNLSDK.Objects
         /// </summary>
         [JsonProperty("processDate")]
         public DateTime? ProcessDate { get; set; }
-
     }
 }

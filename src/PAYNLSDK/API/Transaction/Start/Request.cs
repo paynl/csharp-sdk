@@ -14,8 +14,6 @@ namespace PAYNLSDK.API.Transaction.Start
         {
             get
             {
-
-
                 return true;
             }
         }
@@ -63,7 +61,7 @@ namespace PAYNLSDK.API.Transaction.Start
 
         public override NameValueCollection GetParameters()
         {
-            NameValueCollection nvc = base.GetParameters();
+            var nvc = base.GetParameters();
 
             // Basic params
             ParameterValidator.IsNotNull(Amount, "Amount");
@@ -87,7 +85,6 @@ namespace PAYNLSDK.API.Transaction.Start
 
             if (!ParameterValidator.IsEmpty(TransferValue))
             {
-                
                 if (TransferType == "transaction" || TransferType == "merchant")
                 {
                     nvc.Add("transferType", TransferType);
@@ -202,7 +199,7 @@ namespace PAYNLSDK.API.Transaction.Start
                 }
                 if (!ParameterValidator.IsNull(Enduser.Gender))
                 {
-                    nvc.Add("enduser[gender]", EnumUtil.ToEnumString<Gender>((Gender)Enduser.Gender));
+                    nvc.Add("enduser[gender]", EnumUtil.ToEnumString((Gender)Enduser.Gender));
                 }
                 if (!ParameterValidator.IsNull(Enduser.BirthDate))
                 {
@@ -276,7 +273,7 @@ namespace PAYNLSDK.API.Transaction.Start
                     }
                     if (!ParameterValidator.IsNull(Enduser.InvoiceAddress.Gender))
                     {
-                        string gender = EnumUtil.ToEnumString<Gender>((Gender)Enduser.InvoiceAddress.Gender);
+                        var gender = EnumUtil.ToEnumString((Gender)Enduser.InvoiceAddress.Gender);
                         nvc.Add("enduser[invoiceAddress][gender]", gender);
                     }
                     if (!ParameterValidator.IsEmpty(Enduser.InvoiceAddress.StreetName))
@@ -336,8 +333,8 @@ namespace PAYNLSDK.API.Transaction.Start
                 }
                 if (!ParameterValidator.IsNull(SalesData.OrderData))
                 {
-                    int i = 0;
-                    foreach (OrderData data in SalesData.OrderData)
+                    var i = 0;
+                    foreach (var data in SalesData.OrderData)
                     {
                         ParameterValidator.IsNotNull(data.ProductId, "SalesData.OrderData.ProductId");
                         nvc.Add(string.Format("saleData[orderData][{0}][productId]", i), data.ProductId);
@@ -355,11 +352,11 @@ namespace PAYNLSDK.API.Transaction.Start
 
                         if (!ParameterValidator.IsNull(data.VatCode))
                         {
-                            nvc.Add(string.Format("saleData[orderData][{0}][vatCode]", i), EnumUtil.ToEnumString<TaxClass>((TaxClass)data.VatCode));
+                            nvc.Add(string.Format("saleData[orderData][{0}][vatCode]", i), EnumUtil.ToEnumString((TaxClass)data.VatCode));
                         }
                         if (!ParameterValidator.IsNull(data.ProductType))
                         {
-                            nvc.Add(string.Format("saleData[orderData][{0}][productType]", i), EnumUtil.ToEnumString<ProductType>((ProductType)data.ProductType));
+                            nvc.Add(string.Format("saleData[orderData][{0}][productType]", i), EnumUtil.ToEnumString((ProductType)data.ProductType));
                         }
                         i++;
                     }

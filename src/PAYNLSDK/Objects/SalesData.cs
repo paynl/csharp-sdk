@@ -1,6 +1,5 @@
 ﻿using System;
 using Newtonsoft.Json;
-using PAYNLSDK.Enums;
 using PAYNLSDK.Converters;
 using System.Collections.Generic;
 

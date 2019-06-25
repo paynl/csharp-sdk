@@ -1,9 +1,6 @@
 ﻿using Newtonsoft.Json;
-using PAYNLSDK.Converters;
 using PAYNLSDK.Exceptions;
 using PAYNLSDK.Utilities;
-using System;
-using System.Collections.Specialized;
 
 namespace PAYNLSDK.API.Validate.GetServerIps
 {
@@ -37,9 +34,11 @@ namespace PAYNLSDK.API.Validate.GetServerIps
             {
                 throw new ErrorException("rawResponse is empty!");
             }
-            string[] ips = JsonConvert.DeserializeObject<string[]>(RawResponse);
-            Response r = new Response();
-            r.IPAddresses = ips;
+            var ips = JsonConvert.DeserializeObject<string[]>(RawResponse);
+            var r = new Response
+            {
+                IPAddresses = ips
+            };
             response = r;
         }
     }

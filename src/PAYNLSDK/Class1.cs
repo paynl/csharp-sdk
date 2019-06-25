@@ -1,5 +1,4 @@
 ﻿using PAYNLSDK.API;
-using System;
 
 namespace PAYNLSDK
 {
@@ -14,5 +13,4 @@ namespace PAYNLSDK
             RequestBase.ServiceId = "SL-1094-0450";
         }
     }
-
 }

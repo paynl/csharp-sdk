@@ -1,5 +1,4 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using PAYNLSDK.Converters;
 using PAYNLSDK.Enums;
 using PAYNLSDK.Utilities;
@@ -131,6 +130,5 @@ namespace PAYNLSDK.Objects
         /// <param name="price">Amount in cents of the product (amount incl. vat)</param>
         /// <param name="vatCode">The vat code</param>
         public OrderData(string productId, int price, TaxClass vatCode) : this(productId, "", price, vatCode, 1) { }
-
     }
 }

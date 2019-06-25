@@ -1,5 +1,4 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using PAYNLSDK.Enums;
 
 namespace PAYNLSDK.Objects
@@ -32,6 +31,5 @@ namespace PAYNLSDK.Objects
         /// </summary>
         [JsonProperty("state")]
         public ActiveState State { get; set; }
-
     }
 }

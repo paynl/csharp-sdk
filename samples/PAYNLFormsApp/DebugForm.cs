@@ -1,18 +1,8 @@
-﻿using Newtonsoft.Json;
-using PAYNLFormsApp.Fixtures;
-using PAYNLSDK;
+﻿using PAYNLSDK;
 using PAYNLSDK.API;
 using PAYNLSDK.Exceptions;
 using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Web;
 using System.Windows.Forms;
 
 namespace PAYNLFormsApp
@@ -29,47 +19,43 @@ namespace PAYNLFormsApp
 
         }
 
-        public async Task dumpPaymentmethodsAsync()
+        public async Task DumpPaymentmethodsAsync()
         {
             APISettings.InitAPI();
             ClearDebug();
-            PAYNLSDK.API.PaymentMethod.GetAll.Request request = new PAYNLSDK.API.PaymentMethod.GetAll.Request();
+            var request = new PAYNLSDK.API.PaymentMethod.GetAll.Request();
             InitRequestDebug(request);
             await APISettings.Client.PerformRequestAsync(request);
             DebugRawResponse(request);
             tbMain.Text = request.Response.ToString();
         }
 
-        public async Task dumpTransactionGetServiceAsync()
-        { 
+        public async Task DumpTransactionGetServiceAsync()
+        {
         APISettings.InitAPI();
             ClearDebug();
-        PAYNLSDK.API.Transaction.GetService.Request request = new PAYNLSDK.API.Transaction.GetService.Request();
+        var request = new PAYNLSDK.API.Transaction.GetService.Request();
             InitRequestDebug(request);
         await APISettings.Client.PerformRequestAsync(request);
             DebugRawResponse(request);
         tbMain.Text = request.Response.ToString();
-
          }
 
-        public async Task dumpTransactionGetLastAsync()
+        public async Task DumpTransactionGetLastAsync()
         {
             APISettings.InitAPI();
             ClearDebug();
-            PAYNLSDK.API.Transaction.GetLastTransactions.Request request = new PAYNLSDK.API.Transaction.GetLastTransactions.Request();
+            var request = new PAYNLSDK.API.Transaction.GetLastTransactions.Request();
             InitRequestDebug(request);
             await APISettings.Client.PerformRequestAsync(request);
             DebugRawResponse(request);
             tbMain.Text = request.Response.ToString();
         }
 
-
         public async Task ApproveAsync(string transactionID)
         {
-
             try
             {
-
                 APISettings.InitAPI();
                 ClearDebug();
 
@@ -80,8 +66,10 @@ namespace PAYNLFormsApp
                 }
                 else
                 {
-                    PAYNLSDK.API.Transaction.Approve.Request request = new PAYNLSDK.API.Transaction.Approve.Request();
-                    request.TransactionId = transactionID;
+                    var request = new PAYNLSDK.API.Transaction.Approve.Request
+                    {
+                        TransactionId = transactionID
+                    };
 
                     InitRequestDebug(request);
 
@@ -89,21 +77,18 @@ namespace PAYNLFormsApp
                     DebugRawResponse(request);
                     tbMain.Text = request.Response.Message.ToString();
                 }
-
             }
             catch (ErrorException ee)
             {
                 AddDebug("~~EXCEPTION~~");
                 AddDebug(ee.Message);
             }
-
         }
 
         public async Task DeclineAsync(string transactionID)
         {
             try
             {
-
                 APISettings.InitAPI();
                 ClearDebug();
 
@@ -114,70 +99,62 @@ namespace PAYNLFormsApp
                 }
                 else
                 {
-                    PAYNLSDK.API.Transaction.Decline.Request request = new PAYNLSDK.API.Transaction.Decline.Request();
-                    request.TransactionId = transactionID;
+                    var request = new PAYNLSDK.API.Transaction.Decline.Request
+                    {
+                        TransactionId = transactionID
+                    };
 
                     InitRequestDebug(request);
 
                     await APISettings.Client.PerformRequestAsync(request);
                     DebugRawResponse(request);
 
-
                     tbMain.Text = request.Response.Message.ToString();
-
                 }
-
             }
             catch (ErrorException ee)
             {
                 AddDebug("~~EXCEPTION~~");
                 AddDebug(ee.Message);
             }
-
         }
 
         public async Task TransactionRefundAsync(string transactionID, string amount, string exchangeUrl)
         {
             try
             {
-
                 APISettings.InitAPI();
                 ClearDebug();
 
-                int numValue;
-                bool parsed = Int32.TryParse(amount, out numValue);
+                var parsed = int.TryParse(amount, out var numValue);
+
                 if (!parsed || transactionID == "")
                 {
                     if (!parsed)
                     {
-
                         AddDebug("foutieve invoer");
                         AddDebug("amount: only numbers. 3,40 must be filled in as 350");
-
-
                     }
                     AddDebug("foutieve invoer");
                     AddDebug("transactionID mag niet leeg zijn");
-
                 }
-
                 else if (exchangeUrl != "")
                 {
                     APISettings.InitAPI();
                     AddDebug("-----");
                     AddDebug("Working with modified version of call");
 
-                    PAYNLSDK.API.Transaction.Refund.Response response = await new Transaction().RefundAsync(transactionID, null, numValue, null, exchangeUrl);
+                    var response = await new Transaction().RefundAsync(transactionID, null, numValue, null, exchangeUrl);
 
                     tbMain.Text = response.RefundId;
                 }
-
                 else
                 {
-
-                    PAYNLSDK.API.Transaction.Refund.Request request = new PAYNLSDK.API.Transaction.Refund.Request();
-                    request.Amount = numValue;
-                    request.TransactionId = transactionID;
+                    var request = new PAYNLSDK.API.Transaction.Refund.Request
+                    {
+                        Amount = numValue,
+                        TransactionId = transactionID
+                    };
 
                     InitRequestDebug(request);
 
@@ -186,48 +163,38 @@ namespace PAYNLFormsApp
 
                     tbMain.Text = request.Response.RefundId;
                 }
-                
-
             }
             catch (ErrorException ee)
             {
                 AddDebug("~~EXCEPTION~~");
                 AddDebug(ee.Message);
             }
-
         }
 
         public async Task RefundAddAsync(string bankAccountName, string bankAccountNumber, string amount)
         {
-
             try
             {
                 APISettings.InitAPI();
                 ClearDebug();
 
-                int numValue;
-                bool parsed = Int32.TryParse(amount, out numValue);
+                var parsed = int.TryParse(amount, out var numValue);
+
                 if (!parsed)
                 {
-
                     AddDebug("foutieve invoer");
                     AddDebug("amount: numbers. 3,40 must be filled in as 350");
-
                 }
                 else
                 {
-
-                    PAYNLSDK.API.Refund.Add.Request request = new PAYNLSDK.API.Refund.Add.Request(numValue, bankAccountName, bankAccountNumber, "");
+                    var request = new PAYNLSDK.API.Refund.Add.Request(numValue, bankAccountName, bankAccountNumber, "");
                     InitRequestDebug(request);
 
                     await APISettings.Client.PerformRequestAsync(request);
                     DebugRawResponse(request);
 
-
                     tbMain.Text = request.Response.RefundId;
                 }
-
-
             }
             catch (ErrorException ee)
             {
@@ -238,22 +205,18 @@ namespace PAYNLFormsApp
 
         public async Task TransactionRefundInfoAsync(string refundID)
         {
-
             try
             {
                 APISettings.InitAPI();
                 ClearDebug();
 
-                PAYNLSDK.API.Refund.Info.Request request = new PAYNLSDK.API.Refund.Info.Request(refundID);
+                var request = new PAYNLSDK.API.Refund.Info.Request(refundID);
                 InitRequestDebug(request);
 
                 await APISettings.Client.PerformRequestAsync(request);
                 DebugRawResponse(request);
 
-
                 tbMain.Text = request.Response.ToString();
-
-
             }
             catch (ErrorException ee)
             {

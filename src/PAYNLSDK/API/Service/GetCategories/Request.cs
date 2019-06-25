@@ -1,8 +1,6 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using PAYNLSDK.Utilities;
 using System.Collections.Specialized;
-using PAYNLSDK.Converters;
 using PAYNLSDK.Exceptions;
 
 namespace PAYNLSDK.API.Service.GetCategories
@@ -34,7 +32,7 @@ namespace PAYNLSDK.API.Service.GetCategories
 
         public override NameValueCollection GetParameters()
         {
-            NameValueCollection nvc = base.GetParameters();
+            var nvc = base.GetParameters();
             if (!ParameterValidator.IsNonEmptyInt(PaymentOptionId))
             {
                 nvc.Add("paymentOptionId", PaymentOptionId.ToString());
@@ -50,9 +48,11 @@ namespace PAYNLSDK.API.Service.GetCategories
             {
                 throw new ErrorException("rawResponse is empty!");
             }
-            PAYNLSDK.Objects.ServiceCategory[] pm = JsonConvert.DeserializeObject<PAYNLSDK.Objects.ServiceCategory[]>(RawResponse);
-            Response r = new Response();
-            r.ServiceCategories = pm;
+            var pm = JsonConvert.DeserializeObject<Objects.ServiceCategory[]>(RawResponse);
+            var r = new Response
+            {
+                ServiceCategories = pm
+            };
             response = r;
         }
     }

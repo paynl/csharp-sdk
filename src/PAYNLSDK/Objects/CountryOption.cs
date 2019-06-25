@@ -1,6 +1,4 @@
-﻿using System;
-using Newtonsoft.Json;
-using PAYNLSDK.Enums;
+﻿using Newtonsoft.Json;
 using PAYNLSDK.Converters;
 using System.Collections.Generic;
 
@@ -52,7 +50,6 @@ namespace PAYNLSDK.Objects
         /// </summary>
         [JsonProperty("paymentOptionList")]
         public PaymentOptions PaymentOptions { get; set; }
-
     }
 
     /// <summary>

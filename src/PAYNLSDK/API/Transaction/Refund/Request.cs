@@ -43,7 +43,7 @@ namespace PAYNLSDK.API.Transaction.Refund
 
         public override NameValueCollection GetParameters()
         {
-            NameValueCollection nvc = base.GetParameters();
+            var nvc = base.GetParameters();
 
             ParameterValidator.IsNotEmpty(TransactionId, "TransactionId");
             nvc.Add("transactionId", TransactionId);

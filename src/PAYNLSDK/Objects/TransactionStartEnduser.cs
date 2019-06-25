@@ -1,7 +1,5 @@
 ﻿using Newtonsoft.Json;
-using PAYNLSDK.Converters;
 using PAYNLSDK.Enums;
-using System;
 
 namespace PAYNLSDK.Objects
 {
@@ -16,5 +14,4 @@ namespace PAYNLSDK.Objects
         [JsonProperty("blacklist")]
         public Blacklist Blacklist {get; protected set;}
     }
-
 }

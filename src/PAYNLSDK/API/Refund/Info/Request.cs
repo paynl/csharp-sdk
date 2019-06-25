@@ -1,9 +1,6 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using PAYNLSDK.Utilities;
-using System.Collections.Specialized;
 using PAYNLSDK.Exceptions;
-using PAYNLSDK.Objects;
 
 namespace PAYNLSDK.API.Refund.Info
 {
@@ -86,7 +83,7 @@ namespace PAYNLSDK.API.Refund.Info
         /// <returns></returns>
         public override System.Collections.Specialized.NameValueCollection GetParameters()
         {
-            NameValueCollection nvc = base.GetParameters();
+            var nvc = base.GetParameters();
 
             ParameterValidator.IsNotNull(RefundId, "RefundId");
             nvc.Add("refundId", RefundId);

@@ -1,5 +1,4 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using PAYNLSDK.Objects;
 
 namespace PAYNLSDK.API.Transaction.Info
@@ -23,6 +22,5 @@ namespace PAYNLSDK.API.Transaction.Info
 
         [JsonProperty("statsDetails")]
         public StatsDetails StatsDetails { get; protected set; }
-
     }
 }

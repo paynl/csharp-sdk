@@ -1,20 +1,12 @@
 ﻿using PAYNLSDK.Enums;
 using PAYNLSDK.Utilities;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PAYNLFormsApp
 {
     public partial class StartTransaction : Form
     {
-
         public static bool OK { get; protected set; }
 
         public StartTransaction()
@@ -37,9 +29,9 @@ namespace PAYNLFormsApp
             tbUserlang.Text = LastRequests.LastTransactionStart.Enduser.Language;
             tbInitials.Text = LastRequests.LastTransactionStart.Enduser.Initials;
             tbLastname.Text = LastRequests.LastTransactionStart.Enduser.Lastname;
-            tbGender.Text = EnumUtil.ToEnumString<Gender>((Gender)LastRequests.LastTransactionStart.Enduser.Gender);
+            tbGender.Text = EnumUtil.ToEnumString((Gender)LastRequests.LastTransactionStart.Enduser.Gender);
             //tbDOB.Text = ((DateTime)LastRequests.LastTransactionStart.Enduser.BirthDate).ToString("dd-MM-yyyy");
-            dateTimePicker1.Value = ((DateTime)LastRequests.LastTransactionStart.Enduser.BirthDate);
+            dateTimePicker1.Value = (DateTime)LastRequests.LastTransactionStart.Enduser.BirthDate;
             tbPhone.Text = LastRequests.LastTransactionStart.Enduser.PhoneNumber;
             tbIBAN.Text = LastRequests.LastTransactionStart.Enduser.IBAN;
             tbEmail.Text = LastRequests.LastTransactionStart.Enduser.EmailAddress;
@@ -48,11 +40,11 @@ namespace PAYNLFormsApp
         void Set()
         {
             // load
-            LastRequests.LastTransactionStart.Amount = Int32.Parse(tbAmount.Text);
+            LastRequests.LastTransactionStart.Amount = int.Parse(tbAmount.Text);
             LastRequests.LastTransactionStart.IPAddress = tbIP.Text;
             LastRequests.LastTransactionStart.ReturnUrl = tbReturn.Text;
             LastRequests.LastTransactionStart.Transaction.OrderExchangeUrl = tbExchange.Text;
-            LastRequests.LastTransactionStart.PaymentOptionId = Int32.Parse(tbPaymentOption.Text);
+            LastRequests.LastTransactionStart.PaymentOptionId = int.Parse(tbPaymentOption.Text);
             LastRequests.LastTransactionStart.Transaction.Description = tbDesc.Text;
 
             LastRequests.LastTransactionStart.Enduser.Language = tbUserlang.Text;

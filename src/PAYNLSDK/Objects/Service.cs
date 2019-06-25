@@ -1,5 +1,4 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using PAYNLSDK.Enums;
 
 namespace PAYNLSDK.Objects
@@ -68,7 +67,5 @@ namespace PAYNLSDK.Objects
         /// </summary>
         [JsonProperty("errorUrl")]
         public string ErrorUrl { get; set; }
-
     }
-
 }

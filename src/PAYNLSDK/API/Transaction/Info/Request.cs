@@ -1,14 +1,12 @@
 ﻿using Newtonsoft.Json;
 using PAYNLSDK.Exceptions;
 using PAYNLSDK.Utilities;
-using System;
 using System.Collections.Specialized;
 
 namespace PAYNLSDK.API.Transaction.Info
 {
     public class Request : RequestBase
     {
-
         public string TransactionId { get; set; }
 
         public string EntranceCode { get; set; }
@@ -35,8 +33,8 @@ namespace PAYNLSDK.API.Transaction.Info
 
         public override NameValueCollection GetParameters()
         {
-            NameValueCollection nvc = base.GetParameters();
-            
+            var nvc = base.GetParameters();
+
             ParameterValidator.IsNotEmpty(TransactionId, "TransactionId");
             nvc.Add("transactionId", TransactionId);
 
@@ -56,6 +54,5 @@ namespace PAYNLSDK.API.Transaction.Info
             }
             response = JsonConvert.DeserializeObject<Response>(RawResponse);
         }
-    
     }
 }

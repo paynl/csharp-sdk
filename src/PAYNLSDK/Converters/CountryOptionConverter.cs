@@ -2,9 +2,6 @@
 using PAYNLSDK.Objects;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PAYNLSDK.Converters
 {
@@ -17,8 +14,7 @@ namespace PAYNLSDK.Converters
                 var dict = serializer.Deserialize<Dictionary<string, CountryOption>>(reader);
                 return dict;
             }
-            throw new JsonSerializationException(String.Format("Unexpected token '{0}' when parsing country options.", reader.TokenType));
-
+            throw new JsonSerializationException(string.Format("Unexpected token '{0}' when parsing country options.", reader.TokenType));
         }
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)

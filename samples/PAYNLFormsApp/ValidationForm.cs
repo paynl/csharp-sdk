@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using PAYNLSDK.API.Validate;
@@ -27,11 +20,11 @@ namespace PAYNLFormsApp
             try
             {
                 tbOut.Text = "";
-                string v = textBox1.Text;
-                bool i = checkBox1.Checked;
+                var v = textBox1.Text;
+                var i = checkBox1.Checked;
                 AddLine(string.Format("Validating bankaccount number {0} ({1})", v, i ? "INTERNATIONAL" : "NATIONAL"));
                 AddLine("");
-                bool rs = await validator.ValidateBankAccountNumberAsync(v, i);
+                var rs = await validator.ValidateBankAccountNumberAsync(v, i);
                 AddLine(string.Format("RESULT = {0}", rs));
             }
             catch (Exception ex)
@@ -40,7 +33,6 @@ namespace PAYNLFormsApp
                 AddLine(string.Format("{0}: {1}", ex.Source, ex.Message));
             }
         }
-
 
         private void AddLine(string value)
         {
@@ -55,11 +47,11 @@ namespace PAYNLFormsApp
             try
             {
                 tbOut.Text = "";
-                string v = textBox2.Text;
-                bool i = checkBox1.Checked;
+                var v = textBox2.Text;
+                var i = checkBox1.Checked;
                 AddLine(string.Format("Validating IBAN {0}", v));
                 AddLine("");
-                bool rs = await validator.ValidateIBANAsync(v);
+                var rs = await validator.ValidateIBANAsync(v);
                 AddLine(string.Format("RESULT = {0}", rs));
             }
             catch (Exception ex)
@@ -74,11 +66,11 @@ namespace PAYNLFormsApp
             try
             {
                 tbOut.Text = "";
-                string v = textBox3.Text;
-                bool i = checkBox1.Checked;
+                var v = textBox3.Text;
+                var i = checkBox1.Checked;
                 AddLine(string.Format("Validating SWIFT {0}", v));
                 AddLine("");
-                bool rs = await validator.ValidateSWIFTAsync(v);
+                var rs = await validator.ValidateSWIFTAsync(v);
                 AddLine(string.Format("RESULT = {0}", rs));
             }
             catch (Exception ex)
@@ -93,11 +85,11 @@ namespace PAYNLFormsApp
             try
             {
                 tbOut.Text = "";
-                string v = textBox4.Text;
-                bool i = checkBox1.Checked;
+                var v = textBox4.Text;
+                var i = checkBox1.Checked;
                 AddLine(string.Format("Validating KVK {0}", v));
                 AddLine("");
-                bool rs = await validator.ValidateKVKAsync(v);
+                var rs = await validator.ValidateKVKAsync(v);
                 AddLine(string.Format("RESULT = {0}", rs));
             }
             catch (Exception ex)
@@ -112,11 +104,11 @@ namespace PAYNLFormsApp
             try
             {
                 tbOut.Text = "";
-                string v = textBox5.Text;
-                bool i = checkBox1.Checked;
+                var v = textBox5.Text;
+                var i = checkBox1.Checked;
                 AddLine(string.Format("Validating SOFI {0}", v));
                 AddLine("");
-                bool rs = await validator.ValidateSOFIAsync(v);
+                var rs = await validator.ValidateSOFIAsync(v);
                 AddLine(string.Format("RESULT = {0}", rs));
             }
             catch (Exception ex)
@@ -131,11 +123,11 @@ namespace PAYNLFormsApp
             try
             {
                 tbOut.Text = "";
-                string v = textBox6.Text;
-                bool i = checkBox1.Checked;
+                var v = textBox6.Text;
+                var i = checkBox1.Checked;
                 AddLine(string.Format("Validating VAT {0}", v));
                 AddLine("");
-                bool rs = await validator.ValidateVATAsync(v);
+                var rs = await validator.ValidateVATAsync(v);
                 AddLine(string.Format("RESULT = {0}", rs));
             }
             catch (Exception ex)
@@ -150,11 +142,11 @@ namespace PAYNLFormsApp
             try
             {
                 tbOut.Text = "";
-                string v = textBox7.Text;
-                bool i = checkBox1.Checked;
+                var v = textBox7.Text;
+                var i = checkBox1.Checked;
                 AddLine(string.Format("Validating IP {0}", v));
                 AddLine("");
-                bool rs = await validator.ValidatePayIPAsync(v);
+                var rs = await validator.ValidatePayIPAsync(v);
                 AddLine(string.Format("RESULT = {0}", rs));
             }
             catch (Exception ex)

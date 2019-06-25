@@ -1,9 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 using PAYNLSDK.Utilities;
-using System.Collections.Specialized;
 using PAYNLSDK.Exceptions;
-using PAYNLSDK.Objects;
 
 namespace PAYNLSDK.API.Banktransfer.Add
 {
@@ -112,8 +110,6 @@ namespace PAYNLSDK.API.Banktransfer.Add
         {
             get
             {
-
-
                 return true;
             }
         }
@@ -127,7 +123,7 @@ namespace PAYNLSDK.API.Banktransfer.Add
 
         public override System.Collections.Specialized.NameValueCollection GetParameters()
         {
-            NameValueCollection nvc = base.GetParameters();
+            var nvc = base.GetParameters();
 
             ParameterValidator.IsNotNull(Amount, "Amount");
             nvc.Add("amount", Amount.ToString());

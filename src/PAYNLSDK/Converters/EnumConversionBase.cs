@@ -15,7 +15,7 @@ namespace PAYNLSDK.Converters
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            string result = EnumUtil.ToEnumString(value, EnumType);
+            var result = EnumUtil.ToEnumString(value, EnumType);
             writer.WriteValue(result);
             return;
         }
@@ -59,5 +59,4 @@ namespace PAYNLSDK.Converters
             throw new NotImplementedException();
         }
     }
-
 }

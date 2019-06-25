@@ -1,9 +1,6 @@
 ﻿using Newtonsoft.Json;
-using PAYNLSDK.Converters;
 using PAYNLSDK.Exceptions;
 using PAYNLSDK.Utilities;
-using System;
-using System.Collections.Specialized;
 
 namespace PAYNLSDK.API.Validate.SOFI
 {
@@ -42,7 +39,7 @@ namespace PAYNLSDK.API.Validate.SOFI
 
         public override System.Collections.Specialized.NameValueCollection GetParameters()
         {
-            NameValueCollection nvc = base.GetParameters();
+            var nvc = base.GetParameters();
 
             ParameterValidator.IsNotEmpty(SOFI, "sofi");
             nvc.Add("sofi", SOFI);

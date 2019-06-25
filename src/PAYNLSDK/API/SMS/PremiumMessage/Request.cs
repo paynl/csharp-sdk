@@ -1,18 +1,12 @@
 ﻿using Newtonsoft.Json;
 using PAYNLSDK.Exceptions;
 using PAYNLSDK.Utilities;
-using System;
-using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PAYNLSDK.API.SMS.PremiumMessage
 {
     public class Request : RequestBase
     {
-
         [JsonProperty("sms_id")]
         public string SmsId { get; set; }
 
@@ -44,7 +38,7 @@ namespace PAYNLSDK.API.SMS.PremiumMessage
 
         public override NameValueCollection GetParameters()
         {
-            NameValueCollection nvc = base.GetParameters();
+            var nvc = base.GetParameters();
 
             ParameterValidator.IsNotEmpty(SmsId, "SmsId");
             nvc.Add("sms_id", SmsId);
@@ -67,6 +61,5 @@ namespace PAYNLSDK.API.SMS.PremiumMessage
             }
             response = JsonConvert.DeserializeObject<Response>(RawResponse);
         }
-
     }
 }

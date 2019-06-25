@@ -3,7 +3,6 @@ using Newtonsoft.Json;
 using PAYNLSDK.Utilities;
 using System.Collections.Specialized;
 using PAYNLSDK.Exceptions;
-using PAYNLSDK.Objects;
 using PAYNLSDK.Converters;
 using System.Collections.Generic;
 
@@ -135,9 +134,9 @@ namespace PAYNLSDK.API.Refund.Transaction
         /// 
         /// </summary>
         /// <returns></returns>
-        public override System.Collections.Specialized.NameValueCollection GetParameters()
+        public override NameValueCollection GetParameters()
         {
-            NameValueCollection nvc = base.GetParameters();
+            var nvc = base.GetParameters();
 
             ParameterValidator.IsNotNull(TransactionId, "TransactionId");
             nvc.Add("transactionId", TransactionId.ToString());
@@ -199,7 +198,7 @@ namespace PAYNLSDK.API.Refund.Transaction
             {
                 if (handleMultipleValuesPerKey)
                 {
-                    string[] values = nvc.GetValues(key);
+                    var values = nvc.GetValues(key);
                     if (values.Length == 1)
                     {
                         result.Add(key, values[0]);

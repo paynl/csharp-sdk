@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using PAYNLSDK.Converters;
-using System;
 
 namespace PAYNLSDK.API.SMS.PremiumMessage
 {

@@ -1,6 +1,4 @@
-﻿using System;
-using Newtonsoft.Json;
-using PAYNLSDK.Enums;
+﻿using Newtonsoft.Json;
 using PAYNLSDK.Converters;
 
 namespace PAYNLSDK.Objects
@@ -35,6 +33,5 @@ namespace PAYNLSDK.Objects
         /// </summary>
         [JsonProperty("paymentReference")]
         public string PaymentReference { get; protected set; }
-
     }
 }

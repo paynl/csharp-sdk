@@ -1,6 +1,4 @@
-﻿using PAYNLSDK.Enums;
-using PAYNLSDK.Net;
-using System;
+﻿using PAYNLSDK.Net;
 using System.Threading.Tasks;
 using ServiceGetCategories = PAYNLSDK.API.Service.GetCategories.Request;
 

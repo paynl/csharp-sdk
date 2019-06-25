@@ -1,5 +1,4 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using PAYNLSDK.Enums;
 using System.Collections.Generic;
 
@@ -45,7 +44,6 @@ namespace PAYNLSDK.Objects
         /// </summary>
         [JsonProperty("state")]
         public Availability State { get; set; }
-
     }
 
     /// <summary>
@@ -86,5 +84,4 @@ namespace PAYNLSDK.Objects
     public class PaymentOptions : Dictionary<int, PaymentOption>
     {
     }
-
 }

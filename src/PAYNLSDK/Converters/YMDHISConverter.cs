@@ -7,31 +7,30 @@ namespace PAYNLSDK.Converters
     public class YMDHISConverter : JsonConverter
     {
         private const string Format = "yyyy-MM-dd HH:ii:ss";
-        private static string[] ParseFormats = {
+        private static readonly string[] ParseFormats = {
                                        // - argument.
-                                       "yyyy-M-d h:mm:ss tt", "yyyy-M-d h:mm tt", 
-                                       "yyyy-MM-dd hh:mm:ss", "yyyy-M-d h:mm:ss", 
-                                       "yyyy-M-d hh:mm tt", "yyyy-M-d hh tt", 
-                                       "yyyy-M-d h:mm", "yyyy-M-d h:mm", 
+                                       "yyyy-M-d h:mm:ss tt", "yyyy-M-d h:mm tt",
+                                       "yyyy-MM-dd hh:mm:ss", "yyyy-M-d h:mm:ss",
+                                       "yyyy-M-d hh:mm tt", "yyyy-M-d hh tt",
+                                       "yyyy-M-d h:mm", "yyyy-M-d h:mm",
                                        "yyyy-MM-dd hh:mm", "yyyy-M-dd hh:mm",
                                        // Slash argument.
-                                       "yyyy/M/d h:mm:ss tt", "yyyy/M/d h:mm tt", 
-                                       "yyyy/MM/dd hh:mm:ss", "yyyy/M/d h:mm:ss", 
-                                       "yyyy/M/d hh:mm tt", "yyyy/M/d hh tt", 
-                                       "yyyy/M/d h:mm", "yyyy/M/d h:mm", 
+                                       "yyyy/M/d h:mm:ss tt", "yyyy/M/d h:mm tt",
+                                       "yyyy/MM/dd hh:mm:ss", "yyyy/M/d h:mm:ss",
+                                       "yyyy/M/d hh:mm tt", "yyyy/M/d hh tt",
+                                       "yyyy/M/d h:mm", "yyyy/M/d h:mm",
                                        "yyyy/MM/dd hh:mm", "yyyy/M/dd hh:mm"
                                    };
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            if (value is DateTime)
+            if (value is DateTime dateTime)
             {
-                var dateTime = (DateTime)value;
                 if (dateTime.Kind == DateTimeKind.Unspecified)
                 {
                     throw new JsonSerializationException("Cannot convert date time with an unspecified kind");
                 }
-                string convertedDateTime = dateTime.ToString(Format);
+                var convertedDateTime = dateTime.ToString(Format);
                 writer.WriteValue(convertedDateTime);
             }
             else
@@ -59,27 +58,26 @@ namespace PAYNLSDK.Converters
 
             if (reader.TokenType == JsonToken.String)
             {
-                DateTime dateTime;
-/*
-                string[] formats = {
-                                       // - argument.
-                                       "yyyy-M-d h:mm:ss tt", "yyyy-M-d h:mm tt", 
-                                       "yyyy-MM-dd hh:mm:ss", "yyyy-M-d h:mm:ss", 
-                                       "yyyy-M-d hh:mm tt", "yyyy-M-d hh tt", 
-                                       "yyyy-M-d h:mm", "yyyy-M-d h:mm", 
-                                       "yyyy-MM-dd hh:mm", "yyyy-M-dd hh:mm",
-                                       // Slash argument.
-                                       "yyyy/M/d h:mm:ss tt", "yyyy/M/d h:mm tt", 
-                                       "yyyy/MM/dd hh:mm:ss", "yyyy/M/d h:mm:ss", 
-                                       "yyyy/M/d hh:mm tt", "yyyy/M/d hh tt", 
-                                       "yyyy/M/d h:mm", "yyyy/M/d h:mm", 
-                                       "yyyy/MM/dd hh:mm", "yyyy/M/dd hh:mm"
-                                   };
- */
-                string timeString = (string)reader.Value;
+                /*
+                                string[] formats = {
+                                                       // - argument.
+                                                       "yyyy-M-d h:mm:ss tt", "yyyy-M-d h:mm tt", 
+                                                       "yyyy-MM-dd hh:mm:ss", "yyyy-M-d h:mm:ss", 
+                                                       "yyyy-M-d hh:mm tt", "yyyy-M-d hh tt", 
+                                                       "yyyy-M-d h:mm", "yyyy-M-d h:mm", 
+                                                       "yyyy-MM-dd hh:mm", "yyyy-M-dd hh:mm",
+                                                       // Slash argument.
+                                                       "yyyy/M/d h:mm:ss tt", "yyyy/M/d h:mm tt", 
+                                                       "yyyy/MM/dd hh:mm:ss", "yyyy/M/d h:mm:ss", 
+                                                       "yyyy/M/d hh:mm tt", "yyyy/M/d hh tt", 
+                                                       "yyyy/M/d h:mm", "yyyy/M/d h:mm", 
+                                                       "yyyy/MM/dd hh:mm", "yyyy/M/dd hh:mm"
+                                                   };
+                 */
+                var timeString = (string)reader.Value;
                 if (!ParameterValidator.IsEmpty(timeString))
                 {
-                    if (DateTime.TryParseExact(timeString, ParseFormats, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out dateTime))
+                    if (DateTime.TryParseExact(timeString, ParseFormats, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out var dateTime))
                     {
                         // Gelukt we kunnen doorgaan
                         return dateTime;
@@ -89,16 +87,15 @@ namespace PAYNLSDK.Converters
                         // De opgegeven timeString is niet juist.
                         return null;
                     }
-
                 }
                 return null;
             }
-            throw new JsonSerializationException(String.Format("Unexpected token '{0}' when parsing date.", reader.TokenType));
+            throw new JsonSerializationException(string.Format("Unexpected token '{0}' when parsing date.", reader.TokenType));
         }
 
         public override bool CanConvert(Type objectType)
         {
-            Type t = (Reflection.IsNullable(objectType))
+            var t = Reflection.IsNullable(objectType)
                ? Nullable.GetUnderlyingType(objectType)
                : objectType;
 

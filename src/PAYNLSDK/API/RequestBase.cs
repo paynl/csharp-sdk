@@ -72,7 +72,7 @@ namespace PAYNLSDK.API
         /// <returns>Name Value collection of parameters</returns>
         public virtual NameValueCollection GetParameters()
         {
-            NameValueCollection nvc = new NameValueCollection();
+            var nvc = new NameValueCollection();
             if (RequiresApiToken)
             {
                 ParameterValidator.IsNotEmpty(ApiToken, "ApiToken");
@@ -93,19 +93,19 @@ namespace PAYNLSDK.API
         /// <returns>appendable querystring</returns>
         public string ToQueryString()
         {
-            NameValueCollection nvc = GetParameters();
+            var nvc = GetParameters();
             if (nvc.Count == 0)
             {
                 return "";
             }
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
             // TODO: add "?" if GET?
 
-            bool first = true;
+            var first = true;
 
-            foreach (string key in nvc.AllKeys)
+            foreach (var key in nvc.AllKeys)
             {
-                foreach (string value in nvc.GetValues(key))
+                foreach (var value in nvc.GetValues(key))
                 {
                     if (!first)
                     {
@@ -136,9 +136,9 @@ namespace PAYNLSDK.API
         /// </summary>
         public string RawResponse
         {
-            get 
+            get
             {
-                return rawResponse; 
+                return rawResponse;
             }
             set
             {
@@ -152,5 +152,4 @@ namespace PAYNLSDK.API
         /// </summary>
         public abstract void SetResponse();
     }
-
 }

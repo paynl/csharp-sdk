@@ -1,5 +1,4 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace PAYNLSDK.Objects
 {
@@ -61,6 +60,5 @@ namespace PAYNLSDK.Objects
         /// </summary>
         [JsonProperty("emailAdress")]
         public string EmailAddress { get; protected set; }
-
     }
 }

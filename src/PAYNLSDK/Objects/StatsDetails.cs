@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
 
 namespace PAYNLSDK.Objects
 {
@@ -61,7 +60,5 @@ namespace PAYNLSDK.Objects
         /// </summary>
         [JsonProperty("object")]
         public string Object { get; set; }
-
     }
-
 }

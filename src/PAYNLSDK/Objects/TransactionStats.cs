@@ -1,6 +1,5 @@
 ﻿using System;
 using Newtonsoft.Json;
-using PAYNLSDK.Enums;
 using PAYNLSDK.Converters;
 
 namespace PAYNLSDK.Objects
@@ -76,7 +75,6 @@ namespace PAYNLSDK.Objects
         /// </summary>
         [JsonProperty("profileName")]
         public string ProfileName { get; set; }
-
     }
 
     /// <summary>
@@ -90,5 +88,4 @@ namespace PAYNLSDK.Objects
         [JsonProperty("transations")]
         public TransactionStats[] Transactions { get; set; }
     }
-
 }

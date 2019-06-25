@@ -1,5 +1,4 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using PAYNLSDK.Enums;
 using PAYNLSDK.Converters;
 
@@ -58,5 +57,4 @@ namespace PAYNLSDK.Objects
         [JsonProperty("countryCode")]
         public string CountryCode { get; set; }
     }
-
 }

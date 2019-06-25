@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using PAYNLSDK.Objects;
-using System;
 
 namespace PAYNLSDK.API
 {

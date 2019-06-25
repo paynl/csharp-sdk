@@ -126,5 +126,4 @@ namespace PAYNLSDK.Objects
         [JsonProperty("company")]
         public Company Company { get; set; }
     }
-
 }

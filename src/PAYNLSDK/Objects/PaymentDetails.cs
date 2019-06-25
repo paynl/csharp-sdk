@@ -1,5 +1,4 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using PAYNLSDK.Enums;
 using PAYNLSDK.Converters;
 
@@ -208,6 +207,5 @@ namespace PAYNLSDK.Objects
         /// </summary>
         [JsonProperty("paymentProfileName")]
         public string PaymentProfileName { get; protected set; }
-
     }
 }

@@ -1,5 +1,4 @@
 ﻿using PAYNLSDK.Enums;
-using PAYNLSDK.Exceptions;
 using PAYNLSDK.Net;
 using System;
 using TransactionGetService = PAYNLSDK.API.Transaction.GetService.Request;
@@ -447,7 +446,7 @@ namespace PAYNLSDK
         /// <returns>Transaction Start Request</returns>
         public API.Transaction.Start.Request CreateTransactionRequest(string ipAddress, string returnUrl, int? paymentOptionId, int? paymentSubOptionId)
         {
-            return CreateTransactionRequest(ipAddress, returnUrl, paymentOptionId, null, false);
+            return CreateTransactionRequest(ipAddress, returnUrl, paymentOptionId, paymentSubOptionId, false);
         }
 
         /// <summary>

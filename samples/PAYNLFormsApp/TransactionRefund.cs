@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PAYNLFormsApp
@@ -19,12 +12,9 @@ namespace PAYNLFormsApp
 
         private async void btOK_Click(object sender, EventArgs e)
         {
-            
-            DebugForm form = new DebugForm();
+            var form = new DebugForm();
             await form.TransactionRefundAsync(tbTransactionID.Text, tbAmount.Text, tbExchangeUrl.Text);
             form.ShowDialog();
-
-      
         }
 
         private void btCancel_Click(object sender, EventArgs e)

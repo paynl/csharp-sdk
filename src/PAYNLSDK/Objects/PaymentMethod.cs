@@ -1,5 +1,4 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace PAYNLSDK.Objects
 {
@@ -25,6 +24,5 @@ namespace PAYNLSDK.Objects
         /// </summary>
         [JsonProperty("abbreviation")]
         public string Abbreviation { get; set; }
-
     }
 }

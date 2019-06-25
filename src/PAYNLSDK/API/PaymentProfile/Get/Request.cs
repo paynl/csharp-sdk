@@ -1,7 +1,5 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using PAYNLSDK.Utilities;
-using System.Collections.Specialized;
 using PAYNLSDK.Exceptions;
 
 namespace PAYNLSDK.API.PaymentProfile.Get
@@ -33,7 +31,7 @@ namespace PAYNLSDK.API.PaymentProfile.Get
 
         public override System.Collections.Specialized.NameValueCollection GetParameters()
         {
-            NameValueCollection nvc = base.GetParameters();
+            var nvc = base.GetParameters();
 
             ParameterValidator.IsNotNull(PaymentProfileId, "PaymentProfileId");
             nvc.Add("paymentProfileId", PaymentProfileId.ToString());
@@ -43,16 +41,17 @@ namespace PAYNLSDK.API.PaymentProfile.Get
 
         public Response Response { get { return (Response)response; } }
 
-
         public override void SetResponse()
         {
             if (ParameterValidator.IsEmpty(rawResponse))
             {
                 throw new ErrorException("rawResponse is empty!");
             }
-            PAYNLSDK.Objects.PaymentProfile pm = JsonConvert.DeserializeObject<PAYNLSDK.Objects.PaymentProfile>(RawResponse);
-            Response r = new Response();
-            r.PaymentProfile = pm;
+            var pm = JsonConvert.DeserializeObject<Objects.PaymentProfile>(RawResponse);
+            var r = new Response
+            {
+                PaymentProfile = pm
+            };
             response = r;
         }
     }

@@ -1,9 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 using PAYNLSDK.Utilities;
-using System.Collections.Specialized;
 using PAYNLSDK.Exceptions;
-using PAYNLSDK.Objects;
 
 namespace PAYNLSDK.API.Refund.Add
 {
@@ -26,7 +24,7 @@ namespace PAYNLSDK.API.Refund.Add
             this.BankAccountNumber = bankAccountNumber;
             this.BankAccountBic = bankAccountBic;
         }
-              
+
         /// <summary>
         /// The amount to be paid should be given in cents. For example € 3.50 becomes 350.
         /// </summary>
@@ -143,8 +141,6 @@ namespace PAYNLSDK.API.Refund.Add
         {
             get
             {
-
-
                 return true;
             }
         }
@@ -165,7 +161,7 @@ namespace PAYNLSDK.API.Refund.Add
         /// <returns></returns>
         public override System.Collections.Specialized.NameValueCollection GetParameters()
         {
-            NameValueCollection nvc = base.GetParameters();
+            var nvc = base.GetParameters();
 
             ParameterValidator.IsNotNull(Amount, "Amount");
             nvc.Add("amount", Amount.ToString());

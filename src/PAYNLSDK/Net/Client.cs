@@ -1,15 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 using PAYNLSDK.API;
-using PAYNLSDK.Exceptions;
-using PAYNLSDK.Objects;
-using Newtonsoft.Json;
-using System.Collections.Specialized;
 using System.Net.Http;
 
 namespace PAYNLSDK.Net
@@ -22,7 +14,6 @@ namespace PAYNLSDK.Net
         public string ApiToken
         {
             get;
-            private set;
         }
 
         /// <summary>
@@ -31,7 +22,6 @@ namespace PAYNLSDK.Net
         public string ServiceID
         {
             get;
-            private set;
         }
 
         /// <summary>
@@ -45,7 +35,6 @@ namespace PAYNLSDK.Net
         public string ApiVersion
         {
             get;
-            private set;
         }
 
         /// <summary>
