@@ -2,11 +2,19 @@
 using PAYNLSDK.API.Transaction.Start;
 using PAYNLSDK;
 using PAYNLSDK.Enums;
+using PAYNLSDK.Services;
 
 namespace PAYNLFormsApp.Fixtures
 {
     public class TransactionStart
     {
+        public IClientService ClientService { get; }
+
+        public TransactionStart(IClientService clientService)
+        {
+            ClientService = clientService;
+        }
+
         public Request GetFixture()
         {
             var request = GetFixtureNoProductLines();
@@ -39,7 +47,9 @@ namespace PAYNLFormsApp.Fixtures
 
         public Request GetFixtureNoProductLines()
         {
-            var request = new Transaction().CreateTransactionRequest("37.143.38.31", "https://pay.nl/return.php", 10, 0, true);
+            var request = new Transaction(ClientService)
+                .CreateTransactionRequest("37.143.38.31", "https://pay.nl/return.php", 10, 0, true);
+
             request.Amount = 6489;
 
             // transaction
@@ -74,7 +84,7 @@ namespace PAYNLFormsApp.Fixtures
                 Language = "NL",
                 Initials = "J.",
                 Lastname = "Jansen",
-                Gender = PAYNLSDK.Enums.Gender.Male,
+                Gender = Gender.Male,
                 BirthDate = new DateTime(1991, 1, 23, 0, 0, 0, DateTimeKind.Local),
                 PhoneNumber = "0612345678",
                 EmailAddress = "support@pay.nl",

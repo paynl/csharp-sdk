@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
-using PAYNLSDK.Net;
+using PAYNLSDK.Base;
+using PAYNLSDK.Services;
 using PaymentProfileGet = PAYNLSDK.API.PaymentProfile.Get.Request;
 using PaymentProfileGetAll = PAYNLSDK.API.PaymentProfile.GetAll.Request;
 using PaymentProfileGetAvailable = PAYNLSDK.API.PaymentProfile.GetAvailable.Request;
@@ -10,10 +11,10 @@ namespace PAYNLSDK
     /// Generic Payment Profile service helper class.
     /// Makes calling PAYNL Services easier and illiminates the need to fully initiate all Request objects.
     /// </summary>
-    public class PaymentProfile : Client
+    public class PaymentProfile : BaseClient
     {
-        public PaymentProfile(string apiToken, string serviceID)
-            : base(apiToken, serviceID)
+        public PaymentProfile(IClientService clientService)
+            : base(clientService)
         {
         }
 
@@ -29,7 +30,7 @@ namespace PAYNLSDK
                 PaymentProfileId = paymentProfileId
             };
 
-            await PerformRequestAsync(request);
+            await ClientService.PerformRequestAsync(request);
             return request.Response;
         }
 
@@ -40,7 +41,7 @@ namespace PAYNLSDK
         public async Task<API.PaymentProfile.GetAll.Response> GetAllAsync()
         {
             var request = new PaymentProfileGetAll();
-            await PerformRequestAsync(request);
+            await ClientService.PerformRequestAsync(request);
             return request.Response;
         }
 
@@ -62,7 +63,7 @@ namespace PAYNLSDK
                 ShowNotAllowedOnRegistration = showNotAllowedOnRegistration
             };
 
-            await PerformRequestAsync(request);
+            await ClientService.PerformRequestAsync(request);
             return request.Response;
         }
 

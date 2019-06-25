@@ -59,10 +59,8 @@
             this.Controls.Add(this.tbDebug);
             this.Name = "DebugForm";
             this.Text = "ResultaatFrom";
-            this.Load += new System.EventHandler(this.DebugForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion

@@ -1,18 +1,25 @@
 ﻿using System;
 using System.Windows.Forms;
+using Microsoft.Extensions.Logging;
+using PAYNLSDK.Services;
 
 namespace PAYNLFormsApp
 {
     public partial class RefundAdd : Form
     {
-        public RefundAdd()
+        public IClientService ClientService { get; }
+        public ILogger Logger { get; }
+
+        public RefundAdd(IClientService clientService, ILogger logger)
         {
             InitializeComponent();
+            ClientService = clientService;
+            Logger = logger;
         }
 
         private async void button1_Click(object sender, EventArgs e)
         {
-            var form = new DebugForm();
+            var form = new DebugForm(ClientService, Logger);
             await form.RefundAddAsync(tbBankAccountName.Text, tbBankAccountNumber.Text, tbAmount.Text);
             form.ShowDialog();
         }

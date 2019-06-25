@@ -1,7 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using PAYNLFormsApp.Fixtures;
 using PAYNLSDK.API;
 using PAYNLSDK.Exceptions;
+using PAYNLSDK.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -12,25 +14,39 @@ namespace PAYNLFormsApp
 {
     public partial class Form1 : Form
     {
-        public Form1()
+        public IClientService ClientService { get; }
+        public IUtilityService UtilityService { get; }
+        public ILogger Logger { get; }
+
+        public LastRequests LastRequests { get; set; }
+        public StartTransaction StartTransaction { get; set; }
+
+        public Form1(IClientService clientService, IUtilityService utilityService, ILogger logger)
         {
             InitializeComponent();
+
+            ClientService = clientService;
+            UtilityService = utilityService;
+            Logger = logger;
+
+            LastRequests = new LastRequests();
+            StartTransaction = new StartTransaction(clientService);
         }
 
         private void PayNLAPIToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = new Form2();
+            var form = new Form2(ClientService);
             form.ShowDialog();
         }
 
         private void ValidationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new ValidationForm().ShowDialog();
+            new ValidationForm(UtilityService).ShowDialog();
         }
 
         private async void DumpPaymentmethodsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = new DebugForm();
+            var form = new DebugForm(ClientService, Logger);
             await form.DumpPaymentmethodsAsync();
             form.ShowDialog();
         }
@@ -45,11 +61,16 @@ namespace PAYNLFormsApp
             if (tbDebug.Text.Length == 0)
                 tbDebug.Text = value;
             else
-                tbDebug.AppendText(System.Environment.NewLine + value);
+                tbDebug.AppendText(Environment.NewLine + value);
+
+            Logger.LogDebug(value);
         }
+
         private void InitRequestDebug(RequestBase request)
         {
-            APISettings.InitAPI();
+            request.ApiToken = ClientService.Settings.ApiToken;
+            request.ServiceId = ClientService.Settings.ServiceId;
+
             AddDebug(string.Format("Calling API {0} / {1}", request.Controller, request.Method));
             AddDebug(string.Format("Requires TOKEN? {0}", request.RequiresApiToken));
             AddDebug(string.Format("Requires SERVICEID? {0}", request.RequiresServiceId));
@@ -67,14 +88,14 @@ namespace PAYNLFormsApp
 
         private async void DumpTransactionGetServiceToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = new DebugForm();
+            var form = new DebugForm(ClientService, Logger);
             await form.DumpTransactionGetServiceAsync();
             form.ShowDialog();
         }
 
         private async void DumpTransactionGetLastToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = new DebugForm();
+            var form = new DebugForm(ClientService, Logger);
             await form.DumpTransactionGetLastAsync();
             form.ShowDialog();
         }
@@ -82,14 +103,13 @@ namespace PAYNLFormsApp
         private async void Txinfo(string id)
         {
             //619204633Xc4027e
-            APISettings.InitAPI();
             ClearDebug();
             var request = new PAYNLSDK.API.Transaction.Info.Request
             {
                 TransactionId = id
             };
             InitRequestDebug(request);
-            await APISettings.Client.PerformRequestAsync(request);
+            await ClientService.PerformRequestAsync(request);
             DebugRawResponse(request);
             tbMain.Text = request.Response.ToString();
         }
@@ -111,9 +131,8 @@ namespace PAYNLFormsApp
 
         private void TransActionStartToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            APISettings.InitAPI();
             ClearDebug();
-            var fixture = new TransactionStart().GetFixture();
+            var fixture = new TransactionStart(ClientService).GetFixture();
             AddDebug("Fixture loaded.");
             AddDebug("JSON:");
             AddDebug(fixture.ToString());
@@ -125,9 +144,8 @@ namespace PAYNLFormsApp
 
         private void TransactionStartproductsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            APISettings.InitAPI();
             ClearDebug();
-            var fixture = new TransactionStart().GetFixtureNoProductLines();
+            var fixture = new TransactionStart(ClientService).GetFixtureNoProductLines();
             AddDebug("Fixture loaded.");
             AddDebug("JSON:");
             AddDebug(fixture.ToString());
@@ -186,13 +204,12 @@ namespace PAYNLFormsApp
         {
             try
             {
-                APISettings.InitAPI();
                 ClearDebug();
-                var fixture = new TransactionStart().GetFixtureNoProductLines();
+                var fixture = new TransactionStart(ClientService).GetFixtureNoProductLines();
                 InitRequestDebug(fixture);
                 DumpNvc(fixture.GetParameters());
 
-                await APISettings.Client.PerformRequestAsync(fixture);
+                await ClientService.PerformRequestAsync(fixture);
                 DebugRawResponse(fixture);
                 tbMain.Text = fixture.Response.ToString();
 
@@ -208,7 +225,7 @@ namespace PAYNLFormsApp
 
         private void StartuseFixtureEditableToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var frm = new StartTransaction();
+            var frm = new StartTransaction(ClientService);
             frm.FormClosed += Frm_FormClosed;
             frm.ShowDialog();
         }
@@ -223,13 +240,12 @@ namespace PAYNLFormsApp
                     AddDebug("CANCELLED!");
                     return;
                 }
-                APISettings.InitAPI();
                 ClearDebug();
                 var fixture = LastRequests.LastTransactionStart;
                 InitRequestDebug(fixture);
                 DumpNvc(fixture.GetParameters());
 
-                await APISettings.Client.PerformRequestAsync(fixture);
+                await ClientService.PerformRequestAsync(fixture);
                 DebugRawResponse(fixture);
                 tbMain.Text = fixture.Response.ToString();
 
@@ -259,13 +275,12 @@ namespace PAYNLFormsApp
         {
             try
             {
-                APISettings.InitAPI();
                 ClearDebug();
                 var fixture = new PAYNLSDK.API.PaymentProfile.GetAll.Request();
                 InitRequestDebug(fixture);
                 DumpNvc(fixture.GetParameters());
 
-                await APISettings.Client.PerformRequestAsync(fixture);
+                await ClientService.PerformRequestAsync(fixture);
                 DebugRawResponse(fixture);
                 tbMain.Text = fixture.Response.ToString();
             }
@@ -280,13 +295,12 @@ namespace PAYNLFormsApp
         {
             try
             {
-                APISettings.InitAPI();
                 ClearDebug();
                 var fixture = new PAYNLSDK.API.Service.GetCategories.Request();
                 InitRequestDebug(fixture);
                 DumpNvc(fixture.GetParameters());
 
-                await APISettings.Client.PerformRequestAsync(fixture);
+                await ClientService.PerformRequestAsync(fixture);
                 DebugRawResponse(fixture);
                 tbMain.Text = fixture.Response.ToString();
             }
@@ -299,25 +313,25 @@ namespace PAYNLFormsApp
 
         private void ApproveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = new ApproveDecline();
+            var form = new ApproveDecline(ClientService, Logger);
             form.ShowDialog();
         }
 
         private void DeclineToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = new ApproveDecline();
+            var form = new ApproveDecline(ClientService, Logger);
             form.ShowDialog();
         }
 
         private void RefundAddToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = new RefundAdd();
+            var form = new RefundAdd(ClientService, Logger);
             form.ShowDialog();
         }
 
         private void RefundToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = new TransactionRefund();
+            var form = new TransactionRefund(ClientService, Logger);
             form.ShowDialog();
         }
 
@@ -408,7 +422,6 @@ namespace PAYNLFormsApp
 
         private void RefundtransactionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            APISettings.InitAPI();
             ClearDebug();
             var fixture = RefundTransaction.GetFixtureNoProductLines();
             AddDebug("Fixture loaded.");
@@ -429,7 +442,6 @@ namespace PAYNLFormsApp
 
         private void RefundTrasactionProductsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            APISettings.InitAPI();
             ClearDebug();
             var fixture = RefundTransaction.GetFixture();
             AddDebug("Fixture loaded.");
@@ -464,7 +476,7 @@ namespace PAYNLFormsApp
 
         private void RefundInfoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = new RefundInfo();
+            var form = new RefundInfo(ClientService, Logger);
             form.ShowDialog();
         }
         /*

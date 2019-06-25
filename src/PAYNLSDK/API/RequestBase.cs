@@ -21,12 +21,12 @@ namespace PAYNLSDK.API
         /// <summary>
         /// PAYNL API TOKEN
         /// </summary>
-        public static string ApiToken { get; set; }
+        public string ApiToken { get; set; }
 
         /// <summary>
         /// PAYNL Service ID
         /// </summary>
-        public static string ServiceId { get; set; }
+        public string ServiceId { get; set; }
 
         /// <summary>
         /// Return as JSON

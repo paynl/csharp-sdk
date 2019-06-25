@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
-using PAYNLSDK.Net;
+using PAYNLSDK.Base;
+using PAYNLSDK.Services;
 using PaymentMethodGet = PAYNLSDK.API.PaymentMethod.Get.Request;
 using PaymentMethodGetAll = PAYNLSDK.API.PaymentMethod.GetAll.Request;
 
@@ -9,10 +10,10 @@ namespace PAYNLSDK
     /// Generic Payment Method service helper class.
     /// Makes calling PAYNL Services easier and illiminates the need to fully initiate all Request objects.
     /// </summary>
-    public class PaymentMethod : Client
+    public class PaymentMethod : BaseClient
     {
-        public PaymentMethod(string apiToken, string serviceID)
-            : base(apiToken, serviceID)
+        public PaymentMethod(IClientService clientService)
+            : base(clientService)
         {
         }
 
@@ -28,7 +29,7 @@ namespace PAYNLSDK
                 PaymentMethodId = paymentMethodId
             };
 
-            await PerformRequestAsync(request);
+            await ClientService.PerformRequestAsync(request);
             return request.Response;
         }
 
@@ -39,7 +40,7 @@ namespace PAYNLSDK
         public async Task<API.PaymentMethod.GetAll.Response> GetAllAsync()
         {
             var request = new PaymentMethodGetAll();
-            await PerformRequestAsync(request);
+            await ClientService.PerformRequestAsync(request);
             return request.Response;
         }
     }

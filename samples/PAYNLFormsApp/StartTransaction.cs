@@ -1,4 +1,5 @@
 ﻿using PAYNLSDK.Enums;
+using PAYNLSDK.Services;
 using PAYNLSDK.Utilities;
 using System;
 using System.Windows.Forms;
@@ -7,16 +8,24 @@ namespace PAYNLFormsApp
 {
     public partial class StartTransaction : Form
     {
-        public static bool OK { get; protected set; }
+        public IClientService ClientService { get; }
 
-        public StartTransaction()
+        public bool OK { get; protected set; }
+        public LastRequests LastRequests { get; set; }
+
+        public StartTransaction(IClientService clientService)
         {
             InitializeComponent();
+            ClientService = clientService;
         }
 
         private void StartTransaction_Load(object sender, EventArgs e)
         {
-            LastRequests.LastTransactionStart = new Fixtures.TransactionStart().GetFixtureNoProductLines();
+            LastRequests = new LastRequests
+            {
+                LastTransactionStart = new Fixtures.TransactionStart(ClientService)
+                    .GetFixtureNoProductLines()
+            };
 
             // load
             tbAmount.Text = LastRequests.LastTransactionStart.Amount.ToString();

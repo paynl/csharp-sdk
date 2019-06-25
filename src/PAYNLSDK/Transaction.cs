@@ -1,5 +1,4 @@
 ﻿using PAYNLSDK.Enums;
-using PAYNLSDK.Net;
 using System;
 using TransactionGetService = PAYNLSDK.API.Transaction.GetService.Request;
 using TransactionInfo = PAYNLSDK.API.Transaction.Info.Request;
@@ -8,6 +7,8 @@ using TransactionApprove = PAYNLSDK.API.Transaction.Approve.Request;
 using TransactionDecline = PAYNLSDK.API.Transaction.Decline.Request;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
+using PAYNLSDK.Base;
+using PAYNLSDK.Services;
 
 namespace PAYNLSDK
 {
@@ -15,14 +16,10 @@ namespace PAYNLSDK
     /// Generic Transaction service helper class.
     /// Makes calling PAYNL Services easier and illiminates the need to fully initiate all Request objects.
     /// </summary>
-    public class Transaction : Client
+    public class Transaction : BaseClient
     {
-        public Transaction()
-        {
-        }
-
-        public Transaction(string apiToken, string serviceID)
-            : base(apiToken, serviceID)
+        public Transaction(IClientService clientService)
+            : base(clientService)
         {
         }
 
@@ -40,7 +37,7 @@ namespace PAYNLSDK
                     TransactionId = transactionId
                 };
 
-                await PerformRequestAsync(request);
+                await ClientService.PerformRequestAsync(request);
                 return request.Response.PaymentDetails.State == PaymentStatus.PAID;
             }
             catch
@@ -80,7 +77,7 @@ namespace PAYNLSDK
                     TransactionId = transactionId
                 };
 
-                await PerformRequestAsync(request);
+                await ClientService.PerformRequestAsync(request);
 
                 return request.Response.PaymentDetails.State == PaymentStatus.CANCEL;
             }
@@ -121,7 +118,7 @@ namespace PAYNLSDK
                     TransactionId = transactionId
                 };
 
-                await PerformRequestAsync(request);
+                await ClientService.PerformRequestAsync(request);
 
                 return (request.Response.PaymentDetails.State == PaymentStatus.PENDING_1) ||
                     (request.Response.PaymentDetails.State == PaymentStatus.PENDING_2) ||
@@ -170,7 +167,7 @@ namespace PAYNLSDK
                     TransactionId = transactionId
                 };
 
-                await PerformRequestAsync(request);
+                await ClientService.PerformRequestAsync(request);
 
                 return (request.Response.PaymentDetails.State == PaymentStatus.VERIFY) ||
                     (request.Response.PaymentDetails.StateName == "VERIFY");
@@ -244,7 +241,7 @@ namespace PAYNLSDK
                 TransactionId = transactionId
             };
 
-            await PerformRequestAsync(request);
+            await ClientService.PerformRequestAsync(request);
             return request.Response;
         }
 
@@ -262,7 +259,7 @@ namespace PAYNLSDK
                 PaymentMethodId = paymentMethodId
             };
 
-            await PerformRequestAsync(request);
+            await ClientService.PerformRequestAsync(request);
             return request.Response;
         }
 
@@ -293,7 +290,7 @@ namespace PAYNLSDK
                 ProcessDate = processDate
             };
 
-            await PerformRequestAsync(request);
+            await ClientService.PerformRequestAsync(request);
             return request.Response;
         }
 
@@ -347,7 +344,7 @@ namespace PAYNLSDK
                 ExchangeUrl = exchangeUrl
             };
 
-            await PerformRequestAsync(request);
+            await ClientService.PerformRequestAsync(request);
             // We will convert the response to a PAYNLSDK.API.Transaction.Refund.Response so we stay in the same, original, namespace.
             // We manage to get away with this because the API responses have the same definition.
             return JsonConvert.DeserializeObject<API.Transaction.Refund.Response>(request.RawResponse);
@@ -365,7 +362,7 @@ namespace PAYNLSDK
                 TransactionId = transactionId
             };
 
-            await PerformRequestAsync(request);
+            await ClientService.PerformRequestAsync(request);
             return request.Response;
         }
 
@@ -381,7 +378,7 @@ namespace PAYNLSDK
                 TransactionId = transactionId
             };
 
-            await PerformRequestAsync(request);
+            await ClientService.PerformRequestAsync(request);
             return request.Response;
         }
 
@@ -480,7 +477,7 @@ namespace PAYNLSDK
         /// <returns>Full response object including Transaction ID</returns>
         public async Task<API.Transaction.Start.Response> StartAsync(API.Transaction.Start.Request request)
         {
-            await PerformRequestAsync(request);
+            await ClientService.PerformRequestAsync(request);
             return request.Response;
         }
     }

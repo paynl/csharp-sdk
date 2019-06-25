@@ -1,5 +1,6 @@
-﻿using PAYNLSDK.Net;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using PAYNLSDK.Base;
+using PAYNLSDK.Services;
 using ServiceGetCategories = PAYNLSDK.API.Service.GetCategories.Request;
 
 namespace PAYNLSDK
@@ -8,10 +9,10 @@ namespace PAYNLSDK
     /// Generic Service service helper class.
     /// Makes calling PAYNL Services easier and illiminates the need to fully initiate all Request objects.
     /// </summary>
-    public class Service : Client
+    public class Service : BaseClient
     {
-        public Service(string apiToken, string serviceID)
-            : base(apiToken, serviceID)
+        public Service(IClientService clientService)
+            : base(clientService)
         {
         }
 
@@ -27,7 +28,7 @@ namespace PAYNLSDK
                 PaymentOptionId = paymentOptionId
             };
 
-            await PerformRequestAsync(request);
+            await ClientService.PerformRequestAsync(request);
             return request.Response;
         }
 

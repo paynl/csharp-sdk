@@ -1,19 +1,12 @@
-﻿using PAYNLSDK.API;
-using System.Net;
+﻿using System.Net;
 using System.Threading.Tasks;
+using PAYNLSDK.API;
 
-namespace PAYNLSDK.Net
+namespace PAYNLSDK.Services
 {
-    public interface IClient
+    public interface IClientService
     {
-        /// <summary>
-        /// PAYNL API TOKEN
-        /// </summary>
-        string ApiToken { get; }
-        /// <summary>
-        /// PAYNL SERVICE ID
-        /// </summary>
-        string ServiceID { get; }
+        ISettingsService Settings { get; }
 
         /// <summary>
         /// Proxy injector

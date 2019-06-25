@@ -1,7 +1,10 @@
-﻿using PAYNLSDK.API;
-using PAYNLSDK.Net;
+﻿using GalaSoft.MvvmLight.Ioc;
+using Microsoft.Extensions.Logging;
+using PAYNLSDK.API;
+using PAYNLSDK.Services;
 using System;
 using System.Diagnostics;
+using System.Net;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -29,10 +32,16 @@ namespace PAYNLFormsApp
             AppDomain.CurrentDomain.UnhandledException +=
                 new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
 
-            // Set test token/SL
-            APISettings.ApiToken = "e41f83b246b706291ea9ad798ccfd9f0fee5e0ab";
-            APISettings.ServiceID = "SL-3490-4320";
-            Application.Run(new Form1());
+            SimpleIoc.Default.Register(() => new LoggerFactory().CreateLogger(nameof(PAYNLFormsApp)));
+            SimpleIoc.Default.Register<ISettingsService>(() => new SettingsService("e41f83b246b706291ea9ad798ccfd9f0fee5e0ab", "SL-3490-4320"));
+            SimpleIoc.Default.Register<IWebProxy>(() => null);
+            SimpleIoc.Default.Register<IClientService, ClientService>();
+            SimpleIoc.Default.Register<IUtilityService, UtilityService>();
+
+            Application.Run(new Form1(
+                SimpleIoc.Default.GetInstance<IClientService>(),
+                SimpleIoc.Default.GetInstance<IUtilityService>(),
+                SimpleIoc.Default.GetInstance<ILogger>()));
         }
 
         // Handle the UI exceptions by showing a dialog box, and asking the user whether
@@ -115,35 +124,9 @@ namespace PAYNLFormsApp
         }
     }
 
-    class APISettings
+    public class LastRequests
     {
-        public static string ApiToken { get; set; }
-        public static string ServiceID { get; set; }
-
-        public static void InitAPI()
-        {
-            RequestBase.ApiToken = ApiToken;
-            RequestBase.ServiceId = ServiceID;
-        }
-
-        private static IClient client;
-        public static IClient Client
-        {
-            get
-            {
-                if (client == null)
-                {
-                    client = new Client();
-                }
-                InitAPI();
-                return client;
-            }
-        }
-    }
-
-    class LastRequests
-    {
-        public static PAYNLSDK.API.Transaction.Start.Request LastTransactionStart { get; set; }
-        public static RequestBase LastRequest { get; set; }
+        public PAYNLSDK.API.Transaction.Start.Request LastTransactionStart { get; set; }
+        public RequestBase LastRequest { get; set; }
     }
 }

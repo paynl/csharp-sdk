@@ -1,7 +1,8 @@
-﻿using PAYNLSDK;
+﻿using Microsoft.Extensions.Logging;
+using PAYNLSDK;
 using PAYNLSDK.API;
 using PAYNLSDK.Exceptions;
-using System;
+using PAYNLSDK.Services;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -9,45 +10,42 @@ namespace PAYNLFormsApp
 {
     public partial class DebugForm : Form
     {
-        public DebugForm()
+        public IClientService ClientService { get; }
+        public ILogger Logger { get; }
+
+        public DebugForm(IClientService clientService, ILogger logger)
         {
             InitializeComponent();
-        }
-
-        private void DebugForm_Load(object sender, EventArgs e)
-        {
-
+            ClientService = clientService;
+            Logger = logger;
         }
 
         public async Task DumpPaymentmethodsAsync()
         {
-            APISettings.InitAPI();
             ClearDebug();
             var request = new PAYNLSDK.API.PaymentMethod.GetAll.Request();
             InitRequestDebug(request);
-            await APISettings.Client.PerformRequestAsync(request);
+            await ClientService.PerformRequestAsync(request);
             DebugRawResponse(request);
             tbMain.Text = request.Response.ToString();
         }
 
         public async Task DumpTransactionGetServiceAsync()
         {
-        APISettings.InitAPI();
             ClearDebug();
-        var request = new PAYNLSDK.API.Transaction.GetService.Request();
+            var request = new PAYNLSDK.API.Transaction.GetService.Request();
             InitRequestDebug(request);
-        await APISettings.Client.PerformRequestAsync(request);
+            await ClientService.PerformRequestAsync(request);
             DebugRawResponse(request);
-        tbMain.Text = request.Response.ToString();
+            tbMain.Text = request.Response.ToString();
          }
 
         public async Task DumpTransactionGetLastAsync()
         {
-            APISettings.InitAPI();
             ClearDebug();
             var request = new PAYNLSDK.API.Transaction.GetLastTransactions.Request();
             InitRequestDebug(request);
-            await APISettings.Client.PerformRequestAsync(request);
+            await ClientService.PerformRequestAsync(request);
             DebugRawResponse(request);
             tbMain.Text = request.Response.ToString();
         }
@@ -56,7 +54,6 @@ namespace PAYNLFormsApp
         {
             try
             {
-                APISettings.InitAPI();
                 ClearDebug();
 
                 if (transactionID == "")
@@ -73,7 +70,7 @@ namespace PAYNLFormsApp
 
                     InitRequestDebug(request);
 
-                    await APISettings.Client.PerformRequestAsync(request);
+                    await ClientService.PerformRequestAsync(request);
                     DebugRawResponse(request);
                     tbMain.Text = request.Response.Message.ToString();
                 }
@@ -89,7 +86,6 @@ namespace PAYNLFormsApp
         {
             try
             {
-                APISettings.InitAPI();
                 ClearDebug();
 
                 if (transactionID == "")
@@ -106,7 +102,7 @@ namespace PAYNLFormsApp
 
                     InitRequestDebug(request);
 
-                    await APISettings.Client.PerformRequestAsync(request);
+                    await ClientService.PerformRequestAsync(request);
                     DebugRawResponse(request);
 
                     tbMain.Text = request.Response.Message.ToString();
@@ -123,7 +119,6 @@ namespace PAYNLFormsApp
         {
             try
             {
-                APISettings.InitAPI();
                 ClearDebug();
 
                 var parsed = int.TryParse(amount, out var numValue);
@@ -140,11 +135,11 @@ namespace PAYNLFormsApp
                 }
                 else if (exchangeUrl != "")
                 {
-                    APISettings.InitAPI();
                     AddDebug("-----");
                     AddDebug("Working with modified version of call");
 
-                    var response = await new Transaction().RefundAsync(transactionID, null, numValue, null, exchangeUrl);
+                    var response = await new Transaction(ClientService)
+                        .RefundAsync(transactionID, null, numValue, null, exchangeUrl);
 
                     tbMain.Text = response.RefundId;
                 }
@@ -158,7 +153,7 @@ namespace PAYNLFormsApp
 
                     InitRequestDebug(request);
 
-                    await APISettings.Client.PerformRequestAsync(request);
+                    await ClientService.PerformRequestAsync(request);
                     DebugRawResponse(request);
 
                     tbMain.Text = request.Response.RefundId;
@@ -175,7 +170,6 @@ namespace PAYNLFormsApp
         {
             try
             {
-                APISettings.InitAPI();
                 ClearDebug();
 
                 var parsed = int.TryParse(amount, out var numValue);
@@ -190,7 +184,7 @@ namespace PAYNLFormsApp
                     var request = new PAYNLSDK.API.Refund.Add.Request(numValue, bankAccountName, bankAccountNumber, "");
                     InitRequestDebug(request);
 
-                    await APISettings.Client.PerformRequestAsync(request);
+                    await ClientService.PerformRequestAsync(request);
                     DebugRawResponse(request);
 
                     tbMain.Text = request.Response.RefundId;
@@ -207,13 +201,12 @@ namespace PAYNLFormsApp
         {
             try
             {
-                APISettings.InitAPI();
                 ClearDebug();
 
                 var request = new PAYNLSDK.API.Refund.Info.Request(refundID);
                 InitRequestDebug(request);
 
-                await APISettings.Client.PerformRequestAsync(request);
+                await ClientService.PerformRequestAsync(request);
                 DebugRawResponse(request);
 
                 tbMain.Text = request.Response.ToString();
@@ -237,10 +230,15 @@ namespace PAYNLFormsApp
                 tbDebug.Text = value;
             else
                 tbDebug.AppendText(System.Environment.NewLine + value);
+
+            Logger.LogDebug(value);
         }
+
         private void InitRequestDebug(RequestBase request)
         {
-            APISettings.InitAPI();
+            request.ApiToken = ClientService.Settings.ApiToken;
+            request.ServiceId = ClientService.Settings.ServiceId;
+
             AddDebug(string.Format("Calling API {0} / {1}", request.Controller, request.Method));
             AddDebug(string.Format("Requires TOKEN? {0}", request.RequiresApiToken));
             AddDebug(string.Format("Requires SERVICEID? {0}", request.RequiresServiceId));
