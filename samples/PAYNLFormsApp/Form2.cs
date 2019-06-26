@@ -22,7 +22,8 @@ namespace PAYNLFormsApp
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            ClientService.Settings.SetApiToken(tbApitoken.Text, tbServiceID.Text);
+            ClientService.Settings.ApiToken = tbApitoken.Text;
+            ClientService.Settings.ServiceId = tbServiceID.Text;
         }
 
         private void Button2_Click(object sender, EventArgs e)

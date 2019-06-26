@@ -1,26 +1,17 @@
 ﻿using System.Threading.Tasks;
+using PAYNLFormsApp.Objects;
 using PAYNLSDK.API;
 
 namespace PAYNLSDK.Services
 {
     public interface IClientService
     {
-        ISettingsService Settings { get; }
+        AppSettings Settings { get; }
 
         /// <summary>
         /// API VERSION
         /// </summary>
         string ApiVersion { get; }
-
-        /// <summary>
-        /// Client version
-        /// </summary>
-        string ClientVersion { get; }
-
-        /// <summary>
-        /// User agent
-        /// </summary>
-        string UserAgent { get; }
 
         /// <summary>
         /// Performs an actual request

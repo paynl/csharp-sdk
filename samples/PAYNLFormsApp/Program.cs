@@ -1,13 +1,10 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using PAYNLFormsApp.Models;
+using PAYNLFormsApp.Objects;
 using PAYNLSDK.API;
-using PAYNLSDK.Services;
 using System;
 using System.Diagnostics;
 using System.IO;
-using System.Net;
-using System.Net.Http;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -60,28 +57,8 @@ namespace PAYNLFormsApp
             var appSettings = new AppSettings();
             Configuration.GetSection(nameof(AppSettings)).Bind(appSettings);
 
-            services.AddLogging();
-
-            if(appSettings.UseProxy)
-            {
-                services.AddHttpClient("Proxy").ConfigurePrimaryHttpMessageHandler(() =>
-                {
-                    return new HttpClientHandler
-                    {
-                        Proxy = new WebProxy("http://127.0.0.1:8888"),
-                        UseProxy = true
-                    };
-                });
-            }
-            else
-            {
-                services.AddHttpClient();
-            }
-
-            services.AddTransient(typeof(Form1));
-            services.AddSingleton<ISettingsService>(new SettingsService(appSettings.ApiToken, appSettings.ServiceId));
-            services.AddSingleton<IClientService, ClientService>();
-            services.AddSingleton<IUtilityService, UtilityService>();
+            services.AddPaynl(appSettings);
+            services.AddTransient<Form1>();
         }
 
         // Handle the UI exceptions by showing a dialog box, and asking the user whether
