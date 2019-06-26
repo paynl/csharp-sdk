@@ -21,13 +21,13 @@ namespace PAYNLFormsApp
         public LastRequests LastRequests { get; set; }
         public StartTransaction StartTransaction { get; set; }
 
-        public Form1(IClientService clientService, IUtilityService utilityService, ILogger logger)
+        public Form1(IClientService clientService, IUtilityService utilityService, ILoggerFactory logger)
         {
             InitializeComponent();
 
             ClientService = clientService;
             UtilityService = utilityService;
-            Logger = logger;
+            Logger = logger.CreateLogger<Form1>();
 
             LastRequests = new LastRequests();
             StartTransaction = new StartTransaction(clientService);

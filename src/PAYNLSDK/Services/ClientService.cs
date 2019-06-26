@@ -37,9 +37,9 @@ namespace PAYNLSDK.Services
         }
 
         /// <summary>
-        /// Proxy injector
+        /// HttpClient Factory
         /// </summary>
-        public IWebProxy ProxyConfiguration { get; }
+        private IHttpClientFactory HttpClientFactory { get; }
 
         /// <summary>
         /// Create a new Service client
@@ -47,10 +47,10 @@ namespace PAYNLSDK.Services
         /// <param name="apiToken">PAYNL Api Token</param>
         /// <param name="serviceID">PAYNL Service ID</param>
         /// <param name="proxyConfigurationInjector">Proxy Injector</param>
-        public ClientService(ISettingsService settings, IWebProxy proxyConfiguration)
+        public ClientService(ISettingsService settings, IHttpClientFactory httpClientFactory)
         {
             Settings = settings;
-            ProxyConfiguration = proxyConfiguration;
+            HttpClientFactory = httpClientFactory;
         }
 
         /// <summary>
@@ -65,29 +65,22 @@ namespace PAYNLSDK.Services
             request.ApiToken = Settings.ApiToken;
             request.ServiceId = Settings.ServiceId;
 
-            var httpClientHandler = new HttpClientHandler();
+            var httpClient = HttpClientFactory.CreateClient();
+            httpClient.BaseAddress = new Uri(Constants.Endpoint);
 
-            if (ProxyConfiguration != null)
+            // Use TryAddWithoutValidation because useragent format is not compatible
+            httpClient.DefaultRequestHeaders
+                .TryAddWithoutValidation(Constants.UserAgentHeader, UserAgent);
+
+            httpClient.DefaultRequestHeaders
+                .Accept
+                .Add(new MediaTypeWithQualityHeaderValue(Constants.ApplicationJsonContentType));
+
+            using (var response = await httpClient.PostAsync(request.Url, new StringContent(request.ToQueryString(), Encoding.UTF8, Constants.WWWUrlContentType)))
             {
-                httpClientHandler.Proxy = ProxyConfiguration;
-            }
-
-            using (var httpClient = new HttpClient(httpClientHandler, true) { BaseAddress = new Uri(Constants.Endpoint) })
-            {
-                // Use TryAddWithoutValidation because useragent format is not compatible
-                httpClient.DefaultRequestHeaders
-                    .TryAddWithoutValidation(Constants.UserAgentHeader, UserAgent);
-
-                httpClient.DefaultRequestHeaders
-                    .Accept
-                    .Add(new MediaTypeWithQualityHeaderValue(Constants.ApplicationJsonContentType));
-
-                using (var response = await httpClient.PostAsync(request.Url, new StringContent(request.ToQueryString(), Encoding.UTF8, Constants.WWWUrlContentType)))
-                {
-                    response.EnsureSuccessStatusCode();
-                    result = await response.Content.ReadAsStringAsync();
-                    request.RawResponse = result;
-                }
+                response.EnsureSuccessStatusCode();
+                result = await response.Content.ReadAsStringAsync();
+                request.RawResponse = result;
             }
 
             return result;

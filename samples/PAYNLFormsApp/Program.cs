@@ -1,10 +1,13 @@
-﻿using GalaSoft.MvvmLight.Ioc;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using PAYNLFormsApp.Models;
 using PAYNLSDK.API;
 using PAYNLSDK.Services;
 using System;
 using System.Diagnostics;
+using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -12,6 +15,9 @@ namespace PAYNLFormsApp
 {
     static class Program
     {
+        public static IServiceProvider ServiceProvider { get; private set; }
+        public static IConfiguration Configuration { get; private set; }
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -32,16 +38,50 @@ namespace PAYNLFormsApp
             AppDomain.CurrentDomain.UnhandledException +=
                 new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
 
-            SimpleIoc.Default.Register(() => new LoggerFactory().CreateLogger(nameof(PAYNLFormsApp)));
-            SimpleIoc.Default.Register<ISettingsService>(() => new SettingsService("e41f83b246b706291ea9ad798ccfd9f0fee5e0ab", "SL-3490-4320"));
-            SimpleIoc.Default.Register<IWebProxy>(() => null);
-            SimpleIoc.Default.Register<IClientService, ClientService>();
-            SimpleIoc.Default.Register<IUtilityService, UtilityService>();
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
-            Application.Run(new Form1(
-                SimpleIoc.Default.GetInstance<IClientService>(),
-                SimpleIoc.Default.GetInstance<IUtilityService>(),
-                SimpleIoc.Default.GetInstance<ILogger>()));
+            Configuration = builder.Build();
+
+            var serviceCollection = new ServiceCollection();
+            ConfigureServices(serviceCollection);
+
+            ServiceProvider = serviceCollection.BuildServiceProvider();
+
+            var mainWindow = ServiceProvider.GetRequiredService<Form1>();
+            Application.Run(mainWindow);
+        }
+
+        private static void ConfigureServices(IServiceCollection services)
+        {
+            services.Configure<AppSettings>(Configuration.GetSection(nameof(AppSettings)));
+
+            var appSettings = new AppSettings();
+            Configuration.GetSection(nameof(AppSettings)).Bind(appSettings);
+
+            services.AddLogging();
+
+            if(appSettings.UseProxy)
+            {
+                services.AddHttpClient("Proxy").ConfigurePrimaryHttpMessageHandler(() =>
+                {
+                    return new HttpClientHandler
+                    {
+                        Proxy = new WebProxy("http://127.0.0.1:8888"),
+                        UseProxy = true
+                    };
+                });
+            }
+            else
+            {
+                services.AddHttpClient();
+            }
+
+            services.AddTransient(typeof(Form1));
+            services.AddSingleton<ISettingsService>(new SettingsService(appSettings.ApiToken, appSettings.ServiceId));
+            services.AddSingleton<IClientService, ClientService>();
+            services.AddSingleton<IUtilityService, UtilityService>();
         }
 
         // Handle the UI exceptions by showing a dialog box, and asking the user whether

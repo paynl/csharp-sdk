@@ -1,5 +1,4 @@
-﻿using System.Net;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using PAYNLSDK.API;
 
 namespace PAYNLSDK.Services
@@ -7,11 +6,6 @@ namespace PAYNLSDK.Services
     public interface IClientService
     {
         ISettingsService Settings { get; }
-
-        /// <summary>
-        /// Proxy injector
-        /// </summary>
-        IWebProxy ProxyConfiguration { get; }
 
         /// <summary>
         /// API VERSION
