@@ -4,7 +4,7 @@ namespace PAYNLSDK.Base
 {
     public abstract class BaseClient
     {
-        public IClientService ClientService { get; }
+        private protected IClientService ClientService { get; }
 
         protected BaseClient(IClientService clientService)
         {
