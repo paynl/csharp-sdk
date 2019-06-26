@@ -29,7 +29,7 @@ namespace PAYNLSDK
                 PaymentMethodId = paymentMethodId
             };
 
-            await ClientService.PerformRequestAsync(request);
+            await ClientService.PerformPostRequestAsync(request);
             return request.Response;
         }
 
@@ -40,7 +40,7 @@ namespace PAYNLSDK
         public async Task<API.PaymentMethod.GetAll.Response> GetAllAsync()
         {
             var request = new PaymentMethodGetAll();
-            await ClientService.PerformRequestAsync(request);
+            await ClientService.PerformPostRequestAsync(request);
             return request.Response;
         }
     }

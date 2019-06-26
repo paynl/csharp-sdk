@@ -37,7 +37,7 @@ namespace PAYNLSDK
                     TransactionId = transactionId
                 };
 
-                await ClientService.PerformRequestAsync(request);
+                await ClientService.PerformPostRequestAsync(request);
                 return request.Response.PaymentDetails.State == PaymentStatus.PAID;
             }
             catch
@@ -77,7 +77,7 @@ namespace PAYNLSDK
                     TransactionId = transactionId
                 };
 
-                await ClientService.PerformRequestAsync(request);
+                await ClientService.PerformPostRequestAsync(request);
 
                 return request.Response.PaymentDetails.State == PaymentStatus.CANCEL;
             }
@@ -118,7 +118,7 @@ namespace PAYNLSDK
                     TransactionId = transactionId
                 };
 
-                await ClientService.PerformRequestAsync(request);
+                await ClientService.PerformPostRequestAsync(request);
 
                 return (request.Response.PaymentDetails.State == PaymentStatus.PENDING_1) ||
                     (request.Response.PaymentDetails.State == PaymentStatus.PENDING_2) ||
@@ -167,7 +167,7 @@ namespace PAYNLSDK
                     TransactionId = transactionId
                 };
 
-                await ClientService.PerformRequestAsync(request);
+                await ClientService.PerformPostRequestAsync(request);
 
                 return (request.Response.PaymentDetails.State == PaymentStatus.VERIFY) ||
                     (request.Response.PaymentDetails.StateName == "VERIFY");
@@ -241,7 +241,7 @@ namespace PAYNLSDK
                 TransactionId = transactionId
             };
 
-            await ClientService.PerformRequestAsync(request);
+            await ClientService.PerformPostRequestAsync(request);
             return request.Response;
         }
 
@@ -259,7 +259,7 @@ namespace PAYNLSDK
                 PaymentMethodId = paymentMethodId
             };
 
-            await ClientService.PerformRequestAsync(request);
+            await ClientService.PerformPostRequestAsync(request);
             return request.Response;
         }
 
@@ -290,7 +290,7 @@ namespace PAYNLSDK
                 ProcessDate = processDate
             };
 
-            await ClientService.PerformRequestAsync(request);
+            await ClientService.PerformPostRequestAsync(request);
             return request.Response;
         }
 
@@ -344,7 +344,7 @@ namespace PAYNLSDK
                 ExchangeUrl = exchangeUrl
             };
 
-            await ClientService.PerformRequestAsync(request);
+            await ClientService.PerformPostRequestAsync(request);
             // We will convert the response to a PAYNLSDK.API.Transaction.Refund.Response so we stay in the same, original, namespace.
             // We manage to get away with this because the API responses have the same definition.
             return JsonConvert.DeserializeObject<API.Transaction.Refund.Response>(request.RawResponse);
@@ -362,7 +362,7 @@ namespace PAYNLSDK
                 TransactionId = transactionId
             };
 
-            await ClientService.PerformRequestAsync(request);
+            await ClientService.PerformPostRequestAsync(request);
             return request.Response;
         }
 
@@ -378,7 +378,7 @@ namespace PAYNLSDK
                 TransactionId = transactionId
             };
 
-            await ClientService.PerformRequestAsync(request);
+            await ClientService.PerformPostRequestAsync(request);
             return request.Response;
         }
 
@@ -477,7 +477,7 @@ namespace PAYNLSDK
         /// <returns>Full response object including Transaction ID</returns>
         public async Task<API.Transaction.Start.Response> StartAsync(API.Transaction.Start.Request request)
         {
-            await ClientService.PerformRequestAsync(request);
+            await ClientService.PerformPostRequestAsync(request);
             return request.Response;
         }
     }

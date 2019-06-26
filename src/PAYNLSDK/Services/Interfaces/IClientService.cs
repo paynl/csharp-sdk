@@ -18,6 +18,6 @@ namespace PAYNLSDK.Services
         /// </summary>
         /// <param name="request">Specific request implementation to perform</param>
         /// <returns>raw response string</returns>
-        Task<string> PerformRequestAsync(RequestBase request);
+        Task<string> PerformPostRequestAsync(RequestBase request);
     }
 }

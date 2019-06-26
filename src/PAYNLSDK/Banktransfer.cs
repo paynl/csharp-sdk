@@ -13,14 +13,14 @@ namespace PAYNLSDK
 
         public async Task<API.Banktransfer.Add.Response> AddAsync(API.Banktransfer.Add.Request request)
         {
-            await ClientService.PerformRequestAsync(request);
+            await ClientService.PerformPostRequestAsync(request);
             return request.Response;
         }
 
         public async Task<API.Banktransfer.Add.Response> AddAsync(int amount, string bankAccountHolder, string bankAccountNumber, string bankAccountBic)
         {
             var request = new API.Banktransfer.Add.Request(amount, bankAccountHolder, bankAccountNumber, bankAccountBic);
-            await ClientService.PerformRequestAsync(request);
+            await ClientService.PerformPostRequestAsync(request);
             return request.Response;
         }
     }

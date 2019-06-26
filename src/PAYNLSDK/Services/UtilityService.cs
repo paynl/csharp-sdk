@@ -18,7 +18,7 @@ namespace PAYNLSDK.Services
                 IpAddress = ipAddress
             };
 
-            await ClientService.PerformRequestAsync(request);
+            await ClientService.PerformPostRequestAsync(request);
             return request.Response.result;
         }
 
@@ -30,7 +30,7 @@ namespace PAYNLSDK.Services
                 {
                     BankAccountNumber = bankAccountNumber
                 };
-                await ClientService.PerformRequestAsync(request);
+                await ClientService.PerformPostRequestAsync(request);
                 return request.Response.result;
             }
             else
@@ -39,7 +39,7 @@ namespace PAYNLSDK.Services
                 {
                     BankAccountNumber = bankAccountNumber
                 };
-                await ClientService.PerformRequestAsync(request);
+                await ClientService.PerformPostRequestAsync(request);
                 return request.Response.result;
             }
         }
@@ -50,7 +50,7 @@ namespace PAYNLSDK.Services
             {
                 IBAN = iban
             };
-            await ClientService.PerformRequestAsync(request);
+            await ClientService.PerformPostRequestAsync(request);
             return request.Response.result;
         }
 
@@ -60,7 +60,7 @@ namespace PAYNLSDK.Services
             {
                 SWIFT = swift
             };
-            await ClientService.PerformRequestAsync(request);
+            await ClientService.PerformPostRequestAsync(request);
             return request.Response.result;
         }
 
@@ -70,7 +70,7 @@ namespace PAYNLSDK.Services
             {
                 KVK = kvk
             };
-            await ClientService.PerformRequestAsync(request);
+            await ClientService.PerformPostRequestAsync(request);
             return request.Response.result;
         }
 
@@ -80,7 +80,7 @@ namespace PAYNLSDK.Services
             {
                 VAT = vat
             };
-            await ClientService.PerformRequestAsync(request);
+            await ClientService.PerformPostRequestAsync(request);
             return request.Response.result;
         }
 
@@ -90,7 +90,7 @@ namespace PAYNLSDK.Services
             {
                 SOFI = sofi
             };
-            await ClientService.PerformRequestAsync(request);
+            await ClientService.PerformPostRequestAsync(request);
             return request.Response.result;
         }
     }

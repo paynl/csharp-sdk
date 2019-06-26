@@ -28,7 +28,7 @@ namespace PAYNLSDK
                 PaymentOptionId = paymentOptionId
             };
 
-            await ClientService.PerformRequestAsync(request);
+            await ClientService.PerformPostRequestAsync(request);
             return request.Response;
         }
 

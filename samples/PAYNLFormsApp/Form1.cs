@@ -109,7 +109,7 @@ namespace PAYNLFormsApp
                 TransactionId = id
             };
             InitRequestDebug(request);
-            await ClientService.PerformRequestAsync(request);
+            await ClientService.PerformPostRequestAsync(request);
             DebugRawResponse(request);
             tbMain.Text = request.Response.ToString();
         }
@@ -209,7 +209,7 @@ namespace PAYNLFormsApp
                 InitRequestDebug(fixture);
                 DumpNvc(fixture.GetParameters());
 
-                await ClientService.PerformRequestAsync(fixture);
+                await ClientService.PerformPostRequestAsync(fixture);
                 DebugRawResponse(fixture);
                 tbMain.Text = fixture.Response.ToString();
 
@@ -245,7 +245,7 @@ namespace PAYNLFormsApp
                 InitRequestDebug(fixture);
                 DumpNvc(fixture.GetParameters());
 
-                await ClientService.PerformRequestAsync(fixture);
+                await ClientService.PerformPostRequestAsync(fixture);
                 DebugRawResponse(fixture);
                 tbMain.Text = fixture.Response.ToString();
 
@@ -280,7 +280,7 @@ namespace PAYNLFormsApp
                 InitRequestDebug(fixture);
                 DumpNvc(fixture.GetParameters());
 
-                await ClientService.PerformRequestAsync(fixture);
+                await ClientService.PerformPostRequestAsync(fixture);
                 DebugRawResponse(fixture);
                 tbMain.Text = fixture.Response.ToString();
             }
@@ -300,7 +300,7 @@ namespace PAYNLFormsApp
                 InitRequestDebug(fixture);
                 DumpNvc(fixture.GetParameters());
 
-                await ClientService.PerformRequestAsync(fixture);
+                await ClientService.PerformPostRequestAsync(fixture);
                 DebugRawResponse(fixture);
                 tbMain.Text = fixture.Response.ToString();
             }

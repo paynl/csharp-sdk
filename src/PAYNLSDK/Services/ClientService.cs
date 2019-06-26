@@ -41,7 +41,7 @@ namespace PAYNLSDK.Services
         /// </summary>
         /// <param name="request">Specific request implementation to perform</param>
         /// <returns>raw response string</returns>
-        public async Task<string> PerformRequestAsync(RequestBase request)
+        public async Task<string> PerformPostRequestAsync(RequestBase request)
         {
             var result = string.Empty;
 

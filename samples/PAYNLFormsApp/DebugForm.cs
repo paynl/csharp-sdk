@@ -25,7 +25,7 @@ namespace PAYNLFormsApp
             ClearDebug();
             var request = new PAYNLSDK.API.PaymentMethod.GetAll.Request();
             InitRequestDebug(request);
-            await ClientService.PerformRequestAsync(request);
+            await ClientService.PerformPostRequestAsync(request);
             DebugRawResponse(request);
             tbMain.Text = request.Response.ToString();
         }
@@ -35,7 +35,7 @@ namespace PAYNLFormsApp
             ClearDebug();
             var request = new PAYNLSDK.API.Transaction.GetService.Request();
             InitRequestDebug(request);
-            await ClientService.PerformRequestAsync(request);
+            await ClientService.PerformPostRequestAsync(request);
             DebugRawResponse(request);
             tbMain.Text = request.Response.ToString();
          }
@@ -45,7 +45,7 @@ namespace PAYNLFormsApp
             ClearDebug();
             var request = new PAYNLSDK.API.Transaction.GetLastTransactions.Request();
             InitRequestDebug(request);
-            await ClientService.PerformRequestAsync(request);
+            await ClientService.PerformPostRequestAsync(request);
             DebugRawResponse(request);
             tbMain.Text = request.Response.ToString();
         }
@@ -70,7 +70,7 @@ namespace PAYNLFormsApp
 
                     InitRequestDebug(request);
 
-                    await ClientService.PerformRequestAsync(request);
+                    await ClientService.PerformPostRequestAsync(request);
                     DebugRawResponse(request);
                     tbMain.Text = request.Response.Message.ToString();
                 }
@@ -102,7 +102,7 @@ namespace PAYNLFormsApp
 
                     InitRequestDebug(request);
 
-                    await ClientService.PerformRequestAsync(request);
+                    await ClientService.PerformPostRequestAsync(request);
                     DebugRawResponse(request);
 
                     tbMain.Text = request.Response.Message.ToString();
@@ -153,7 +153,7 @@ namespace PAYNLFormsApp
 
                     InitRequestDebug(request);
 
-                    await ClientService.PerformRequestAsync(request);
+                    await ClientService.PerformPostRequestAsync(request);
                     DebugRawResponse(request);
 
                     tbMain.Text = request.Response.RefundId;
@@ -184,7 +184,7 @@ namespace PAYNLFormsApp
                     var request = new PAYNLSDK.API.Refund.Add.Request(numValue, bankAccountName, bankAccountNumber, "");
                     InitRequestDebug(request);
 
-                    await ClientService.PerformRequestAsync(request);
+                    await ClientService.PerformPostRequestAsync(request);
                     DebugRawResponse(request);
 
                     tbMain.Text = request.Response.RefundId;
@@ -206,7 +206,7 @@ namespace PAYNLFormsApp
                 var request = new PAYNLSDK.API.Refund.Info.Request(refundID);
                 InitRequestDebug(request);
 
-                await ClientService.PerformRequestAsync(request);
+                await ClientService.PerformPostRequestAsync(request);
                 DebugRawResponse(request);
 
                 tbMain.Text = request.Response.ToString();

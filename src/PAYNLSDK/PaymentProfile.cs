@@ -30,7 +30,7 @@ namespace PAYNLSDK
                 PaymentProfileId = paymentProfileId
             };
 
-            await ClientService.PerformRequestAsync(request);
+            await ClientService.PerformPostRequestAsync(request);
             return request.Response;
         }
 
@@ -41,7 +41,7 @@ namespace PAYNLSDK
         public async Task<API.PaymentProfile.GetAll.Response> GetAllAsync()
         {
             var request = new PaymentProfileGetAll();
-            await ClientService.PerformRequestAsync(request);
+            await ClientService.PerformPostRequestAsync(request);
             return request.Response;
         }
 
@@ -63,7 +63,7 @@ namespace PAYNLSDK
                 ShowNotAllowedOnRegistration = showNotAllowedOnRegistration
             };
 
-            await ClientService.PerformRequestAsync(request);
+            await ClientService.PerformPostRequestAsync(request);
             return request.Response;
         }
 
