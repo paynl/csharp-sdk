@@ -1,29 +1,30 @@
 ﻿using System;
 using System.Windows.Forms;
-using PAYNLSDK.Services;
+using Microsoft.Extensions.Options;
+using PAYNLFormsApp.Objects;
 
 namespace PAYNLFormsApp
 {
     public partial class Form2 : Form
     {
-        public IClientService ClientService { get; }
+        private AppSettings Settings { get; }
 
-        public Form2(IClientService clientService)
+        public Form2(IOptions<AppSettings> settings)
         {
             InitializeComponent();
-            ClientService = clientService;
+            Settings = settings.Value;
         }
 
         private void Form2_Load(object sender, EventArgs e)
         {
-            tbApitoken.Text = ClientService.Settings.ApiToken;
-            tbServiceID.Text = ClientService.Settings.ServiceId;
+            tbApitoken.Text = Settings.ApiToken;
+            tbServiceID.Text = Settings.ServiceId;
         }
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            ClientService.Settings.ApiToken = tbApitoken.Text;
-            ClientService.Settings.ServiceId = tbServiceID.Text;
+            Settings.ApiToken = tbApitoken.Text;
+            Settings.ServiceId = tbServiceID.Text;
         }
 
         private void Button2_Click(object sender, EventArgs e)

@@ -58,7 +58,17 @@ namespace PAYNLFormsApp
             Configuration.GetSection(nameof(AppSettings)).Bind(appSettings);
 
             services.AddPaynl(appSettings);
+
+            // Register all available forms
+            services.AddTransient<ApproveDecline>();
+            services.AddTransient<DebugForm>();
             services.AddTransient<Form1>();
+            services.AddTransient<Form2>();
+            services.AddTransient<RefundAdd>();
+            services.AddTransient<RefundInfo>();
+            services.AddTransient<StartTransaction>();
+            services.AddTransient<TransactionRefund>();
+            services.AddTransient<ValidationForm>();
         }
 
         // Handle the UI exceptions by showing a dialog box, and asking the user whether

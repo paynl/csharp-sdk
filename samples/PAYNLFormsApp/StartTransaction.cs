@@ -8,7 +8,7 @@ namespace PAYNLFormsApp
 {
     public partial class StartTransaction : Form
     {
-        public IClientService ClientService { get; }
+        private IClientService ClientService { get; }
 
         public bool OK { get; protected set; }
         public LastRequests LastRequests { get; set; }

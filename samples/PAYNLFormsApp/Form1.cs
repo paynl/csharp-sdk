@@ -1,6 +1,9 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using PAYNLFormsApp.Fixtures;
+using PAYNLFormsApp.Objects;
 using PAYNLSDK.API;
 using PAYNLSDK.Exceptions;
 using PAYNLSDK.Services;
@@ -14,20 +17,22 @@ namespace PAYNLFormsApp
 {
     public partial class Form1 : Form
     {
-        public IClientService ClientService { get; }
-        public IUtilityService UtilityService { get; }
-        public ILogger Logger { get; }
+        private IServiceProvider ServiceProvider { get; }
+        private IClientService ClientService { get; }
+        private ILogger Logger { get; }
+        private AppSettings Settings { get; }
 
         public LastRequests LastRequests { get; set; }
         public StartTransaction StartTransaction { get; set; }
 
-        public Form1(IClientService clientService, IUtilityService utilityService, ILoggerFactory logger)
+        public Form1(IServiceProvider serviceProvider, IOptions<AppSettings> settings, IClientService clientService, ILoggerFactory logger)
         {
             InitializeComponent();
 
+            ServiceProvider = serviceProvider;
             ClientService = clientService;
-            UtilityService = utilityService;
             Logger = logger.CreateLogger<Form1>();
+            Settings = settings.Value;
 
             LastRequests = new LastRequests();
             StartTransaction = new StartTransaction(clientService);
@@ -35,18 +40,19 @@ namespace PAYNLFormsApp
 
         private void PayNLAPIToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = new Form2(ClientService);
+            var form = ServiceProvider.GetRequiredService<Form2>();
             form.ShowDialog();
         }
 
         private void ValidationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new ValidationForm(UtilityService).ShowDialog();
+            var form = ServiceProvider.GetRequiredService<ValidationForm>();
+            form.ShowDialog();
         }
 
         private async void DumpPaymentmethodsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = new DebugForm(ClientService, Logger);
+            var form = ServiceProvider.GetRequiredService<DebugForm>();
             await form.DumpPaymentmethodsAsync();
             form.ShowDialog();
         }
@@ -68,8 +74,8 @@ namespace PAYNLFormsApp
 
         private void InitRequestDebug(RequestBase request)
         {
-            request.ApiToken = ClientService.Settings.ApiToken;
-            request.ServiceId = ClientService.Settings.ServiceId;
+            request.ApiToken = Settings.ApiToken;
+            request.ServiceId = Settings.ServiceId;
 
             AddDebug(string.Format("Calling API {0} / {1}", request.Controller, request.Method));
             AddDebug(string.Format("Requires TOKEN? {0}", request.RequiresApiToken));
@@ -88,14 +94,14 @@ namespace PAYNLFormsApp
 
         private async void DumpTransactionGetServiceToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = new DebugForm(ClientService, Logger);
+            var form = ServiceProvider.GetRequiredService<DebugForm>();
             await form.DumpTransactionGetServiceAsync();
             form.ShowDialog();
         }
 
         private async void DumpTransactionGetLastToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = new DebugForm(ClientService, Logger);
+            var form = ServiceProvider.GetRequiredService<DebugForm>();
             await form.DumpTransactionGetLastAsync();
             form.ShowDialog();
         }
@@ -313,25 +319,25 @@ namespace PAYNLFormsApp
 
         private void ApproveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = new ApproveDecline(ClientService, Logger);
+            var form = ServiceProvider.GetRequiredService<ApproveDecline>();
             form.ShowDialog();
         }
 
         private void DeclineToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = new ApproveDecline(ClientService, Logger);
+            var form = ServiceProvider.GetRequiredService<ApproveDecline>();
             form.ShowDialog();
         }
 
         private void RefundAddToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = new RefundAdd(ClientService, Logger);
+            var form = ServiceProvider.GetRequiredService<RefundAdd>();
             form.ShowDialog();
         }
 
         private void RefundToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = new TransactionRefund(ClientService, Logger);
+            var form = ServiceProvider.GetRequiredService<TransactionRefund>();
             form.ShowDialog();
         }
 
@@ -476,7 +482,7 @@ namespace PAYNLFormsApp
 
         private void RefundInfoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = new RefundInfo(ClientService, Logger);
+            var form = ServiceProvider.GetRequiredService<RefundInfo>();
             form.ShowDialog();
         }
         /*

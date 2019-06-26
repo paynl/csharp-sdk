@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using PAYNLFormsApp.Objects;
 using PAYNLSDK;
 using PAYNLSDK.API;
 using PAYNLSDK.Exceptions;
@@ -10,13 +12,15 @@ namespace PAYNLFormsApp
 {
     public partial class DebugForm : Form
     {
-        public IClientService ClientService { get; }
-        public ILogger Logger { get; }
+        private IClientService ClientService { get; }
+        private ILogger Logger { get; }
+        private AppSettings Settings { get; }
 
-        public DebugForm(IClientService clientService, ILogger logger)
+        public DebugForm(IClientService clientService, IOptions<AppSettings> settings, ILogger<DebugForm> logger)
         {
             InitializeComponent();
             ClientService = clientService;
+            Settings = settings.Value;
             Logger = logger;
         }
 
@@ -236,8 +240,8 @@ namespace PAYNLFormsApp
 
         private void InitRequestDebug(RequestBase request)
         {
-            request.ApiToken = ClientService.Settings.ApiToken;
-            request.ServiceId = ClientService.Settings.ServiceId;
+            request.ApiToken = Settings.ApiToken;
+            request.ServiceId = Settings.ServiceId;
 
             AddDebug(string.Format("Calling API {0} / {1}", request.Controller, request.Method));
             AddDebug(string.Format("Requires TOKEN? {0}", request.RequiresApiToken));

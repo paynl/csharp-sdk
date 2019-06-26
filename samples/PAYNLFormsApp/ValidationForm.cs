@@ -6,7 +6,7 @@ namespace PAYNLFormsApp
 {
     public partial class ValidationForm : Form
     {
-        public IUtilityService UtilityService { get; }
+        private IUtilityService UtilityService { get; }
 
         public ValidationForm(IUtilityService utilityService)
         {

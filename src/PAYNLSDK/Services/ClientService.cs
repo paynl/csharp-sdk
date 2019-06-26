@@ -9,7 +9,7 @@ namespace PAYNLSDK.Services
 {
     public class ClientService : IClientService
     {
-        public AppSettings Settings { get; }
+        private AppSettings Settings { get; }
 
         /// <summary>
         /// API VERSION

@@ -1,13 +1,10 @@
 ﻿using System.Threading.Tasks;
-using PAYNLFormsApp.Objects;
 using PAYNLSDK.API;
 
 namespace PAYNLSDK.Services
 {
     public interface IClientService
     {
-        AppSettings Settings { get; }
-
         /// <summary>
         /// API VERSION
         /// </summary>

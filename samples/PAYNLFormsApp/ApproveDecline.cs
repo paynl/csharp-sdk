@@ -1,32 +1,29 @@
 ﻿using System;
 using System.Windows.Forms;
-using Microsoft.Extensions.Logging;
-using PAYNLSDK.Services;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace PAYNLFormsApp
 {
     public partial class ApproveDecline : Form
     {
-        public IClientService ClientService { get; }
-        public ILogger Logger { get; }
+        private IServiceProvider ServiceProvider { get; }
 
-        public ApproveDecline(IClientService clientService, ILogger logger)
+        public ApproveDecline(IServiceProvider serviceProvider)
         {
             InitializeComponent();
-            ClientService = clientService;
-            Logger = logger;
+            ServiceProvider = serviceProvider;
         }
 
         private async void BtApprove_Click(object sender, EventArgs e)
         {
-            var form = new DebugForm(ClientService, Logger);
+            var form = ServiceProvider.GetRequiredService<DebugForm>();
             await form.ApproveAsync(tbTransactionID.Text);
             form.ShowDialog();
         }
 
         private async void BtDecline_Click(object sender, EventArgs e)
         {
-            var form = new DebugForm(ClientService, Logger);
+            var form = ServiceProvider.GetRequiredService<DebugForm>();
             await form.DeclineAsync(tbTransactionID.Text);
             form.ShowDialog();
         }
