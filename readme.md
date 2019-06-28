@@ -38,19 +38,17 @@ PAYNLSDK.API.RequestBase.ApiToken = "e41f83b246b706291ea9ad798ccfd9f0fee5e0ab";
 PAYNLSDK.API.RequestBase.ServiceId = "SL-3490-4320";
 
 PAYNLSDK.API.Transaction.Start.Request request = PAYNLSDK.Transaction.CreateTransactionRequest("127.0.0.1", "http://example.org/visitor-return-after-payment");
-request.Amount = 621;
+request.Amount = 621; // Amount in cents
 
-// Optional values
-options.store("paymentMethod", 10;
-options.store("description", "demo payment";
-options.store("language","EN";
+request.PaymentOptionId = 10; // Payment profile/option
+
 
 // Transaction data
 request.Transaction = new PAYNLSDK.Objects.TransactionData();
 request.Transaction.Currency = "EUR";
 request.Transaction.CostsVat = null;
 request.Transaction.OrderExchangeUrl = "https://example.org/exchange.php";
-request.Transaction.Description = "TEST PAYMENT";
+request.Transaction.Description = "TEST PAYMENT"; // Description for client
 request.Transaction.ExpireDate = DateTime.Now.AddDays(14);
 
 // Optional Stats data
@@ -62,7 +60,6 @@ request.StatsData.Extra2 = "Y";
 request.StatsData.Extra3 = "Z";
 
 // Initialize Salesdata
-
 request.SalesData = new PAYNLSDK.Objects.SalesData();
 request.SalesData.InvoiceDate = DateTime.Now;
 request.SalesData.DeliveryDate = DateTime.Now;
@@ -75,7 +72,7 @@ request.SalesData.OrderData.Add(new PAYNLSDK.Objects.OrderData("SKU-2359", "Test
 
 // enduser
 request.Enduser = new PAYNLSDK.Objects.EndUser();
-request.Enduser.Language = "NL";
+request.Enduser.Language = "NL"; // End user language
 request.Enduser.Initials = "J.";
 request.Enduser.Lastname = "Buyer";
 request.Enduser.Gender = PAYNLSDK.Enums.Gender.Male;
@@ -98,14 +95,17 @@ request.Enduser.Address.CountryCode = "NL";
 request.Enduser.InvoiceAddress = new PAYNLSDK.Objects.Address();
 request.Enduser.InvoiceAddress.Initials = "J.";
 request.Enduser.InvoiceAddress.LastName = "Jansen";
-request.Enduser.InvoiceAddress.Gender = PAYLSDK.Enums.Gender.Male;
+request.Enduser.InvoiceAddress.Gender = PAYNLSDK.Enums.Gender.Male;
 request.Enduser.InvoiceAddress.StreetName = "InvoiceStreetname";
 request.Enduser.InvoiceAddress.StreetNumber = "10";
 request.Enduser.InvoiceAddress.ZipCode = "1234BC";
 request.Enduser.InvoiceAddress.City = "City";
 request.Enduser.InvoiceAddress.CountryCode = "NL";
 
-PAYNLSDK.API.Transaction.Start.Response response = PAYNLSDK.Transaction.Start(request);
+//System.Diagnostics.Debug.WriteLine(request.ToString()); // JSON view of data before sending
+
+
+PAYNLSDK.API.Transaction.Start.Response response = PAYNLSDK.Transaction.Start(request); // Sending to PAY.
 ```
 
 To determine if a transaction has been paid, you can use:
