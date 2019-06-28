@@ -103,12 +103,12 @@ namespace PAYNLSDK.API.Transaction.Start
             ParameterValidator.IsNotNull(ReturnUrl, "ReturnUrl");
             nvc.Add("finishUrl", ReturnUrl);
 
-            if (!ParameterValidator.IsNonEmptyInt(PaymentOptionId))
+            if (ParameterValidator.IsNonEmptyInt(PaymentOptionId))
             {
                 nvc.Add("paymentOptionId", PaymentOptionId.ToString());
             }
 
-            if (!ParameterValidator.IsNonEmptyInt(PaymentOptionSubId))
+            if (ParameterValidator.IsNonEmptyInt(PaymentOptionSubId))
             {
                 nvc.Add("paymentOptionSubId", PaymentOptionSubId.ToString());
             }
@@ -182,7 +182,7 @@ namespace PAYNLSDK.API.Transaction.Start
             // StatsData
             if (StatsData != null)
             {
-                if (!ParameterValidator.IsNonEmptyInt(StatsData.PromotorId))
+                if (ParameterValidator.IsNonEmptyInt(StatsData.PromotorId))
                 {
                     nvc.Add("statsData[promotorId]", StatsData.PromotorId.ToString());
                 }
