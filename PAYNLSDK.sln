@@ -1,11 +1,25 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28917.181
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PAYNLSDK", "PAYNLSDK\PAYNLSDK.csproj", "{AE95E452-C622-44A3-81F3-BEEDBAA18CE3}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{B7D5970D-7D2C-443D-B849-745B92ACAED1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PAYNLFormsApp", "PAYNLFormsApp\PAYNLFormsApp.csproj", "{6D6D7430-DF23-4A29-9C64-2EF056D99A4A}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{2BE758C5-5BDE-4D26-8607-2121C7F147AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PAYNLFormsApp", "samples\PAYNLFormsApp\PAYNLFormsApp.csproj", "{6D6D7430-DF23-4A29-9C64-2EF056D99A4A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PAYNLSDK", "src\PAYNLSDK\PAYNLSDK.csproj", "{AE95E452-C622-44A3-81F3-BEEDBAA18CE3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{48C4EFA3-42D1-44CF-A835-E02BB26F2700}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitignore = .gitignore
+		Analyzers.props = Analyzers.props
+		Analyzers.ruleset = Analyzers.ruleset
+		Project.props = Project.props
+		readme.md = readme.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,16 +27,23 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{AE95E452-C622-44A3-81F3-BEEDBAA18CE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AE95E452-C622-44A3-81F3-BEEDBAA18CE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AE95E452-C622-44A3-81F3-BEEDBAA18CE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AE95E452-C622-44A3-81F3-BEEDBAA18CE3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6D6D7430-DF23-4A29-9C64-2EF056D99A4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6D6D7430-DF23-4A29-9C64-2EF056D99A4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D6D7430-DF23-4A29-9C64-2EF056D99A4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D6D7430-DF23-4A29-9C64-2EF056D99A4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE95E452-C622-44A3-81F3-BEEDBAA18CE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE95E452-C622-44A3-81F3-BEEDBAA18CE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE95E452-C622-44A3-81F3-BEEDBAA18CE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE95E452-C622-44A3-81F3-BEEDBAA18CE3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6D6D7430-DF23-4A29-9C64-2EF056D99A4A} = {B7D5970D-7D2C-443D-B849-745B92ACAED1}
+		{AE95E452-C622-44A3-81F3-BEEDBAA18CE3} = {2BE758C5-5BDE-4D26-8607-2121C7F147AA}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {21A87E49-A7A0-4E06-A8F8-DB069EC38424}
 	EndGlobalSection
 EndGlobal
