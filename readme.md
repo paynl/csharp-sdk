@@ -38,10 +38,10 @@ PAYNLSDK.API.RequestBase.ApiToken = "e41f83b246b706291ea9ad798ccfd9f0fee5e0ab";
 PAYNLSDK.API.RequestBase.ServiceId = "SL-3490-4320";
 
 PAYNLSDK.API.Transaction.Start.Request request = PAYNLSDK.Transaction.CreateTransactionRequest("127.0.0.1", "http://example.org/visitor-return-after-payment");
-request.Amount = 621; // Amount in cents
+request.Amount = 7184; // Amount in cents
 
 request.PaymentOptionId = 10; // Payment profile/option
-
+// request.PaymentOptionSubId = 5081; // Set bank id for iDEAL (example)
 
 // Transaction data
 request.Transaction = new PAYNLSDK.Objects.TransactionData();
@@ -69,6 +69,9 @@ request.SalesData.OrderData = new System.Collections.Generic.List<PAYNLSDK.Objec
 request.SalesData.OrderData.Add(new PAYNLSDK.Objects.OrderData("SKU-8489", "Testproduct 1", 2995, "H", 1));
 request.SalesData.OrderData.Add(new PAYNLSDK.Objects.OrderData("SKU-8421", "Testproduct 2", 995, "H", 1));
 request.SalesData.OrderData.Add(new PAYNLSDK.Objects.OrderData("SKU-2359", "Testproduct 3", 2499, "H", 1));
+
+// Add shipping
+request.SalesData.OrderData.Add(new PAYNLSDK.Objects.OrderData("SHIPPINGCOST", "Shipping of products", 695, "H", 1, "SHIPPING"));
 
 // enduser
 request.Enduser = new PAYNLSDK.Objects.EndUser();
