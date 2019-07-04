@@ -11,7 +11,7 @@ With this SDK you will be able to start transactions and retrieve transactions w
 
 ### Usage
 
-Setting the configuration:
+Setting the configuration (for example using mvvmlight as dependency resolver):
 ```c#
 SimpleIoc.Default.Register(() => new LoggerFactory().CreateLogger(nameof(Quicktstart)));
 SimpleIoc.Default.Register<ISettingsService>(() => new SettingsService("e41f83b246b706291ea9ad798ccfd9f0fee5e0ab", "SL-3490-4320"));
@@ -40,9 +40,7 @@ Starting a transaction:
 var transaction = new PAYNLSDK.Transaction(SimpleIoc.Default.GetInstance<IClientService>());
 var request = transaction.CreateTransactionRequest("127.0.0.1", "http://example.org/visitor-return-after-payment");
 
-PAYNLSDK.API.Transaction.Start.Request request = PAYNLSDK.Transaction.CreateTransactionRequest("127.0.0.1", "http://example.org/visitor-return-after-payment");
 request.Amount = 7184; // Amount in cents
-
 request.PaymentOptionId = 10; // Payment profile/option
 // request.PaymentOptionSubId = 5081; // Set bank id for iDEAL (example)
 
