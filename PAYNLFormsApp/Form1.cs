@@ -9,6 +9,7 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -383,7 +384,16 @@ namespace PAYNLFormsApp
                                  @"{dt: '2018/12/11 9:9:1'}",
                                  @"{dt: '2018/12/1 9:9:10'}",
                                  @"{dt: '2018/12/1 09:9:10'}",
-                                 @"{dt: '2018/12/1 9:09:10'}"
+                                 @"{dt: '2018/12/1 9:09:10'}",
+                                 @"{dt: '2019-08-29 13:04:22'}",
+                                 @"{dt: '2019-8-29 13:04:22'}",
+                                 @"{dt: '2019-8-29 13:4:22'}",
+                                 @"{dt: '2019-8-29 13:04'}",
+                                 @"{dt: '2019-8-29'}",
+                                 @"{dt: '2019-08-29 13:4:22'}",
+                                 @"{dt: '2019-08-29 13:04'}",
+                                 @"{dt: '2019-08-29'}",
+                                 @"{dt: '2019-08-29 11:04:22'}",
                             };
 
 
@@ -490,6 +500,114 @@ namespace PAYNLFormsApp
             RefundInfo form = new RefundInfo();
             form.ShowDialog();
         }
+
+        private void transactiondetailsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ClearDebug();
+            String json = TransactionDetails.GetJsonFixture();
+            PAYNLSDK.Objects.TransactionDetailsPaymentDetails fixture = TransactionDetails.GetFixture();
+            AddDebug("Fixture loaded.");
+            AddDebug("JSON:");
+            AddDebug(json);
+            AddDebug("-----");
+            AddDebug(fixture.ToString());
+            AddDebug("-----");
+            AddDebug("DONE");
+        }
+
+        private void changestatuslistToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ClearDebug();
+            String json = ChangeStatusList.GetJsonFixture();
+            PAYNLSDK.API.Transaction.ChangeStatusList.Response fixture = ChangeStatusList.GetFixture();
+            AddDebug("Fixture loaded.");
+            AddDebug("JSON:");
+            AddDebug(json);
+            AddDebug("-----");
+            AddDebug(fixture.ToString());
+            AddDebug("-----");
+            AddDebug("DONE");
+        }
+
+        private void detailsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EnterTIDEC form = new EnterTIDEC();
+            form.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.EnterTIDEC_FormClosed);
+            form.ShowDialog();
+        }
+
+        private void changeStatusListToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            EnterTime form = new EnterTime();
+            form.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.EnterTime_FormClosed);
+            form.ShowDialog();
+        }
+
+        private void EnterTime_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            EnterTime form = (EnterTime)sender;
+            if (form.DialogResult == DialogResult.OK)
+            {
+                try
+                {
+                    DateTime dt = form.Time.ToUniversalTime();
+                    DateTime epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+                    long timestamp = (long)dt.Subtract(epoch).TotalSeconds;
+
+                    APISettings.InitAPI();
+
+                    ClearDebug();
+                    PAYNLSDK.API.Transaction.ChangeStatusList.Request fixture = new PAYNLSDK.API.Transaction.ChangeStatusList.Request();
+                    fixture.Timestamp = timestamp;
+
+                    InitRequestDebug(fixture);
+                    DumpNvc(fixture.GetParameters());
+
+                    APISettings.Client.PerformRequest(fixture);
+                    DebugRawResponse(fixture);
+                    tbMain.Text = fixture.Response.ToString();
+                }
+                catch (Exception ex)
+                {
+                    AddDebug(ex.ToString());
+                }
+            }
+        }
+
+        private void EnterTIDEC_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            EnterTIDEC form = (EnterTIDEC)sender;
+            if (form.DialogResult == DialogResult.OK)
+            {
+                try
+                {
+                    string TransactionID = form.TransactionID;
+                    string EntranceCode = form.EntranceCode;
+
+                    APISettings.InitAPI();
+
+                    ClearDebug();
+                    PAYNLSDK.API.Transaction.Details.Request fixture = new PAYNLSDK.API.Transaction.Details.Request();
+                    fixture.TransactionId = TransactionID;
+                    if (EntranceCode != null && EntranceCode != "")
+                    {
+                        fixture.EntranceCode = EntranceCode;
+                    }
+
+                    InitRequestDebug(fixture);
+                    DumpNvc(fixture.GetParameters());
+
+                    APISettings.Client.PerformRequest(fixture);
+                    DebugRawResponse(fixture);
+                    tbMain.Text = fixture.Response.ToString();
+                }
+                catch (Exception ex)
+                {
+                    AddDebug(ex.ToString());
+                }
+            }
+        }
+
         /*
         class X
         {

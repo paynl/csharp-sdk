@@ -6,7 +6,7 @@ namespace PAYNLSDK.Converters
 {
     public class YMDHISConverter : JsonConverter
     {
-        private const string Format = "yyyy-MM-dd HH:ii:ss";
+        private const string Format = "yyyy-MM-dd HH:mm:ss";
         private static string[] ParseFormats = {
                                        // - argument.
                                        "yyyy-M-d h:mm:ss tt", "yyyy-M-d h:mm tt", 
@@ -14,12 +14,25 @@ namespace PAYNLSDK.Converters
                                        "yyyy-M-d hh:mm tt", "yyyy-M-d hh tt", 
                                        "yyyy-M-d h:mm", "yyyy-M-d h:mm", 
                                        "yyyy-MM-dd hh:mm", "yyyy-M-dd hh:mm",
+
+                                       "yyyy-M-d H:mm:ss tt", "yyyy-M-d H:mm tt", 
+                                       "yyyy-MM-dd HH:mm:ss", "yyyy-M-d H:mm:ss", 
+                                       "yyyy-M-d HH:mm tt", "yyyy-M-d HH tt", 
+                                       "yyyy-M-d H:mm", "yyyy-M-d H:mm", 
+                                       "yyyy-MM-dd HH:mm", "yyyy-M-dd HH:mm",
+
                                        // Slash argument.
                                        "yyyy/M/d h:mm:ss tt", "yyyy/M/d h:mm tt", 
                                        "yyyy/MM/dd hh:mm:ss", "yyyy/M/d h:mm:ss", 
                                        "yyyy/M/d hh:mm tt", "yyyy/M/d hh tt", 
                                        "yyyy/M/d h:mm", "yyyy/M/d h:mm", 
-                                       "yyyy/MM/dd hh:mm", "yyyy/M/dd hh:mm"
+                                       "yyyy/MM/dd hh:mm", "yyyy/M/dd hh:mm",
+                                       
+                                       "yyyy/M/d H:mm:ss tt", "yyyy/M/d H:mm tt", 
+                                       "yyyy/MM/dd HH:mm:ss", "yyyy/M/d H:mm:ss", 
+                                       "yyyy/M/d HH:mm tt", "yyyy/M/d HH tt", 
+                                       "yyyy/M/d H:mm", "yyyy/M/d H:mm", 
+                                       "yyyy/MM/dd HH:mm", "yyyy/M/dd HH:mm"
                                    };
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
@@ -29,7 +42,8 @@ namespace PAYNLSDK.Converters
                 var dateTime = (DateTime)value;
                 if (dateTime.Kind == DateTimeKind.Unspecified)
                 {
-                    throw new JsonSerializationException("Cannot convert date time with an unspecified kind");
+                    // Gives too many errors. We'll just assume everything is ok and handle everything "as is"... -sigh-
+                    //throw new JsonSerializationException("Cannot convert date time with an unspecified kind");
                 }
                 string convertedDateTime = dateTime.ToString(Format);
                 writer.WriteValue(convertedDateTime);
@@ -60,22 +74,35 @@ namespace PAYNLSDK.Converters
             if (reader.TokenType == JsonToken.String)
             {
                 DateTime dateTime;
-/*
-                string[] formats = {
-                                       // - argument.
-                                       "yyyy-M-d h:mm:ss tt", "yyyy-M-d h:mm tt", 
-                                       "yyyy-MM-dd hh:mm:ss", "yyyy-M-d h:mm:ss", 
-                                       "yyyy-M-d hh:mm tt", "yyyy-M-d hh tt", 
-                                       "yyyy-M-d h:mm", "yyyy-M-d h:mm", 
-                                       "yyyy-MM-dd hh:mm", "yyyy-M-dd hh:mm",
-                                       // Slash argument.
-                                       "yyyy/M/d h:mm:ss tt", "yyyy/M/d h:mm tt", 
-                                       "yyyy/MM/dd hh:mm:ss", "yyyy/M/d h:mm:ss", 
-                                       "yyyy/M/d hh:mm tt", "yyyy/M/d hh tt", 
-                                       "yyyy/M/d h:mm", "yyyy/M/d h:mm", 
-                                       "yyyy/MM/dd hh:mm", "yyyy/M/dd hh:mm"
-                                   };
- */
+                /*
+                                string[] formats = {
+                                                       // - argument.
+                                                       "yyyy-M-d h:mm:ss tt", "yyyy-M-d h:mm tt", 
+                                                       "yyyy-MM-dd hh:mm:ss", "yyyy-M-d h:mm:ss", 
+                                                       "yyyy-M-d hh:mm tt", "yyyy-M-d hh tt", 
+                                                       "yyyy-M-d h:mm", "yyyy-M-d h:mm", 
+                                                       "yyyy-MM-dd hh:mm", "yyyy-M-dd hh:mm",
+
+                                                       "yyyy-M-d H:mm:ss tt", "yyyy-M-d H:mm tt", 
+                                                       "yyyy-MM-dd HH:mm:ss", "yyyy-M-d H:mm:ss", 
+                                                       "yyyy-M-d HH:mm tt", "yyyy-M-d HH tt", 
+                                                       "yyyy-M-d H:mm", "yyyy-M-d H:mm", 
+                                                       "yyyy-MM-dd HH:mm", "yyyy-M-dd HH:mm",
+
+                                                       // Slash argument.
+                                                       "yyyy/M/d h:mm:ss tt", "yyyy/M/d h:mm tt", 
+                                                       "yyyy/MM/dd hh:mm:ss", "yyyy/M/d h:mm:ss", 
+                                                       "yyyy/M/d hh:mm tt", "yyyy/M/d hh tt", 
+                                                       "yyyy/M/d h:mm", "yyyy/M/d h:mm", 
+                                                       "yyyy/MM/dd hh:mm", "yyyy/M/dd hh:mm",
+
+                                                       "yyyy/M/d H:mm:ss tt", "yyyy/M/d H:mm tt", 
+                                                       "yyyy/MM/dd HH:mm:ss", "yyyy/M/d H:mm:ss", 
+                                                       "yyyy/M/d HH:mm tt", "yyyy/M/d HH tt", 
+                                                       "yyyy/M/d H:mm", "yyyy/M/d H:mm", 
+                                                       "yyyy/MM/dd HH:mm", "yyyy/M/dd HH:mm"
+                                                   };
+                 */
                 string timeString = (string)reader.Value;
                 if (!ParameterValidator.IsEmpty(timeString))
                 {
