@@ -460,5 +460,101 @@ namespace PAYNLSDK
             c.PerformRequest(request);
             return request.Response;
         }
+
+
+        /// <summary>
+        /// Get transaction details
+        /// </summary>
+        /// <param name="transactionId">The ID of the transaction (EX-code)</param>
+        /// <param name="entranceCode">The entrancecode of the transaction.</param>
+        /// <returns>Transaction details Request</returns>
+        static public PAYNLSDK.API.Transaction.Details.Request CreateTransactionDetailRequest(string transactionId, string entranceCode)
+        {
+            API.Transaction.Details.Request request = new API.Transaction.Details.Request();
+            request.TransactionId = transactionId;
+            request.EntranceCode = entranceCode;
+            return request;
+        }
+
+        /// <summary>
+        /// Get transaction details
+        /// </summary>
+        /// <param name="transactionId">The ID of the transaction (EX-code)</param>
+        /// <returns>Transaction details Request</returns>
+        static public PAYNLSDK.API.Transaction.Details.Request CreateTransactionDetailRequest(string transactionId)
+        {
+            return CreateTransactionDetailRequest(transactionId,null);
+        }
+
+        /// <summary>
+        /// Performs a request to get transaction details.
+        /// </summary>
+        /// <returns>Full response object</returns>
+        static public PAYNLSDK.API.Transaction.Details.Response Details(PAYNLSDK.API.Transaction.Details.Request request)
+        {
+            Client c = new Client();
+            c.PerformRequest(request);
+            return request.Response;
+        }
+
+        /// <summary>
+        /// Get transaction details
+        /// </summary>
+        /// <param name="transactionId">The ID of the transaction (EX-code)</param>
+        /// <param name="entranceCode">The entrancecode of the transaction.</param>
+        /// <returns>Transaction details Response</returns>
+        static public PAYNLSDK.API.Transaction.Details.Response Details(string transactionId, string entranceCode)
+        {
+            return Details(CreateTransactionDetailRequest(transactionId, entranceCode));
+        }
+
+        /// <summary>
+        /// Get transaction details
+        /// </summary>
+        /// <param name="transactionId">The ID of the transaction (EX-code)</param>
+        /// <returns>Transaction details Response</returns>
+        static public PAYNLSDK.API.Transaction.Details.Response Details(string transactionId)
+        {
+            return Details(CreateTransactionDetailRequest(transactionId));
+        }
+
+
+
+
+
+        /// <summary>
+        /// Get transaction ChangeStatusList
+        /// </summary>
+        /// <param name="timestamp">The Unix timestamp of where the list should begin.</param>
+        /// <returns>Transaction ChangeStatusList Request</returns>
+        static public PAYNLSDK.API.Transaction.ChangeStatusList.Request CreateTransactionChangeStatusListRequest(long timestamp)
+        {
+            API.Transaction.ChangeStatusList.Request request = new API.Transaction.ChangeStatusList.Request();
+            request.Timestamp = timestamp;
+            return request;
+        }
+
+        /// <summary>
+        /// Performs a request to get transaction ChangeStatusList.
+        /// </summary>
+        /// <returns>Full response object</returns>
+        static public PAYNLSDK.API.Transaction.ChangeStatusList.Response ChangeStatusList(PAYNLSDK.API.Transaction.ChangeStatusList.Request request)
+        {
+            Client c = new Client();
+            c.PerformRequest(request);
+            return request.Response;
+        }
+
+        /// <summary>
+        /// Get transaction ChangeStatusList
+        /// </summary>
+        /// <param name="timestamp">The Unix timestamp of where the list should begin.</param>
+        /// <returns>Transaction ChangeStatusList Response</returns>
+        static public PAYNLSDK.API.Transaction.ChangeStatusList.Response ChangeStatusList(long timestamp)
+        {
+            return ChangeStatusList(CreateTransactionChangeStatusListRequest(timestamp));
+        }
+
+
     }
 }
