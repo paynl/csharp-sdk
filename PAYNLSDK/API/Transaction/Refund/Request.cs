@@ -55,7 +55,7 @@ namespace PAYNLSDK.API.Transaction.Refund
 
             if (!ParameterValidator.IsNull(ProcessDate))
             {
-                nvc.Add("processDate", ((DateTime)ProcessDate).ToString("yyyy-MM-dd"));
+                nvc.Add("processDate", ((DateTime)ProcessDate).ToString("dd-MM-yyyy"));
             }
 
             return nvc;
