@@ -13,13 +13,13 @@ With this SDK you will be able to start transactions and retrieve transactions w
 
 Setting the configuration:
 ```c#
-PAYNLSDK.API.RequestBase.ApiToken = "your token";
+PAYNLSDK.API.RequestBase.ApiToken = "e41f83b246b706291ea9ad798ccfd9f0fee5e0ab";
 PAYNLSDK.API.RequestBase.ServiceId = "SL-3490-4320";
 ```
 
 Getting a list of available payment methods, use the Getservice.
 ```c#
-PAYNLSDK.API.RequestBase.ApiToken = "your token";
+PAYNLSDK.API.RequestBase.ApiToken = "e41f83b246b706291ea9ad798ccfd9f0fee5e0ab";
 PAYNLSDK.API.RequestBase.ServiceId = "SL-3490-4320";
 PAYNLSDK.API.Transaction.GetService.Response response = PAYNLSDK.Transaction.GetService(paymentMethodId);
 //paymentMethodId: is optional
@@ -34,14 +34,14 @@ PAYNLSDK.API.Transaction.GetService.Response response = PAYNLSDK.Transaction.Get
 
 Starting a transaction:
 ```c#
-PAYNLSDK.API.RequestBase.ApiToken = "your token";
+PAYNLSDK.API.RequestBase.ApiToken = "e41f83b246b706291ea9ad798ccfd9f0fee5e0ab";
 PAYNLSDK.API.RequestBase.ServiceId = "SL-3490-4320";
 
 PAYNLSDK.API.Transaction.Start.Request request = PAYNLSDK.Transaction.CreateTransactionRequest("127.0.0.1", "http://example.org/visitor-return-after-payment");
-request.Amount = 7184; // Amount in cents
+request.Amount = 621; // Amount in cents
 
 request.PaymentOptionId = 10; // Payment profile/option
-// request.PaymentOptionSubId = 5081; // Set bank id for iDEAL (example)
+
 
 // Transaction data
 request.Transaction = new PAYNLSDK.Objects.TransactionData();
@@ -69,9 +69,6 @@ request.SalesData.OrderData = new System.Collections.Generic.List<PAYNLSDK.Objec
 request.SalesData.OrderData.Add(new PAYNLSDK.Objects.OrderData("SKU-8489", "Testproduct 1", 2995, "H", 1));
 request.SalesData.OrderData.Add(new PAYNLSDK.Objects.OrderData("SKU-8421", "Testproduct 2", 995, "H", 1));
 request.SalesData.OrderData.Add(new PAYNLSDK.Objects.OrderData("SKU-2359", "Testproduct 3", 2499, "H", 1));
-
-// Add shipping
-request.SalesData.OrderData.Add(new PAYNLSDK.Objects.OrderData("SHIPPINGCOST", "Shipping of products", 695, "H", 1, "SHIPPING"));
 
 // enduser
 request.Enduser = new PAYNLSDK.Objects.EndUser();
@@ -113,9 +110,10 @@ PAYNLSDK.API.Transaction.Start.Response response = PAYNLSDK.Transaction.Start(re
 
 To determine if a transaction has been paid, you can use:
 ```c#
-PAYNLSDK.API.RequestBase.ApiToken = "your token";
+PAYNLSDK.API.RequestBase.ApiToken = "e41f83b246b706291ea9ad798ccfd9f0fee5e0ab";
 PAYNLSDK.API.RequestBase.ServiceId = "SL-3490-4320";
 
+PAYNLSDK.API.Transaction.Start.Response response;
 // Perform transaction to get response object. Alternately, you could work with a stored ID.
 
 PAYNLSDK.API.Transaction.Info.Response info = PAYNLSDK.Transaction.Info(response.transactionId);
@@ -129,18 +127,6 @@ else
 {
     // it has not been paid yet, so redirect user back to checkout
 }
-```
-
-To get the details of a transaction, you can use:
-```c#
-PAYNLSDK.API.RequestBase.ApiToken = "your token";
-PAYNLSDK.API.Transaction.Details.Response response = PAYNLSDK.Transaction.Details("EX-code of transaction here");
-```
-
-To get the list of changes for transactions, you can use:
-```c#
-PAYNLSDK.API.RequestBase.ApiToken = "your token";
-PAYNLSDK.API.Transaction.ChangeStatusList.Response response = PAYNLSDK.Transaction.ChangeStatusList(unix-timestamp here);
 ```
 
 When implementing the exchange script (where you should process the order in your backend):

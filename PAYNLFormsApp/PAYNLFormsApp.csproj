@@ -9,10 +9,8 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PAYNLFormsApp</RootNamespace>
     <AssemblyName>PAYNLFormsApp</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
-    <TargetFrameworkProfile />
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -25,6 +23,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -49,8 +48,9 @@
     <DocumentationFile>bin\Release\PAYNLFormsApp.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -77,22 +77,8 @@
     <Compile Include="DebugForm.Designer.cs">
       <DependentUpon>DebugForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="EnterTIDEC.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="EnterTIDEC.Designer.cs">
-      <DependentUpon>EnterTIDEC.cs</DependentUpon>
-    </Compile>
-    <Compile Include="EnterTime.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="EnterTime.Designer.cs">
-      <DependentUpon>EnterTime.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Fixtures\ChangeStatusList.cs" />
-    <Compile Include="Fixtures\RefundInfo.cs" />
     <Compile Include="Fixtures\RefundTransaction.cs" />
-    <Compile Include="Fixtures\TransactionDetails.cs" />
+    <Compile Include="Fixtures\RefundInfo.cs" />
     <Compile Include="Fixtures\TransactionStart.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -144,12 +130,6 @@
     <EmbeddedResource Include="DebugForm.resx">
       <DependentUpon>DebugForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EnterTIDEC.resx">
-      <DependentUpon>EnterTIDEC.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EnterTime.resx">
-      <DependentUpon>EnterTime.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -164,7 +144,6 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="RefundAdd.resx">
       <DependentUpon>RefundAdd.cs</DependentUpon>
