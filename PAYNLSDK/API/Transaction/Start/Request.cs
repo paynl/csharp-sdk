@@ -31,7 +31,7 @@ namespace PAYNLSDK.API.Transaction.Start
         public string IPAddress { get; set; }
         public string ReturnUrl { get; set; }
         public int? PaymentOptionId { get; set; }
-        public int? PaymentOptionSubId { get; set; }
+        public string PaymentOptionSubId { get; set; }
         public bool? TestMode { get; set; }
         public string TransferType { get; set; }
         public string TransferValue { get; set; }
@@ -80,7 +80,7 @@ namespace PAYNLSDK.API.Transaction.Start
                 nvc.Add("paymentOptionId", PaymentOptionId.ToString());
             }
 
-            if (ParameterValidator.IsNonEmptyInt(PaymentOptionSubId))
+            if (!ParameterValidator.IsEmpty(PaymentOptionSubId))
             {
                 nvc.Add("paymentOptionSubId", PaymentOptionSubId.ToString());
             }
