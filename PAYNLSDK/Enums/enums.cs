@@ -264,6 +264,8 @@ namespace PAYNLSDK.Enums
         REFUND = -81,
         [EnumMember(Value = "-80")]
         EXPIRED = -80,
+        [EnumMember(Value = "-72")]
+        REFUNDING = -72,
         [EnumMember(Value = "-71")]
         CHARGEBACK_1 = -71,
         [EnumMember(Value = "-70")]

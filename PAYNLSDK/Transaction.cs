@@ -124,13 +124,13 @@ namespace PAYNLSDK
         /// </summary>
         /// <param name="status">Transaction status</param>
         /// <returns>True if REFUND or REFUNDING, false otherwise</returns>
-        static public bool IsRefund(Enums.PaymentStatus status)
+         public static bool IsRefund(Enums.PaymentStatus status)
         {
             try
             {
-                return ((status == Enums.PaymentStatus.REFUND) || (status == Enums.PaymentStatus.REFUNDING));
+                return status == Enums.PaymentStatus.REFUND || status == Enums.PaymentStatus.REFUNDING;
             }
-            catch (ErrorException e)
+            catch (PayNlException e)
             {
                 return false;
             }
@@ -141,13 +141,13 @@ namespace PAYNLSDK
         /// </summary>
         /// <param name="status">Transaction status</param>
         /// <returns>True if REFUNDING, false otherwise</returns>
-        static public bool IsRefunding(Enums.PaymentStatus status)
+        public static bool IsRefunding(Enums.PaymentStatus status)
         {
             try
             {
-                return ((status == Enums.PaymentStatus.REFUNDING));
+                return status == Enums.PaymentStatus.REFUNDING;
             }
-            catch (ErrorException e)
+            catch (PayNlException e)
             {
                 return false;
             }
