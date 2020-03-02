@@ -11,6 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayNLSdk.Tests", "PayNLSdk.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Files", "Solution Files", "{B16C3601-D4E5-4C36-B88E-AC26A4368490}"
 	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
 		appveyor.yml = appveyor.yml
 		readme.md = readme.md
 	EndProjectSection
