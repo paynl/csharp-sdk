@@ -130,7 +130,7 @@ namespace PAYNLSDK
             {
                 return ((status == Enums.PaymentStatus.REFUND) || (status == Enums.PaymentStatus.REFUNDING));
             }
-            catch (ErrorException e)
+            catch (PayNlException e)
             {
                 return false;
             }
