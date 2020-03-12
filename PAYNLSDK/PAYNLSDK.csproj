@@ -1,8 +1,31 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net45;netstandard2.0;netstandard2.1</TargetFrameworks>
+    <TargetFrameworks>net45;netstandard2.0</TargetFrameworks>
+    <Copyright>Copyright 2019 PAY.NL</Copyright>
+    <PackageTags>pay.nl payments pay paynl</PackageTags>
+    <Version>1.0.0.14</Version>
+    <Description>PayNL Gateway SDK</Description>
+    <PackageProjectUrl>https://github.com/paynl/csharp-sdk</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/paynl/csharp-sdk</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageReleaseNotes>The PayNL Gateway SDK package now also supports .NET Standard 2.0</PackageReleaseNotes>
+    <Authors>Sebsoft</Authors>
+    <Company>PAY</Company>
+    <PackageId>PayNLSdk</PackageId>
+    <Product>PayNLSdk</Product>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+  <PropertyGroup>
+    <DocumentationFile>$(OutputPath)bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="8.0.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\LICENSE.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 </Project>
