@@ -11,6 +11,13 @@ namespace PAYNLSDK.API.Refund.Add
     /// </summary>
     public class Request : RequestBase
     {
+        /// <summary>
+        /// A refund is the repayment of (part of) a transaction to the end user.
+        /// </summary>
+        /// <param name="amount"></param>
+        /// <param name="bankAccountHolder"></param>
+        /// <param name="bankAccountNumber"></param>
+        /// <param name="bankAccountBic"></param>
         public Request(int amount, string bankAccountHolder, string bankAccountNumber, string bankAccountBic)
         {
             Amount = amount;
