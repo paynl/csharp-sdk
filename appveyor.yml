@@ -23,6 +23,7 @@
   os: Visual Studio 2017
   install:
     - choco install gitversion.portable -pre -y
+    - ps: gitversion /l console /output buildserver
   assembly_info:
     patch: false
   dotnet_csproj:
@@ -37,8 +38,7 @@
     project: PAYNLSDK.sln
   before_build:
     - dotnet restore
-    - ps: gitversion /l console /output buildserver
-    - ps: .\build.ps1
+#    - ps: .\build.ps1
   cache:
     - packages -> **\packages.config      # preserve "packages" directory in the root of build folder but will reset it if packages.config is modified
     - '%USERPROFILE%\.nuget\packages -> **\project.json'  # project.json cache
