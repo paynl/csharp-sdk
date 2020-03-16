@@ -9,12 +9,12 @@ using System.Collections.Specialized;
 namespace PAYNLSDK.API.Refund.Transaction
 {
     /// <summary>
-    /// 
+    /// A product specific refund for Products like Sofort & Afterpay
+    /// For normal refunds, you should use <seealso cref="PAYNLSDK.API.Transaction.Refund.Request"/>
     /// </summary>
     public class Request : RequestBase
     {
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="transactionId">The order ID or EX code of the transaction</param>
         public Request(string transactionId)
@@ -54,7 +54,7 @@ namespace PAYNLSDK.API.Refund.Transaction
         public string ExchangeUrl { get; set; }
 
         /// <summary>
-        /// Product items that are refunded (key: product ID,value: quantity).
+        /// Product items that are refunded (key: product ID, value: quantity).
         /// </summary>
         [JsonProperty("products")]
         public Dictionary<string, int> Products { get; set; }

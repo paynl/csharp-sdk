@@ -7,7 +7,8 @@ using System.Collections.Specialized;
 namespace PAYNLSDK.API.Refund.Add
 {
     /// <summary>
-    /// 
+    /// A refund, not based on a previous transaction, but to another IBAN.
+    /// If you are looking for a normal refund, use <seealso cref="PAYNLSDK.API.Transaction.Refund.Request"/>
     /// </summary>
     public class Request : RequestBase
     {

@@ -7,6 +7,10 @@ using System.Collections.Specialized;
 
 namespace PAYNLSDK.API.Transaction.Refund
 {
+    /// <summary>
+    /// A normal refund from a previously placed transaction.
+    /// If you are doing a refund from Sofort or AfterPay, you'll need to use <seealso cref="PAYNLSDK.API.Refund.Transaction.Request"/>
+    /// </summary>
     public class Request : RequestBase
     {
         [JsonProperty("transactionId")]
