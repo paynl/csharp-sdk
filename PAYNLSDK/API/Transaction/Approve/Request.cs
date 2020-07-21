@@ -1,8 +1,6 @@
 ﻿using Newtonsoft.Json;
-using PAYNLSDK.Converters;
 using PAYNLSDK.Exceptions;
 using PAYNLSDK.Utilities;
-using System;
 using System.Collections.Specialized;
 
 namespace PAYNLSDK.API.Transaction.Approve
@@ -18,49 +16,44 @@ namespace PAYNLSDK.API.Transaction.Approve
         [JsonProperty("transactionId")]
         public string TransactionId { get; set; }
 
+
         /// <summary>
-        /// not implemented
+        /// Entrance-code of transaction
         /// </summary>
-        //  [JsonProperty("entranceCode")]
-        //   public string EntranceCode { get; set; }
+        [JsonProperty("entranceCode")]
+        public string EntranceCode { get; set; }
 
         /// <inheritdoc />
-        protected override int Version
-        {
-            get { return 7; }
-        }
+        protected override int Version => 16;
 
         /// <inheritdoc />
-        protected override string Controller
-        {
-            get { return "Transaction"; }
-        }
+        protected override string Controller => "Transaction";
 
         /// <inheritdoc />
-        protected override string Method
-        {
-            get { return "approve"; }
-        }
-        
+        protected override string Method => "approve";
+
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
         public override NameValueCollection GetParameters()
         {
-            NameValueCollection nvc = new NameValueCollection();
+            var nvc = new NameValueCollection();
 
-                ParameterValidator.IsNotEmpty(TransactionId, "TransactionId");
-                nvc.Add("orderId", TransactionId);
+            ParameterValidator.IsNotEmpty(TransactionId, "TransactionId");
+            nvc.Add("orderId", TransactionId);
 
-                return nvc;
-       
+            if (string.IsNullOrWhiteSpace(EntranceCode) == false)
+            {
+                nvc.Add("entranceCode", EntranceCode);
+            }
+
+            return nvc;
+
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public Response Response { get { return (Response)response; } }
+        /// <inheritdoc cref="ResponseBase"/>
+        public Response Response => (Response)response;
 
         /// <summary>
         /// 
