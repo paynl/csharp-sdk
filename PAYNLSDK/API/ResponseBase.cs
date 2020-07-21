@@ -1,9 +1,11 @@
 ﻿using Newtonsoft.Json;
 using PAYNLSDK.Objects;
-using System;
 
 namespace PAYNLSDK.API
 {
+    /// <summary>
+    /// A abstract base class for every response from the API
+    /// </summary>
     public abstract class ResponseBase
     {
         /// <summary>
