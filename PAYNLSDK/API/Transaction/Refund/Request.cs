@@ -4,6 +4,7 @@ using PAYNLSDK.Exceptions;
 using PAYNLSDK.Utilities;
 using System;
 using System.Collections.Specialized;
+using System.Globalization;
 
 namespace PAYNLSDK.API.Transaction.Refund
 {
@@ -21,10 +22,11 @@ namespace PAYNLSDK.API.Transaction.Refund
 
         /// <summary>
         /// Amount to be paid in cents. 
-        /// For example € 3.50 becomes 350. 
+        /// For example € 3.50 becomes 350.
+        /// If no amount is specified, the full amount is refunded and currency is not used. 
         /// </summary>
         [JsonProperty("amount")]
-        public int? Amount { get; set; }
+        public decimal? Amount { get; set; }
 
         /// <summary>
         /// description to include with the payment.
@@ -35,12 +37,12 @@ namespace PAYNLSDK.API.Transaction.Refund
         /// <summary>
         /// The date on which the refund needs to be processed. Only works for IBAN refunds.
         /// </summary>
-        /// <remarks>Internal format should be , format dd-mm-yyyy(eg. 25-09-2016)</remarks>
+        /// <remarks>Internal format should be dd-mm-yyyy(eg. 25-09-2016)</remarks>
         [JsonProperty("processDate"), JsonConverter(typeof(DMYConverter))]
         public DateTime? ProcessDate { get; set; }
 
         /// <inheritdoc />
-        protected override int Version => 11;
+        protected override int Version => 16;
 
         /// <inheritdoc />
         protected override string Controller => "Transaction";
@@ -56,9 +58,9 @@ namespace PAYNLSDK.API.Transaction.Refund
             ParameterValidator.IsNotEmpty(TransactionId, "TransactionId");
             nvc.Add("transactionId", TransactionId);
 
-            if (!ParameterValidator.IsNull(Amount))
+            if (Amount.HasValue)
             {
-                nvc.Add("amount", Amount.ToString());
+                nvc.Add("amount", ((int)Math.Floor(Amount.Value * 100)).ToString());
             }
 
             if (!ParameterValidator.IsEmpty(Description))
@@ -66,13 +68,30 @@ namespace PAYNLSDK.API.Transaction.Refund
                 nvc.Add("description", Description);
             }
 
-            if (!ParameterValidator.IsNull(ProcessDate))
+            if (ProcessDate.HasValue)
             {
-                nvc.Add("processDate", ((DateTime)ProcessDate).ToString("dd-MM-yyyy"));
+                nvc.Add("processDate", ProcessDate.Value.ToString("dd-MM-yyyy"));
+            }
+
+            if (VatPercentage.HasValue)
+            {
+                nvc.Add("vatPercentage", VatPercentage.Value.ToString(CultureInfo.InvariantCulture));
             }
 
             return nvc;
         }
+
+        /// <summary>
+        /// the vat percentage this refund applies to (AfterPay/Focum only)
+        /// </summary>
+        [JsonProperty("vatPercentage")]
+        public decimal? VatPercentage { get; set; }
+
+        /// <summary>
+        /// Optional field. The currency in which the amount is specified. Standard in euro.
+        /// </summary>
+        [JsonProperty("currency")]
+        public string Currency { get; set; }
 
         /// <summary>
         /// the response from the request
