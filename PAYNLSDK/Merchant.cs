@@ -70,13 +70,13 @@ namespace PAYNLSDK
             //   }
 
 
-            var request = new API.Merchant.Get.Request
-            {
-                MerchantId = merchantId
-            };
+            //var request = new API.Merchant.GetAll.Request
+            //{
+            //    MerchantId = "TODO"
+            //};
 
-            var response = _webClient.PerformRequest(request);
-            return API.Merchant.Get.Response.FromRawResponse(response);
+            //var response = _webClient.PerformRequest(request);
+            //return API.Merchant.GetAll.Response.FromRawResponse(response);
 
             return new object(); // Result\Merchant\GetList( result);
         }
@@ -85,6 +85,6 @@ namespace PAYNLSDK
         {
             NewMerchant,
 
-    }
+        }
     }
 }
