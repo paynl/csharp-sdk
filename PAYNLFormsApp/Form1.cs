@@ -376,42 +376,43 @@ namespace PAYNLFormsApp
 
             foreach (string dateString in ymdtests)
             {
-                try
-                {
-                    TestYMD testObj = JsonConvert.DeserializeObject<TestYMD>(dateString);
-                    AddDebug(String.Format("Converted '{0}' to {1}.", dateString, testObj.DT.ToString()));
-                }
-                catch (Exception e0)
-                {
-                    AddDebug(String.Format("Error converting '{0}' using YMD.", dateString));
-                    AddDebug(e0.Message);
-                }
-            }
-            foreach (string dateString in dmytests)
-            {
-                try
-                {
-                    TestDMY testObj = JsonConvert.DeserializeObject<TestDMY>(dateString);
-                    AddDebug(String.Format("Converted '{0}' to {1}.", dateString, testObj.DT.ToString()));
-                }
-                catch (Exception e1)
-                {
-                    AddDebug(String.Format("Error converting '{0}' using YMD.", dateString));
-                    AddDebug(e1.Message);
-                }
-            }
-            foreach (string dateString in ymdhistests)
-            {
-                try
-                {
-                    TestYMDHIS testObj = JsonConvert.DeserializeObject<TestYMDHIS>(dateString);
-                    AddDebug(String.Format("Converted '{0}' to {1}.", dateString, testObj.DT.ToString()));
-                }
-                catch (Exception e2)
-                {
-                    AddDebug(String.Format("Error converting '{0}' using YMD.", dateString));
-                    AddDebug(e2.Message);
-                }
+                AddDebug("Can not test this use case");
+            //    try
+            //    {
+            //        TestYMD testObj = JsonConvert.DeserializeObject<TestYMD>(dateString);
+            //        AddDebug(String.Format("Converted '{0}' to {1}.", dateString, testObj.DT.ToString()));
+            //    }
+            //    catch (Exception e0)
+            //    {
+            //        AddDebug(String.Format("Error converting '{0}' using YMD.", dateString));
+            //        AddDebug(e0.Message);
+            //    }
+            //}
+            //foreach (string dateString in dmytests)
+            //{
+            //    try
+            //    {
+            //        TestDMY testObj = JsonConvert.DeserializeObject<TestDMY>(dateString);
+            //        AddDebug(String.Format("Converted '{0}' to {1}.", dateString, testObj.DT.ToString()));
+            //    }
+            //    catch (Exception e1)
+            //    {
+            //        AddDebug(String.Format("Error converting '{0}' using YMD.", dateString));
+            //        AddDebug(e1.Message);
+            //    }
+            //}
+            //foreach (string dateString in ymdhistests)
+            //{
+            //    try
+            //    {
+            //        TestYMDHIS testObj = JsonConvert.DeserializeObject<TestYMDHIS>(dateString);
+            //        AddDebug(String.Format("Converted '{0}' to {1}.", dateString, testObj.DT.ToString()));
+            //    }
+            //    catch (Exception e2)
+            //    {
+            //        AddDebug(String.Format("Error converting '{0}' using YMD.", dateString));
+            //        AddDebug(e2.Message);
+            //    }
             }
 
         }
@@ -487,31 +488,31 @@ namespace PAYNLFormsApp
          */
     }
 
-    public class TestYMD
-    {
-        /// <summary>
-        /// Merchant ID
-        /// </summary>
-        [JsonProperty("dt"), JsonConverter(typeof(PAYNLSDK.Converters.YMDConverter))]
-        public DateTime? DT { get; set; }
+    //public class TestYMD
+    //{
+    //    /// <summary>
+    //    /// Merchant ID
+    //    /// </summary>
+    //    [JsonProperty("dt"), JsonConverter(typeof(PAYNLSDK.Converters.YMDConverter))]
+    //    public DateTime? DT { get; set; }
 
-    }
-    public class TestDMY
-    {
-        /// <summary>
-        /// Merchant ID
-        /// </summary>
-        [JsonProperty("dt"), JsonConverter(typeof(PAYNLSDK.Converters.DMYConverter))]
-        public DateTime? DT { get; set; }
+    //}
+    //public class TestDMY
+    //{
+    //    /// <summary>
+    //    /// Merchant ID
+    //    /// </summary>
+    //    [JsonProperty("dt"), JsonConverter(typeof(PAYNLSDK.Converters.DMYConverter))]
+    //    public DateTime? DT { get; set; }
+    //}
 
-    }
-    public class TestYMDHIS
-    {
-        /// <summary>
-        /// Merchant ID
-        /// </summary>
-        [JsonProperty("dt"), JsonConverter(typeof(PAYNLSDK.Converters.YMDHISConverter))]
-        public DateTime? DT { get; set; }
+    //public class TestYMDHIS
+    //{
+    //    /// <summary>
+    //    /// Merchant ID
+    //    /// </summary>
+    //    [JsonProperty("dt"), JsonConverter(typeof(PAYNLSDK.Converters.YMDHISConverter))]
+    //    public DateTime? DT { get; set; }
 
-    }
+    //}
 }

@@ -3,9 +3,9 @@ using System;
 
 namespace PAYNLSDK.Converters
 {
-    abstract public class EnumConversionBase : JsonConverter
+    internal abstract class EnumConversionBase : JsonConverter
     {
-        abstract public Type EnumType { get; }
+        public abstract Type EnumType { get; }
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
@@ -16,47 +16,6 @@ namespace PAYNLSDK.Converters
         {
             string result = Enums.EnumUtil.ToEnumString(value, EnumType);
             writer.WriteValue(result);
-            return;
         }
     }
-
-    public class GenderConverter : EnumConversionBase
-    {
-        public override Type EnumType
-        {
-            get { return typeof(Enums.Gender); }
-        }
-
-        public override bool CanConvert(Type objectType)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    public class TaxClassConverter : EnumConversionBase
-    {
-        public override Type EnumType
-        {
-            get { return typeof(Enums.TaxClass); }
-        }
-
-        public override bool CanConvert(Type objectType)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    public class ProductTypeConverter : EnumConversionBase
-    {
-        public override Type EnumType
-        {
-            get { return typeof(Enums.ProductType); }
-        }
-
-        public override bool CanConvert(Type objectType)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
 }
