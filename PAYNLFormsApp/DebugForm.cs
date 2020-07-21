@@ -141,8 +141,7 @@ namespace PAYNLFormsApp
 
                 ClearDebug();
 
-                int numValue;
-                bool parsed = Int32.TryParse(amount, out numValue);
+                var parsed = decimal.TryParse(amount, out var numValue);
                 if (!parsed || transactionID == "")
                 {
                     if (!parsed)
@@ -157,7 +156,6 @@ namespace PAYNLFormsApp
                     AddDebug("transactionID mag niet leeg zijn");
 
                 }
-
                 else
                 {
 
@@ -172,8 +170,6 @@ namespace PAYNLFormsApp
 
                     tbMain.Text = request.Response.RefundId;
                 }
-
-
             }
             catch (PayNlException ee)
             {
@@ -191,8 +187,8 @@ namespace PAYNLFormsApp
 
                 ClearDebug();
 
-                int numValue;
-                bool parsed = Int32.TryParse(amount, out numValue);
+                decimal numValue;
+                bool parsed = decimal.TryParse(amount, out numValue);
                 if (!parsed)
                 {
 

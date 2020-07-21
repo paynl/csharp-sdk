@@ -19,9 +19,9 @@ namespace PAYNLSDK.API.Refund.Add
         /// <param name="bankAccountHolder"></param>
         /// <param name="bankAccountNumber"></param>
         /// <param name="bankAccountBic"></param>
-        public Request(int amount, string bankAccountHolder, string bankAccountNumber, string bankAccountBic)
+        public Request(decimal amount, string bankAccountHolder, string bankAccountNumber, string bankAccountBic)
         {
-            Amount = amount;
+            AmountInCents = (int)Math.Floor(amount * 100);
             BankAccountHolder = bankAccountHolder;
             BankAccountNumber = bankAccountNumber;
             BankAccountBic = bankAccountBic;
@@ -30,7 +30,8 @@ namespace PAYNLSDK.API.Refund.Add
         /// <summary>
         /// The amount to be paid should be given in cents. For example € 3.50 becomes 350.
         /// </summary>
-        public int Amount { get; set; }
+        [JsonProperty("amount")]
+        public int AmountInCents { get; set; }
 
         /// <summary>
         /// The name of the customer.
@@ -126,8 +127,8 @@ namespace PAYNLSDK.API.Refund.Add
         {
             NameValueCollection nvc = new NameValueCollection();
 
-            ParameterValidator.IsNotNull(Amount, "Amount");
-            nvc.Add("amount", Amount.ToString());
+            ParameterValidator.IsNotNull(AmountInCents, "Amount");
+            nvc.Add("amount", AmountInCents.ToString());
 
             ParameterValidator.IsNotNull(BankAccountHolder, "BankAccountHolder");
             nvc.Add("bankAccountHolder", BankAccountHolder);
