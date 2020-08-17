@@ -34,12 +34,6 @@ namespace PAYNLSDK.Objects
         public string Publication { get; set; }
 
         /// <summary>
-        /// Base path of the images for the payment options 
-        /// </summary>
-        [JsonProperty("basePath")]
-        public string BasePath { get; set; }
-
-        /// <summary>
         /// ID of the module
         /// </summary>
         [JsonProperty("module")]

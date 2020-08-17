@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PAYNLSDK", "PAYNLSDK\PAYNLSDK.csproj", "{AE95E452-C622-44A3-81F3-BEEDBAA18CE3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PAYNLSDK", "PAYNLSDK\PAYNLSDK.csproj", "{967D943A-0C54-431B-A432-88F2922E313B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PAYNLFormsApp", "PAYNLFormsApp\PAYNLFormsApp.csproj", "{6D6D7430-DF23-4A29-9C64-2EF056D99A4A}"
 EndProject
@@ -13,10 +13,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{AE95E452-C622-44A3-81F3-BEEDBAA18CE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AE95E452-C622-44A3-81F3-BEEDBAA18CE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AE95E452-C622-44A3-81F3-BEEDBAA18CE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AE95E452-C622-44A3-81F3-BEEDBAA18CE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{967D943A-0C54-431B-A432-88F2922E313B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{967D943A-0C54-431B-A432-88F2922E313B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{967D943A-0C54-431B-A432-88F2922E313B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{967D943A-0C54-431B-A432-88F2922E313B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6D6D7430-DF23-4A29-9C64-2EF056D99A4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6D6D7430-DF23-4A29-9C64-2EF056D99A4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D6D7430-DF23-4A29-9C64-2EF056D99A4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -24,5 +24,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2CB71854-FB91-4E82-B4AE-1D79F36E9FC9}
 	EndGlobalSection
 EndGlobal

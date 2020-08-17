@@ -34,6 +34,8 @@
             // 
             // tbDebug
             // 
+            this.tbDebug.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.tbDebug.Location = new System.Drawing.Point(431, 12);
             this.tbDebug.Multiline = true;
             this.tbDebug.Name = "tbDebug";
@@ -43,6 +45,8 @@
             // 
             // tbMain
             // 
+            this.tbMain.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbMain.Location = new System.Drawing.Point(12, 12);
             this.tbMain.Multiline = true;
             this.tbMain.Name = "tbMain";

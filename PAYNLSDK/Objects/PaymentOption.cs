@@ -31,14 +31,8 @@ namespace PAYNLSDK.Objects
         /// <summary>
         /// Image for this payment (sub)option
         /// </summary>
-        [JsonProperty("img")]
+        [JsonProperty("image")]
         public string Image { get; set; }
-
-        /// <summary>
-        /// Path for the (sub)option icon. The full icon URL is a concatenation of $basePath, $path and $img. 
-        /// </summary>
-        [JsonProperty("path")]
-        public string IconPath { get; set; }
 
         /// <summary>
         /// Indicator whether or not the sub option is available

@@ -21,7 +21,7 @@ namespace PAYNLSDK.API.Transaction.GetService
 
         public override int Version
         {
-            get { return 5; }
+            get { return 16; }
         }
 
         public override string Controller

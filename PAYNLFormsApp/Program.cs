@@ -19,8 +19,8 @@ namespace PAYNLFormsApp
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             // Set test token/SL
-            APISettings.ApiToken = "e41f83b246b706291ea9ad798ccfd9f0fee5e0ab";
-            APISettings.ServiceID = "SL-3490-4320";
+            APISettings.ApiToken = "06fe50eb098ad1f8becaa20231023adeae6325c4";
+            APISettings.ServiceID = "SL-5796-8370";
             Application.Run(new Form1());
         }
     }
