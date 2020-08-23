@@ -93,7 +93,7 @@ namespace PAYNLSDK.Enums
         [EnumMember(Value = "N")]
         None = 0,
         [EnumMember(Value = "L")]
-        Low = 6,
+        Low = 9,
         [EnumMember(Value = "H")]
         High = 21
     }
