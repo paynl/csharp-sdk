@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Newtonsoft.Json;
 using System.Collections.Specialized;
 using PAYNLSDK.Utilities;
@@ -41,6 +41,30 @@ namespace PAYNLSDK.API.Transaction.Start
         public EndUser Enduser { get; set; }
         public SalesData SalesData { get; set; }
 
+        private string apiToken;
+
+        private string serviceId;
+
+        public string GetApiToken()
+        {
+            return apiToken;
+        }
+
+        public void SetApiToken(string value)
+        {
+            apiToken = value;
+        }
+
+        public string GetServiceId()
+        {
+            return serviceId;
+        }
+
+        public void SetServiceId(string value)
+        {
+            serviceId = value;
+        }
+
         public override int Version
         {
             get { return 5; }
@@ -64,6 +88,22 @@ namespace PAYNLSDK.API.Transaction.Start
         public override NameValueCollection GetParameters()
         {
             NameValueCollection nvc = base.GetParameters();
+
+            if (RequiresApiToken)
+            {
+                if (!String.IsNullOrEmpty(GetApiToken()))
+                {
+                    nvc.Add("token", GetApiToken());
+                }
+            }        
+            
+            if (RequiresServiceId)
+            {
+                if (!String.IsNullOrEmpty(GetServiceId()))
+                {
+                    nvc.Add("serviceId", GetServiceId());
+                }
+            }
 
             // Basic params
             ParameterValidator.IsNotNull(Amount, "Amount");

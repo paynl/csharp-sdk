@@ -20,6 +20,31 @@ namespace PAYNLSDK.API.Validate.BankAccountNumber
             }
         }
 
+
+        private string apiToken;
+
+        private string serviceId;
+
+        public string GetApiToken()
+        {
+            return apiToken;
+        }
+
+        public void SetApiToken(string value)
+        {
+            apiToken = value;
+        }
+
+        public string GetServiceId()
+        {
+            return serviceId;
+        }
+
+        public void SetServiceId(string value)
+        {
+            serviceId = value;
+        }
+
         public override int Version
         {
             get { return 1; }
@@ -43,6 +68,22 @@ namespace PAYNLSDK.API.Validate.BankAccountNumber
         public override System.Collections.Specialized.NameValueCollection GetParameters()
         {
             NameValueCollection nvc = base.GetParameters();
+
+            if (RequiresApiToken)
+            {
+                if (!String.IsNullOrEmpty(GetApiToken()))
+                {
+                    nvc.Add("token", GetApiToken());
+                }
+            }
+
+            if (RequiresServiceId)
+            {
+                if (!String.IsNullOrEmpty(GetServiceId()))
+                {
+                    nvc.Add("serviceId", GetServiceId());
+                }
+            }
 
             ParameterValidator.IsNotEmpty(BankAccountNumber, "bankAccountNumber");
             nvc.Add("bankAccountNumber", BankAccountNumber);

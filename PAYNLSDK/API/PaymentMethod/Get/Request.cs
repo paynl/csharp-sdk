@@ -11,6 +11,30 @@ namespace PAYNLSDK.API.PaymentMethod.Get
         [JsonProperty("paymentMethodId")]
         public int PaymentMethodId { get; set; }
 
+        private string apiToken;
+
+        private string serviceId;
+
+        public string GetApiToken()
+        {
+            return apiToken;
+        }
+
+        public void SetApiToken(string value)
+        {
+            apiToken = value;
+        }
+
+        public string GetServiceId()
+        {
+            return serviceId;
+        }
+
+        public void SetServiceId(string value)
+        {
+            serviceId = value;
+        }
+
         public override int Version
         {
             get { return 1; }
@@ -35,6 +59,22 @@ namespace PAYNLSDK.API.PaymentMethod.Get
         {
             NameValueCollection nvc = base.GetParameters();
 
+            if (RequiresApiToken)
+            {
+                if (!String.IsNullOrEmpty(GetApiToken()))
+                {
+                    nvc.Add("apiToken", GetApiToken());
+                }
+            }
+
+            if (RequiresServiceId)
+            {
+                if (!String.IsNullOrEmpty(GetServiceId()))
+                {
+                    nvc.Add("serviceID", GetServiceId());
+                }
+            }
+
             ParameterValidator.IsNotNull(PaymentMethodId, "PaymentMethodId");
             nvc.Add("paymentMethodId", PaymentMethodId.ToString());
 
@@ -51,8 +91,10 @@ namespace PAYNLSDK.API.PaymentMethod.Get
                 throw new ErrorException("rawResponse is empty!");
             }
             PAYNLSDK.Objects.PaymentMethod pm = JsonConvert.DeserializeObject<PAYNLSDK.Objects.PaymentMethod>(RawResponse);
-            Response r = new Response();
-            r.PaymentMethod = pm;
+            Response r = new Response
+            {
+                PaymentMethod = pm
+            };
             response = r;
         }
     }

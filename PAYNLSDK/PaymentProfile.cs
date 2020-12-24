@@ -16,9 +16,11 @@ namespace PAYNLSDK
         /// </summary>
         /// <param name="paymentProfileId">Payment profile ID</param>
         /// <returns>Payment profile response</returns>
-        static public PAYNLSDK.API.PaymentProfile.Get.Response Get(int paymentProfileId)
+        static public PAYNLSDK.API.PaymentProfile.Get.Response Get(int paymentProfileId, string apiToken = null, string serviceId = null)
         {
             PaymentProfileGet request = new PaymentProfileGet();
+            request.SetApiToken(apiToken);
+            request.SetServiceId(serviceId);
             request.PaymentProfileId = paymentProfileId;
             Client c = new Client("", "");
             c.PerformRequest(request);
@@ -29,9 +31,11 @@ namespace PAYNLSDK
         /// Get details for all payment profiles
         /// </summary>
         /// <returns>List of payment profile info</returns>
-        static public PAYNLSDK.API.PaymentProfile.GetAll.Response GetAll()
+        static public PAYNLSDK.API.PaymentProfile.GetAll.Response GetAll(string apiToken = null, string serviceId = null)
         {
             PaymentProfileGetAll request = new PaymentProfileGetAll();
+            request.SetApiToken(apiToken);
+            request.SetServiceId(serviceId);
             Client c = new Client("", "");
             c.PerformRequest(request);
             return request.Response;
@@ -45,9 +49,12 @@ namespace PAYNLSDK
         /// <param name="paymentMethodId">Payment Method ID</param>
         /// <param name="showNotAllowedOnRegistration">Indicator wether to show profiles that are initially not allowed on registration. </param>
         /// <returns>Response containing the list of payment profile information</returns>
-        static public PAYNLSDK.API.PaymentProfile.GetAvailable.Response GetAvailable(int categoryId, int? programId, int? paymentMethodId, bool? showNotAllowedOnRegistration)
+        static public PAYNLSDK.API.PaymentProfile.GetAvailable.Response GetAvailable(int categoryId, int? programId, int? paymentMethodId
+            , bool? showNotAllowedOnRegistration, string apiToken = null, string serviceId = null)
         {
             PaymentProfileGetAvailable request = new PaymentProfileGetAvailable();
+            request.SetApiToken(apiToken);
+            request.SetServiceId(serviceId);
             request.CategoryId = categoryId;
             request.ProgramId = programId;
             request.PaymentMethodId = paymentMethodId;

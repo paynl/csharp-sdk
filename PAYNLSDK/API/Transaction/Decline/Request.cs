@@ -57,6 +57,30 @@ namespace PAYNLSDK.API.Transaction.Decline
             get { return ""; }
         }
 
+        private string apiToken;
+
+        private string serviceId;
+
+        public string GetApiToken()
+        {
+            return apiToken;
+        }
+
+        public void SetApiToken(string value)
+        {
+            apiToken = value;
+        }
+
+        public string GetServiceId()
+        {
+            return serviceId;
+        }
+
+        public void SetServiceId(string value)
+        {
+            serviceId = value;
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -64,6 +88,22 @@ namespace PAYNLSDK.API.Transaction.Decline
         public override NameValueCollection GetParameters()
         {
             NameValueCollection nvc = base.GetParameters();
+
+            if (RequiresApiToken)
+            {
+                if (!String.IsNullOrEmpty(GetApiToken()))
+                {
+                    nvc.Add("token", GetApiToken());
+                }
+            }
+
+            if (RequiresServiceId)
+            {
+                if (!String.IsNullOrEmpty(GetServiceId()))
+                {
+                    nvc.Add("serviceId", GetServiceId());
+                }
+            }
 
             ParameterValidator.IsNotEmpty(TransactionId, "TransactionId");
             nvc.Add("orderId", TransactionId);
