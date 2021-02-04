@@ -331,6 +331,10 @@ namespace PAYNLSDK.API.Transaction.Start
                     {
                         nvc.Add("enduser[invoiceAddress][streetNumber]", Enduser.InvoiceAddress.StreetNumber);
                     }
+                    if (!ParameterValidator.IsEmpty(Enduser.InvoiceAddress.StreetNumberExtension))
+                    {
+                        nvc.Add("enduser[invoiceAddress][streetNumber]", Enduser.InvoiceAddress.StreetNumberExtension);
+                    }
                     if (!ParameterValidator.IsEmpty(Enduser.InvoiceAddress.ZipCode))
                     {
                         nvc.Add("enduser[invoiceAddress][zipCode]", Enduser.InvoiceAddress.ZipCode);
