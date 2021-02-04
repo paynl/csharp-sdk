@@ -11,7 +11,7 @@ With this SDK you will be able to start transactions and retrieve transactions w
 
 ### Usage
 
-Setting the configuration:
+Setting the configuration globally (optional):
 ```c#
 PAYNLSDK.API.RequestBase.ApiToken = "e41f83b246b706291ea9ad798ccfd9f0fee5e0ab";
 PAYNLSDK.API.RequestBase.ServiceId = "SL-3490-4320";
@@ -70,6 +70,10 @@ request.SalesData.OrderData.Add(new PAYNLSDK.Objects.OrderData("SKU-8489", "Test
 request.SalesData.OrderData.Add(new PAYNLSDK.Objects.OrderData("SKU-8421", "Testproduct 2", 995, "H", 1));
 request.SalesData.OrderData.Add(new PAYNLSDK.Objects.OrderData("SKU-2359", "Testproduct 3", 2499, "H", 1));
 
+// Token per request (optional, overrides globally set token)
+request.SetApiToken("e41f83b246b706291ea9ad798ccfd9f0fee5e0ab");
+request.SetServiceId("SL-3490-4320");
+
 // enduser
 request.Enduser = new PAYNLSDK.Objects.EndUser();
 request.Enduser.Language = "NL"; // End user language
@@ -87,6 +91,7 @@ request.Enduser.BIC = "";
 request.Enduser.Address = new PAYNLSDK.Objects.Address();
 request.Enduser.Address.StreetName = "Streetname";
 request.Enduser.Address.StreetNumber = "8";
+request.Enduser.Address.StreetNumberExtension = "B"; // optional
 request.Enduser.Address.ZipCode = "1234AB";
 request.Enduser.Address.City = "City";
 request.Enduser.Address.CountryCode = "NL";
@@ -98,6 +103,7 @@ request.Enduser.InvoiceAddress.LastName = "Jansen";
 request.Enduser.InvoiceAddress.Gender = PAYNLSDK.Enums.Gender.Male;
 request.Enduser.InvoiceAddress.StreetName = "InvoiceStreetname";
 request.Enduser.InvoiceAddress.StreetNumber = "10";
+request.Enduser.InvoiceAddress.StreetNumberExtension = "A"; // optional
 request.Enduser.InvoiceAddress.ZipCode = "1234BC";
 request.Enduser.InvoiceAddress.City = "City";
 request.Enduser.InvoiceAddress.CountryCode = "NL";
