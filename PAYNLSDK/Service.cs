@@ -16,10 +16,12 @@ namespace PAYNLSDK
         /// </summary>
         /// <param name="paymentOptionId">Payment Option ID</param>
         /// <returns>Response object containing service categories</returns>
-        static public PAYNLSDK.API.Service.GetCategories.Response GetCategories(int? paymentOptionId)
+        static public PAYNLSDK.API.Service.GetCategories.Response GetCategories(int? paymentOptionId, string apiToken = null, string serviceId = null)
         {
             ServiceGetCategories request = new ServiceGetCategories();
             request.PaymentOptionId = paymentOptionId;
+            request.SetApiToken(apiToken);
+            request.SetServiceId(serviceId);
             Client c = new Client("", "");
             c.PerformRequest(request);
             return request.Response;

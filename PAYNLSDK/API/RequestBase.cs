@@ -75,14 +75,20 @@ namespace PAYNLSDK.API
             NameValueCollection nvc = new NameValueCollection();
             if (RequiresApiToken)
             {
-                ParameterValidator.IsNotEmpty(ApiToken, "ApiToken");
-                nvc.Add("token", ApiToken);
+                if (!String.IsNullOrEmpty(ApiToken))
+                {
+                    nvc.Add("token", ApiToken);
+                }
             }
+
             if (RequiresServiceId)
             {
-                ParameterValidator.IsNotEmpty(ServiceId, "ServiceId");
-                nvc.Add("serviceId", ServiceId);
+                if (!String.IsNullOrEmpty(ServiceId))
+                {
+                    nvc.Add("serviceId", ServiceId);
+                }
             }
+
 
             return nvc;
         }

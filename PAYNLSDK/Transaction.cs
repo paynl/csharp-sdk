@@ -47,7 +47,7 @@ namespace PAYNLSDK
         {
             try
             {
-               return (status == Enums.PaymentStatus.PAID);
+                return (status == Enums.PaymentStatus.PAID);
             }
             catch (ErrorException e)
             {
@@ -217,13 +217,15 @@ namespace PAYNLSDK
         /// </summary>
         /// <param name="transactionId">Transaction ID</param>
         /// <returns>Full response object with all information available</returns>
-        static public PAYNLSDK.API.Transaction.Info.Response Info(string transactionId)
+        static public PAYNLSDK.API.Transaction.Info.Response Info(string transactionId, string apiToken = null, string serviceId = null)
         {
-                TransactionInfo request = new TransactionInfo();
-                request.TransactionId = transactionId;
-                Client c = new Client();
-                c.PerformRequest(request);
-                return request.Response;
+            TransactionInfo request = new TransactionInfo();
+            request.SetApiToken(apiToken);
+            request.SetServiceId(serviceId);
+            request.TransactionId = transactionId;
+            Client c = new Client();
+            c.PerformRequest(request);
+            return request.Response;
         }
 
         /// <summary>
@@ -233,13 +235,15 @@ namespace PAYNLSDK
         /// </summary>
         /// <param name="paymentMethodId">Paymentmethod ID</param>
         /// <returns>FUll response with all service information</returns>
-        static public PAYNLSDK.API.Transaction.GetService.Response GetService(PaymentMethodId? paymentMethodId)
+        static public PAYNLSDK.API.Transaction.GetService.Response GetService(PaymentMethodId? paymentMethodId, string apiToken = null, string serviceId = null)
         {
             TransactionGetService request = new TransactionGetService();
-                request.PaymentMethodId = paymentMethodId;
-                Client c = new Client();
-                c.PerformRequest(request);
-                return request.Response;
+            request.PaymentMethodId = paymentMethodId;
+            request.SetApiToken(apiToken);
+            request.SetServiceId(serviceId);
+            Client c = new Client();
+            c.PerformRequest(request);
+            return request.Response;
         }
 
         /// <summary>

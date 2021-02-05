@@ -17,6 +17,7 @@ namespace PAYNLFormsApp.Fixtures
             request.Enduser.InvoiceAddress.Gender = Gender.Male;
             request.Enduser.InvoiceAddress.StreetName = "Dam Bustersstraat";
             request.Enduser.InvoiceAddress.StreetNumber = "8";
+            request.Enduser.InvoiceAddress.StreetNumberExtension = "A";
             request.Enduser.InvoiceAddress.ZipCode = "4651SJ";
             request.Enduser.InvoiceAddress.City = "Steenbergen";
             request.Enduser.InvoiceAddress.CountryCode = "NL";

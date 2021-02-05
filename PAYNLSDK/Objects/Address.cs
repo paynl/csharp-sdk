@@ -41,6 +41,12 @@ namespace PAYNLSDK.Objects
         public string StreetNumber { get; set; }
 
         /// <summary>
+        /// Street number
+        /// </summary>
+        [JsonProperty("streetNumberExtension")]
+        public string StreetNumberExtension { get; set; }
+
+        /// <summary>
         /// Zipcode
         /// </summary>
         [JsonProperty("zipCode")]

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Newtonsoft.Json;
 using System.Collections.Specialized;
 using PAYNLSDK.Utilities;
@@ -41,6 +41,30 @@ namespace PAYNLSDK.API.Transaction.Start
         public EndUser Enduser { get; set; }
         public SalesData SalesData { get; set; }
 
+        private string apiToken;
+
+        private string serviceId;
+
+        public string GetApiToken()
+        {
+            return apiToken;
+        }
+
+        public void SetApiToken(string value)
+        {
+            apiToken = value;
+        }
+
+        public string GetServiceId()
+        {
+            return serviceId;
+        }
+
+        public void SetServiceId(string value)
+        {
+            serviceId = value;
+        }
+
         public override int Version
         {
             get { return 5; }
@@ -64,6 +88,22 @@ namespace PAYNLSDK.API.Transaction.Start
         public override NameValueCollection GetParameters()
         {
             NameValueCollection nvc = base.GetParameters();
+
+            if (RequiresApiToken)
+            {
+                if (!String.IsNullOrEmpty(GetApiToken()))
+                {
+                    nvc.Add("token", GetApiToken());
+                }
+            }        
+            
+            if (RequiresServiceId)
+            {
+                if (!String.IsNullOrEmpty(GetServiceId()))
+                {
+                    nvc.Add("serviceId", GetServiceId());
+                }
+            }
 
             // Basic params
             ParameterValidator.IsNotNull(Amount, "Amount");
@@ -249,6 +289,10 @@ namespace PAYNLSDK.API.Transaction.Start
                     {
                         nvc.Add("enduser[address][streetNumber]", Enduser.Address.StreetNumber);
                     }
+                    if (!ParameterValidator.IsEmpty(Enduser.Address.StreetNumberExtension))
+                    {
+                        nvc.Add("enduser[address][streetNumberExtension]", Enduser.Address.StreetNumberExtension);
+                    }
                     if (!ParameterValidator.IsEmpty(Enduser.Address.ZipCode))
                     {
                         nvc.Add("enduser[address][zipCode]", Enduser.Address.ZipCode);
@@ -286,6 +330,10 @@ namespace PAYNLSDK.API.Transaction.Start
                     if (!ParameterValidator.IsEmpty(Enduser.InvoiceAddress.StreetNumber))
                     {
                         nvc.Add("enduser[invoiceAddress][streetNumber]", Enduser.InvoiceAddress.StreetNumber);
+                    }
+                    if (!ParameterValidator.IsEmpty(Enduser.InvoiceAddress.StreetNumberExtension))
+                    {
+                        nvc.Add("enduser[invoiceAddress][streetNumber]", Enduser.InvoiceAddress.StreetNumberExtension);
                     }
                     if (!ParameterValidator.IsEmpty(Enduser.InvoiceAddress.ZipCode))
                     {
