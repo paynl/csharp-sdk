@@ -333,7 +333,7 @@ namespace PAYNLSDK.API.Transaction.Start
                     }
                     if (!ParameterValidator.IsEmpty(Enduser.InvoiceAddress.StreetNumberExtension))
                     {
-                        nvc.Add("enduser[invoiceAddress][streetNumber]", Enduser.InvoiceAddress.StreetNumberExtension);
+                        nvc.Add("enduser[invoiceAddress][streetNumberExtension]", Enduser.InvoiceAddress.StreetNumberExtension);
                     }
                     if (!ParameterValidator.IsEmpty(Enduser.InvoiceAddress.ZipCode))
                     {
