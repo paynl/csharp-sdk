@@ -2,15 +2,15 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>PayNLSdk</id>
-        <version>1.0.0.17</version>
+        <version>1.0.0.18</version>
         <title>PayNLSdk</title>
         <authors>SebsoftPayNLSdk</authors>
         <owners>paynl</owners>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>PayNL Gateway SDK</description>
         <summary>Pay.nl SDK for .net</summary>
-        <releaseNotes>Implemented issue #15</releaseNotes>
-        <copyright>Copyright 2020</copyright>
+        <releaseNotes>Small change to address parser</releaseNotes>
+        <copyright>Copyright 2021</copyright>
         <tags>pay.nl payments pay paynl</tags>
         <dependencies>
             <dependency id="Newtonsoft.Json" version="12.0.3" />
