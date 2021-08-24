@@ -42,4 +42,4 @@ jobs:
         PROJECT_FILE_PATH: PAYNLSDK/PayNLSdk.csproj
         # API key to authenticate with NuGet server
         NUGET_KEY: ${{ secrets.NUGET_PUBLISH_KEY }}
-        INCLUDE_SYMBOLS: true
+        # INCLUDE_SYMBOLS: true # check issue https://github.com/brandedoutcast/publish-nuget/pull/62
