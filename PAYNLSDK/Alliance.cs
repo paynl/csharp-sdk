@@ -11,7 +11,10 @@ namespace PAYNLSDK
     {
         private readonly IClient _webClient;
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Create a new API client for the Alliance API
+        /// </summary>
+        /// <param name="webClient"></param>
         public Alliance(IClient webClient)
         {
             _webClient = webClient;
