@@ -20,8 +20,6 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --no-restore PAYNLSDK\PayNLSdk.csproj
-    - name: Build
-      run: dotnet build --no-restore PayNLSdk.Tests\PayNLSdk.Tests.csproj
+      run: dotnet build --no-restore 
     - name: Test
-      run: dotnet test --no-build --verbosity normal PayNLSdk.Tests\PayNLSdk.Tests.csproj
+      run: dotnet test --no-build --verbosity normal
