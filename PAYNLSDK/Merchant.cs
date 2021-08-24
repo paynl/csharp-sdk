@@ -14,7 +14,10 @@ namespace PAYNLSDK
     {
         private readonly IClient _webClient;
 
-        /// <inheritdoc />
+        /// <summary>
+        /// The merchant api. This is a part from the alliance SDK.
+        /// </summary>
+        /// <param name="webClient"></param>
         public Merchant(IClient webClient)
         {
             _webClient = webClient;
@@ -25,37 +28,15 @@ namespace PAYNLSDK
         /// <returns>A new <see cref="API.Merchant.Add.Response"/> object</returns>
         public API.Merchant.Add.Response Create(API.Merchant.Add.Request request)
         {
-            // api = new Api\AddMerchant();
-
-            //    if (!String.IsNullOrEmpty( options['accounts']))
-            //    {
-            //        self::_addAccounts( options['accounts'],  api);
-            //    }
-            // merchant = self::_getMerchant( options);
-            // api->setMerchant( merchant);
-
-            // bankAccount = self::_getBankAccount( options);
-            //    if (!empty( bankAccount))
-            //    {
-            //     api->setBankAccount( bankAccount);
-            //    }
-
-            // settings = self::_getSettings( options);
-            //    if (!empty( settings))
-            //    {
-            //     api->setSettings( settings);
-            //    }
-
-            // result =  api->doRequest();
-
             var response = _webClient.PerformRequest(request);
             return API.Merchant.Add.Response.FromRawResponse(response);
         }
 
-        /**
-         * @param  options
-         * @return Result\Merchant\Get
-         */
+        /// <summary>
+        /// Get a specific merchant by id
+        /// </summary>
+        /// <param name="merchantId"></param>
+        /// <returns></returns>
         public API.Merchant.Get.Response Get(string merchantId)
         {
             //api = new Api\GetMerchant();
@@ -66,14 +47,19 @@ namespace PAYNLSDK
 
             //result =  api->doRequest();
 
-            var request = new API.Merchant.Get.Request();
-            request.MerchantId = merchantId;
+            var request = new API.Merchant.Get.Request
+            {
+                MerchantId = merchantId
+            };
 
             var response = _webClient.PerformRequest(request);
             return API.Merchant.Get.Response.FromRawResponse(response);
         }
 
-        public object getList( /*options = array()*/)
+        /// <summary>
+        /// Get a list of all merchants
+        /// </summary>
+        public object GetAll( /*options = array()*/)
         {
             throw new NotImplementedException("this is not yet implemented");
             //api = new Api\GetMerchants();
@@ -83,9 +69,22 @@ namespace PAYNLSDK
             //    api->setState( options['state']);
             //   }
 
-            //result =  api->doRequest();
+
+            //var request = new API.Merchant.GetAll.Request
+            //{
+            //    MerchantId = "TODO"
+            //};
+
+            //var response = _webClient.PerformRequest(request);
+            //return API.Merchant.GetAll.Response.FromRawResponse(response);
 
             return new object(); // Result\Merchant\GetList( result);
+        }
+
+        public enum MerchantState
+        {
+            NewMerchant,
+
         }
     }
 }

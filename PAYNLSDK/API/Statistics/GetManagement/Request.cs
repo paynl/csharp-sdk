@@ -5,6 +5,7 @@ using PAYNLSDK.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Diagnostics.CodeAnalysis;
 
 namespace PayNLSdk.API.Statistics.GetManagement
 {
@@ -41,7 +42,7 @@ namespace PayNLSdk.API.Statistics.GetManagement
         /// </summary>
         /// <param name="dateTime">a current time implementation</param>
         /// <param name="period">The period for the request</param>
-        public static Request Create(IDateTime dateTime, StatsPeriod period) 
+        public static Request Create(IDateTime dateTime, StatsPeriod period)
         {
             var retval = new Request();
 
@@ -91,12 +92,21 @@ namespace PayNLSdk.API.Statistics.GetManagement
         /// the first date to be included in the report
         /// </summary>
         public DateTime StartDate { get; set; }
+
         /// <summary>
         /// The last date to be included in the Report
         /// </summary>
         public DateTime EndDate { get; set; }
 
+        /// <summary>
+        /// Use this parameter to indicate whether to take your volume discount into account
+        /// (note that this is an estimate based on your transactions this month. Default=false).
+        /// </summary>
         public bool Staffels { get; set; }
+
+        /// <summary>
+        /// The currency in which the data is returned (default=1 : EUR)
+        /// </summary>
         public int? CurrencyId { get; set; }
 
         /// <summary>
@@ -170,7 +180,7 @@ namespace PayNLSdk.API.Statistics.GetManagement
             foreach (var filterItem in Filters)
             {
                 filterNvc.Add($"filterType[{i}]", filterItem.Key);
-                filterNvc.Add($"filterOperator[{i}]", filterItem.Operator?.ToString() ?? ValidOperators.eq.ToString());
+                filterNvc.Add($"filterOperator[{i}]", filterItem.Operator?.ToString() ?? ValidOperators.Eq.ToString().ToLowerInvariant());
                 filterNvc.Add($"filterValue[{i}]", filterItem.Value);
                 i++;
             }
@@ -188,21 +198,51 @@ namespace PayNLSdk.API.Statistics.GetManagement
             }
         }
 
+        /// <summary>
+        /// A filter for statistics
+        /// </summary>
         public struct FilterItem
-
         {
+            /// <summary>
+            /// the field to filter upon
+            /// </summary>
             public string Key { get; set; }
+            /// <summary>
+            /// the operator for the filter on the specified field
+            /// </summary>
             public ValidOperators? Operator { get; set; }
+            /// <summary>
+            /// The value to compare against
+            /// </summary>
             public string Value { get; set; }
         }
 
+        /// <summary>
+        /// The operators for filtering management statistics
+        /// </summary>
+        [SuppressMessage("ReSharper", "UnusedMember.Global")]
         public enum ValidOperators
         {
-            eq,
-            neq,
-            gt,
-            lt,
-            like
+            /// <summary>
+            /// Equals
+            /// </summary>
+            Eq,
+            /// <summary>
+            /// Not equals
+            /// </summary>
+            Neq,
+            /// <summary>
+            /// Greater
+            /// </summary>
+            Gt,
+            /// <summary>
+            /// Smaller
+            /// </summary>
+            Lt,
+            /// <summary>
+            /// Like
+            /// </summary>
+            Like
         }
 
     }

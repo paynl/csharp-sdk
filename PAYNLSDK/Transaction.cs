@@ -19,6 +19,10 @@ namespace PAYNLSDK
 
         private readonly IClient _webClient;
 
+        /// <summary>
+        /// Initializes a new transaction object
+        /// </summary>
+        /// <param name="webClient"></param>
         public Transaction(IClient webClient)
         {
             _webClient = webClient;
@@ -32,17 +36,13 @@ namespace PAYNLSDK
         /// <returns>True if PAID, false otherwise</returns>
         public bool IsPaid(string transactionId)
         {
-            try
+            var request = new TransactionInfo
             {
-                TransactionInfo request = new TransactionInfo();
-                request.TransactionId = transactionId;
-                _webClient.PerformRequest(request);
-                return (request.Response.PaymentDetails.State == Enums.PaymentStatus.PAID);
-            }
-            catch (PayNlException e)
-            {
-                return false;
-            }
+                TransactionId = transactionId
+            };
+
+            _webClient.PerformRequest(request);
+            return (request.Response.PaymentDetails.State == Enums.PaymentStatus.PAID);
         }
 
 
@@ -124,7 +124,7 @@ namespace PAYNLSDK
         /// </summary>
         /// <param name="status">Transaction status</param>
         /// <returns>True if REFUND or REFUNDING, false otherwise</returns>
-         public static bool IsRefund(Enums.PaymentStatus status)
+        public static bool IsRefund(Enums.PaymentStatus status)
         {
             try
             {
@@ -201,49 +201,18 @@ namespace PAYNLSDK
         /// <param name="amount">Amount of the refund. If null is given, it will be the full amount of the transaction.</param>
         /// <param name="processDate">Date to process the refund. May be null.</param>
         /// <returns>Full response including the Refund ID</returns>
-        public PAYNLSDK.API.Transaction.Refund.Response Refund(string transactionId, string description, int? amount, DateTime? processDate)
+        public PAYNLSDK.API.Transaction.Refund.Response Refund(string transactionId, string description = null, decimal? amount = null, DateTime? processDate = null)
         {
-            TransactionRefund request = new TransactionRefund();
-            request.TransactionId = transactionId;
-            request.Description = description;
-            request.Amount = amount;
-            request.ProcessDate = processDate;
+            var request = new TransactionRefund
+            {
+                TransactionId = transactionId,
+                Description = description,
+                Amount = amount,
+                ProcessDate = processDate
+            };
 
             _webClient.PerformRequest(request);
             return request.Response;
-        }
-
-        /// <summary>
-        /// Performs a (partial) refund call on an existing transaction
-        /// </summary>
-        /// <param name="transactionId">Transaction ID</param>
-        /// <param name="description">Reason for the refund. May be null.</param>
-        /// <param name="amount">Amount of the refund. If null is given, it will be the full amount of the transaction.</param>
-        /// <returns>Full response including the Refund ID</returns>
-        public PAYNLSDK.API.Transaction.Refund.Response Refund(string transactionId, string description, int? amount)
-        {
-            return Refund(transactionId, description, amount, null);
-        }
-
-        /// <summary>
-        /// Performs a (partial) refund call on an existing transaction
-        /// </summary>
-        /// <param name="transactionId">Transaction ID</param>
-        /// <param name="description">Reason for the refund. May be null.</param>
-        /// <returns>Full response including the Refund ID</returns>
-        public PAYNLSDK.API.Transaction.Refund.Response Refund(string transactionId, string description)
-        {
-            return Refund(transactionId, description, null, null);
-        }
-
-        /// <summary>
-        /// Performs a (partial) refund call on an existing transaction.
-        /// </summary>
-        /// <param name="transactionId">Transaction ID</param>
-        /// <returns>Full response including the Refund ID</returns>
-        public PAYNLSDK.API.Transaction.Refund.Response Refund(string transactionId)
-        {
-            return Refund(transactionId, null, null, null);
         }
 
         /// <summary>

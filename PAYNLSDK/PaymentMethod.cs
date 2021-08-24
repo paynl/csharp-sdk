@@ -6,7 +6,7 @@ namespace PAYNLSDK
 {
     /// <summary>
     /// Generic Payment Method service helper class.
-    /// Makes calling PAYNL Services easier and illiminates the need to fully initiate all Request objects.
+    /// Makes calling PAYNL Services easier and eliminates the need to fully initiate all Request objects.
     /// </summary>
     public class PaymentMethod
     {
@@ -42,7 +42,7 @@ namespace PAYNLSDK
         /// <returns>Response containing a list of information for all payment methods</returns>
         public PAYNLSDK.API.PaymentMethod.GetAll.Response GetAll()
         {
-            PaymentMethodGetAll request = new PaymentMethodGetAll();
+            var request = new PaymentMethodGetAll();
             _webClient.PerformRequest(request);
             return request.Response;
         }

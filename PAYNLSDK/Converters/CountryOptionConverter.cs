@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PAYNLSDK.Converters
 {
-    class CountryOptionConverter : JsonConverter
+    internal class CountryOptionConverter : JsonConverter
     {
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {

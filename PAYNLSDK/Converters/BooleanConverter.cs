@@ -3,7 +3,10 @@ using System;
 
 namespace PAYNLSDK.Converters
 {
-    class BooleanConverter : JsonConverter
+    /// <summary>
+    /// A boolean json converter for newtonsoft
+    /// </summary>
+    internal class BooleanConverter : JsonConverter
     {
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {

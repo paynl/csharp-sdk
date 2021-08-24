@@ -11,7 +11,11 @@ namespace PAYNLSDK
     public class PaymentProfile
     {
         private readonly IClient _webClient;
-
+        
+        /// <summary>
+        /// Create a new payment profile Sdk
+        /// </summary>
+        /// <param name="webClient"></param>
         public PaymentProfile(IClient webClient)
         {
             _webClient = webClient;
@@ -55,7 +59,7 @@ namespace PAYNLSDK
         /// <returns>Response containing the list of payment profile information</returns>
         public PAYNLSDK.API.PaymentProfile.GetAvailable.Response GetAvailable(int categoryId, int? programId = null, int? paymentMethodId = null, bool? showNotAllowedOnRegistration = null)
         {
-            PaymentProfileGetAvailable request = new PaymentProfileGetAvailable
+            var request = new PaymentProfileGetAvailable
             {
                 CategoryId = categoryId,
                 ProgramId = programId,

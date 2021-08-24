@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PAYNLSDK.Utilities
 {
-    class Reflection
+    internal class Reflection
     {
         public static bool IsNullable(Type t)
         {

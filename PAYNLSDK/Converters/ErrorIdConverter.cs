@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PAYNLSDK.Converters
 {
-    class ErrorIdConverter : JsonConverter
+    internal class ErrorIdConverter : JsonConverter
     {
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {

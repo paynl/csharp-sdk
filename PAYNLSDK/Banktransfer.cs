@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 namespace PAYNLSDK
 {
     /// <summary>
-    /// A bank transfer
+    /// the Bank Transfer API
     /// </summary>
     public class Banktransfer
     {
         private readonly IClient _webClient;
-     
+
         /// <summary>
-        /// Constructor to initialise a <see cref="Banktransfer"/> object
+        /// Create a new BankTransfer api object
         /// </summary>
         /// <param name="webClient"></param>
         public Banktransfer(IClient webClient)
@@ -23,12 +23,25 @@ namespace PAYNLSDK
             _webClient = webClient;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         public API.Banktransfer.Add.Response Add(PAYNLSDK.API.Banktransfer.Add.Request request)
         {
             _webClient.PerformRequest(request);
             return request.Response;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="amount"></param>
+        /// <param name="bankAccountHolder"></param>
+        /// <param name="bankAccountNumber"></param>
+        /// <param name="bankAccountBic"></param>
+        /// <returns></returns>
         public API.Banktransfer.Add.Response Add(int amount, string bankAccountHolder, string bankAccountNumber, string bankAccountBic)
         {
             var request = new API.Banktransfer.Add.Request(amount, bankAccountHolder, bankAccountNumber, bankAccountBic);

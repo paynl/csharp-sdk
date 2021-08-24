@@ -4,7 +4,7 @@ using PAYNLSDK.Utilities;
 
 namespace PAYNLSDK.Converters
 {
-    public class YMDHISConverter : JsonConverter
+    internal class YMDHISConverter : JsonConverter
     {
         private const string Format = "yyyy-MM-dd HH:ii:ss";
         private static string[] ParseFormats = {

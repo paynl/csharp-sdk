@@ -6,11 +6,21 @@ using System.Collections.Specialized;
 
 namespace PAYNLSDK.API.Banktransfer.Add
 {
+    /// <summary>
+    /// A new ADD request for the banktransfer (payment option id 136)
+    /// </summary>
     public class Request : RequestBase
     {
-        public Request(int amount, string bankAccountHolder, string bankAccountNumber, string bankAccountBic)
+        /// <summary>
+        /// Create a new bank transfer request object
+        /// </summary>
+        /// <param name="amount"></param>
+        /// <param name="bankAccountHolder"></param>
+        /// <param name="bankAccountNumber"></param>
+        /// <param name="bankAccountBic"></param>
+        public Request(decimal amount, string bankAccountHolder, string bankAccountNumber, string bankAccountBic)
         {
-            Amount = amount;
+            AmountInCents = (int)Math.Floor(amount * 100);
             BankAccountHolder = bankAccountHolder;
             BankAccountNumber = bankAccountNumber;
             BankAccountBic = bankAccountBic;
@@ -19,7 +29,7 @@ namespace PAYNLSDK.API.Banktransfer.Add
         /// <summary>
         /// The amount to be paid should be given in cents. For example € 3.50 becomes 350.
         /// </summary>
-        public int Amount { get; set; }
+        public int AmountInCents { get; set; }
 
         /// <summary>
         /// The name of the customer.
@@ -42,7 +52,7 @@ namespace PAYNLSDK.API.Banktransfer.Add
         public string Description { get; set; }
 
         /// <summary>
-        /// The id of a promotor / affiliate.
+        /// The id of a promotor webmaster / affiliate.
         /// In general, you won't use this unless you know the ID's of your affiliate's
         /// </summary>
         public int? PromotorId { get; set; }
@@ -105,10 +115,10 @@ namespace PAYNLSDK.API.Banktransfer.Add
         /// <inheritdoc />
         public override NameValueCollection GetParameters()
         {
-            NameValueCollection nvc = new NameValueCollection();
+            var nvc = new NameValueCollection();
 
-            ParameterValidator.IsNotNull(Amount, "Amount");
-            nvc.Add("amount", Amount.ToString());
+            ParameterValidator.IsNotNull(AmountInCents, "Amount");
+            nvc.Add("amount", AmountInCents.ToString());
 
             ParameterValidator.IsNotNull(BankAccountHolder, "BankAccountHolder");
             nvc.Add("bankAccountHolder", BankAccountHolder);
@@ -124,7 +134,7 @@ namespace PAYNLSDK.API.Banktransfer.Add
                 nvc.Add("description", Description);
             }
 
-            if (!ParameterValidator.IsNonEmptyInt(PromotorId))
+            if (PromotorId.HasValue)
             {
                 nvc.Add("promotorId", PromotorId.Value.ToString());
             }
@@ -170,6 +180,7 @@ namespace PAYNLSDK.API.Banktransfer.Add
             return nvc;
         }
 
+        /// <overridedoc />
         protected override void PrepareAndSetResponse()
         {
             if (ParameterValidator.IsEmpty(rawResponse))
@@ -184,6 +195,7 @@ namespace PAYNLSDK.API.Banktransfer.Add
             }
         }
 
+        /// <overridedoc />
         public Response Response => (Response)response;
     }
 }
