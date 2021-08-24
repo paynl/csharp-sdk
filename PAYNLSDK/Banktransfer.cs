@@ -7,10 +7,17 @@ using System.Threading.Tasks;
 
 namespace PAYNLSDK
 {
+    /// <summary>
+    /// A bank transfer
+    /// </summary>
     public class Banktransfer
     {
         private readonly IClient _webClient;
      
+        /// <summary>
+        /// Constructor to initialise a <see cref="Banktransfer"/> object
+        /// </summary>
+        /// <param name="webClient"></param>
         public Banktransfer(IClient webClient)
         {
             _webClient = webClient;
