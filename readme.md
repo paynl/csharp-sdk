@@ -1,5 +1,5 @@
 [![NuGet release](https://img.shields.io/nuget/v/RoodFluweel.PAYNLSDK.svg)](https://www.nuget.org/packages/RoodFluweel.PAYNLSDK/)
-[![Build status](https://ci.appveyor.com/api/projects/status/tf7nerddjixwumn1?svg=true)](https://ci.appveyor.com/project/dampee/csharp-sdk)
+[![.NET](https://github.com/roodfluweel/csharp-sdk/actions/workflows/dotnet.yml/badge.svg)](https://github.com/roodfluweel/csharp-sdk/actions/workflows/dotnet.yml)
 
 # Pay.nl C# SDK
 
