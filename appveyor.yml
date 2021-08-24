@@ -1,7 +1,7 @@
 -
   branches:
     only:
-      - master
+      - main
   configuration: AppVeyor
   artifacts:
     - path: '**\RoodFluweel.PAYNLSDK.*.nupkg' # find all NuGet packages recursively
