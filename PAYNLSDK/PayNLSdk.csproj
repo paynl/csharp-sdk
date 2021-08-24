@@ -7,7 +7,7 @@
 
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageId>RoodFluweel.PAYNLSDK</PackageId>
-        <Version>1.5.0</Version>
+        <Version>1.5.1</Version>
         <Authors>paynl, dampee, Sebsoft</Authors>
         <Company>dampee, paynl</Company>
         <PackageLicenseUrl></PackageLicenseUrl>
@@ -15,11 +15,9 @@
         <PackageReleaseNotes>
             Latest addition is the addition of the Statistics/Management api
         </PackageReleaseNotes>
-        <Description>
-            Connector for Pay.NL, forked from the original
-            and improved to support multiple tenants and the Alliance SDK.
-            Targeting netstandard2, netcoreapp20, net46 and net47.
-        </Description>
+        <Description>Connector for Pay.NL, forked from the original and improved to support multiple tenants and the Alliance SDK.
+Targeting netstandard2.0
+</Description>
         <PackageTags>paynl payment gateway</PackageTags>
         <Copyright>Copyright ©2017</Copyright>
         <RepositoryUrl>https://github.com/roodfluweel/csharp-sdk</RepositoryUrl>

@@ -36,12 +36,10 @@ jobs:
       with:
         dotnet-version: 5.0.x
     - name: Publish NuGet
-      uses: brandedoutcast/publish-nuget@v2.5.5
+      uses: brandedoutcast/publish-nuget@v2
       with:
         # Filepath of the project to be packaged, relative to root of repository
         PROJECT_FILE_PATH: PAYNLSDK/PayNLSdk.csproj
-        VERSION_REGEX: ^\s*<Version>(.*)<\/Version>\s*$
-        TAG_FORMAT: '*'
         # API key to authenticate with NuGet server
         NUGET_KEY: ${{ secrets.NUGET_PUBLISH_KEY }}
         INCLUDE_SYMBOLS: true
