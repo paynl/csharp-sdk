@@ -12,7 +12,7 @@ namespace PAYNLSDK.Objects
         /// payment session ID
         /// </summary>
         [JsonProperty("paymentSessionId")]
-        public int PaymentSessionId { get; protected set; }
+        public long PaymentSessionId { get; protected set; }
 
         /// <summary>
         /// Refund amount

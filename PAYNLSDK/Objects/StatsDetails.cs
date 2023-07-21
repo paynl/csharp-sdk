@@ -13,7 +13,7 @@ namespace PAYNLSDK.Objects
         /// ID for the Payment session these details belong to
         /// </summary>
         [JsonProperty("paymentSessionId")]
-        public int? PaymentSessionId { get; set; }
+        public long? PaymentSessionId { get; set; }
 
         /// <summary>
         /// The used tool code which can be tracked in the stats
