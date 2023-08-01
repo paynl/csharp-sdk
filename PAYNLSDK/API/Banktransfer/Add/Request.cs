@@ -184,7 +184,7 @@ namespace PAYNLSDK.API.Banktransfer.Add
                 nvc.Add("description", Description);
             }
 
-            if (!ParameterValidator.IsNonEmptyInt(PromotorId))
+            if (PromotorId.HasValue)
             {
                 nvc.Add("promotorId", PromotorId.Value.ToString());
             }
