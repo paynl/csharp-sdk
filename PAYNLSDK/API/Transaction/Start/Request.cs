@@ -5,6 +5,7 @@ using PAYNLSDK.Utilities;
 using PAYNLSDK.Objects;
 using PAYNLSDK.Enums;
 using PAYNLSDK.Exceptions;
+using System.Reflection;
 
 namespace PAYNLSDK.API.Transaction.Start
 {
@@ -217,6 +218,7 @@ namespace PAYNLSDK.API.Transaction.Start
                 //{
                 //    nvc.Add("statsData[transferData]", StatsData.TransferData);
                 //}
+                nvc.Add("statsData[object]", string.Format("dotnetsdk {0} | {1}", Assembly.GetExecutingAssembly().GetName().Version.ToString(), Environment.Version));
             }
 
             // End user

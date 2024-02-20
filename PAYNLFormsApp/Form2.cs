@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PAYNLFormsApp
@@ -21,18 +15,31 @@ namespace PAYNLFormsApp
         {
             tbApitoken.Text = PAYNLFormsApp.APISettings.ApiToken;
             tbServiceID.Text = PAYNLFormsApp.APISettings.ServiceID;
+            var cores = new Dictionary<string, string>();
+            cores.Add(PAYNLSDK.API.RequestBase.Core1, PAYNLSDK.API.RequestBase.Core1Label);
+            cores.Add(PAYNLSDK.API.RequestBase.Core2, PAYNLSDK.API.RequestBase.Core2Label);
+            cores.Add(PAYNLSDK.API.RequestBase.Core3, PAYNLSDK.API.RequestBase.Core3Label);
+            comboBox1.DataSource = new BindingSource(cores, null);
+            comboBox1.DisplayMember = "Value";
+            comboBox1.ValueMember = "Key";
+            comboBox1.Text = APISettings.Core;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            PAYNLFormsApp.APISettings.ApiToken = tbApitoken.Text;
-            PAYNLFormsApp.APISettings.ServiceID = tbServiceID.Text;
+            APISettings.ApiToken = tbApitoken.Text;
+            APISettings.ServiceID = tbServiceID.Text;
+            APISettings.Core = comboBox1.Text;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-               
             this.DialogResult = DialogResult.OK;
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
     }
