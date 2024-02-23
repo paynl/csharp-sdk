@@ -54,7 +54,7 @@ namespace PAYNLSDK.Net
         /// </summary>
         public string ClientVersion
         {
-            get { return "1.0.0.20"; }
+            get { return "1.0.1.0"; }
         }
 
         /// <summary>
@@ -112,6 +112,20 @@ namespace PAYNLSDK.Net
         /// <returns>raw response string</returns>
         public string PerformRequest(RequestBase request)
         {
+            if (request.ToQueryString().Contains("transactionId"))
+            {
+                string TransactionCore = request.GetParameters().Get("TransactionId").Substring(0,2);
+                if (TransactionCore == "51")
+                {
+                    PAYNLSDK.API.RequestBase.Core = PAYNLSDK.API.RequestBase.Core2;
+                }
+                else if (TransactionCore == "52")
+                {
+                    PAYNLSDK.API.RequestBase.Core = PAYNLSDK.API.RequestBase.Core3;
+                }
+            }
+                
+
             HttpWebRequest httprequest = PrepareRequest(request.Url, "POST", PAYNLSDK.API.RequestBase.Core);
             string rawResponse = PerformRoundTrip2(httprequest, HttpStatusCode.OK, HttpStatusCode.Created, () =>
             {
