@@ -124,8 +124,8 @@ namespace PAYNLSDK.Net
                     PAYNLSDK.API.RequestBase.Core = PAYNLSDK.API.RequestBase.Core3;
                 }
             }
-                
 
+                
             HttpWebRequest httprequest = PrepareRequest(request.Url, "POST", PAYNLSDK.API.RequestBase.Core);
             string rawResponse = PerformRoundTrip2(httprequest, HttpStatusCode.OK, HttpStatusCode.Created, () =>
             {
@@ -146,6 +146,7 @@ namespace PAYNLSDK.Net
         /// </summary>
         /// <param name="requestUriString">URL to call</param>
         /// <param name="method">Request Method (get, post, delete, put)</param>
+        /// <param name="endpoint">Core to use for request</param>
         /// <returns></returns>
         private HttpWebRequest PrepareRequest(string requestUriString, string method, string endpoint)
         {
