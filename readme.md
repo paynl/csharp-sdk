@@ -21,6 +21,11 @@ Getting a list of available payment methods, use the Getservice.
 ```c#
 PAYNLSDK.API.RequestBase.ApiToken = "****************************************";
 PAYNLSDK.API.RequestBase.ServiceId = "SL-####-####";
+PAYNLSDK.API.RequestBase.Core = PAYNLSDK.API.RequestBase.Core1; // https://rest-api.pay.nl
+                                                                //Core1 = "https://rest-api.pay.nl";
+                                                                //Core2 = "https://rest.achterelkebetaling.nl";
+                                                                //Core3 = "https://rest.payments.nl";
+
 PAYNLSDK.API.Transaction.GetService.Response response = PAYNLSDK.Transaction.GetService(paymentMethodId);
 //paymentMethodId: is optional
 //The ID of the payment method. Only the payment options linked to the provided payment method ID will be returned if an ID is provided.

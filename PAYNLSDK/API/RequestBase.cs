@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
-using PAYNLSDK.Utilities;
 using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Text;
 
@@ -12,6 +12,33 @@ namespace PAYNLSDK.API
         /// Indicator stating whether or not a API Token is required for a specific request
         /// </summary>
         public virtual bool RequiresApiToken { get { return true; } }
+
+        /// <summary>
+        /// PAYNL CORE
+        /// </summary>
+        public static string Core { get; set; }
+
+        /// <summary>
+        /// PAYNL CORES
+        /// </summary>
+        public static Dictionary<string, string> GetCores()
+        {
+            var cores = new Dictionary<string, string>();
+            cores.Add("Core1 (" + PAYNLSDK.API.RequestBase.Core1 + ")", PAYNLSDK.API.RequestBase.Core1Label);
+            cores.Add("Core2 (" + PAYNLSDK.API.RequestBase.Core2 + ")", PAYNLSDK.API.RequestBase.Core2Label);
+            cores.Add("Core3 (" + PAYNLSDK.API.RequestBase.Core3 + ")", PAYNLSDK.API.RequestBase.Core3Label);
+            return cores;
+        }
+
+        /// <summary>
+        /// PAYNL Cores
+        /// </summary>
+        public static readonly string Core1 = "https://rest-api.pay.nl";
+        public static readonly string Core1Label = "Pay.nl (Default)";
+        public static readonly string Core2 = "https://rest.achterelkebetaling.nl";
+        public static readonly string Core2Label = "Achterelkebetaling.nl";
+        public static readonly string Core3 = "https://rest.payments.nl";
+        public static readonly string Core3Label = "Payments.nl";
 
         /// <summary>
         /// Indicator stating whether or not a Service ID is required for a specific request

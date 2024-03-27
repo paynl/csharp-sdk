@@ -235,8 +235,9 @@ namespace PAYNLSDK
         /// </summary>
         /// <param name="paymentMethodId">Paymentmethod ID</param>
         /// <returns>FUll response with all service information</returns>
-        static public PAYNLSDK.API.Transaction.GetService.Response GetService(PaymentMethodId? paymentMethodId, string apiToken = null, string serviceId = null)
+        static public API.Transaction.GetService.Response GetService(PaymentMethodId? paymentMethodId, string apiToken = null, string serviceId = null)
         {
+            API.RequestBase.Core = API.RequestBase.Core1;
             TransactionGetService request = new TransactionGetService();
             request.PaymentMethodId = paymentMethodId;
             request.SetApiToken(apiToken);
@@ -252,7 +253,7 @@ namespace PAYNLSDK
         /// This is an important API if you want to build your own payment screens.
         /// </summary>
         /// <returns>FUll response with all service information</returns>
-        static public PAYNLSDK.API.Transaction.GetService.Response GetService()
+        static public API.Transaction.GetService.Response GetService()
         {
             return GetService(null);
         }
@@ -265,7 +266,7 @@ namespace PAYNLSDK
         /// <param name="amount">Amount of the refund. If null is given, it will be the full amount of the transaction.</param>
         /// <param name="processDate">Date to process the refund. May be null.</param>
         /// <returns>Full response including the Refund ID</returns>
-        static public PAYNLSDK.API.Transaction.Refund.Response Refund(string transactionId, string description, int? amount, DateTime? processDate)
+        static public API.Transaction.Refund.Response Refund(string transactionId, string description, int? amount, DateTime? processDate)
         {
             TransactionRefund request = new TransactionRefund();
             request.TransactionId = transactionId;
