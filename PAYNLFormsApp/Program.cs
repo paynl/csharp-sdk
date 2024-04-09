@@ -1,4 +1,4 @@
-﻿using PAYNLSDK.API;
+using PAYNLSDK.API;
 using PAYNLSDK.Net;
 using System;
 using System.Collections.Generic;
@@ -29,11 +29,13 @@ namespace PAYNLFormsApp
     {
         public static string ApiToken { get; set; }
         public static string ServiceID { get; set; }
+        public static string Core { get; set; }
 
         public static void InitAPI()
         {
             RequestBase.ApiToken = ApiToken;
             RequestBase.ServiceId = ServiceID;
+            RequestBase.Core = Core;
         }
 
         private static IClient client;

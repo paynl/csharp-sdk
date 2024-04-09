@@ -1,26 +1,19 @@
-﻿using PAYNLSDK.Net.ProxyConfigurationInjector;
+using PAYNLSDK.Net.ProxyConfigurationInjector;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 using PAYNLSDK.API;
 using PAYNLSDK.Exceptions;
-using PAYNLSDK.Objects;
 using Newtonsoft.Json;
-using System.Collections.Specialized;
+using System.Configuration;
+using System.Reflection;
 
 namespace PAYNLSDK.Net
 {
     public class Client : IClient
     {
-        /// <summary>
-        /// PAYNL Endpoint
-        /// </summary>
-        public static readonly string Endpoint = "https://rest-api.pay.nl";
-
         /// <summary>
         /// PAYNL API TOKEN
         /// </summary>
@@ -42,7 +35,10 @@ namespace PAYNLSDK.Net
         /// <summary>
         /// Proxy injector
         /// </summary>
-        public IProxyConfigurationInjector ProxyConfigurationInjector { get; private set; }
+        public IProxyConfigurationInjector ProxyConfigurationInjector 
+        {
+            get; private set; 
+        }
 
         /// <summary>
         /// API VERSION
@@ -58,7 +54,7 @@ namespace PAYNLSDK.Net
         /// </summary>
         public string ClientVersion
         {
-            get { return "1.0.0.0"; }
+            get { return "1.0.1.0"; }
         }
 
         /// <summary>
@@ -116,8 +112,22 @@ namespace PAYNLSDK.Net
         /// <returns>raw response string</returns>
         public string PerformRequest(RequestBase request)
         {
-            HttpWebRequest httprequest = PrepareRequest(request.Url, "POST");
-            string rawResponse = PerformRoundTrip2(httprequest, HttpStatusCode.OK, () =>
+            if (request.ToQueryString().Contains("transactionId"))
+            {
+                string TransactionCore = request.GetParameters().Get("TransactionId").Substring(0,2);
+                if (TransactionCore == "51")
+                {
+                    PAYNLSDK.API.RequestBase.Core = PAYNLSDK.API.RequestBase.Core2;
+                }
+                else if (TransactionCore == "52")
+                {
+                    PAYNLSDK.API.RequestBase.Core = PAYNLSDK.API.RequestBase.Core3;
+                }
+            }
+
+                
+            HttpWebRequest httprequest = PrepareRequest(request.Url, "POST", PAYNLSDK.API.RequestBase.Core);
+            string rawResponse = PerformRoundTrip2(httprequest, HttpStatusCode.OK, HttpStatusCode.Created, () =>
             {
                 using (var requestWriter = new StreamWriter(httprequest.GetRequestStream()))
                 {
@@ -136,10 +146,16 @@ namespace PAYNLSDK.Net
         /// </summary>
         /// <param name="requestUriString">URL to call</param>
         /// <param name="method">Request Method (get, post, delete, put)</param>
+        /// <param name="endpoint">Core to use for request</param>
         /// <returns></returns>
-        private HttpWebRequest PrepareRequest(string requestUriString, string method)
+        private HttpWebRequest PrepareRequest(string requestUriString, string method, string endpoint)
         {
-            string uriString = String.Format("{0}/{1}", Endpoint, requestUriString);
+            if(String.IsNullOrEmpty(endpoint))
+            {
+                endpoint = PAYNLSDK.API.RequestBase.Core1;
+            }
+
+            string uriString = String.Format("{0}/{1}", endpoint, requestUriString);
             var uri = new Uri(uriString);
             var request = WebRequest.Create(uri) as HttpWebRequest;
             request.UserAgent = UserAgent;
@@ -164,7 +180,7 @@ namespace PAYNLSDK.Net
         /// <param name="expectedHttpStatusCode">expected http status code</param>
         /// <param name="requestAction">Any action that can be executed before actually performing the http request</param>
         /// <returns>raw response</returns>
-        private string PerformRoundTrip2(HttpWebRequest request, HttpStatusCode expectedHttpStatusCode, Action requestAction)
+        private string PerformRoundTrip2(HttpWebRequest request, HttpStatusCode expectedHttpStatusCode1, HttpStatusCode expectedHttpStatusCode2, Action requestAction)
         {
             try
             {
@@ -173,7 +189,7 @@ namespace PAYNLSDK.Net
                 using (var response = request.GetResponse() as HttpWebResponse)
                 {
                     var statusCode = (HttpStatusCode)response.StatusCode;
-                    if (statusCode == expectedHttpStatusCode)
+                    if (statusCode == expectedHttpStatusCode1 || statusCode == expectedHttpStatusCode2)
                     {
                         Stream responseStream = response.GetResponseStream();
                         Encoding encoding = GetEncoding(response);
