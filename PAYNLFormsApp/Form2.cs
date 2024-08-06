@@ -19,6 +19,7 @@ namespace PAYNLFormsApp
             cores.Add(PAYNLSDK.API.RequestBase.Core1, PAYNLSDK.API.RequestBase.Core1Label);
             cores.Add(PAYNLSDK.API.RequestBase.Core2, PAYNLSDK.API.RequestBase.Core2Label);
             cores.Add(PAYNLSDK.API.RequestBase.Core3, PAYNLSDK.API.RequestBase.Core3Label);
+            cores.Add(PAYNLSDK.API.RequestBase.Core4, PAYNLSDK.API.RequestBase.Core4Label);
             comboBox1.DataSource = new BindingSource(cores, null);
             comboBox1.DisplayMember = "Value";
             comboBox1.ValueMember = "Key";

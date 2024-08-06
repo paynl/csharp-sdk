@@ -18,10 +18,6 @@ namespace PAYNLSDK.Converters
             if (value is DateTime)
             {
                 var dateTime = (DateTime)value;
-                if (dateTime.Kind == DateTimeKind.Unspecified)
-                {
-                    throw new JsonSerializationException("Cannot convert date time with an unspecified kind");
-                }
                 string convertedDateTime = dateTime.ToString(Format);
                 writer.WriteValue(convertedDateTime);
             }
