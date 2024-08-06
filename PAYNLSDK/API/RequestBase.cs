@@ -27,18 +27,22 @@ namespace PAYNLSDK.API
             cores.Add("Core1 (" + PAYNLSDK.API.RequestBase.Core1 + ")", PAYNLSDK.API.RequestBase.Core1Label);
             cores.Add("Core2 (" + PAYNLSDK.API.RequestBase.Core2 + ")", PAYNLSDK.API.RequestBase.Core2Label);
             cores.Add("Core3 (" + PAYNLSDK.API.RequestBase.Core3 + ")", PAYNLSDK.API.RequestBase.Core3Label);
+            cores.Add("Core4 (" + PAYNLSDK.API.RequestBase.Core4 + ")", PAYNLSDK.API.RequestBase.Core4Label);
             return cores;
         }
 
         /// <summary>
         /// PAYNL Cores
         /// </summary>
-        public static readonly string Core1 = "https://rest-api.pay.nl";
-        public static readonly string Core1Label = "Pay.nl (Default)";
-        public static readonly string Core2 = "https://rest.achterelkebetaling.nl";
+        public static readonly string Core1 = "https://connect.pay.nl";
+        public static readonly string Core1Label = "Connect.pay.nl (Default)";
+        public static readonly string Core2 = "https://connect.achterelkebetaling.nl";
         public static readonly string Core2Label = "Achterelkebetaling.nl";
-        public static readonly string Core3 = "https://rest.payments.nl";
+        public static readonly string Core3 = "https://connect.payments.nl";
         public static readonly string Core3Label = "Payments.nl";
+        public static readonly string Core4 = "https://rest-api.pay.nl";
+        public static readonly string Core4Label = "Pay.nl";
+
 
         /// <summary>
         /// Indicator stating whether or not a Service ID is required for a specific request
