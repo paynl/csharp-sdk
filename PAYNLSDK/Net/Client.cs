@@ -9,6 +9,7 @@ using PAYNLSDK.Exceptions;
 using Newtonsoft.Json;
 using System.Configuration;
 using System.Reflection;
+using System.Linq;
 
 namespace PAYNLSDK.Net
 {
@@ -54,7 +55,7 @@ namespace PAYNLSDK.Net
         /// </summary>
         public string ClientVersion
         {
-            get { return "1.0.1.0"; }
+            get { return "1.0.3.0"; }
         }
 
         /// <summary>
@@ -153,6 +154,11 @@ namespace PAYNLSDK.Net
             if(String.IsNullOrEmpty(endpoint))
             {
                 endpoint = PAYNLSDK.API.RequestBase.Core1;
+            }
+
+            if (!requestUriString.Contains("/Transaction/info/") && !requestUriString.Contains("/Transaction/start/"))
+            {
+                endpoint = PAYNLSDK.API.RequestBase.Core4;
             }
 
             string uriString = String.Format("{0}/{1}", endpoint, requestUriString);
